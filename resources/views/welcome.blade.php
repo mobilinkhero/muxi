@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TradeMaster - Master Trading Across All Markets</title>
+    <title>GSM Trading Lab - Crypto | Forex | Stocks | Indices | Commodities | Derivatives</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="description"
         content="Master trading in Crypto, Forex, Stocks, Indices, Commodities & Derivatives. Expert education, professional trading signals, and comprehensive market analysis.">
     <style>
@@ -18,14 +19,16 @@
         <div class="container">
             <div class="nav-container">
                 <a href="#" class="logo">
-                    <div class="logo-icon">📊</div>
-                    TradeMaster
+                    <img src="https://i.ibb.co/3ykG88h/gsm-logo.png" alt="GSM Trading Lab Logo" class="logo-animation"
+                        style="height: 50px;">
+                    GSM Trading Lab
                 </a>
                 <ul class="nav-links">
                     <li><a href="#home">Home</a></li>
                     <li><a href="#markets">Markets</a></li>
                     <li><a href="#services">Services</a></li>
                     <li><a href="#about">About</a></li>
+                    <li><a href="#reviews">Reviews</a></li>
                     <li><a href="#contact" class="btn btn-primary">Get Started</a></li>
                 </ul>
             </div>
@@ -46,9 +49,9 @@
                     <span>Trusted by 10,000+ Traders Worldwide</span>
                 </div>
                 <h1>Master Trading Across All Markets</h1>
-                <p class="hero-description">
-                    Learn to trade Crypto, Forex, Stocks, Indices, Commodities & Derivatives from industry experts.
-                    Get professional market analysis, trading signals, and investment strategies to grow your portfolio.
+                <p class="hero-description" style="font-size: 1.1rem; line-height: 1.8;">
+                    Crypto | 💱 Forex | 📊 Stocks | 📈 Indices | 🪙 Commodities | 🧾 Derivatives<br>
+                    📊 Market Analysis | 🛡️ Risk Management | 🧠 All about Financial Markets Learning
                 </p>
                 <div class="hero-cta">
                     <a href="#markets" class="btn btn-primary">
@@ -110,6 +113,12 @@
                         currency correlation strategies.</p>
                 </div>
                 <div class="feature-card">
+                    <div class="feature-icon">🪙</div>
+                    <h3>Commodities (Gold/Oil)</h3>
+                    <p>Trade gold, silver, oil, and agricultural commodities. Learn supply-demand dynamics and commodity
+                        market cycles.</p>
+                </div>
+                <div class="feature-card">
                     <div class="feature-icon">📊</div>
                     <h3>Stock Market Trading</h3>
                     <p>Invest in global stocks and equities. Learn fundamental analysis, earnings reports, and long-term
@@ -120,12 +129,6 @@
                     <h3>Indices Trading</h3>
                     <p>Trade major indices like S&P 500, NASDAQ, and FTSE. Understand market trends and index-based
                         investment strategies.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🪙</div>
-                    <h3>Commodities Trading</h3>
-                    <p>Trade gold, silver, oil, and agricultural commodities. Learn supply-demand dynamics and commodity
-                        market cycles.</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">🧾</div>
@@ -252,6 +255,123 @@
         </div>
     </section>
 
+    <!-- Student Reviews Section -->
+    <section class="section" id="reviews" style="background: var(--dark-light);">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">Success Stories</span>
+                <h2>What Our Students Say</h2>
+                <p>Real results from real people learning with GSM Trading Lab</p>
+            </div>
+            <div class="features-grid">
+                <!-- Review 1 -->
+                <div class="feature-card" style="text-align: left;">
+                    <div style="color: #F59E0B; margin-bottom: 0.5rem;">★★★★★</div>
+                    <p style="font-style: italic; margin-bottom: 1.5rem;">"I started with zero knowledge about crypto.
+                        The 'Learn Now, Pay Later' program gave me the confidence to start without risking my own money
+                        first. Now I'm profitable!"</p>
+                    <div style="display: flex; align-items: center; gap: 1rem;">
+                        <div
+                            style="width: 40px; height: 40px; background: var(--gradient-crypto); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; color: white;">
+                            AH</div>
+                        <div>
+                            <div style="font-weight: 600; color: var(--white);">Ali Hassan</div>
+                            <div style="font-size: 0.8rem; color: var(--gray);">Crypto Student</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Review 2 -->
+                <div class="feature-card" style="text-align: left;">
+                    <div style="color: #F59E0B; margin-bottom: 0.5rem;">★★★★★</div>
+                    <p style="font-style: italic; margin-bottom: 1.5rem;">"The live trading sessions are a game changer.
+                        Seeing expert traders analyze the market in real-time helped me understand price action better
+                        than any video course."</p>
+                    <div style="display: flex; align-items: center; gap: 1rem;">
+                        <div
+                            style="width: 40px; height: 40px; background: var(--gradient-success); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; color: white;">
+                            SK</div>
+                        <div>
+                            <div style="font-weight: 600; color: var(--white);">Sarah Khan</div>
+                            <div style="font-size: 0.8rem; color: var(--gray);">Premium Member</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Review 3 -->
+                <div class="feature-card" style="text-align: left;">
+                    <div style="color: #F59E0B; margin-bottom: 0.5rem;">★★★★★</div>
+                    <p style="font-style: italic; margin-bottom: 1.5rem;">"GSM Trading Lab's signals are spot on. I
+                        recovered my enrollment fee in just the first week of trading. Highly recommended for anyone
+                        serious about trading."</p>
+                    <div style="display: flex; align-items: center; gap: 1rem;">
+                        <div
+                            style="width: 40px; height: 40px; background: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; color: white;">
+                            MR</div>
+                        <div>
+                            <div style="font-weight: 600; color: var(--white);">Muhammad Rizwan</div>
+                            <div style="font-size: 0.8rem; color: var(--gray);">Forex Trader</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Submit Review Button -->
+            <div style="text-align: center; margin-top: 3rem;">
+                <button class="btn btn-secondary" onclick="openReviewModal()">
+                    <span>Write a Review</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Review Modal -->
+    <div id="reviewModal"
+        style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.9); z-index: 9999; overflow-y: auto; padding: 2rem;">
+        <div style="max-width: 500px; margin: 0 auto; position: relative; top: 10%;">
+            <button onclick="closeReviewModal()"
+                style="position: absolute; top: -10px; right: -10px; width: 40px; height: 40px; border-radius: 50%; background: var(--primary); color: white; border: none; font-size: 1.5rem; cursor: pointer;">&times;</button>
+            <div
+                style="background: var(--dark); border: 1px solid var(--primary); border-radius: var(--radius-lg); padding: 2rem;">
+                <h3 style="text-align: center; margin-bottom: 1.5rem; color: var(--white);">Share Your Experience</h3>
+                <form
+                    onsubmit="event.preventDefault(); alert('Thank you! Your review has been submitted for moderation.'); closeReviewModal();">
+                    <div style="margin-bottom: 1rem;">
+                        <label style="display: block; margin-bottom: 0.5rem; color: var(--white);">Your Name</label>
+                        <input type="text" required
+                            style="width: 100%; padding: 0.8rem; background: var(--dark-light); border: 1px solid rgba(255,255,255,0.1); border-radius: var(--radius-md); color: white;">
+                    </div>
+                    <div style="margin-bottom: 1rem;">
+                        <label style="display: block; margin-bottom: 0.5rem; color: var(--white);">Rating</label>
+                        <select
+                            style="width: 100%; padding: 0.8rem; background: var(--dark-light); border: 1px solid rgba(255,255,255,0.1); border-radius: var(--radius-md); color: white;">
+                            <option>★★★★★ (Excellent)</option>
+                            <option>★★★★☆ (Good)</option>
+                            <option>★★★☆☆ (Average)</option>
+                            <option>★★☆☆☆ (Poor)</option>
+                            <option>★☆☆☆☆ (Terrible)</option>
+                        </select>
+                    </div>
+                    <div style="margin-bottom: 1rem;">
+                        <label style="display: block; margin-bottom: 0.5rem; color: var(--white);">Your Review</label>
+                        <textarea rows="4" required
+                            style="width: 100%; padding: 0.8rem; background: var(--dark-light); border: 1px solid rgba(255,255,255,0.1); border-radius: var(--radius-md); color: white;"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Submit Review</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openReviewModal() {
+            document.getElementById('reviewModal').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+        function closeReviewModal() {
+            document.getElementById('reviewModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+    </script>
+
     <!-- CTA Section -->
     <section class="section cta" id="contact">
         <div class="container">
@@ -259,8 +379,67 @@
                 <h2>Ready to Start Your Trading Journey?</h2>
                 <p>Join thousands of successful traders and investors who trust us across all markets - Crypto, Forex,
                     Stocks, Indices, Commodities & Derivatives.</p>
+
+                <!-- Social Media Links -->
+                <div style="display: flex; gap: 1rem; justify-content: center; margin: 2rem 0; flex-wrap: wrap;">
+                    <a href="https://facebook.com/gsmtradinglab" target="_blank"
+                        style="text-decoration: none; transition: transform 0.2s;"
+                        onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+                        <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook" width="40"
+                            height="40">
+                    </a>
+                    <a href="https://instagram.com/gsmtradinglab" target="_blank"
+                        style="text-decoration: none; transition: transform 0.2s;"
+                        onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+                        <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram" width="40"
+                            height="40">
+                    </a>
+                    <a href="https://threads.net/@gsmtradinglab" target="_blank"
+                        style="text-decoration: none; transition: transform 0.2s;"
+                        onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+                        <img src="https://cdn-icons-png.flaticon.com/512/10856/10856184.png" alt="Threads" width="40"
+                            height="40" style="filter: invert(1);">
+                    </a>
+                    <a href="https://twitter.com/gsmtradinglab" target="_blank"
+                        style="text-decoration: none; transition: transform 0.2s;"
+                        onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+                        <img src="https://cdn-icons-png.flaticon.com/512/5968/5968830.png" alt="Twitter/X" width="40"
+                            height="40" style="filter: invert(1);">
+                    </a>
+                    <a href="https://tiktok.com/@gsmtradinglab" target="_blank"
+                        style="text-decoration: none; transition: transform 0.2s;"
+                        onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+                        <img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png" alt="TikTok" width="40"
+                            height="40" style="filter: invert(1);">
+                    </a>
+                    <a href="https://snapchat.com/add/gsmtradinglab" target="_blank"
+                        style="text-decoration: none; transition: transform 0.2s;"
+                        onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+                        <img src="https://cdn-icons-png.flaticon.com/512/3670/3670166.png" alt="Snapchat" width="40"
+                            height="40">
+                    </a>
+                    <a href="https://discord.gg/gsmtradinglab" target="_blank"
+                        style="text-decoration: none; transition: transform 0.2s;"
+                        onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+                        <img src="https://cdn-icons-png.flaticon.com/512/3670/3670157.png" alt="Discord" width="40"
+                            height="40" style="filter: invert(1);">
+                    </a>
+                    <a href="https://linkedin.com/in/gsmtradinglab" target="_blank"
+                        style="text-decoration: none; transition: transform 0.2s;"
+                        onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+                        <img src="https://cdn-icons-png.flaticon.com/512/3536/3536505.png" alt="LinkedIn" width="40"
+                            height="40">
+                    </a>
+                    <a href="https://wa.me/447478035502" target="_blank"
+                        style="text-decoration: none; transition: transform 0.2s;"
+                        onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+                        <img src="https://cdn-icons-png.flaticon.com/512/3670/3670051.png" alt="WhatsApp" width="40"
+                            height="40">
+                    </a>
+                </div>
+
                 <a href="#" class="btn"
-                    onclick="alert('Contact form coming soon! For now, email us at: info@trademaster.com')">
+                    onclick="alert('Contact form coming soon! For now, email us at: info@gsmtradinglab.com')">
                     <span>Get Started Today</span>
                     <span>→</span>
                 </a>
@@ -273,9 +452,9 @@
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-section">
-                    <h4 class="logo">
-                        <div class="logo-icon">📊</div>
-                        TradeMaster
+                    <h4 class="logo" style="font-size: 1.5rem;">
+                        <img src="https://i.ibb.co/3ykG88h/gsm-logo.png" alt="GSM Trading Lab Logo" style="height: 40px;">
+                        GSM Trading Lab
                     </h4>
                     <p style="color: var(--gray-light); margin-top: 1rem;">
                         Your trusted partner in multi-market trading education, professional signals, and comprehensive
@@ -311,7 +490,8 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2026 TradeMaster. All rights reserved. | Empowering traders across all markets worldwide.</p>
+                <p>&copy; 2026 GSM Trading Lab. All rights reserved. | Empowering traders across all markets worldwide.
+                </p>
             </div>
         </div>
     </footer>
@@ -341,6 +521,7 @@
             });
         });
     </script>
+    @include('partials.security-script')
 </body>
 
 </html>

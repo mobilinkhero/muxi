@@ -57,6 +57,10 @@
     --transition-slow: 500ms ease;
 }
 
+.logo-animation {
+    animation: float 6s ease-in-out infinite;
+}
+
 * {
     margin: 0;
     padding: 0;

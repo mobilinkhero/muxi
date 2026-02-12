@@ -4,9 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Learn Trading - TradeMaster Academy</title>
+    <title>Learn Crypto, Forex & Gold Trading - GSM Trading Lab Academy</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="description"
-        content="Master trading across all markets with our comprehensive courses. Learn Crypto, Forex, Stocks, Indices, Commodities & Derivatives from expert traders.">
+        content="Master trading with a focus on Crypto, Forex, and Gold. Comprehensive courses for all markets including Stocks, Indices & Derivatives.">
     <style>
         <?php echo file_get_contents(resource_path('css/app.css')); ?>
     </style>
@@ -18,8 +19,9 @@
         <div class="container">
             <div class="nav-container">
                 <a href="/" class="logo">
-                    <div class="logo-icon">📊</div>
-                    TradeMaster
+                    <img src="https://i.ibb.co/3ykG88h/gsm-logo.png" alt="GSM Trading Lab Logo" class="logo-animation"
+                        style="height: 50px;">
+                    GSM Trading Lab
                 </a>
                 <ul class="nav-links">
                     <li><a href="/">Home</a></li>
@@ -43,13 +45,12 @@
             <div class="hero-content">
                 <div class="hero-badge">
                     <span>🎓</span>
-                    <span>TradeMaster Academy</span>
+                    <span>GSM Trading Lab Academy</span>
                 </div>
                 <h1>Learn to Trade Like a Pro</h1>
                 <p class="hero-description">
-                    Master trading across all markets with our comprehensive courses, expert mentorship, and hands-on
-                    practice.
-                    Start your journey from beginner to professional trader.
+                    Master trading with a special focus on <strong>Crypto, Forex, and Gold</strong>.
+                    Access comprehensive courses, expert mentorship, and hands-on practice for all financial markets.
                 </p>
             </div>
         </div>
@@ -309,40 +310,106 @@
                         <div style="display: flex; flex-direction: column; gap: 1rem;">
                             <!-- Bitcoin Option -->
                             <label
-                                style="display: flex; align-items: center; gap: 1rem; padding: 1.25rem; background: var(--dark-light); border: 2px solid rgba(255,255,255,0.1); border-radius: var(--radius-md); cursor: pointer; transition: var(--transition-base);"
+                                style="display: flex; align-items: center; gap: 1rem; padding: 1rem; background: var(--dark-light); border: 2px solid rgba(255,255,255,0.1); border-radius: var(--radius-md); cursor: pointer; transition: var(--transition-base);"
                                 onclick="selectPaymentMethod('btc', this)">
                                 <input type="radio" name="crypto" value="btc"
                                     style="width: 20px; height: 20px; cursor: pointer;">
+                                <img src="https://cryptologos.cc/logos/bitcoin-btc-logo.png" alt="BTC" width="32"
+                                    height="32">
                                 <div style="flex: 1;">
-                                    <div style="font-weight: 600; color: var(--white); margin-bottom: 0.25rem;">₿
-                                        Bitcoin (BTC)</div>
-                                    <div style="font-size: 0.85rem; color: var(--gray);">≈ 0.0024 BTC</div>
+                                    <div style="font-weight: 600; color: var(--white); margin-bottom: 0.25rem;">Bitcoin
+                                        (BTC)</div>
+                                    <div style="font-size: 0.85rem; color: var(--gray);">Network: Bitcoin</div>
                                 </div>
                             </label>
 
                             <!-- Ethereum Option -->
                             <label
-                                style="display: flex; align-items: center; gap: 1rem; padding: 1.25rem; background: var(--dark-light); border: 2px solid rgba(255,255,255,0.1); border-radius: var(--radius-md); cursor: pointer; transition: var(--transition-base);"
+                                style="display: flex; align-items: center; gap: 1rem; padding: 1rem; background: var(--dark-light); border: 2px solid rgba(255,255,255,0.1); border-radius: var(--radius-md); cursor: pointer; transition: var(--transition-base);"
                                 onclick="selectPaymentMethod('eth', this)">
                                 <input type="radio" name="crypto" value="eth"
                                     style="width: 20px; height: 20px; cursor: pointer;">
+                                <img src="https://cryptologos.cc/logos/ethereum-eth-logo.png" alt="ETH" width="32"
+                                    height="32">
                                 <div style="flex: 1;">
-                                    <div style="font-weight: 600; color: var(--white); margin-bottom: 0.25rem;">Ξ
-                                        Ethereum (ETH)</div>
-                                    <div style="font-size: 0.85rem; color: var(--gray);">≈ 0.038 ETH</div>
+                                    <div style="font-weight: 600; color: var(--white); margin-bottom: 0.25rem;">Ethereum
+                                        (ETH)</div>
+                                    <div style="font-size: 0.85rem; color: var(--gray);">Network: ERC20</div>
                                 </div>
                             </label>
 
-                            <!-- USDT Option -->
+                            <!-- Solana Option -->
                             <label
-                                style="display: flex; align-items: center; gap: 1rem; padding: 1.25rem; background: var(--dark-light); border: 2px solid rgba(255,255,255,0.1); border-radius: var(--radius-md); cursor: pointer; transition: var(--transition-base);"
-                                onclick="selectPaymentMethod('usdt', this)">
-                                <input type="radio" name="crypto" value="usdt"
+                                style="display: flex; align-items: center; gap: 1rem; padding: 1rem; background: var(--dark-light); border: 2px solid rgba(255,255,255,0.1); border-radius: var(--radius-md); cursor: pointer; transition: var(--transition-base);"
+                                onclick="selectPaymentMethod('sol', this)">
+                                <input type="radio" name="crypto" value="sol"
                                     style="width: 20px; height: 20px; cursor: pointer;">
+                                <img src="https://cryptologos.cc/logos/solana-sol-logo.png" alt="SOL" width="32"
+                                    height="32">
                                 <div style="flex: 1;">
-                                    <div style="font-weight: 600; color: var(--white); margin-bottom: 0.25rem;">₮ USDT
-                                        (TRC20)</div>
-                                    <div style="font-size: 0.85rem; color: var(--gray);">100 USDT</div>
+                                    <div style="font-weight: 600; color: var(--white); margin-bottom: 0.25rem;">Solana
+                                        (SOL)</div>
+                                    <div style="font-size: 0.85rem; color: var(--gray);">Network: Solana</div>
+                                </div>
+                            </label>
+
+                            <!-- BNB Option -->
+                            <label
+                                style="display: flex; align-items: center; gap: 1rem; padding: 1rem; background: var(--dark-light); border: 2px solid rgba(255,255,255,0.1); border-radius: var(--radius-md); cursor: pointer; transition: var(--transition-base);"
+                                onclick="selectPaymentMethod('bnb', this)">
+                                <input type="radio" name="crypto" value="bnb"
+                                    style="width: 20px; height: 20px; cursor: pointer;">
+                                <img src="https://cryptologos.cc/logos/bnb-bnb-logo.png" alt="BNB" width="32"
+                                    height="32">
+                                <div style="flex: 1;">
+                                    <div style="font-weight: 600; color: var(--white); margin-bottom: 0.25rem;">BNB
+                                        Smart Chain</div>
+                                    <div style="font-size: 0.85rem; color: var(--gray);">Network: BEP20</div>
+                                </div>
+                            </label>
+
+                            <!-- USDT TRC20 Option -->
+                            <label
+                                style="display: flex; align-items: center; gap: 1rem; padding: 1rem; background: var(--dark-light); border: 2px solid rgba(255,255,255,0.1); border-radius: var(--radius-md); cursor: pointer; transition: var(--transition-base);"
+                                onclick="selectPaymentMethod('usdt_trc20', this)">
+                                <input type="radio" name="crypto" value="usdt_trc20"
+                                    style="width: 20px; height: 20px; cursor: pointer;">
+                                <img src="https://cryptologos.cc/logos/tether-usdt-logo.png" alt="USDT" width="32"
+                                    height="32">
+                                <div style="flex: 1;">
+                                    <div style="font-weight: 600; color: var(--white); margin-bottom: 0.25rem;">USDT
+                                        (Tron)</div>
+                                    <div style="font-size: 0.85rem; color: #10B981;">Network: TRC20 (Recommended)</div>
+                                </div>
+                            </label>
+
+                            <!-- USDT ERC20 Option -->
+                            <label
+                                style="display: flex; align-items: center; gap: 1rem; padding: 1rem; background: var(--dark-light); border: 2px solid rgba(255,255,255,0.1); border-radius: var(--radius-md); cursor: pointer; transition: var(--transition-base);"
+                                onclick="selectPaymentMethod('usdt_erc20', this)">
+                                <input type="radio" name="crypto" value="usdt_erc20"
+                                    style="width: 20px; height: 20px; cursor: pointer;">
+                                <img src="https://cryptologos.cc/logos/tether-usdt-logo.png" alt="USDT" width="32"
+                                    height="32">
+                                <div style="flex: 1;">
+                                    <div style="font-weight: 600; color: var(--white); margin-bottom: 0.25rem;">USDT
+                                        (Ethereum)</div>
+                                    <div style="font-size: 0.85rem; color: var(--gray);">Network: ERC20</div>
+                                </div>
+                            </label>
+
+                            <!-- USDT BEP20 Option -->
+                            <label
+                                style="display: flex; align-items: center; gap: 1rem; padding: 1rem; background: var(--dark-light); border: 2px solid rgba(255,255,255,0.1); border-radius: var(--radius-md); cursor: pointer; transition: var(--transition-base);"
+                                onclick="selectPaymentMethod('usdt_bep20', this)">
+                                <input type="radio" name="crypto" value="usdt_bep20"
+                                    style="width: 20px; height: 20px; cursor: pointer;">
+                                <img src="https://cryptologos.cc/logos/tether-usdt-logo.png" alt="USDT" width="32"
+                                    height="32">
+                                <div style="flex: 1;">
+                                    <div style="font-weight: 600; color: var(--white); margin-bottom: 0.25rem;">USDT
+                                        (BSC)</div>
+                                    <div style="font-size: 0.85rem; color: var(--gray);">Network: BEP20</div>
                                 </div>
                             </label>
                         </div>
@@ -715,9 +782,13 @@
     <script>
         // Dummy crypto addresses
         const cryptoAddresses = {
-            btc: 'bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh',
-            eth: '0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb',
-            usdt: 'TN3W4H6rK2ce4vX9YnFQHwKENnHjoxb3m9'
+            btc: 'bc1q03nmsngcpwck9lah9uqkx3z84rfstgyc599hmf',
+            eth: '0xf5c6f9ad0a30e968dd82d3b18e726d11a9007a85', // ETH and USDT (ERC20)
+            usdt_trc20: 'TFjdAsb8yVgtNNU1ozMLXAyFq9Cvk3MbeB',
+            usdt_erc20: '0xf5c6f9ad0a30e968dd82d3b18e726d11a9007a85',
+            usdt_bep20: '0xf5c6f9ad0a30e968dd82d3b18e726d11a9007a85',
+            sol: 'C2w5KgYMCrVcm62XihK6prHDyXay2fEcpTXgHSU4FoqV',
+            bnb: '0xf5c6f9ad0a30e968dd82d3b18e726d11a9007a85'
         };
 
         let selectedCrypto = '';
@@ -948,7 +1019,7 @@
                     data.screenshot = uploadedScreenshot.name;
                     data.paymentMethod = selectedCrypto.toUpperCase();
 
-                    alert('🎉 Registration Complete!\n\nWelcome to TradeMaster Premium!\n\n' +
+                    alert('🎉 Registration Complete!\n\nWelcome to GSM Trading Lab Premium!\n\n' +
                         'Registration Details:\n' +
                         '✓ Name: ' + data.fullName + '\n' +
                         '✓ Email: ' + data.email + '\n' +
@@ -1121,7 +1192,7 @@
                         '• Demo account credentials\n' +
                         '• Access to learning platform\n' +
                         '• Welcome guide via email\n\n' +
-                        'Thank you for choosing TradeMaster!');
+                        'Thank you for choosing GSM Trading Lab!');
 
                     closeVerificationModal();
                 });
@@ -1173,14 +1244,130 @@
         </div>
     </section>
 
+    <!-- Student Reviews Section -->
+    <section class="section" id="reviews" style="background: var(--dark-light);">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">Success Stories</span>
+                <h2>What Our Students Say</h2>
+                <p>Real results from real people learning with GSM Trading Lab</p>
+            </div>
+            <div class="features-grid">
+                <!-- Review 1 -->
+                <div class="feature-card" style="text-align: left;">
+                    <div style="color: #F59E0B; margin-bottom: 0.5rem;">★★★★★</div>
+                    <p style="font-style: italic; margin-bottom: 1.5rem;">"The 'Learn Now, Pay Later' option was a
+                        lifesaver. I learned the basics for free and only paid when I was confident. Best decision
+                        ever!"</p>
+                    <div style="display: flex; align-items: center; gap: 1rem;">
+                        <div
+                            style="width: 40px; height: 40px; background: var(--gradient-crypto); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; color: white;">
+                            K</div>
+                        <div>
+                            <div style="font-weight: 600; color: var(--white);">Kamran</div>
+                            <div style="font-size: 0.8rem; color: var(--gray);">Crypto Student</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Review 2 -->
+                <div class="feature-card" style="text-align: left;">
+                    <div style="color: #F59E0B; margin-bottom: 0.5rem;">★★★★★</div>
+                    <p style="font-style: italic; margin-bottom: 1.5rem;">"Premium Live Trading is intense but amazing.
+                        You learn so much more watching them trade live than you ever could from a book."</p>
+                    <div style="display: flex; align-items: center; gap: 1rem;">
+                        <div
+                            style="width: 40px; height: 40px; background: var(--gradient-success); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; color: white;">
+                            J</div>
+                        <div>
+                            <div style="font-weight: 600; color: var(--white);">Jason P.</div>
+                            <div style="font-size: 0.8rem; color: var(--gray);">UK Trader</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Review 3 -->
+                <div class="feature-card" style="text-align: left;">
+                    <div style="color: #F59E0B; margin-bottom: 0.5rem;">★★★★★</div>
+                    <p style="font-style: italic; margin-bottom: 1.5rem;">"Completed the Forex Mastery course last
+                        month. The content is structured perfectly. I finally understand risk management properly."</p>
+                    <div style="display: flex; align-items: center; gap: 1rem;">
+                        <div
+                            style="width: 40px; height: 40px; background: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; color: white;">
+                            A</div>
+                        <div>
+                            <div style="font-weight: 600; color: var(--white);">Ahmed</div>
+                            <div style="font-size: 0.8rem; color: var(--gray);">Forex Student</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Submit Review Button -->
+            <div style="text-align: center; margin-top: 3rem;">
+                <button class="btn btn-secondary" onclick="openReviewModal()">
+                    <span>Write a Review</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Review Modal -->
+    <div id="reviewModal"
+        style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.9); z-index: 9999; overflow-y: auto; padding: 2rem;">
+        <div style="max-width: 500px; margin: 0 auto; position: relative; top: 10%;">
+            <button onclick="closeReviewModal()"
+                style="position: absolute; top: -10px; right: -10px; width: 40px; height: 40px; border-radius: 50%; background: var(--primary); color: white; border: none; font-size: 1.5rem; cursor: pointer;">&times;</button>
+            <div
+                style="background: var(--dark); border: 1px solid var(--primary); border-radius: var(--radius-lg); padding: 2rem;">
+                <h3 style="text-align: center; margin-bottom: 1.5rem; color: var(--white);">Share Your Experience</h3>
+                <form
+                    onsubmit="event.preventDefault(); alert('Thank you! Your review has been submitted for moderation.'); closeReviewModal();">
+                    <div style="margin-bottom: 1rem;">
+                        <label style="display: block; margin-bottom: 0.5rem; color: var(--white);">Your Name</label>
+                        <input type="text" required
+                            style="width: 100%; padding: 0.8rem; background: var(--dark-light); border: 1px solid rgba(255,255,255,0.1); border-radius: var(--radius-md); color: white;">
+                    </div>
+                    <div style="margin-bottom: 1rem;">
+                        <label style="display: block; margin-bottom: 0.5rem; color: var(--white);">Rating</label>
+                        <select
+                            style="width: 100%; padding: 0.8rem; background: var(--dark-light); border: 1px solid rgba(255,255,255,0.1); border-radius: var(--radius-md); color: white;">
+                            <option>★★★★★ (Excellent)</option>
+                            <option>★★★★☆ (Good)</option>
+                            <option>★★★☆☆ (Average)</option>
+                            <option>★★☆☆☆ (Poor)</option>
+                            <option>★☆☆☆☆ (Terrible)</option>
+                        </select>
+                    </div>
+                    <div style="margin-bottom: 1rem;">
+                        <label style="display: block; margin-bottom: 0.5rem; color: var(--white);">Your Review</label>
+                        <textarea rows="4" required
+                            style="width: 100%; padding: 0.8rem; background: var(--dark-light); border: 1px solid rgba(255,255,255,0.1); border-radius: var(--radius-md); color: white;"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Submit Review</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openReviewModal() {
+            document.getElementById('reviewModal').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+        function closeReviewModal() {
+            document.getElementById('reviewModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+    </script>
+
     <!-- CTA Section -->
     <section class="section cta">
         <div class="container">
             <div class="cta-content">
                 <h2>Ready to Start Your Learning Journey?</h2>
-                <p>Join thousands of students who have transformed their trading skills with TradeMaster Academy.</p>
+                <p>Join thousands of students who have transformed their trading skills with GSM Trading Lab Academy.
+                </p>
                 <a href="#" class="btn"
-                    onclick="alert('Enrollment coming soon! For now, email us at: academy@trademaster.com')">
+                    onclick="alert('Enrollment coming soon! For now, email us at: academy@gsmtradinglab.com')">
                     <span>Enroll Now</span>
                     <span>→</span>
                 </a>
@@ -1191,11 +1378,69 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
+            <!-- Social Media Links -->
+            <div style="display: flex; gap: 1rem; justify-content: center; margin-bottom: 2rem; flex-wrap: wrap;">
+                <a href="https://facebook.com/gsmtradinglab" target="_blank"
+                    style="text-decoration: none; transition: transform 0.2s;"
+                    onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+                    <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook" width="40"
+                        height="40">
+                </a>
+                <a href="https://instagram.com/gsmtradinglab" target="_blank"
+                    style="text-decoration: none; transition: transform 0.2s;"
+                    onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+                    <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram" width="40"
+                        height="40">
+                </a>
+                <a href="https://threads.net/@gsmtradinglab" target="_blank"
+                    style="text-decoration: none; transition: transform 0.2s;"
+                    onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+                    <img src="https://cdn-icons-png.flaticon.com/512/10856/10856184.png" alt="Threads" width="40"
+                        height="40" style="filter: invert(1);">
+                </a>
+                <a href="https://twitter.com/gsmtradinglab" target="_blank"
+                    style="text-decoration: none; transition: transform 0.2s;"
+                    onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+                    <img src="https://cdn-icons-png.flaticon.com/512/5968/5968830.png" alt="Twitter/X" width="40"
+                        height="40" style="filter: invert(1);">
+                </a>
+                <a href="https://tiktok.com/@gsmtradinglab" target="_blank"
+                    style="text-decoration: none; transition: transform 0.2s;"
+                    onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+                    <img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png" alt="TikTok" width="40"
+                        height="40" style="filter: invert(1);">
+                </a>
+                <a href="https://snapchat.com/add/gsmtradinglab" target="_blank"
+                    style="text-decoration: none; transition: transform 0.2s;"
+                    onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+                    <img src="https://cdn-icons-png.flaticon.com/512/3670/3670166.png" alt="Snapchat" width="40"
+                        height="40">
+                </a>
+                <a href="https://discord.gg/gsmtradinglab" target="_blank"
+                    style="text-decoration: none; transition: transform 0.2s;"
+                    onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+                    <img src="https://cdn-icons-png.flaticon.com/512/3670/3670157.png" alt="Discord" width="40"
+                        height="40" style="filter: invert(1);">
+                </a>
+                <a href="https://linkedin.com/in/gsmtradinglab" target="_blank"
+                    style="text-decoration: none; transition: transform 0.2s;"
+                    onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+                    <img src="https://cdn-icons-png.flaticon.com/512/3536/3536505.png" alt="LinkedIn" width="40"
+                        height="40">
+                </a>
+                <a href="https://wa.me/447478035502" target="_blank"
+                    style="text-decoration: none; transition: transform 0.2s;"
+                    onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+                    <img src="https://cdn-icons-png.flaticon.com/512/3670/3670051.png" alt="WhatsApp" width="40"
+                        height="40">
+                </a>
+            </div>
             <div class="footer-grid">
                 <div class="footer-section">
-                    <h4 class="logo">
-                        <div class="logo-icon">📊</div>
-                        TradeMaster
+                    <h4 class="logo" style="font-size: 1.5rem;">
+                        <img src="https://i.ibb.co/3ykG88h/gsm-logo.png" alt="GSM Trading Lab Logo"
+                            style="height: 40px;">
+                        GSM Trading Lab
                     </h4>
                     <p style="color: var(--gray-light); margin-top: 1rem;">
                         Your trusted partner in multi-market trading education, professional signals, and comprehensive
@@ -1231,7 +1476,8 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2026 TradeMaster. All rights reserved. | Empowering traders across all markets worldwide.</p>
+                <p>&copy; 2026 GSM Trading Lab. All rights reserved. | Empowering traders across all markets worldwide.
+                </p>
             </div>
         </div>
     </footer>
@@ -1261,6 +1507,7 @@
             });
         });
     </script>
+    @include('partials.security-script')
 </body>
 
 </html>
