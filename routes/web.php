@@ -40,6 +40,9 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 use App\Http\Controllers\OrderController;
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\PaymentMethodController;
+use App\Http\Controllers\Admin\BrokerController;
 
 // Secure Student Area
 Route::middleware(['auth'])->group(function () {
@@ -57,6 +60,16 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
 
     // Signal Management
     Route::resource('signals', SignalController::class);
+
+    // User Management
+    Route::get('users', [UserController::class, 'index'])->name('users.index');
+    Route::delete('users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
+
+    // Payment Methods
+    Route::resource('payment-methods', PaymentMethodController::class);
+
+    // Brokers
+    Route::resource('brokers', BrokerController::class);
 });
 
 use App\Http\Controllers\MarketController;

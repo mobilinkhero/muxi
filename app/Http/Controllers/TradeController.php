@@ -22,6 +22,8 @@ class TradeController extends Controller
             ->orderBy('created_at', 'desc')
             ->get();
 
-        return view('trade', compact('closedSignals', 'activeSignals'));
+        $brokers = \App\Models\Broker::all();
+
+        return view('trade', compact('closedSignals', 'activeSignals', 'brokers'));
     }
 }
