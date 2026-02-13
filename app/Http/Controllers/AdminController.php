@@ -25,6 +25,36 @@ class AdminController extends Controller
         $activePaymentMethods = \App\Models\PaymentMethod::where('is_active', true)->count();
         $totalBrokers = \App\Models\Broker::count();
 
+        // Chart 1: Revenue (Last 7 Days)
+        $revenueChart = Order::where('status', 'completed')
+            ->where('created_at', '>=', now()->subDays(6)) // Last 7 days including today
+            ->selectRaw('DATE(created_at) as date, SUM(amount) as total')
+            ->groupBy('date')
+            ->orderBy('date')
+            ->get();
+
+        // Fill in missing days with 0
+        $revenueDates = [];
+        $revenueData = [];
+        for ($i = 6; $i >= 0; $i--) {
+            $date = now()->subDays($i)->format('Y-m-d');
+            $revenueDates[] = now()->subDays($i)->format('M d');
+            $dayData = $revenueChart->firstWhere('date', $date);
+            $revenueData[] = $dayData ? $dayData->total : 0;
+        }
+
+        // Chart 2: Payment Method Usage
+        $paymentMethodsChart = Order::selectRaw('payment_method, COUNT(*) as count')
+            ->groupBy('payment_method')
+            ->pluck('count', 'payment_method');
+
+        // Chart 3: Order Status
+        $orderStatusChart = [
+            'Pending' => $pendingOrders,
+            'Completed' => $orders->where('status', 'completed')->count(),
+            'Rejected' => $orders->where('status', 'rejected')->count(),
+        ];
+
         return view('admin.dashboard', compact(
             'orders',
             'totalUsers',
@@ -32,7 +62,11 @@ class AdminController extends Controller
             'pendingOrders',
             'totalRevenue',
             'activePaymentMethods',
-            'totalBrokers'
+            'totalBrokers',
+            'revenueDates',
+            'revenueData',
+            'paymentMethodsChart',
+            'orderStatusChart'
         ));
     }
 

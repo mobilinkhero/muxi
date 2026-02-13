@@ -73,6 +73,34 @@
         </div>
     </div>
 
+    <!-- Analytics Charts -->
+    <div
+        style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
+        <!-- Revenue Chart -->
+        <div class="card" style="grid-column: 1 / -1;">
+            <h3 style="margin-bottom: 1rem; color: var(--white);">Revenue Trend (7 Days)</h3>
+            <div class="chart-container" style="height: 350px;">
+                <canvas id="revenueChart"></canvas>
+            </div>
+        </div>
+
+        <!-- Order Status -->
+        <div class="card">
+            <h3 style="margin-bottom: 1rem; color: var(--white);">Order Status</h3>
+            <div class="chart-container" style="height: 250px;">
+                <canvas id="statusChart"></canvas>
+            </div>
+        </div>
+
+        <!-- Payment Methods -->
+        <div class="card">
+            <h3 style="margin-bottom: 1rem; color: var(--white);">Payment Methods</h3>
+            <div class="chart-container" style="height: 250px;">
+                <canvas id="paymentChart"></canvas>
+            </div>
+        </div>
+    </div>
+
     <!-- Recent Orders -->
     <div class="card">
         <div style="margin-bottom: 2rem; display: flex; justify-content: space-between; align-items: center;">
@@ -141,4 +169,124 @@
             </table>
         </div>
     </div>
+
+    <script>
+        // Revenue Chart
+        const revenueCtx = document.getElementById('revenueChart').getContext('2d');
+        new Chart(revenueCtx, {
+            type: 'line',
+            data: {
+                labels: {!! json_encode($revenueDates) !!},
+                datasets: [{
+                    label: 'Revenue ($)',
+                    data: {!! json_encode($revenueData) !!},
+                    borderColor: '#10B981',
+                    backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                    borderWidth: 2,
+                    fill: true,
+                    tension: 0.4,
+                    pointRadius: 4,
+                    pointHoverRadius: 6
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        mode: 'index',
+                        intersect: false,
+                        backgroundColor: 'rgba(0,0,0,0.8)',
+                        titleColor: '#fff',
+                        bodyColor: '#fff',
+                        borderColor: 'rgba(255,255,255,0.1)',
+                        borderWidth: 1
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: { color: 'rgba(255, 255, 255, 0.05)' },
+                        ticks: { color: '#9CA3AF' }
+                    },
+                    x: {
+                        grid: { display: false },
+                        ticks: { color: '#9CA3AF' }
+                    }
+                }
+            }
+        });
+
+        // Status Chart
+        const statusCtx = document.getElementById('statusChart').getContext('2d');
+        new Chart(statusCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Pending', 'Completed', 'Rejected'],
+                datasets: [{
+                    data: [{{ $orderStatusChart['Pending'] }}, {{ $orderStatusChart['Completed'] }}, {{ $orderStatusChart['Rejected'] }}],
+                    backgroundColor: ['#F59E0B', '#10B981', '#EF4444'],
+                    borderWidth: 0,
+                    hoverOffset: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'right',
+                        labels: {
+                            color: '#e5e7eb',
+                            font: { size: 12 },
+                            padding: 20
+                        }
+                    }
+                }
+            }
+        });
+
+        // Payment Method Chart
+        const paymentCtx = document.getElementById('paymentChart').getContext('2d');
+        const paymentData = {!! json_encode($paymentMethodsChart) !!}; // {"BTC": 10, "USDT": 20}
+
+        new Chart(paymentCtx, {
+            type: 'bar',
+            data: {
+                labels: Object.keys(paymentData),
+                datasets: [{
+                    label: 'Orders',
+                    data: Object.values(paymentData),
+                    backgroundColor: [
+                        'rgba(59, 130, 246, 0.7)',
+                        'rgba(16, 185, 129, 0.7)',
+                        'rgba(245, 158, 11, 0.7)',
+                        'rgba(239, 68, 68, 0.7)',
+                        'rgba(139, 92, 246, 0.7)'
+                    ],
+                    borderWidth: 0,
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: { color: 'rgba(255, 255, 255, 0.05)' },
+                        ticks: { color: '#9CA3AF', stepSize: 1 }
+                    },
+                    x: {
+                        grid: { display: false },
+                        ticks: { color: '#9CA3AF' }
+                    }
+                }
+            }
+        });
+    </script>
 @endsection
