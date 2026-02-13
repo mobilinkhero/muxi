@@ -19,7 +19,10 @@
         <div class="container">
             <div class="nav-container">
                 <a href="/" class="logo">
-                    <img src="/images/logo.svg" alt="GSM Trading Lab" style="height: 40px;">
+                    <img src="{{ $settings['site_logo'] ?? '/images/logo.svg' }}"
+                        alt="{{ $settings['site_name'] ?? 'GSM Trading Lab' }}" style="height: 40px;">
+                    <span
+                        style="font-weight: bold; font-size: 1.2rem; color: var(--white); margin-left: 0.5rem;">{{ $settings['site_name'] ?? 'GSM Trading Lab' }}</span>
                 </a>
                 <ul class="nav-links">
                     <li><a href="/">Home</a></li>
@@ -48,7 +51,7 @@
             <div class="hero-content">
                 <div class="hero-badge">
                     <span>🎓</span>
-                    <span>GSM Trading Lab Academy</span>
+                    <span>{{ $settings['site_name'] ?? 'GSM Trading Lab' }} Academy</span>
                 </div>
                 <h1>Learn to Trade Like a Pro</h1>
                 <p class="hero-description">
@@ -327,16 +330,23 @@
                                 <label
                                     style="display: flex; align-items: center; gap: 1rem; padding: 1rem; background: var(--dark-light); border: 2px solid rgba(255,255,255,0.1); border-radius: var(--radius-md); cursor: pointer; transition: var(--transition-base);"
                                     onclick="selectPaymentMethod('{{ strtolower(str_replace(' ', '_', $method->name)) }}', this)">
-                                    <input type="radio" name="crypto" value="{{ strtolower(str_replace(' ', '_', $method->name)) }}"
+                                    <input type="radio" name="crypto"
+                                        value="{{ strtolower(str_replace(' ', '_', $method->name)) }}"
                                         style="width: 20px; height: 20px; cursor: pointer;">
                                     @if($method->icon)
-                                        <img src="{{ $method->icon }}" alt="{{ $method->name }}" width="32" height="32" style="object-fit: contain;">
+                                        <img src="{{ $method->icon }}" alt="{{ $method->name }}" width="32" height="32"
+                                            style="object-fit: contain;">
                                     @endif
                                     <div style="flex: 1;">
-                                        <div style="font-weight: 600; color: var(--white); margin-bottom: 0.25rem;">{{ $method->name }}</div>
-                                        <div style="font-size: 0.85rem; color: var(--gray);">Network: {{ $method->network }}</div>
+                                        <div style="font-weight: 600; color: var(--white); margin-bottom: 0.25rem;">
+                                            {{ $method->name }}
+                                        </div>
+                                        <div style="font-size: 0.85rem; color: var(--gray);">Network: {{ $method->network }}
+                                        </div>
                                         @if($method->instruction)
-                                            <div style="font-size: 0.75rem; color: var(--primary-light); margin-top: 2px;">{{ $method->instruction }}</div>
+                                            <div style="font-size: 0.75rem; color: var(--primary-light); margin-top: 2px;">
+                                                {{ $method->instruction }}
+                                            </div>
                                         @endif
                                     </div>
                                 </label>

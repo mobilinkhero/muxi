@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Trade Signals (Crypto, Forex, Gold) - GSM Trading Lab</title>
+    <title>Trade Signals (Crypto, Forex, Gold) - {{ $settings['site_name'] ?? 'GSM Trading Lab' }}</title>
     <meta name="description"
         content="Get professional trading signals and market analysis for Crypto, Forex, Gold, Stocks, Indices & Derivatives.">
     <style>
@@ -60,7 +60,10 @@
         <div class="container">
             <div class="nav-container">
                 <a href="/" class="logo" style="display: flex; align-items: center;">
-                    <embed src="/images/logo.svg" type="image/svg+xml" style="height: 40px;">
+                    <img src="{{ $settings['site_logo'] ?? '/images/logo.svg' }}"
+                        alt="{{ $settings['site_name'] ?? 'GSM Trading Lab' }}" style="height: 40px;">
+                    <span
+                        style="font-weight: bold; font-size: 1.2rem; color: var(--white); margin-left: 0.5rem;">{{ $settings['site_name'] ?? 'GSM Trading Lab' }}</span>
                 </a>
                 <ul class="nav-links">
                     <li><a href="/">Home</a></li>

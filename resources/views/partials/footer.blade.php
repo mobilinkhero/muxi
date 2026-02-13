@@ -45,7 +45,7 @@
             <h3 style="color: var(--white); margin-bottom: 1.5rem; font-size: 1.5rem;">🚀 Follow Us On Social Media</h3>
             <div style="display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap;">
                 <!-- YouTube -->
-                <a href="https://youtube.com/@gsmtradinglab" target="_blank"
+                <a href="{{ $settings['youtube_link'] ?? 'https://youtube.com/@gsmtradinglab' }}" target="_blank"
                     style="text-decoration: none; transition: transform 0.2s; display: flex; flex-direction: column; align-items: center; gap: 0.5rem;"
                     onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
                     <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube" width="40"
@@ -53,7 +53,7 @@
                     <span style="font-size: 0.8rem; color: var(--gray);">YouTube</span>
                 </a>
                 <!-- Telegram -->
-                <a href="https://t.me/gsmtradinglab" target="_blank"
+                <a href="{{ $settings['telegram_link'] ?? 'https://t.me/gsmtradinglab' }}" target="_blank"
                     style="text-decoration: none; transition: transform 0.2s; display: flex; flex-direction: column; align-items: center; gap: 0.5rem;"
                     onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram"
@@ -61,7 +61,7 @@
                     <span style="font-size: 0.8rem; color: var(--gray);">Telegram</span>
                 </a>
                 <!-- Facebook -->
-                <a href="https://facebook.com/gsmtradinglab" target="_blank"
+                <a href="{{ $settings['facebook_link'] ?? 'https://facebook.com/gsmtradinglab' }}" target="_blank"
                     style="text-decoration: none; transition: transform 0.2s; display: flex; flex-direction: column; align-items: center; gap: 0.5rem;"
                     onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
                     <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook" width="40"
@@ -69,7 +69,7 @@
                     <span style="font-size: 0.8rem; color: var(--gray);">Facebook</span>
                 </a>
                 <!-- Instagram -->
-                <a href="https://instagram.com/gsmtradinglab" target="_blank"
+                <a href="{{ $settings['instagram_link'] ?? 'https://instagram.com/gsmtradinglab' }}" target="_blank"
                     style="text-decoration: none; transition: transform 0.2s; display: flex; flex-direction: column; align-items: center; gap: 0.5rem;"
                     onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
                     <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram" width="40"
@@ -77,7 +77,7 @@
                     <span style="font-size: 0.8rem; color: var(--gray);">Instagram</span>
                 </a>
                 <!-- Threads -->
-                <a href="https://threads.net/@gsmtradinglab" target="_blank"
+                <a href="{{ $settings['threads_link'] ?? 'https://threads.net/@gsmtradinglab' }}" target="_blank"
                     style="text-decoration: none; transition: transform 0.2s; display: flex; flex-direction: column; align-items: center; gap: 0.5rem;"
                     onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
                     <img src="https://cdn-icons-png.flaticon.com/512/10856/10856184.png" alt="Threads" width="40"
@@ -85,7 +85,7 @@
                     <span style="font-size: 0.8rem; color: var(--gray);">Threads</span>
                 </a>
                 <!-- Twitter/X -->
-                <a href="https://twitter.com/gsmtradinglab" target="_blank"
+                <a href="{{ $settings['twitter_link'] ?? 'https://twitter.com/gsmtradinglab' }}" target="_blank"
                     style="text-decoration: none; transition: transform 0.2s; display: flex; flex-direction: column; align-items: center; gap: 0.5rem;"
                     onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
                     <img src="https://cdn-icons-png.flaticon.com/512/5968/5968830.png" alt="X" width="40" height="40"
@@ -93,7 +93,7 @@
                     <span style="font-size: 0.8rem; color: var(--gray);">X (Twitter)</span>
                 </a>
                 <!-- TikTok -->
-                <a href="https://tiktok.com/@gsmtradinglab" target="_blank"
+                <a href="{{ $settings['tiktok_link'] ?? 'https://tiktok.com/@gsmtradinglab' }}" target="_blank"
                     style="text-decoration: none; transition: transform 0.2s; display: flex; flex-direction: column; align-items: center; gap: 0.5rem;"
                     onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
                     <img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png" alt="TikTok" width="40"

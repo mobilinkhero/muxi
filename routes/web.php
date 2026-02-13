@@ -77,7 +77,19 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
 
     // Brokers
     Route::resource('brokers', BrokerController::class);
+
+    // Messaging & Inquiries
+    Route::get('/messages', [App\Http\Controllers\Admin\InquiryController::class, 'messages'])->name('messages.index');
+    Route::get('/consultations', [App\Http\Controllers\Admin\InquiryController::class, 'consultations'])->name('consultations.index');
+    Route::delete('/messages/{id}', [App\Http\Controllers\Admin\InquiryController::class, 'destroyMessage'])->name('messages.destroy');
+    Route::delete('/consultations/{id}', [App\Http\Controllers\Admin\InquiryController::class, 'destroyConsultation'])->name('consultations.destroy');
+
+    // Site Settings
+    Route::get('/settings', [App\Http\Controllers\Admin\SettingController::class, 'index'])->name('settings.index');
+    Route::post('/settings', [App\Http\Controllers\Admin\SettingController::class, 'update'])->name('settings.update');
 });
+
+Route::post('/consultation', [App\Http\Controllers\ConsultationController::class, 'store'])->name('consultation.store');
 
 use App\Http\Controllers\MarketController;
 use App\Http\Controllers\CoinGlassController;

@@ -49,8 +49,9 @@
         <div class="container">
             <div class="nav-container">
                 <a href="/" class="logo">
-                    <img src="https://i.ibb.co/3ykG88h/gsm-logo.png" alt="GSM Trading Lab Logo" style="height: 40px;">
-                    GSM Trading Lab
+                    <img src="{{ $settings['site_logo'] ?? 'https://i.ibb.co/3ykG88h/gsm-logo.png' }}"
+                        alt="{{ $settings['site_name'] ?? 'GSM Trading Lab' }}" style="height: 40px;">
+                    {{ $settings['site_name'] ?? 'GSM Trading Lab' }}
                 </a>
                 <ul class="nav-links">
                     <li><a href="/">Home</a></li>

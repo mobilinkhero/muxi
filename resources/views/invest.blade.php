@@ -19,9 +19,10 @@
         <div class="container">
             <div class="nav-container">
                 <a href="/" class="logo">
-                    <img src="https://i.ibb.co/3ykG88h/gsm-logo.png" alt="GSM Trading Lab Logo" class="logo-animation"
+                    <img src="{{ $settings['site_logo'] ?? 'https://i.ibb.co/3ykG88h/gsm-logo.png' }}"
+                        alt="{{ $settings['site_name'] ?? 'GSM Trading Lab' }}" class="logo-animation"
                         style="height: 50px;">
-                    GSM Trading Lab
+                    {{ $settings['site_name'] ?? 'GSM Trading Lab' }}
                 </a>
                 <ul class="nav-links">
                     <li><a href="/">Home</a></li>
@@ -111,26 +112,33 @@
             </div>
             <div
                 style="max-width: 600px; margin: 0 auto; background: var(--dark); padding: 2rem; border-radius: var(--radius-lg); border: 1px solid rgba(255,255,255,0.1);">
-                <form
-                    onsubmit="event.preventDefault(); alert('Consultation request received! We will contact you shortly.');">
+                @if(session('success'))
+                    <div
+                        style="background: rgba(16, 185, 129, 0.2); color: #10B981; padding: 1rem; border-radius: var(--radius-md); margin-bottom: 2rem; border: 1px solid #10B981;">
+                        {{ session('success') }}
+                    </div>
+                @endif
+
+                <form action="{{ route('consultation.store') }}" method="POST">
+                    @csrf
                     <div style="margin-bottom: 1rem;">
                         <label style="display: block; color: var(--white); margin-bottom: 0.5rem;">Full Name</label>
-                        <input type="text" required
+                        <input type="text" name="name" required
                             style="width: 100%; padding: 0.8rem; background: var(--dark-light); border: 1px solid rgba(255,255,255,0.1); border-radius: var(--radius-md); color: white;">
                     </div>
                     <div style="margin-bottom: 1rem;">
                         <label style="display: block; color: var(--white); margin-bottom: 0.5rem;">Email Address</label>
-                        <input type="email" required
+                        <input type="email" name="email" required
                             style="width: 100%; padding: 0.8rem; background: var(--dark-light); border: 1px solid rgba(255,255,255,0.1); border-radius: var(--radius-md); color: white;">
                     </div>
                     <div style="margin-bottom: 1rem;">
                         <label style="display: block; color: var(--white); margin-bottom: 0.5rem;">Investment
                             Capital</label>
-                        <select
+                        <select name="capital"
                             style="width: 100%; padding: 0.8rem; background: var(--dark-light); border: 1px solid rgba(255,255,255,0.1); border-radius: var(--radius-md); color: white;">
-                            <option>$1,000 - $10,000</option>
-                            <option>$10,000 - $50,000</option>
-                            <option>$50,000+</option>
+                            <option value="$1,000 - $10,000">$1,000 - $10,000</option>
+                            <option value="$10,000 - $50,000">$10,000 - $50,000</option>
+                            <option value="$50,000+">$50,000+</option>
                         </select>
                     </div>
                     <button type="submit" class="btn btn-primary" style="width: 100%;">Submit Request</button>

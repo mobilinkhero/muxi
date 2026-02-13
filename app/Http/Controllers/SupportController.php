@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\ContactMessage;
 
 class SupportController extends Controller
 {
@@ -20,8 +21,7 @@ class SupportController extends Controller
             'message' => 'required|string',
         ]);
 
-        // Logic to send email would go here.
-        // Mail::to('admin@gsmtradinglab.com')->send(new ContactFormMail($request->all()));
+        \App\Models\ContactMessage::create($request->all());
 
         return back()->with('success', 'Thank you for contacting us! We will get back to you shortly.');
     }
