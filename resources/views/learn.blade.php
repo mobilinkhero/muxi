@@ -10,6 +10,59 @@
         content="Master trading with a focus on Crypto, Forex, and Gold. Comprehensive courses for all markets including Stocks, Indices & Derivatives.">
     <style>
         <?php echo file_get_contents(resource_path('css/app.css')); ?>
+
+        /* Academy Page Mobile Fixes */
+        @media (max-width: 768px) {
+            .hero {
+                padding-top: 100px;
+                min-height: auto;
+                padding-bottom: 3rem;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero-description {
+                font-size: 1rem;
+            }
+
+            .services-grid {
+                gap: 2rem;
+            }
+
+            .service-card {
+                padding: 1.5rem;
+            }
+
+            .service-header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .service-icon {
+                margin: 0 auto 1rem;
+            }
+
+            #premiumModal,
+            #verificationModal {
+                padding: 1rem;
+            }
+
+            #premiumModal>div,
+            #verificationModal>div {
+                max-width: 100% !important;
+                margin: 0;
+            }
+
+            .modal-content-box {
+                padding: 1.5rem !important;
+            }
+
+            .price-display {
+                font-size: 2rem !important;
+            }
+        }
     </style>
 </head>
 
@@ -30,7 +83,12 @@
                     <li><a href="/#services">Services</a></li>
                     <li><a href="/#about">About</a></li>
                     @auth
-                        <li><a href="{{ route('dashboard') }}" class="btn btn-secondary">Dashboard</a></li>
+                        @if(auth()->user()->is_admin)
+                            <li><a href="{{ route('admin.dashboard') }}" class="btn btn-secondary"
+                                    style="border-color: #f59e0b; color: #f59e0b;">Admin Panel</a></li>
+                        @else
+                            <li><a href="{{ route('dashboard') }}" class="btn btn-secondary">Dashboard</a></li>
+                        @endif
                     @else
                         <li><a href="{{ route('login') }}" class="btn btn-secondary" style="border: none;">Login</a></li>
                     @endauth
@@ -281,7 +339,7 @@
                 style="position: absolute; top: -10px; right: -10px; width: 40px; height: 40px; border-radius: 50%; background: var(--accent); color: white; border: none; font-size: 1.5rem; cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 10000;">×</button>
 
             <!-- Modal Content -->
-            <div
+            <div class="modal-content-box"
                 style="background: var(--dark); border: 2px solid var(--accent); border-radius: var(--radius-lg); padding: 2.5rem; margin-top: 1rem;">
 
                 <!-- Step Indicator -->
@@ -311,7 +369,8 @@
                         style="background: rgba(245, 158, 11, 0.1); border-radius: var(--radius-md); padding: 1.5rem; margin-bottom: 2rem; text-align: center;">
                         <div style="font-size: 0.9rem; color: var(--gray-light); margin-bottom: 0.5rem;">Total Amount
                         </div>
-                        <div style="font-size: 3rem; font-weight: 800; color: var(--accent-light); line-height: 1;">
+                        <div class="price-display"
+                            style="font-size: 3rem; font-weight: 800; color: var(--accent-light); line-height: 1;">
                             <span
                                 style="font-size: 1.5rem; text-decoration: line-through; color: var(--gray); margin-right: 10px;">$350</span>$100
                         </div>
@@ -409,8 +468,10 @@
                     <form id="clientDetailsForm" action="{{ route('order.submit') }}" method="POST"
                         enctype="multipart/form-data" style="display: flex; flex-direction: column; gap: 1.25rem;">
                         @csrf
-                        <input type="hidden" name="service_name" value="Learn Now Pay Later Course">
+                        <input type="hidden" name="service_name" value="GSM Premium Trading Course (Upfront)">
+                        <input type="hidden" name="amount" value="100">
                         <input type="hidden" name="currency" value="USD">
+                        <input type="hidden" name="modal_id" value="premiumModal">
                         <!-- Full Name -->
                         <div>
                             <label
@@ -433,7 +494,23 @@
                                 placeholder="your.email@example.com">
                         </div>
 
-                        <!-- Country & Phone -->
+                        @if(!auth()->check())
+                            <!-- Password for new account -->
+                            <div>
+                                <label
+                                    style="display: block; color: var(--white); font-weight: 600; margin-bottom: 0.5rem; font-size: 0.95rem;">
+                                    Create Account Password <span style="color: #ef4444;">*</span>
+                                </label>
+                                <input type="password" name="password" required
+                                    style="width: 100%; padding: 0.875rem 1rem; background: var(--dark-light); border: 1px solid rgba(255,255,255,0.1); border-radius: var(--radius-md); color: var(--white); font-size: 1rem;"
+                                    placeholder="Minimum 8 characters">
+                                <div style="margin-top: 0.5rem; font-size: 0.8rem; color: var(--gray);">
+                                    🔑 You will use this password to login later
+                                </div>
+                            </div>
+                        @else
+                            <input type="hidden" name="password" value="ALREADY_LOGGED_IN">
+                        @endif
                         <div>
                             <label
                                 style="display: block; color: var(--white); font-weight: 600; margin-bottom: 0.5rem; font-size: 0.95rem;">
@@ -479,7 +556,19 @@
                             </div>
                         </div>
 
-                        <!-- Transaction ID -->
+                        <!-- WhatsApp Number -->
+                        <div>
+                            <label
+                                style="display: block; color: var(--white); font-weight: 600; margin-bottom: 0.5rem; font-size: 0.95rem;">
+                                WhatsApp Number <span style="color: #ef4444;">*</span>
+                            </label>
+                            <input type="tel" name="whatsapp" required
+                                style="width: 100%; padding: 0.875rem 1rem; background: var(--dark-light); border: 1px solid rgba(255,255,255,0.1); border-radius: var(--radius-md); color: var(--white); font-size: 1rem;"
+                                placeholder="Enter WhatsApp with country code">
+                            <div style="margin-top: 0.5rem; font-size: 0.85rem; color: var(--gray);">
+                                📱 For emergency contact and class updates
+                            </div>
+                        </div>
                         <div>
                             <label
                                 style="display: block; color: var(--white); font-weight: 600; margin-bottom: 0.5rem; font-size: 0.95rem;">
@@ -556,7 +645,7 @@
                 style="position: absolute; top: -10px; right: -10px; width: 40px; height: 40px; border-radius: 50%; background: var(--primary); color: white; border: none; font-size: 1.5rem; cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 10000;">×</button>
 
             <!-- Modal Content -->
-            <div
+            <div class="modal-content-box"
                 style="background: var(--dark); border: 2px solid var(--primary); border-radius: var(--radius-lg); padding: 2.5rem; margin-top: 1rem;">
 
                 <!-- Header -->
@@ -591,6 +680,7 @@
                     <input type="hidden" name="amount" value="0">
                     <input type="hidden" name="currency" value="PKR">
                     <input type="hidden" name="payment_method" value="Verification">
+                    <input type="hidden" name="modal_id" value="verificationModal">
 
                     <!-- Full Name -->
                     <div>
@@ -637,7 +727,19 @@
                         </div>
                     </div>
 
-                    <!-- CNIC Front Photo -->
+                    <!-- WhatsApp Number -->
+                    <div>
+                        <label
+                            style="display: block; color: var(--white); font-weight: 600; margin-bottom: 0.5rem; font-size: 0.95rem;">
+                            WhatsApp Number <span style="color: #ef4444;">*</span>
+                        </label>
+                        <input type="tel" name="whatsapp" required
+                            style="width: 100%; padding: 0.875rem 1rem; background: var(--dark-light); border: 1px solid rgba(255,255,255,0.1); border-radius: var(--radius-md); color: var(--white); font-size: 1rem;"
+                            placeholder="Enter WhatsApp with country code">
+                        <div style="margin-top: 0.5rem; font-size: 0.85rem; color: var(--gray);">
+                            📱 For emergency contact and class updates
+                        </div>
+                    </div>
                     <div>
                         <label
                             style="display: block; color: var(--white); font-weight: 600; margin-bottom: 0.5rem; font-size: 0.95rem;">
@@ -701,16 +803,34 @@
                         <div id="profilePhotoPreview" style="display: none; margin-top: 1rem;"></div>
                     </div>
 
-                    <!-- Email (Optional) -->
+                    <!-- Email -->
                     <div>
                         <label
                             style="display: block; color: var(--white); font-weight: 600; margin-bottom: 0.5rem; font-size: 0.95rem;">
-                            Email Address (Optional)
+                            Email Address <span style="color: #ef4444;">*</span>
                         </label>
-                        <input type="email" name="email"
+                        <input type="email" name="email" required
                             style="width: 100%; padding: 0.875rem 1rem; background: var(--dark-light); border: 1px solid rgba(255,255,255,0.1); border-radius: var(--radius-md); color: var(--white); font-size: 1rem;"
                             placeholder="your.email@example.com">
                     </div>
+
+                    @if(!auth()->check())
+                        <!-- Password for new account -->
+                        <div>
+                            <label
+                                style="display: block; color: var(--white); font-weight: 600; margin-bottom: 0.5rem; font-size: 0.95rem;">
+                                Create Account Password <span style="color: #ef4444;">*</span>
+                            </label>
+                            <input type="password" name="password" required
+                                style="width: 100%; padding: 0.875rem 1rem; background: var(--dark-light); border: 1px solid rgba(255,255,255,0.1); border-radius: var(--radius-md); color: var(--white); font-size: 1rem;"
+                                placeholder="Minimum 8 characters">
+                            <div style="margin-top: 0.5rem; font-size: 0.8rem; color: var(--gray);">
+                                🔑 You will use this password to login later
+                            </div>
+                        </div>
+                    @else
+                        <input type="hidden" name="password" value="ALREADY_LOGGED_IN">
+                    @endif
 
                     <!-- Submit Button -->
                     <button type="submit"
@@ -991,7 +1111,7 @@
                         const amountInput = document.createElement('input');
                         amountInput.type = 'hidden';
                         amountInput.name = 'amount';
-                        amountInput.value = '230'; // Default amount
+                        amountInput.value = '100'; // Match the UI $100 price
                         this.appendChild(amountInput);
                     }
 
@@ -1371,6 +1491,30 @@
                     });
                 }
             });
+        });
+    </script>
+
+    <script>
+        // Modal recovery after validation errors
+        document.addEventListener('DOMContentLoaded', function () {
+            @if($errors->any())
+                const modalId = "{{ old('modal_id') }}";
+                if (modalId === 'premiumModal') {
+                    openPremiumModal();
+                    // Go to step 2 directly since Step 1 is payment and Step 2 is where form is
+                    document.getElementById('payment-step').style.display = 'none';
+                    document.getElementById('details-step').style.display = 'block';
+                } else if (modalId === 'verificationModal') {
+                    openVerificationModal();
+                }
+
+                // Show errors in an alert for better visibility in modal
+                let errorMsg = "Please fix the following errors:\n";
+                @foreach($errors->all() as $error)
+                    errorMsg += "- {{ $error }}\n";
+                @endforeach
+                alert(errorMsg);
+            @endif
         });
     </script>
     @include('partials.security-script')

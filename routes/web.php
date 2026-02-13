@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
-
+use App\Http\Controllers\LmsController;
 use App\Http\Controllers\HomeController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -40,6 +40,12 @@ Route::get('/register', [AuthController::class, 'showRegister'])->name('register
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
+// Password Reset Routes (Placeholder for now)
+Route::get('password/reset', [AuthController::class, 'showForgotPassword'])->name('password.request');
+Route::post('password/email', [AuthController::class, 'sendResetLink'])->name('password.email');
+Route::get('password/reset/{token}', [AuthController::class, 'showResetPassword'])->name('password.reset');
+Route::post('password/reset', [AuthController::class, 'resetPassword'])->name('password.update');
+
 use App\Http\Controllers\OrderController;
 
 use App\Http\Controllers\AdminController;
@@ -50,23 +56,41 @@ use App\Http\Controllers\Admin\BrokerController;
 // Secure Student Area
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    Route::post('/order/submit', [OrderController::class, 'store'])->name('order.submit');
+    Route::get('/dashboard/courses', [DashboardController::class, 'courses'])->name('dashboard.courses');
+
+    // LMS Routes
+    Route::get('/join-class/{id}', [LmsController::class, 'joinClass'])->name('lms.join');
+    Route::get('/dashboard/learning-stats', [LmsController::class, 'myStats'])->name('dashboard.stats');
 });
 
+Route::post('/order/submit', [OrderController::class, 'store'])->name('order.submit');
+Route::get('/order/success', [OrderController::class, 'success'])->name('order.success');
+
 use App\Http\Controllers\SignalController;
+use App\Http\Controllers\Admin\LmsController as AdminLmsController;
 
 // Admin Area
-// Admin Area
-Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
+Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
     Route::get('/orders', [App\Http\Controllers\Admin\OrderController::class, 'index'])->name('orders.index');
+
+    // Admin LMS
+    Route::get('/lms/classes', [AdminLmsController::class, 'classes'])->name('lms.classes');
+    Route::post('/lms/classes', [AdminLmsController::class, 'createClass'])->name('lms.classes.store');
+    Route::delete('/lms/classes/{id}', [AdminLmsController::class, 'deleteClass'])->name('lms.classes.delete');
+    Route::get('/lms/attendance/{id}', [AdminLmsController::class, 'attendance'])->name('lms.attendance');
+    Route::get('/lms/student-stats', [AdminLmsController::class, 'studentStats'])->name('lms.student_stats');
+
     Route::post('/order/{id}', [App\Http\Controllers\Admin\OrderController::class, 'updateStatus'])->name('order.update');
+    Route::delete('/order/{id}', [App\Http\Controllers\Admin\OrderController::class, 'destroy'])->name('orders.destroy');
 
     // Signal Management
     Route::resource('signals', SignalController::class);
 
     // User Management
     Route::get('users', [UserController::class, 'index'])->name('users.index');
+    Route::get('users/create', [UserController::class, 'create'])->name('users.create');
+    Route::post('users', [UserController::class, 'store'])->name('users.store');
     Route::get('users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
     Route::put('users/{user}', [UserController::class, 'update'])->name('users.update');
     Route::post('users/{user}/impersonate', [UserController::class, 'impersonate'])->name('users.impersonate');

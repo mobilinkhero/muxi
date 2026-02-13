@@ -95,6 +95,40 @@
                 <div style="font-size: 1.5rem; font-weight: bold; color: var(--white);">{{ $totalConsultations ?? 0 }}</div>
             </div>
         </div>
+
+        <!-- LMS Stats -->
+        <div class="card"
+            style="padding: 1.5rem; display: flex; align-items: center; gap: 1rem; border: 1px solid rgba(255,255,255,0.05);">
+            <div
+                style="font-size: 2rem; background: rgba(239, 68, 68, 0.1); width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; border-radius: 50%; color: #ef4444;">
+                📺</div>
+            <div>
+                <div style="font-size: 0.9rem; color: var(--gray);">Total Classes</div>
+                <div style="font-size: 1.5rem; font-weight: bold; color: var(--white);">{{ $totalClasses ?? 0 }}</div>
+            </div>
+        </div>
+
+        <div class="card"
+            style="padding: 1.5rem; display: flex; align-items: center; gap: 1rem; border: 1px solid rgba(255,255,255,0.05);">
+            <div
+                style="font-size: 2rem; background: rgba(16, 185, 129, 0.1); width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; border-radius: 50%; color: #10b981;">
+                👥</div>
+            <div>
+                <div style="font-size: 0.9rem; color: var(--gray);">Total Attendance</div>
+                <div style="font-size: 1.5rem; font-weight: bold; color: var(--white);">{{ $totalAttendance ?? 0 }}</div>
+            </div>
+        </div>
+
+        <div class="card"
+            style="padding: 1.5rem; display: flex; align-items: center; gap: 1rem; border: 1px solid rgba(255,255,255,0.05);">
+            <div
+                style="font-size: 2rem; background: rgba(245, 158, 11, 0.1); width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; border-radius: 50%; color: #f59e0b;">
+                ⏳</div>
+            <div>
+                <div style="font-size: 0.9rem; color: var(--gray);">Upcoming Sessions</div>
+                <div style="font-size: 1.5rem; font-weight: bold; color: var(--white);">{{ $upcomingClasses ?? 0 }}</div>
+            </div>
+        </div>
     </div>
 
     <!-- Analytics Charts -->

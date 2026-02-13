@@ -12,8 +12,7 @@ class DashboardController extends Controller
     {
         $user = Auth::user();
 
-        $orders = \Illuminate\Support\Facades\DB::table('orders')
-            ->where('user_id', $user->id)
+        $orders = Order::where('user_id', $user->id)
             ->orderBy('created_at', 'desc')
             ->get();
 
@@ -27,6 +26,33 @@ class DashboardController extends Controller
         // Let's just pass active signals for now.
         $totalSignals = \App\Models\Signal::count();
 
-        return view('dashboard', compact('user', 'orders', 'activeSignals', 'totalSignals'));
+        // LMS Stats
+        $liveClasses = \App\Models\LiveClass::where('scheduled_at', '>=', now()->subHours(5))
+            ->where('status', '!=', 'completed')
+            ->orderBy('scheduled_at', 'asc')
+            ->get();
+
+        return view('dashboard', compact('user', 'orders', 'activeSignals', 'totalSignals', 'liveClasses'));
+    }
+
+    public function courses()
+    {
+        $user = Auth::user();
+        $orders = Order::where('user_id', $user->id)
+            ->where('status', 'completed')
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        // Focus on Live Session Stats
+        $attendanceData = \App\Models\LiveClassAttendee::where('user_id', $user->id)->get();
+
+        $stats = [
+            'sessions_attended' => $attendanceData->count(),
+            'late_entries' => $attendanceData->where('status', 'late')->count(),
+            'upcoming_sessions' => \App\Models\LiveClass::where('scheduled_at', '>', now())->count(),
+            'certificates' => 0
+        ];
+
+        return view('dashboard.courses', compact('user', 'orders', 'stats'));
     }
 }

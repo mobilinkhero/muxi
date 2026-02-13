@@ -26,6 +26,8 @@ class SiteSettingSeeder extends Seeder
             'snapchat_link' => 'https://snapchat.com/add/gsmtradinglab',
             'discord_link' => 'https://discord.gg/gsmtradinglab',
             'linkedin_link' => 'https://linkedin.com/in/gsmtradinglab',
+            'zoom_meeting_link' => 'https://zoom.us/j/your-meeting-id',
+            'class_schedule' => 'Every Monday & Thursday at 8:00 PM (GMT+5)',
         ];
 
         foreach ($settings as $key => $value) {

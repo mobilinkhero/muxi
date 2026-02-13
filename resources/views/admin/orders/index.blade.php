@@ -74,9 +74,27 @@
                                             <img src="{{ Storage::url($order->screenshot_path) }}" alt="Proof" 
                                                  style="width: 100%; height: 100%; object-fit: cover;">
                                         </a>
-                                        <div style="font-size: 0.8rem; font-family: monospace; color: var(--gray);">
-                                            TXID: {{ Str::limit($order->transaction_id, 15) }}
-                                        </div>
+                                        @if($order->transaction_id)
+                                            <div style="font-size: 0.8rem; font-family: monospace; color: var(--gray);">
+                                                TXID: {{ Str::limit($order->transaction_id, 15) }}
+                                            </div>
+                                        @endif
+                                    </div>
+                                @elseif(str_contains($order->notes, 'Verification request'))
+                                    <div style="display: flex; gap: 0.25rem; flex-wrap: wrap;">
+                                        @php
+                                            $verification = json_decode(str_replace('Verification request: ', '', $order->notes), true);
+                                        @endphp
+                                        @if(is_array($verification))
+                                            @foreach($verification as $label => $path)
+                                                <a href="{{ Storage::url($path) }}" target="_blank" 
+                                                   style="display: block; width: 50px; height: 35px; overflow: hidden; border-radius: 4px; border: 1px solid rgba(255,255,255,0.1);"
+                                                   title="{{ $label }}">
+                                                    <img src="{{ Storage::url($path) }}" alt="{{ $label }}" 
+                                                         style="width: 100%; height: 100%; object-fit: cover;">
+                                                </a>
+                                            @endforeach
+                                        @endif
                                     </div>
                                 @else
                                     <span style="color: var(--gray);">No Proof Uploaded</span>
@@ -107,11 +125,18 @@
                                                 style="background: rgba(239, 68, 68, 0.1); color: #EF4444; border: 1px solid #EF4444; width: 100%; text-align: center;">
                                             Reject
                                         </button>
-                                    @else
-                                        <div style="display: flex; gap: 0.25rem;">
-                                            <button type="submit" name="status" value="pending" class="btn btn-sm" style="background: var(--dark-light); border: 1px solid var(--gray); color: var(--gray); font-size: 0.7rem;">Reset</button>
-                                        </div>
                                     @endif
+                                </form>
+
+                                <form action="{{ route('admin.orders.destroy', $order->id) }}" method="POST" 
+                                    onsubmit="return confirm('⚠️ Warning: This will permanently delete this order from the database. This action cannot be undone. Continue?')"
+                                    style="margin-top: 0.5rem;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-sm" 
+                                            style="background: transparent; color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.3); width: 100%; font-size: 0.75rem; padding: 0.15rem 0.5rem;">
+                                        🗑️ Delete Permanently
+                                    </button>
                                 </form>
                             </td>
                         </tr>

@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Order;
-use App\Models\ContactMessage;
-use App\Models\ConsultationRequest;
 
 class AdminController extends Controller
 {
@@ -29,15 +27,19 @@ class AdminController extends Controller
         $totalMessages = \App\Models\ContactMessage::count();
         $totalConsultations = \App\Models\ConsultationRequest::count();
 
+        // LMS Stats
+        $totalClasses = \App\Models\LiveClass::count();
+        $totalAttendance = \App\Models\LiveClassAttendee::count();
+        $upcomingClasses = \App\Models\LiveClass::where('scheduled_at', '>', now())->count();
+
         // Chart 1: Revenue (Last 7 Days)
         $revenueChart = Order::where('status', 'completed')
-            ->where('created_at', '>=', now()->subDays(6)) // Last 7 days including today
+            ->where('created_at', '>=', now()->subDays(6))
             ->selectRaw('DATE(created_at) as date, SUM(amount) as total')
             ->groupBy('date')
             ->orderBy('date')
             ->get();
 
-        // Fill in missing days with 0
         $revenueDates = [];
         $revenueData = [];
         for ($i = 6; $i >= 0; $i--) {
@@ -72,7 +74,10 @@ class AdminController extends Controller
             'revenueDates',
             'revenueData',
             'paymentMethodsChart',
-            'orderStatusChart'
+            'orderStatusChart',
+            'totalClasses',
+            'totalAttendance',
+            'upcomingClasses'
         ));
     }
 

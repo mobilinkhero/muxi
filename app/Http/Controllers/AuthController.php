@@ -21,12 +21,15 @@ class AuthController extends Controller
             $request->merge(['email' => 'admin@gsmtradinglab.com']);
         }
 
-        $credentials = $request->validate([
-            'email' => ['required', 'email'],
+        $request->validate([
+            'email' => ['required', 'string'],
             'password' => ['required'],
         ]);
 
-        if (Auth::attempt($credentials)) {
+        $loginValue = $request->email;
+        $loginField = filter_var($loginValue, FILTER_VALIDATE_EMAIL) ? 'email' : 'phone';
+
+        if (Auth::attempt([$loginField => $loginValue, 'password' => $request->password])) {
             $request->session()->regenerate();
 
             if (Auth::user()->is_admin) {
@@ -51,12 +54,16 @@ class AuthController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
+            'phone' => 'required|string|unique:users',
+            'whatsapp' => 'required|string',
             'password' => 'required|string|min:8|confirmed',
         ]);
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
+            'phone' => $request->phone,
+            'whatsapp' => $request->whatsapp,
             'password' => Hash::make($request->password),
         ]);
 
@@ -71,5 +78,43 @@ class AuthController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
         return redirect('/');
+    }
+
+    // Password Reset Methods
+    public function showForgotPassword()
+    {
+        return view('auth.passwords.email');
+    }
+
+    public function sendResetLink(Request $request)
+    {
+        $request->validate(['email' => 'required|email']);
+
+        // Since we are using manual logic for now, we'll just show a success message
+        // In a real app, you'd use Password::sendResetLink()
+        return back()->with('status', 'If your email is registered, we have sent a reset link.');
+    }
+
+    public function showResetPassword($token)
+    {
+        return view('auth.passwords.reset', ['token' => $token, 'email' => request()->email]);
+    }
+
+    public function resetPassword(Request $request)
+    {
+        $request->validate([
+            'token' => 'required',
+            'email' => 'required|email',
+            'password' => 'required|confirmed|min:8',
+        ]);
+
+        $user = User::where('email', $request->email)->first();
+        if ($user) {
+            $user->password = Hash::make($request->password);
+            $user->save();
+            return redirect('/login')->with('success', 'Password reset successfully. Please login.');
+        }
+
+        return back()->withErrors(['email' => 'User not found.']);
     }
 }

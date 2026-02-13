@@ -15,9 +15,28 @@
             </div>
 
             <div class="form-group">
-                <label class="form-label">EmailAddress</label>
+                <label class="form-label">Email Address</label>
                 <input type="email" name="email" class="form-input" required value="{{ old('email', $user->email) }}">
             </div>
+
+            <div class="form-group">
+                <label class="form-label">Phone Number</label>
+                <input type="text" name="phone" class="form-input" value="{{ old('phone', $user->phone) }}">
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">WhatsApp Number</label>
+                <input type="text" name="whatsapp" class="form-input" value="{{ old('whatsapp', $user->whatsapp) }}">
+            </div>
+
+            @if($user->id !== auth()->id())
+                <div class="form-group" style="margin: 1.5rem 0;">
+                    <label class="form-check">
+                        <input type="checkbox" name="is_admin" value="1" {{ $user->is_admin ? 'checked' : '' }}>
+                        <span style="color: var(--white); font-weight: 600;">Grant Admin Privileges</span>
+                    </label>
+                </div>
+            @endif
 
             <div
                 style="background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); padding: 1.5rem; border-radius: var(--radius-sm); margin: 2rem 0;">

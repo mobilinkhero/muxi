@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Login - GSM Trading Lab</title>
+    <title>Forgot Password - GSM Trading Lab</title>
     <style>
         <?php echo file_get_contents(resource_path('css/app.css')); ?>
 
@@ -52,22 +52,14 @@
             transition: var(--transition-base);
         }
 
-        .form-input:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
-        }
-
-        .auth-footer {
-            margin-top: 1.5rem;
-            text-align: center;
+        .alert-success {
+            padding: 1rem;
+            background: rgba(16, 185, 129, 0.2);
+            color: #10b981;
+            border: 1px solid #10b981;
+            border-radius: var(--radius-md);
+            margin-bottom: 1.5rem;
             font-size: 0.9rem;
-            color: var(--gray);
-        }
-
-        .auth-footer a {
-            color: var(--primary-light);
-            text-decoration: none;
         }
 
         .error-msg {
@@ -83,45 +75,37 @@
     <div class="auth-card">
         <div class="auth-header">
             <a href="/" class="logo" style="justify-content: center; margin-bottom: 1rem;">
-                <img src="https://i.ibb.co/3ykG88h/gsm-logo.png" alt="Logo" class="logo-animation"
-                    style="height: 60px;">
+                <img src="https://i.ibb.co/3ykG88h/gsm-logo.png" alt="Logo" style="height: 60px;">
             </a>
-            <h2>Student Login</h2>
-            <p>Access your dashboard and purchased courses</p>
+            <h2>Forgot Password</h2>
+            <p>Enter your email to receive a reset link</p>
         </div>
 
-        <form action="{{ route('login') }}" method="POST">
+        @if (session('status'))
+            <div class="alert-success">
+                {{ session('status') }}
+            </div>
+        @endif
+
+        <form action="{{ route('password.email') }}" method="POST">
             @csrf
 
             <div class="form-group">
-                <label class="form-label">Email Address or Phone Number</label>
-                <input type="text" name="email" class="form-input" required value="{{ old('email') }}"
-                    placeholder="Enter email or +923000000000">
+                <label class="form-label">Email Address</label>
+                <input type="email" name="email" class="form-input" required value="{{ old('email') }}"
+                    placeholder="registered@email.com">
                 @error('email')
                     <div class="error-msg">{{ $message }}</div>
                 @enderror
             </div>
 
-            <div class="form-group">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
-                    <label class="form-label" style="margin-bottom: 0;">Password</label>
-                    <a href="{{ route('password.request') }}"
-                        style="font-size: 0.8rem; color: var(--primary-light); text-decoration: none;">Forgot
-                        Password?</a>
-                </div>
-                <input type="password" name="password" class="form-input" required>
-                @error('password')
-                    <div class="error-msg">{{ $message }}</div>
-                @enderror
-            </div>
-
             <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;">
-                Log In
+                Send Password Reset Link
             </button>
         </form>
 
-        <div class="auth-footer">
-            Don't have an account? <a href="{{ route('register') }}">Register here</a>
+        <div style="margin-top: 1.5rem; text-align: center; font-size: 0.9rem;">
+            <a href="{{ route('login') }}" style="color: var(--gray-light); text-decoration: none;">← Back to Login</a>
         </div>
     </div>
 

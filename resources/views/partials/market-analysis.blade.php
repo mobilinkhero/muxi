@@ -364,10 +364,19 @@
                             style="width: 100%; padding: 0.7rem; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); color: white; border-radius: 4px; font-weight: bold;">
                     </div>
 
-                    <button onclick="addPriceAlert()" class="btn btn-primary"
-                        style="width: 100%; justify-content: center; margin-bottom: 1rem;">
-                        <span>⏰ Set Alarm</span>
-                    </button>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                        <button onclick="addPriceAlert()" class="btn btn-primary" style="justify-content: center;">
+                            <span>⏰ Set Alarm</span>
+                        </button>
+                        <button onclick="testAlarmSound()" class="btn btn-secondary"
+                            style="justify-content: center; background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.1);">
+                            <span>🔊 Test Sound</span>
+                        </button>
+                    </div>
+
+                    <div style="font-size: 0.75rem; color: var(--gray); text-align: center; margin-bottom: 1rem;">
+                        ⚠️ Click "Test Sound" once to allow alarm audio in this browser tab.
+                    </div>
 
                     <!-- Active Alerts List -->
                     <div id="activeAlertsList" style="display: flex; flex-direction: column; gap: 0.5rem;">
@@ -767,7 +776,7 @@
     let lastNewsId = null;
     let alertsEnabled = false;
     // Simple notification sound (Beep)
-    const alertSound = new Audio("https://assets.mixkit.co/active_storage/sfx/2869/2869-preview.mp3");
+    const alertSound = new Audio("https://actions.google.com/sounds/v1/alarms/digital_watch_alarm_long.ogg");
 
     async function checkMarketNews() {
         if (!alertsEnabled) return;
@@ -862,7 +871,9 @@
                 document.getElementById('alertBtn').style.borderColor = "#10b981";
 
                 // Test Sound
-                alertSound.play().catch(e => console.log("Please interact with page first"));
+                alertSound.play().then(() => {
+                    setTimeout(() => alertSound.pause(), 2000);
+                }).catch(e => console.log("Please interact with page first"));
 
                 // Show confirmation toast
                 showToast({
@@ -911,11 +922,39 @@
 <!-- Price Alert & Worker Logic -->
 <script>
     let activeAlerts = [];
-    const loopAlarm = new Audio("https://assets.mixkit.co/active_storage/sfx/2869/2869-preview.mp3");
+    // Using a more reliable alarm sound (Emergency pager/siren style)
+    const loopAlarm = new Audio("https://actions.google.com/sounds/v1/alarms/spaceship_alarm.ogg");
+    loopAlarm.loop = true; // Built-in looping
+
     let isAlarmPlaying = false;
-    let alarmInterval = null;
     let marketWorker = null;
     let latestPrices = {};
+
+    function testAlarmSound() {
+        // 1. Explicitly request Notification permission first
+        if (Notification.permission !== "granted") {
+            Notification.requestPermission().then(permission => {
+                if (permission === 'granted') {
+                    new Notification("Notifications Enabled!", { body: "You will now receive desktop alerts with sound." });
+                }
+            });
+        }
+
+        // 2. Try to play sound
+        loopAlarm.currentTime = 0;
+        loopAlarm.play().then(() => {
+            setTimeout(() => {
+                if (!isAlarmPlaying) {
+                    loopAlarm.pause();
+                    loopAlarm.currentTime = 0;
+                }
+            }, 3000);
+            alert("✅ Sound OK! Ek loud alarm 3 seconds k liye bajay ga. Agar aapko awaz aayi hai to set up mukammal hai.");
+        }).catch(e => {
+            console.error("Audio block error:", e);
+            alert("❌ Browser ne awaz block kar di hai!\n\nIsko theek karne k liye:\n1. Browser ki address bar me 'Lock' (🔒) icon par click karein.\n2. 'Sound' aur 'Notifications' ko 'Allow' kar dein.\n3. Page refresh kar k dobara check karein.");
+        });
+    }
 
     // Load from local storage
     const savedAlerts = localStorage.getItem('gsmPriceAlerts');
@@ -1048,19 +1087,32 @@
     function triggerFullAlarm(alert, currentPrice) {
         if (isAlarmPlaying) return;
         isAlarmPlaying = true;
+
+        // Show Overlay
         document.getElementById('alarmOverlay').style.display = 'flex';
         document.getElementById('alarmMessage').innerText = `${alert.asset} reached $${currentPrice}`;
+
+        // Play Sound
         loopAlarm.currentTime = 0;
-        loopAlarm.play();
-        alarmInterval = setInterval(() => { loopAlarm.currentTime = 0; loopAlarm.play(); }, 3000);
-        new Notification("🚨 PRICE ALERT!", { body: `${alert.asset}: $${currentPrice}`, icon: "" });
+        loopAlarm.play().catch(e => console.error("Sound play failed:", e));
+
+        // Desktop Notification with urgency
+        if (Notification.permission === "granted") {
+            const notif = new Notification("🚨 PRICE ALERT TRIGGERED!", {
+                body: `${alert.asset}: $${currentPrice}\nAction: ${alert.condition === 'above' ? 'Price Cross Up' : 'Price Cross Down'}`,
+                icon: "https://cdn-icons-png.flaticon.com/512/179/179133.png",
+                requireInteraction: true, // Notification stays until dismissed
+                silent: false // Browser system sound
+            });
+            notif.onclick = () => { window.focus(); dismissAlarm(); };
+        }
     }
 
     function dismissAlarm() {
         isAlarmPlaying = false;
         document.getElementById('alarmOverlay').style.display = 'none';
-        clearInterval(alarmInterval);
         loopAlarm.pause();
+        loopAlarm.currentTime = 0;
     }
 
     // Global Metrics Fetcher

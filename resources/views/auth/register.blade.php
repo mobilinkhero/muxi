@@ -111,6 +111,24 @@
             </div>
 
             <div class="form-group">
+                <label class="form-label">Phone Number (Will be your Username)</label>
+                <input type="text" name="phone" class="form-input" required value="{{ old('phone') }}"
+                    placeholder="+923XXXXXXXXX">
+                @error('phone')
+                    <div class="error-msg">{{ $message }}</div>
+                @enderror
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">WhatsApp Number</label>
+                <input type="text" name="whatsapp" class="form-input" required value="{{ old('whatsapp') }}"
+                    placeholder="+923XXXXXXXXX">
+                @error('whatsapp')
+                    <div class="error-msg">{{ $message }}</div>
+                @enderror
+            </div>
+
+            <div class="form-group">
                 <label class="form-label">Password</label>
                 <input type="password" name="password" class="form-input" required>
                 @error('password')

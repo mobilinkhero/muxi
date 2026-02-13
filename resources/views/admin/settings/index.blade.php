@@ -42,6 +42,32 @@
                         <input type="text" name="whatsapp_number" class="form-input"
                             value="{{ $settings['whatsapp_number'] ?? '' }}">
                     </div>
+
+                    <h3
+                        style="margin-top: 2rem; margin-bottom: 1.5rem; color: var(--primary); border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 0.5rem;">
+                        Academy Information</h3>
+
+                    <div class="form-group">
+                        <label class="form-label">Zoom Meeting Link</label>
+                        <input type="url" name="zoom_meeting_link" class="form-input"
+                            value="{{ $settings['zoom_meeting_link'] ?? '' }}">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Class Schedule</label>
+                        <input type="text" name="class_schedule" class="form-input"
+                            value="{{ $settings['class_schedule'] ?? '' }}">
+                    </div>
+
+                    <div class="form-group"
+                        style="background: rgba(16, 185, 129, 0.05); padding: 1.5rem; border-radius: 8px; border: 1px solid rgba(16, 185, 129, 0.2); margin-top: 1rem;">
+                        <label class="form-label" style="color: #10B981; font-weight: bold;">📢 Scrolling Announcement
+                            (Patti)</label>
+                        <textarea name="announcement_ticker" class="form-input" style="height: 80px;"
+                            placeholder="Yahan wo message likhain jo dono dashboards par patti ki tarah chalay ga...">{{ $settings['announcement_ticker'] ?? '' }}</textarea>
+                        <small style="color: var(--gray); display: block; margin-top: 5px;">Ye message Admin aur Student
+                            portal par scroll kare ga.</small>
+                    </div>
                 </div>
 
                 <!-- Social Links -->
@@ -63,15 +89,27 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="form-label">Twitter/X Link</label>
+                        <label class="form-label">Twitter / X Link</label>
                         <input type="url" name="twitter_link" class="form-input"
                             value="{{ $settings['twitter_link'] ?? '' }}">
                     </div>
 
                     <div class="form-group">
-                        <label class="form-label">YouTube Link</label>
-                        <input type="url" name="youtube_link" class="form-input"
-                            value="{{ $settings['youtube_link'] ?? '' }}">
+                        <label class="form-label">Threads Link</label>
+                        <input type="url" name="threads_link" class="form-input"
+                            value="{{ $settings['threads_link'] ?? '' }}">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">TikTok Link</label>
+                        <input type="url" name="tiktok_link" class="form-input"
+                            value="{{ $settings['tiktok_link'] ?? '' }}">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Snapchat Link</label>
+                        <input type="url" name="snapchat_link" class="form-input"
+                            value="{{ $settings['snapchat_link'] ?? '' }}">
                     </div>
 
                     <div class="form-group">
