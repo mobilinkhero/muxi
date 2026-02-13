@@ -94,8 +94,8 @@
             @csrf
 
             <div class="form-group">
-                <label class="form-label">Email Address</label>
-                <input type="email" name="email" class="form-input" required value="{{ old('email') }}">
+                <label class="form-label">Email Address or Username</label>
+                <input type="text" name="email" class="form-input" required value="{{ old('email') }}">
                 @error('email')
                     <div class="error-msg">{{ $message }}</div>
                 @enderror

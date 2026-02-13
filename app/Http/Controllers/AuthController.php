@@ -16,6 +16,11 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
+        // Allow login with 'admin' username
+        if ($request->email === 'admin') {
+            $request->merge(['email' => 'admin@gsmtradinglab.com']);
+        }
+
         $credentials = $request->validate([
             'email' => ['required', 'email'],
             'password' => ['required'],
@@ -23,6 +28,11 @@ class AuthController extends Controller
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
+
+            if (Auth::user()->is_admin) {
+                return redirect()->intended('/admin/dashboard');
+            }
+
             return redirect()->intended('dashboard');
         }
 
