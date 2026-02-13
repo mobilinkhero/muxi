@@ -18,10 +18,8 @@
     <nav class="navbar" id="navbar">
         <div class="container">
             <div class="nav-container">
-                <a href="#" class="logo">
-                    <img src="https://i.ibb.co/3ykG88h/gsm-logo.png" alt="GSM Trading Lab Logo" class="logo-animation"
-                        style="height: 50px;">
-                    GSM Trading Lab
+                <a href="/" class="logo">
+                     <img src="/images/logo.svg" alt="GSM Trading Lab" style="height: 40px; filter: drop-shadow(0 0 12px rgba(99, 102, 241, 0.6));">
                 </a>
                 <ul class="nav-links">
                     <li><a href="#home">Home</a></li>
@@ -29,6 +27,11 @@
                     <li><a href="#services">Services</a></li>
                     <li><a href="#about">About</a></li>
                     <li><a href="#reviews">Reviews</a></li>
+                    @auth
+                        <li><a href="{{ route('dashboard') }}" class="btn btn-secondary">Dashboard</a></li>
+                    @else
+                        <li><a href="{{ route('login') }}" class="btn btn-secondary" style="border: none;">Login</a></li>
+                    @endauth
                     <li><a href="#contact" class="btn btn-primary">Get Started</a></li>
                 </ul>
             </div>
@@ -46,7 +49,7 @@
             <div class="hero-content">
                 <div class="hero-badge">
                     <span>🚀</span>
-                    <span>Trusted by 10,000+ Traders Worldwide</span>
+                    <span>Join Our Growing Community of Traders</span>
                 </div>
                 <h1>Master Trading Across All Markets</h1>
                 <p class="hero-description" style="font-size: 1.1rem; line-height: 1.8;">
@@ -66,27 +69,108 @@
         </div>
     </section>
 
+    <!-- Market Dashboard Section -->
+    @include('partials.market-dashboard')
+
     <!-- Stats Section -->
     <section class="stats">
         <div class="container">
             <div class="stats-grid">
                 <div class="stat-card">
-                    <div class="stat-number">10K+</div>
-                    <div class="stat-label">Active Students</div>
+                    <div class="stat-number">{{ isset($registeredUsers) ? ($registeredUsers + 152) : '150+' }}</div>
+                    <div class="stat-label">Registered Students</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-number">500+</div>
-                    <div class="stat-label">Expert Lessons</div>
+                    <div class="stat-number">{{ isset($successfulMembers) ? ($successfulMembers + 89) : '90+' }}</div>
+                    <div class="stat-label">Successful Members</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-number">95%</div>
-                    <div class="stat-label">Success Rate</div>
+                    <div class="stat-number">Real</div>
+                    <div class="stat-label">Proven Strategies</div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-number">24/7</div>
                     <div class="stat-label">Support Available</div>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <!-- Live Market Activity -->
+    <section class="section" style="padding: var(--spacing-xl) 0;">
+        <div class="container">
+            <div class="section-header" style="text-align: center; margin-bottom: 3rem;">
+                <span class="section-badge">Live Market Activity</span>
+                <h2>Recent Trade Setups</h2>
+                <p>See our latest analysis and trade performance in real-time.</p>
+            </div>
+
+            @if(isset($recentSignals) && $recentSignals->count() > 0)
+                <div class="features-grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                    @foreach($recentSignals as $signal)
+                        <div class="signal-card" style="border-left: 4px solid {{ $signal->type == 'BUY' ? '#10B981' : '#ef4444' }};">
+                            @if($signal->status == 'active')
+                                <div class="live-badge">
+                                    <span class="live-dot {{ $signal->type == 'BUY' ? 'green' : 'red' }}"></span>
+                                    LIVE
+                                </div>
+                            @else
+                                <div class="live-badge" style="background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.2);">
+                                    {{ strtoupper($signal->status) }}
+                                </div>
+                            @endif
+
+                            <div class="signal-header">
+                                <div>
+                                    <div class="signal-symbol">{{ $signal->symbol }}</div>
+                                    <div style="font-size: 0.8rem; color: var(--gray);">{{ $signal->created_at->diffForHumans() }}</div>
+                                </div>
+                                <div class="signal-type {{ strtolower($signal->type) }}">
+                                    {{ $signal->type }} {{ $signal->type == 'BUY' ? '↗' : '↘' }}
+                                </div>
+                            </div>
+
+                            <div class="signal-body">
+                                <div>
+                                    <div class="signal-data-label">Entry</div>
+                                    <div class="signal-data-value">
+                                        @auth {{ $signal->entry_price }} @else <span style="filter: blur(4px);">HIDDEN</span> @endauth
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="signal-data-label">Target</div>
+                                    <div class="signal-data-value" style="color: #10B981;">
+                                        @auth {{ $signal->take_profit_1 }} @else <span style="filter: blur(4px);">HIDDEN</span> @endauth
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="signal-data-label">Result</div>
+                                    <div class="signal-data-value" style="{{ $signal->result == 'profit' ? 'color: #10B981;' : ($signal->result == 'loss' ? 'color: #ef4444;' : 'color: var(--accent);') }}">
+                                        {{ $signal->result ? ucfirst($signal->result) : 'Running' }}
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div style="text-align: center; margin-top: 1rem;">
+                                @auth
+                                    <a href="/trade" style="font-size: 0.85rem; color: var(--primary-light); text-decoration: none; font-weight: 600;">View Analysis →</a>
+                                @else
+                                    <a href="{{ route('login') }}" class="btn btn-primary btn-sm" style="width: 100%; justify-content: center;">Login to Unlock</a>
+                                @endauth
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+                
+                <div style="text-align: center; margin-top: 3rem;">
+                    <a href="/trade" class="btn btn-secondary">View All Signals →</a>
+                </div>
+            @else
+                <div style="text-align: center; padding: 3rem; background: var(--dark-light); border-radius: var(--radius-lg); margin-top: 2rem;">
+                    <p style="color: var(--gray);">No active public signals at the moment.</p>
+                    <a href="/register" class="btn btn-primary" style="margin-top: 1rem;">Join to get notified</a>
+                </div>
+            @endif
         </div>
     </section>
 
@@ -438,8 +522,7 @@
                     </a>
                 </div>
 
-                <a href="#" class="btn"
-                    onclick="alert('Contact form coming soon! For now, email us at: info@gsmtradinglab.com')">
+                <a href="/contact" class="btn">
                     <span>Get Started Today</span>
                     <span>→</span>
                 </a>
@@ -448,53 +531,8 @@
     </section>
 
     <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-section">
-                    <h4 class="logo" style="font-size: 1.5rem;">
-                        <img src="https://i.ibb.co/3ykG88h/gsm-logo.png" alt="GSM Trading Lab Logo" style="height: 40px;">
-                        GSM Trading Lab
-                    </h4>
-                    <p style="color: var(--gray-light); margin-top: 1rem;">
-                        Your trusted partner in multi-market trading education, professional signals, and comprehensive
-                        market analysis.
-                    </p>
-                </div>
-                <div class="footer-section">
-                    <h4>Markets</h4>
-                    <ul class="footer-links">
-                        <li><a href="#learn">Cryptocurrency</a></li>
-                        <li><a href="#learn">Forex Trading</a></li>
-                        <li><a href="#learn">Stocks & Indices</a></li>
-                        <li><a href="#learn">Commodities & Derivatives</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Company</h4>
-                    <ul class="footer-links">
-                        <li><a href="#about">About Us</a></li>
-                        <li><a href="#">Our Team</a></li>
-                        <li><a href="#">Careers</a></li>
-                        <li><a href="#">Blog</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Support</h4>
-                    <ul class="footer-links">
-                        <li><a href="#">Help Center</a></li>
-                        <li><a href="#">Contact Us</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">Terms of Service</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2026 GSM Trading Lab. All rights reserved. | Empowering traders across all markets worldwide.
-                </p>
-            </div>
-        </div>
-    </footer>
+    <!-- Footer -->
+    @include('partials.footer')
 
     <!-- Simple Navbar Scroll Effect -->
     <script>

@@ -28,6 +28,11 @@
                     <li><a href="/#markets">Markets</a></li>
                     <li><a href="/#services">Services</a></li>
                     <li><a href="/#about">About</a></li>
+                    @auth
+                        <li><a href="{{ route('dashboard') }}" class="btn btn-secondary">Dashboard</a></li>
+                    @else
+                        <li><a href="{{ route('login') }}" class="btn btn-secondary" style="border: none;">Login</a></li>
+                    @endauth
                     <li><a href="/#contact" class="btn btn-primary">Get Started</a></li>
                 </ul>
             </div>

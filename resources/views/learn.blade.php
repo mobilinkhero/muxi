@@ -19,15 +19,18 @@
         <div class="container">
             <div class="nav-container">
                 <a href="/" class="logo">
-                    <img src="https://i.ibb.co/3ykG88h/gsm-logo.png" alt="GSM Trading Lab Logo" class="logo-animation"
-                        style="height: 50px;">
-                    GSM Trading Lab
+                     <img src="/images/logo.svg" alt="GSM Trading Lab" style="height: 40px;">
                 </a>
                 <ul class="nav-links">
                     <li><a href="/">Home</a></li>
                     <li><a href="/#markets">Markets</a></li>
                     <li><a href="/#services">Services</a></li>
                     <li><a href="/#about">About</a></li>
+                    @auth
+                        <li><a href="{{ route('dashboard') }}" class="btn btn-secondary">Dashboard</a></li>
+                    @else
+                        <li><a href="{{ route('login') }}" class="btn btn-secondary" style="border: none;">Login</a></li>
+                    @endauth
                     <li><a href="/#contact" class="btn btn-primary">Get Started</a></li>
                 </ul>
             </div>
@@ -49,8 +52,9 @@
                 </div>
                 <h1>Learn to Trade Like a Pro</h1>
                 <p class="hero-description">
-                    Master trading with a special focus on <strong>Crypto, Forex, and Gold</strong>.
-                    Access comprehensive courses, expert mentorship, and hands-on practice for all financial markets.
+                    Master trading with a focus on <strong>Risk Management & Live Execution</strong>.
+                    Get <strong>Lifetime Premium Access</strong> to daily live sessions, 1-on-1 mentorship, and 24/7
+                    support. One-time fee, forever value.
                 </p>
             </div>
         </div>
@@ -69,10 +73,10 @@
             <div class="services-grid" style="max-width: 1100px; margin: 0 auto;">
 
                 <!-- Option 1: Learn Now, Pay Later -->
-                <div class="service-card" style="border: 2px solid var(--primary);">
+                <div class="service-card" style="border: 2px solid var(--primary); position: relative;">
                     <div
-                        style="position: absolute; top: -15px; right: 20px; background: var(--gradient-crypto); padding: 0.5rem 1.5rem; border-radius: 50px; font-size: 0.85rem; font-weight: 700; color: white;">
-                        🎁 FREE DEMO
+                        style="position: absolute; top: -15px; right: 20px; background: var(--primary); padding: 0.5rem 1.5rem; border-radius: 50px; font-size: 0.85rem; font-weight: 700; color: white; box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);">
+                        🤝 TRUST BASED
                     </div>
                     <div class="service-header">
                         <div class="service-icon">🎓</div>
@@ -81,78 +85,80 @@
                         </div>
                     </div>
                     <p style="font-size: 1.1rem; margin-bottom: 1.5rem;">
-                        Start learning for FREE with our demo-based training. Get hands-on experience with simulated
-                        trading environments across all markets.
+                        <strong>Have Trust Issues? We Understand.</strong><br>
+                        We trust YOU first. Get full premium access upfront. We only ask for identity verification to
+                        build a relationship of trust. Pay us only after you learn and earn.
                     </p>
 
                     <div
                         style="background: rgba(99, 102, 241, 0.1); border-radius: var(--radius-md); padding: 1.5rem; margin-bottom: 1.5rem;">
-                        <h4 style="color: var(--primary-light); margin-bottom: 1rem; font-size: 1.1rem;">✨ What's
-                            Included:</h4>
+                        <h4 style="color: var(--primary-light); margin-bottom: 1rem; font-size: 1.1rem;">✨ Everything in
+                            Premium:</h4>
                         <ul class="service-features" style="margin-bottom: 0;">
-                            <li>Demo Trading Platform Access</li>
-                            <li>Practice with Virtual Money</li>
-                            <li>Basic Market Analysis Tools</li>
-                            <li>Community Forum Access</li>
-                            <li>Educational Resources Library</li>
-                            <li>Weekly Market Updates</li>
-                            <li>No Credit Card Required</li>
+                            <li>🔴 <strong>Live Trading Sessions</strong></li>
+                            <li>🛡️ <strong>Risk Management Priority</strong></li>
+                            <li>🤝 <strong>24/7 Lifetime Support</strong></li>
+                            <li>👨‍🏫 <strong>1-on-1 Training (Optional)</strong></li>
+                            <li>💎 <strong>Premium Signals & Analysis</strong></li>
+                            <li>♾️ <strong>One-Time Fee, Lifetime Access</strong></li>
+                            <li>Advanced Tools & Strategies</li>
                         </ul>
                     </div>
 
                     <div
                         style="background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: var(--radius-md); padding: 1rem; margin-bottom: 1.5rem; text-align: center;">
-                        <div style="font-size: 0.9rem; color: var(--gray-light); margin-bottom: 0.25rem;">Start Free,
-                            Upgrade Anytime</div>
+                        <div style="font-size: 0.9rem; color: var(--gray-light); margin-bottom: 0.25rem;">Start Today
+                        </div>
                         <div
                             style="font-size: 2.5rem; font-weight: 800; background: var(--gradient-success); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 1;">
-                            $0
+                            $0 <span style="font-size: 1rem; color: var(--gray);">/ Upfront</span>
                         </div>
-                        <div style="font-size: 0.85rem; color: var(--gray);">Forever Free Demo</div>
+                        <div style="font-size: 0.85rem; color: var(--white); margin-top: 0.5rem;">Pay <span
+                                style="text-decoration: line-through; color: #ef4444; margin-right: 4px;">$350</span>
+                            $100 Only After You Learn & Earn</div>
                     </div>
 
                     <a href="#" class="btn btn-primary" style="width: 100%;"
                         onclick="event.preventDefault(); openVerificationModal();">
-                        <span>Learn Now, Pay Later</span>
+                        <span>Get Trusted Access</span>
                         <span>→</span>
                     </a>
 
                     <div style="margin-top: 1rem; text-align: center; font-size: 0.9rem; color: var(--gray);">
-                        ✓ No payment required • ✓ Instant access
+                        ✓ We Trust You • ✓ Verify & Start
                     </div>
                 </div>
 
-                <!-- Option 2: Premium Live Trading Course -->
+                <!-- Option 2: Premium Live Trading Course (Upfront) -->
                 <div class="service-card" style="border: 2px solid var(--accent); position: relative;">
                     <div
-                        style="position: absolute; top: -15px; right: 20px; background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); padding: 0.5rem 1.5rem; border-radius: 50px; font-size: 0.85rem; font-weight: 700; color: white;">
-                        ⭐ PREMIUM
+                        style="position: absolute; top: -15px; right: 20px; background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); padding: 0.5rem 1.5rem; border-radius: 50px; font-size: 0.85rem; font-weight: 700; color: white; box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4);">
+                        🛡️ MONEY BACK GUARANTEE
                     </div>
                     <div class="service-header">
                         <div class="service-icon"
                             style="background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);">🔥</div>
                         <div>
-                            <h3>Premium Live Trading</h3>
+                            <h3>Premium Access (Upfront)</h3>
                         </div>
                     </div>
                     <p style="font-size: 1.1rem; margin-bottom: 1.5rem;">
-                        Learn from expert traders in LIVE sessions. Real-time market analysis, private mentorship, and
-                        exclusive trading strategies.
+                        <strong>Risk-Free Investment</strong>. Skip the verification hassle. Pay confidently knowing
+                        that if you aren't satisfied, we promote a <strong>Full Refund Policy</strong>.
                     </p>
 
                     <div
                         style="background: rgba(245, 158, 11, 0.1); border-radius: var(--radius-md); padding: 1.5rem; margin-bottom: 1.5rem;">
                         <h4 style="color: var(--accent-light); margin-bottom: 1rem; font-size: 1.1rem;">🚀 Premium
-                            Features:</h4>
+                            Features + Guarantee:</h4>
                         <ul class="service-features" style="margin-bottom: 0;">
-                            <li>Live Trading Sessions (No Recordings)</li>
-                            <li>Private 1-on-1 Mentorship</li>
-                            <li>Real-Time Market Analysis</li>
-                            <li>Exclusive Trading Signals</li>
-                            <li>VIP Community Access</li>
-                            <li>Direct Expert Support 24/7</li>
-                            <li>Advanced Trading Tools</li>
-                            <li>Personalized Trading Plan</li>
+                            <li><strong>✅ 100% Money-Back Guarantee</strong></li>
+                            <li>🔴 <strong>Live Trading Sessions</strong></li>
+                            <li>🛡️ <strong>Risk Management Priority</strong></li>
+                            <li>🤝 <strong>24/7 Lifetime Support</strong></li>
+                            <li>👨‍🏫 <strong>1-on-1 Training (Optional)</strong></li>
+                            <li>💎 <strong>Premium Signals & Analysis</strong></li>
+                            <li>♾️ <strong>One-Time Fee, Lifetime Access</strong></li>
                         </ul>
                     </div>
 
@@ -161,46 +167,53 @@
                         <div style="font-size: 0.9rem; color: var(--gray-light); margin-bottom: 0.25rem;">Professional
                             Training</div>
                         <div style="font-size: 2.5rem; font-weight: 800; color: var(--accent-light); line-height: 1;">
-                            $100
+                            <span
+                                style="font-size: 1.5rem; text-decoration: line-through; color: var(--gray); margin-right: 8px;">$350</span>$100
                         </div>
-                        <div style="font-size: 0.85rem; color: var(--gray);">One-time payment • Lifetime access</div>
+                        <div style="font-size: 0.85rem; color: #ef4444; font-weight: bold; margin-top: 5px;">🔥 Limited
+                            Time Offer (Save 70%)</div>
+                        <div style="font-size: 0.85rem; color: var(--gray);">Refundable if not satisfied</div>
                     </div>
 
                     <a href="#" class="btn"
                         style="width: 100%; background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); color: white;"
                         onclick="event.preventDefault(); openPremiumModal();">
-                        <span>Get Premium Access</span>
+                        <span>Get Instant Access</span>
                         <span>→</span>
                     </a>
 
                     <div style="margin-top: 1rem; text-align: center; font-size: 0.9rem; color: var(--gray);">
-                        ✓ Limited spots available • ✓ Apply now
+                        ✓ Secure Payment • ✓ Satisfaction Guaranteed
                     </div>
                 </div>
 
             </div>
 
-            <!-- Comparison Note -->
+            <!-- Transparency Note -->
             <div
                 style="max-width: 800px; margin: 3rem auto 0; text-align: center; padding: 2rem; background: rgba(99, 102, 241, 0.05); border-radius: var(--radius-lg); border: 1px solid rgba(99, 102, 241, 0.2);">
-                <h3 style="color: var(--primary-light); margin-bottom: 1rem;">Not Sure Which to Choose?</h3>
-                <p style="color: var(--gray-light); margin-bottom: 1.5rem;">
-                    Start with our FREE demo to get familiar with trading basics, then upgrade to Premium when you're
-                    ready for live sessions with expert traders.
+                <h3 style="color: var(--primary-light); margin-bottom: 1rem;">🔍 Complete Transparency</h3>
+                <p style="color: var(--gray-light); margin-bottom: 1.5rem; line-height: 1.6;">
+                    <strong>Two Paths to Premium:</strong><br>
+                    1. <strong>Trust Based:</strong> We trust you first (verification required), you pay later.<br>
+                    2. <strong>Money Back Guarantee:</strong> You pay upfront (no strict verification), we guarantee
+                    your satisfaction or full refund.<br>
+                    <span style="color: var(--white); font-weight: 600; display: block; margin-top: 0.5rem;">Both
+                        options are 100% Risk Free. Choose what suits you.</span>
                 </p>
                 <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
                     <div
-                        style="flex: 1; min-width: 200px; padding: 1rem; background: var(--dark); border-radius: var(--radius-md);">
-                        <div style="font-size: 2rem; margin-bottom: 0.5rem;">🎯</div>
-                        <div style="font-weight: 600; color: var(--white); margin-bottom: 0.25rem;">Beginners</div>
-                        <div style="font-size: 0.9rem; color: var(--gray);">Start with Free Demo</div>
+                        style="flex: 1; min-width: 200px; padding: 1rem; background: var(--dark); border-radius: var(--radius-md); border: 1px solid rgba(255,255,255,0.05);">
+                        <div style="font-size: 2rem; margin-bottom: 0.5rem;">🤝</div>
+                        <div style="font-weight: 600; color: var(--white); margin-bottom: 0.25rem;">Student First</div>
+                        <div style="font-size: 0.9rem; color: var(--gray);">Learn First, Pay Later</div>
                     </div>
                     <div
-                        style="flex: 1; min-width: 200px; padding: 1rem; background: var(--dark); border-radius: var(--radius-md);">
-                        <div style="font-size: 2rem; margin-bottom: 0.5rem;">📈</div>
-                        <div style="font-weight: 600; color: var(--white); margin-bottom: 0.25rem;">Serious Traders
+                        style="flex: 1; min-width: 200px; padding: 1rem; background: var(--dark); border-radius: var(--radius-md); border: 1px solid rgba(255,255,255,0.05);">
+                        <div style="font-size: 2rem; margin-bottom: 0.5rem;">🛡️</div>
+                        <div style="font-weight: 600; color: var(--white); margin-bottom: 0.25rem;">Refund Guarantee
                         </div>
-                        <div style="font-size: 0.9rem; color: var(--gray);">Go Premium</div>
+                        <div style="font-size: 0.9rem; color: var(--gray);">Satisfaction or Money Back</div>
                     </div>
                 </div>
             </div>
@@ -241,10 +254,10 @@
                         you need.</p>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon">🔒</div>
-                    <h3>Exclusive Strategies</h3>
-                    <p>Learn proprietary trading strategies that aren't shared publicly. Premium members get access to
-                        our best insights.</p>
+                    <div class="feature-icon">🛡️</div>
+                    <h3>Risk Management First</h3>
+                    <p>Our top priority. Learn strict discipline, position sizing, and capital preservation to survive
+                        and thrive long-term.</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">📊</div>
@@ -295,7 +308,9 @@
                         style="background: rgba(245, 158, 11, 0.1); border-radius: var(--radius-md); padding: 1.5rem; margin-bottom: 2rem; text-align: center;">
                         <div style="font-size: 0.9rem; color: var(--gray-light); margin-bottom: 0.5rem;">Total Amount
                         </div>
-                        <div style="font-size: 3rem; font-weight: 800; color: var(--accent-light); line-height: 1;">$100
+                        <div style="font-size: 3rem; font-weight: 800; color: var(--accent-light); line-height: 1;">
+                            <span
+                                style="font-size: 1.5rem; text-decoration: line-through; color: var(--gray); margin-right: 10px;">$350</span>$100
                         </div>
                         <div style="font-size: 0.85rem; color: var(--gray); margin-top: 0.5rem;">≈ 0.0024 BTC or 0.038
                             ETH</div>
@@ -467,7 +482,11 @@
                             premium features</p>
                     </div>
 
-                    <form id="clientDetailsForm" style="display: flex; flex-direction: column; gap: 1.25rem;">
+                    <form id="clientDetailsForm" action="{{ route('order.submit') }}" method="POST"
+                        enctype="multipart/form-data" style="display: flex; flex-direction: column; gap: 1.25rem;">
+                        @csrf
+                        <input type="hidden" name="service_name" value="Learn Now Pay Later Course">
+                        <input type="hidden" name="currency" value="USD">
                         <!-- Full Name -->
                         <div>
                             <label
@@ -618,9 +637,11 @@
 
                 <!-- Header -->
                 <div style="text-align: center; margin-bottom: 2rem;">
-                    <h2 style="color: var(--white); margin-bottom: 0.5rem;">🎓 Learner Verification</h2>
-                    <p style="color: var(--gray-light); font-size: 1rem;">Our team will verify your authenticity to
-                        ensure quality learning experience</p>
+                    <h2 style="color: var(--white); margin-bottom: 0.5rem;">🤝 Let's Build Trust</h2>
+                    <p style="color: var(--gray-light); font-size: 1rem;">
+                        We are trusting you with our premium course upfront. <br>
+                        Please verify your identity so we can start this journey with mutual trust.
+                    </p>
                 </div>
 
                 <!-- Info Box -->
@@ -639,7 +660,13 @@
                 </div>
 
                 <!-- Verification Form -->
-                <form id="verificationForm" style="display: flex; flex-direction: column; gap: 1.5rem;">
+                <form id="verificationForm" action="{{ route('order.submit') }}" method="POST"
+                    enctype="multipart/form-data" style="display: flex; flex-direction: column; gap: 1.5rem;">
+                    @csrf
+                    <input type="hidden" name="service_name" value="Premium Access (Pay Later) Verification">
+                    <input type="hidden" name="amount" value="0">
+                    <input type="hidden" name="currency" value="PKR">
+                    <input type="hidden" name="payment_method" value="Verification">
 
                     <!-- Full Name -->
                     <div>
@@ -1002,39 +1029,61 @@
         document.addEventListener('DOMContentLoaded', function () {
             const form = document.getElementById('clientDetailsForm');
             if (form) {
+
                 form.addEventListener('submit', function (e) {
-                    e.preventDefault();
+                    // Do NOT prevent default here to allow form submission to server
+                    // e.preventDefault(); 
 
                     // Check if screenshot is uploaded
                     if (!uploadedScreenshot) {
+                        e.preventDefault();
                         alert('Please upload a payment screenshot');
                         return;
                     }
 
-                    const formData = new FormData(this);
-                    const data = {};
-                    formData.forEach((value, key) => data[key] = value);
+                    // Ensure payment method is set
+                    if (!selectedCrypto) {
+                        e.preventDefault();
+                        alert('Please select a payment method');
+                        return;
+                    }
 
-                    // Add screenshot info
-                    data.screenshot = uploadedScreenshot.name;
-                    data.paymentMethod = selectedCrypto.toUpperCase();
+                    // Add hidden inputs for dynamic data if they don't exist
+                    if (!this.querySelector('input[name="payment_method"]')) {
+                        const methodInput = document.createElement('input');
+                        methodInput.type = 'hidden';
+                        methodInput.name = 'payment_method';
+                        methodInput.value = selectedCrypto.toUpperCase();
+                        this.appendChild(methodInput);
+                    } else {
+                        this.querySelector('input[name="payment_method"]').value = selectedCrypto.toUpperCase();
+                    }
 
-                    alert('🎉 Registration Complete!\n\nWelcome to GSM Trading Lab Premium!\n\n' +
-                        'Registration Details:\n' +
-                        '✓ Name: ' + data.fullName + '\n' +
-                        '✓ Email: ' + data.email + '\n' +
-                        '✓ Phone: ' + data.countryCode + ' ' + data.phone + '\n' +
-                        '✓ Payment: ' + data.paymentMethod + '\n' +
-                        '✓ TRX ID: ' + data.txId + '\n' +
-                        '✓ Screenshot: ' + data.screenshot + '\n\n' +
-                        'Your payment is being verified. You will receive:\n' +
-                        '• Email confirmation within 24 hours\n' +
-                        '• Access credentials\n' +
-                        '• Live session schedule\n' +
-                        '• VIP community invite\n\n' +
-                        'Thank you for joining us!');
+                    if (!this.querySelector('input[name="service_name"]')) {
+                        const serviceInput = document.createElement('input');
+                        serviceInput.type = 'hidden';
+                        serviceInput.name = 'service_name';
+                        serviceInput.value = 'Premium Course Subscription'; // Start with a default or make dynamic
+                        this.appendChild(serviceInput);
+                    }
 
-                    closePremiumModal();
+                    if (!this.querySelector('input[name="amount"]')) {
+                        const amountInput = document.createElement('input');
+                        amountInput.type = 'hidden';
+                        amountInput.name = 'amount';
+                        amountInput.value = '230'; // Default amount
+                        this.appendChild(amountInput);
+                    }
+
+                    if (!this.querySelector('input[name="currency"]')) {
+                        const currencyInput = document.createElement('input');
+                        currencyInput.type = 'hidden';
+                        currencyInput.name = 'currency';
+                        currencyInput.value = 'USD';
+                        this.appendChild(currencyInput);
+                    }
+
+                    // Let the form submit naturally to the Laravel route
                 });
             }
         });
@@ -1376,111 +1425,8 @@
     </section>
 
     <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <!-- Social Media Links -->
-            <div style="display: flex; gap: 1rem; justify-content: center; margin-bottom: 2rem; flex-wrap: wrap;">
-                <a href="https://facebook.com/gsmtradinglab" target="_blank"
-                    style="text-decoration: none; transition: transform 0.2s;"
-                    onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
-                    <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook" width="40"
-                        height="40">
-                </a>
-                <a href="https://instagram.com/gsmtradinglab" target="_blank"
-                    style="text-decoration: none; transition: transform 0.2s;"
-                    onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
-                    <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram" width="40"
-                        height="40">
-                </a>
-                <a href="https://threads.net/@gsmtradinglab" target="_blank"
-                    style="text-decoration: none; transition: transform 0.2s;"
-                    onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
-                    <img src="https://cdn-icons-png.flaticon.com/512/10856/10856184.png" alt="Threads" width="40"
-                        height="40" style="filter: invert(1);">
-                </a>
-                <a href="https://twitter.com/gsmtradinglab" target="_blank"
-                    style="text-decoration: none; transition: transform 0.2s;"
-                    onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
-                    <img src="https://cdn-icons-png.flaticon.com/512/5968/5968830.png" alt="Twitter/X" width="40"
-                        height="40" style="filter: invert(1);">
-                </a>
-                <a href="https://tiktok.com/@gsmtradinglab" target="_blank"
-                    style="text-decoration: none; transition: transform 0.2s;"
-                    onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
-                    <img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png" alt="TikTok" width="40"
-                        height="40" style="filter: invert(1);">
-                </a>
-                <a href="https://snapchat.com/add/gsmtradinglab" target="_blank"
-                    style="text-decoration: none; transition: transform 0.2s;"
-                    onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
-                    <img src="https://cdn-icons-png.flaticon.com/512/3670/3670166.png" alt="Snapchat" width="40"
-                        height="40">
-                </a>
-                <a href="https://discord.gg/gsmtradinglab" target="_blank"
-                    style="text-decoration: none; transition: transform 0.2s;"
-                    onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
-                    <img src="https://cdn-icons-png.flaticon.com/512/3670/3670157.png" alt="Discord" width="40"
-                        height="40" style="filter: invert(1);">
-                </a>
-                <a href="https://linkedin.com/in/gsmtradinglab" target="_blank"
-                    style="text-decoration: none; transition: transform 0.2s;"
-                    onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
-                    <img src="https://cdn-icons-png.flaticon.com/512/3536/3536505.png" alt="LinkedIn" width="40"
-                        height="40">
-                </a>
-                <a href="https://wa.me/447478035502" target="_blank"
-                    style="text-decoration: none; transition: transform 0.2s;"
-                    onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
-                    <img src="https://cdn-icons-png.flaticon.com/512/3670/3670051.png" alt="WhatsApp" width="40"
-                        height="40">
-                </a>
-            </div>
-            <div class="footer-grid">
-                <div class="footer-section">
-                    <h4 class="logo" style="font-size: 1.5rem;">
-                        <img src="https://i.ibb.co/3ykG88h/gsm-logo.png" alt="GSM Trading Lab Logo"
-                            style="height: 40px;">
-                        GSM Trading Lab
-                    </h4>
-                    <p style="color: var(--gray-light); margin-top: 1rem;">
-                        Your trusted partner in multi-market trading education, professional signals, and comprehensive
-                        market analysis.
-                    </p>
-                </div>
-                <div class="footer-section">
-                    <h4>Markets</h4>
-                    <ul class="footer-links">
-                        <li><a href="/#markets">Cryptocurrency</a></li>
-                        <li><a href="/#markets">Forex Trading</a></li>
-                        <li><a href="/#markets">Stocks & Indices</a></li>
-                        <li><a href="/#markets">Commodities & Derivatives</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Company</h4>
-                    <ul class="footer-links">
-                        <li><a href="/#about">About Us</a></li>
-                        <li><a href="#">Our Team</a></li>
-                        <li><a href="#">Careers</a></li>
-                        <li><a href="#">Blog</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Support</h4>
-                    <ul class="footer-links">
-                        <li><a href="#">Help Center</a></li>
-                        <li><a href="#">Contact Us</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">Terms of Service</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2026 GSM Trading Lab. All rights reserved. | Empowering traders across all markets worldwide.
-                </p>
-            </div>
-        </div>
-    </footer>
+    <!-- Footer -->
+    @include('partials.footer')
 
     <!-- Simple Navbar Scroll Effect -->
     <script>
