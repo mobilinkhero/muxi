@@ -50,19 +50,13 @@ Route::middleware(['auth'])->group(function () {
 use App\Http\Controllers\SignalController;
 
 // Admin Area
-Route::middleware(['auth'])->group(function () {
-    Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
-    Route::post('/admin/order/{id}', [AdminController::class, 'updateStatus'])->name('admin.order.update');
+// Admin Area
+Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
+    Route::post('/order/{id}', [AdminController::class, 'updateStatus'])->name('order.update');
 
     // Signal Management
-    Route::resource('admin/signals', SignalController::class)->names([
-        'index' => 'admin.signals.index',
-        'create' => 'admin.signals.create',
-        'store' => 'admin.signals.store',
-        'edit' => 'admin.signals.edit',
-        'update' => 'admin.signals.update',
-        'destroy' => 'admin.signals.destroy',
-    ]);
+    Route::resource('signals', SignalController::class);
 });
 
 use App\Http\Controllers\MarketController;
