@@ -68,6 +68,7 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::get('users', [UserController::class, 'index'])->name('users.index');
     Route::get('users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
     Route::put('users/{user}', [UserController::class, 'update'])->name('users.update');
+    Route::post('users/{user}/impersonate', [UserController::class, 'impersonate'])->name('users.impersonate');
     Route::delete('users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
 
     // Payment Methods

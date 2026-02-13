@@ -34,6 +34,12 @@
                             <td>
                                 @if(!$user->is_admin)
                                     <div style="display: flex; gap: 0.5rem;">
+                                        <form action="{{ route('admin.users.impersonate', $user->id) }}" method="POST"
+                                            onsubmit="return confirm('You will be logged out as Admin and logged in as this user. Continue?')">
+                                            @csrf
+                                            <button type="submit" class="btn btn-secondary btn-sm"
+                                                style="color: #10B981; border-color: #10B981;">Login As</button>
+                                        </form>
                                         <a href="{{ route('admin.users.edit', $user->id) }}" class="btn btn-secondary btn-sm"
                                             style="color: var(--primary); border-color: var(--primary);">Edit</a>
                                         <form action="{{ route('admin.users.destroy', $user->id) }}" method="POST"

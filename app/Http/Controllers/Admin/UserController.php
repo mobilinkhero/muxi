@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Order;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -25,19 +27,31 @@ class UserController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email,' . $user->id,
-            'password' => 'nullable|string|min:8', // Only update if provided
+            'password' => 'nullable|string|min:8',
         ]);
 
         $user->name = $validated['name'];
         $user->email = $validated['email'];
 
         if ($request->filled('password')) {
-            $user->password = \Illuminate\Support\Facades\Hash::make($validated['password']);
+            $user->password = Hash::make($validated['password']);
         }
 
         $user->save();
 
         return redirect()->route('admin.users.index')->with('success', 'User updated successfully. ' . ($request->filled('password') ? 'Password changed.' : ''));
+    }
+
+    public function impersonate(User $user)
+    {
+        // Safety check
+        if ($user->is_admin) {
+            return back()->with('error', 'Cannot impersonate an administrator.');
+        }
+
+        Auth::login($user);
+
+        return redirect()->route('dashboard')->with('success', 'You are now logged in as ' . $user->name);
     }
 
     public function destroy(User $user)
