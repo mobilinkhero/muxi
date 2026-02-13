@@ -32,5 +32,10 @@ class DatabaseSeeder extends Seeder
                 'is_admin' => false,
             ]
         );
+
+        $this->call([
+            BrokerSeeder::class,
+            PaymentMethodSeeder::class,
+        ]);
     }
 }

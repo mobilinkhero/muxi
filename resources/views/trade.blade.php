@@ -427,106 +427,36 @@
             </div>
 
             <div class="services-grid" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));">
-                <!-- Binance -->
-                <div class="service-card" style="text-align: center; padding: 2rem;">
-                    <div
-                        style="height: 60px; display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem;">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/1/12/Binance_logo.svg" alt="Binance"
-                            style="max-height: 100%; max-width: 100%;">
-                    </div>
-                    <ul class="service-features"
-                        style="justify-content: center; text-align: left; margin-bottom: 1.5rem;">
-                        <li>World's Leading Exchange</li>
-                        <li>Lowest Fees</li>
-                    </ul>
-                    <a href="https://accounts.binance.com/register?ref=GSMBINANCE" target="_blank"
-                        class="btn btn-primary"
-                        style="width: 100%; background: #F0B90B; color: #000; border: none;">Join Binance</a>
-                </div>
-
-                <!-- MEXC -->
-                <div class="service-card" style="text-align: center; padding: 2rem;">
-                    <div
-                        style="height: 60px; display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem;">
-                        <img src="https://public.mexc.com/static/mexc-logo.png" alt="MEXC"
-                            style="max-height: 100%; max-width: 100%;">
-                    </div>
-                    <ul class="service-features"
-                        style="justify-content: center; text-align: left; margin-bottom: 1.5rem;">
-                        <li>No KYC Required</li>
-                        <li>High Leverage</li>
-                    </ul>
-                    <a href="https://www.mexc.com/acquisition/custom-sign-up?shareCode=mexc-gsmtrading" target="_blank"
-                        class="btn btn-primary" style="width: 100%; background: #2860F6; border: none;">Join MEXC</a>
-                </div>
-
-                <!-- Fasset -->
-                <div class="service-card" style="text-align: center; padding: 2rem;">
-                    <div
-                        style="height: 60px; display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem;">
-                        <img src="https://fasset.com/assets/images/logo/fasset-logo.svg" alt="FASSET"
-                            onerror="this.onerror=null; this.src='https://assets.coingecko.com/coins/images/28362/small/FAST.png?1670987258'; this.style.height='40px'; this.parentElement.innerHTML+='<span style=\'font-weight:800; font-size: 24px; margin-left: 10px;\'>FASSET</span>'"
-                            style="max-height: 100%; max-width: 100%;">
-                    </div>
-                    <ul class="service-features"
-                        style="justify-content: center; text-align: left; margin-bottom: 1.5rem;">
-                        <li>Smart Investments</li>
-                        <li>Exciting Rewards</li>
-                    </ul>
-                    <div style="margin-bottom: 1rem; font-size: 0.9rem; color: var(--gray);">Code: <span
-                            style="color: var(--white); font-weight: bold;">XYJXV7G</span></div>
-                    <a href="https://play.google.com/store/apps/details?id=com.fasset.cashapp" target="_blank"
-                        class="btn btn-primary"
-                        style="width: 100%; background: #00D54B; color: #000; border: none;">Download App</a>
-                </div>
-
-                <!-- BingX -->
-                <div class="service-card" style="text-align: center; padding: 2rem;">
-                    <div
-                        style="height: 60px; display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem;">
-                        <img src="https://assets.coingecko.com/markets/images/812/large/bingx_logo.png?1654854592"
-                            alt="BingX" style="max-height: 100%; max-width: 100%;">
-                        <span style="font-weight: 800; font-size: 24px; margin-left: 10px;">BingX</span>
-                    </div>
-                    <ul class="service-features"
-                        style="justify-content: center; text-align: left; margin-bottom: 1.5rem;">
-                        <li>Social Trading Network</li>
-                        <li>Forex & Crypto</li>
-                    </ul>
-                    <a href="#" class="btn btn-primary" style="width: 100%; background: #3c5cfc; border: none;">Join
-                        BingX</a>
-                </div>
-
-                <!-- XM -->
-                <div class="service-card" style="text-align: center; padding: 2rem;">
-                    <div
-                        style="height: 60px; display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem;">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/XM_Logo.svg/1200px-XM_Logo.svg.png"
-                            alt="XM" style="max-height: 100%; max-width: 100%; filter: brightness(0) invert(1);">
-                    </div>
-                    <ul class="service-features"
-                        style="justify-content: center; text-align: left; margin-bottom: 1.5rem;">
-                        <li>Global Forex Broker</li>
-                        <li>$30 No Deposit Bonus</li>
-                    </ul>
-                    <a href="#" class="btn btn-primary"
-                        style="width: 100%; background: #000; border: 1px solid #fff;">Join XM</a>
-                </div>
-
-                <!-- Exness -->
-                <div class="service-card" style="text-align: center; padding: 2rem;">
-                    <div
-                        style="height: 60px; display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem;">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/f/f3/Exness_logo.svg" alt="Exness"
-                            style="max-height: 100%; max-width: 100%; filter: brightness(0) invert(1);">
-                    </div>
-                    <ul class="service-features"
-                        style="justify-content: center; text-align: left; margin-bottom: 1.5rem;">
-                        <li>Instant Withdrawals</li>
-                        <li>Tight Spreads</li>
-                    </ul>
-                    <a href="#" class="btn btn-primary"
-                        style="width: 100%; background: #FFCE00; color: #000; border: none;">Join Exness</a>
+                <div class="services-grid" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));">
+                    @foreach($brokers as $broker)
+                        <div class="service-card"
+                            style="text-align: center; padding: 2rem; position: relative; border: 1px solid rgba(255,255,255,0.05); transition: transform 0.3s ease;">
+                            @if($broker->is_recommended)
+                                <div
+                                    style="position: absolute; top: -10px; right: 50%; transform: translateX(50%); background: #10B981; color: white; padding: 0.25rem 0.75rem; border-radius: 50px; font-size: 0.75rem; font-weight: 800; box-shadow: 0 4px 10px rgba(16, 185, 129, 0.4); white-space: nowrap;">
+                                    ★ RECOMMENDED
+                                </div>
+                            @endif
+                            <div
+                                style="height: 60px; display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem; margin-top: 1rem;">
+                                <img src="{{ $broker->logo_path }}" alt="{{ $broker->name }}"
+                                    style="max-height: 50px; max-width: 100%; object-fit: contain; filter: brightness(0) invert(1);">
+                            </div>
+                            <h3 style="margin-bottom: 1rem; font-size: 1.25rem;">{{ $broker->name }}</h3>
+                            <ul class="service-features"
+                                style="justify-content: center; text-align: left; margin-bottom: 1.5rem; min-height: 80px;">
+                                @foreach(explode("\n", $broker->description) as $feature)
+                                    @if(trim($feature))
+                                        <li>{{ trim($feature) }}</li>
+                                    @endif
+                                @endforeach
+                            </ul>
+                            <a href="{{ $broker->referral_link }}" target="_blank" class="btn btn-primary"
+                                style="width: 100%; background: {{ $loop->even ? 'var(--dark)' : 'var(--primary)' }}; border: 1px solid var(--primary); color: {{ $loop->even ? 'var(--primary-light)' : 'white' }};">
+                                Join {{ $broker->name }}
+                            </a>
+                        </div>
+                    @endforeach
                 </div>
             </div>
 

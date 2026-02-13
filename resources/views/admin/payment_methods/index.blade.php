@@ -32,7 +32,9 @@
                             </td>
                             <td>{{ $method->name }}</td>
                             <td>
-                                <div>{{ $method->account_name }}</div>
+                                @if($method->account_name)
+                                    <div>{{ $method->account_name }}</div>
+                                @endif
                                 <div style="font-family: monospace; color: var(--primary);">{{ $method->account_number }}</div>
                                 <small style="color: var(--gray);">{{ $method->network ?? $method->bank_name }}</small>
                             </td>

@@ -8,18 +8,76 @@
 @endsection
 
 @section('content')
-    <div class="card">
-        <div style="margin-bottom: 2rem; display: flex; justify-content: space-between; align-items: flex-end;">
-            <div>
-                <p style="color: var(--gray);">Review and approve student payments</p>
-            </div>
+    <div class="stats-grid"
+        style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
+        <!-- Total Users -->
+        <div class="card"
+            style="padding: 1.5rem; display: flex; align-items: center; gap: 1rem; border: 1px solid rgba(255,255,255,0.05);">
             <div
-                style="background: var(--dark); padding: 1rem; border-radius: var(--radius-md); border: 1px solid rgba(255,255,255,0.1);">
-                <span style="color: var(--gray);">Total Revenue:</span>
-                <strong style="color: #10b981; font-size: 1.2rem; margin-left: 0.5rem;">
-                    ${{ number_format($orders->where('status', 'completed')->sum('amount'), 2) }}
-                </strong>
+                style="font-size: 2rem; background: rgba(99, 102, 241, 0.1); width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; border-radius: 50%; color: var(--primary);">
+                👥</div>
+            <div>
+                <div style="font-size: 0.9rem; color: var(--gray);">Total Users</div>
+                <div style="font-size: 1.5rem; font-weight: bold; color: var(--white);">{{ $totalUsers ?? 0 }}</div>
             </div>
+        </div>
+
+        <!-- Total Revenue -->
+        <div class="card"
+            style="padding: 1.5rem; display: flex; align-items: center; gap: 1rem; border: 1px solid rgba(255,255,255,0.05);">
+            <div
+                style="font-size: 2rem; background: rgba(16, 185, 129, 0.1); width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; border-radius: 50%; color: var(--secondary);">
+                💰</div>
+            <div>
+                <div style="font-size: 0.9rem; color: var(--gray);">Total Revenue</div>
+                <div style="font-size: 1.5rem; font-weight: bold; color: var(--white);">
+                    ${{ number_format($totalRevenue ?? 0, 2) }}</div>
+            </div>
+        </div>
+
+        <!-- Pending Orders -->
+        <div class="card"
+            style="padding: 1.5rem; display: flex; align-items: center; gap: 1rem; border: 1px solid rgba(255,255,255,0.05);">
+            <div
+                style="font-size: 2rem; background: rgba(245, 158, 11, 0.1); width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; border-radius: 50%; color: var(--accent);">
+                ⏳</div>
+            <div>
+                <div style="font-size: 0.9rem; color: var(--gray);">Pending Orders</div>
+                <div style="font-size: 1.5rem; font-weight: bold; color: var(--white);">{{ $pendingOrders ?? 0 }}</div>
+            </div>
+        </div>
+
+        <!-- Payment Methods -->
+        <div class="card"
+            style="padding: 1.5rem; display: flex; align-items: center; gap: 1rem; border: 1px solid rgba(255,255,255,0.05);">
+            <div
+                style="font-size: 2rem; background: rgba(59, 130, 246, 0.1); width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; border-radius: 50%; color: #3b82f6;">
+                💳</div>
+            <div>
+                <div style="font-size: 0.9rem; color: var(--gray);">Active Methods</div>
+                <div style="font-size: 1.5rem; font-weight: bold; color: var(--white);">{{ $activePaymentMethods ?? 0 }}
+                </div>
+            </div>
+        </div>
+
+        <!-- Brokers -->
+        <div class="card"
+            style="padding: 1.5rem; display: flex; align-items: center; gap: 1rem; border: 1px solid rgba(255,255,255,0.05);">
+            <div
+                style="font-size: 2rem; background: rgba(236, 72, 153, 0.1); width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; border-radius: 50%; color: #ec4899;">
+                🏦</div>
+            <div>
+                <div style="font-size: 0.9rem; color: var(--gray);">Partner Brokers</div>
+                <div style="font-size: 1.5rem; font-weight: bold; color: var(--white);">{{ $totalBrokers ?? 0 }}</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recent Orders -->
+    <div class="card">
+        <div style="margin-bottom: 2rem; display: flex; justify-content: space-between; align-items: center;">
+            <h3 style="margin: 0; color: var(--white);">Recent Orders</h3>
+            <a href="#" style="font-size: 0.9rem; color: var(--primary-light);">View All Orders →</a>
         </div>
 
         <div style="overflow-x: auto;">

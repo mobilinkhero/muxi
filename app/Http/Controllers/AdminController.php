@@ -16,7 +16,24 @@ class AdminController extends Controller
         }
 
         $orders = Order::with('user')->orderBy('created_at', 'desc')->get();
-        return view('admin.dashboard', compact('orders'));
+
+        // Dashboard Stats
+        $totalUsers = \App\Models\User::count();
+        $totalOrders = $orders->count();
+        $pendingOrders = $orders->where('status', 'pending')->count();
+        $totalRevenue = $orders->where('status', 'completed')->sum('amount');
+        $activePaymentMethods = \App\Models\PaymentMethod::where('is_active', true)->count();
+        $totalBrokers = \App\Models\Broker::count();
+
+        return view('admin.dashboard', compact(
+            'orders',
+            'totalUsers',
+            'totalOrders',
+            'pendingOrders',
+            'totalRevenue',
+            'activePaymentMethods',
+            'totalBrokers'
+        ));
     }
 
     public function updateStatus(Request $request, $id)

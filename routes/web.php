@@ -7,8 +7,11 @@ use App\Http\Controllers\HomeController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
+use App\Models\PaymentMethod;
+
 Route::get('/learn', function () {
-    return view('learn');
+    $paymentMethods = PaymentMethod::where('is_active', true)->get();
+    return view('learn', compact('paymentMethods'));
 });
 
 use App\Http\Controllers\TradeController;

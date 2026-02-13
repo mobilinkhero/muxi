@@ -19,7 +19,7 @@
         <div class="container">
             <div class="nav-container">
                 <a href="/" class="logo">
-                     <img src="/images/logo.svg" alt="GSM Trading Lab" style="height: 40px;">
+                    <img src="/images/logo.svg" alt="GSM Trading Lab" style="height: 40px;">
                 </a>
                 <ul class="nav-links">
                     <li><a href="/">Home</a></li>
@@ -323,110 +323,24 @@
                             Payment Method:</label>
 
                         <div style="display: flex; flex-direction: column; gap: 1rem;">
-                            <!-- Bitcoin Option -->
-                            <label
-                                style="display: flex; align-items: center; gap: 1rem; padding: 1rem; background: var(--dark-light); border: 2px solid rgba(255,255,255,0.1); border-radius: var(--radius-md); cursor: pointer; transition: var(--transition-base);"
-                                onclick="selectPaymentMethod('btc', this)">
-                                <input type="radio" name="crypto" value="btc"
-                                    style="width: 20px; height: 20px; cursor: pointer;">
-                                <img src="https://cryptologos.cc/logos/bitcoin-btc-logo.png" alt="BTC" width="32"
-                                    height="32">
-                                <div style="flex: 1;">
-                                    <div style="font-weight: 600; color: var(--white); margin-bottom: 0.25rem;">Bitcoin
-                                        (BTC)</div>
-                                    <div style="font-size: 0.85rem; color: var(--gray);">Network: Bitcoin</div>
-                                </div>
-                            </label>
-
-                            <!-- Ethereum Option -->
-                            <label
-                                style="display: flex; align-items: center; gap: 1rem; padding: 1rem; background: var(--dark-light); border: 2px solid rgba(255,255,255,0.1); border-radius: var(--radius-md); cursor: pointer; transition: var(--transition-base);"
-                                onclick="selectPaymentMethod('eth', this)">
-                                <input type="radio" name="crypto" value="eth"
-                                    style="width: 20px; height: 20px; cursor: pointer;">
-                                <img src="https://cryptologos.cc/logos/ethereum-eth-logo.png" alt="ETH" width="32"
-                                    height="32">
-                                <div style="flex: 1;">
-                                    <div style="font-weight: 600; color: var(--white); margin-bottom: 0.25rem;">Ethereum
-                                        (ETH)</div>
-                                    <div style="font-size: 0.85rem; color: var(--gray);">Network: ERC20</div>
-                                </div>
-                            </label>
-
-                            <!-- Solana Option -->
-                            <label
-                                style="display: flex; align-items: center; gap: 1rem; padding: 1rem; background: var(--dark-light); border: 2px solid rgba(255,255,255,0.1); border-radius: var(--radius-md); cursor: pointer; transition: var(--transition-base);"
-                                onclick="selectPaymentMethod('sol', this)">
-                                <input type="radio" name="crypto" value="sol"
-                                    style="width: 20px; height: 20px; cursor: pointer;">
-                                <img src="https://cryptologos.cc/logos/solana-sol-logo.png" alt="SOL" width="32"
-                                    height="32">
-                                <div style="flex: 1;">
-                                    <div style="font-weight: 600; color: var(--white); margin-bottom: 0.25rem;">Solana
-                                        (SOL)</div>
-                                    <div style="font-size: 0.85rem; color: var(--gray);">Network: Solana</div>
-                                </div>
-                            </label>
-
-                            <!-- BNB Option -->
-                            <label
-                                style="display: flex; align-items: center; gap: 1rem; padding: 1rem; background: var(--dark-light); border: 2px solid rgba(255,255,255,0.1); border-radius: var(--radius-md); cursor: pointer; transition: var(--transition-base);"
-                                onclick="selectPaymentMethod('bnb', this)">
-                                <input type="radio" name="crypto" value="bnb"
-                                    style="width: 20px; height: 20px; cursor: pointer;">
-                                <img src="https://cryptologos.cc/logos/bnb-bnb-logo.png" alt="BNB" width="32"
-                                    height="32">
-                                <div style="flex: 1;">
-                                    <div style="font-weight: 600; color: var(--white); margin-bottom: 0.25rem;">BNB
-                                        Smart Chain</div>
-                                    <div style="font-size: 0.85rem; color: var(--gray);">Network: BEP20</div>
-                                </div>
-                            </label>
-
-                            <!-- USDT TRC20 Option -->
-                            <label
-                                style="display: flex; align-items: center; gap: 1rem; padding: 1rem; background: var(--dark-light); border: 2px solid rgba(255,255,255,0.1); border-radius: var(--radius-md); cursor: pointer; transition: var(--transition-base);"
-                                onclick="selectPaymentMethod('usdt_trc20', this)">
-                                <input type="radio" name="crypto" value="usdt_trc20"
-                                    style="width: 20px; height: 20px; cursor: pointer;">
-                                <img src="https://cryptologos.cc/logos/tether-usdt-logo.png" alt="USDT" width="32"
-                                    height="32">
-                                <div style="flex: 1;">
-                                    <div style="font-weight: 600; color: var(--white); margin-bottom: 0.25rem;">USDT
-                                        (Tron)</div>
-                                    <div style="font-size: 0.85rem; color: #10B981;">Network: TRC20 (Recommended)</div>
-                                </div>
-                            </label>
-
-                            <!-- USDT ERC20 Option -->
-                            <label
-                                style="display: flex; align-items: center; gap: 1rem; padding: 1rem; background: var(--dark-light); border: 2px solid rgba(255,255,255,0.1); border-radius: var(--radius-md); cursor: pointer; transition: var(--transition-base);"
-                                onclick="selectPaymentMethod('usdt_erc20', this)">
-                                <input type="radio" name="crypto" value="usdt_erc20"
-                                    style="width: 20px; height: 20px; cursor: pointer;">
-                                <img src="https://cryptologos.cc/logos/tether-usdt-logo.png" alt="USDT" width="32"
-                                    height="32">
-                                <div style="flex: 1;">
-                                    <div style="font-weight: 600; color: var(--white); margin-bottom: 0.25rem;">USDT
-                                        (Ethereum)</div>
-                                    <div style="font-size: 0.85rem; color: var(--gray);">Network: ERC20</div>
-                                </div>
-                            </label>
-
-                            <!-- USDT BEP20 Option -->
-                            <label
-                                style="display: flex; align-items: center; gap: 1rem; padding: 1rem; background: var(--dark-light); border: 2px solid rgba(255,255,255,0.1); border-radius: var(--radius-md); cursor: pointer; transition: var(--transition-base);"
-                                onclick="selectPaymentMethod('usdt_bep20', this)">
-                                <input type="radio" name="crypto" value="usdt_bep20"
-                                    style="width: 20px; height: 20px; cursor: pointer;">
-                                <img src="https://cryptologos.cc/logos/tether-usdt-logo.png" alt="USDT" width="32"
-                                    height="32">
-                                <div style="flex: 1;">
-                                    <div style="font-weight: 600; color: var(--white); margin-bottom: 0.25rem;">USDT
-                                        (BSC)</div>
-                                    <div style="font-size: 0.85rem; color: var(--gray);">Network: BEP20</div>
-                                </div>
-                            </label>
+                            @foreach($paymentMethods as $method)
+                                <label
+                                    style="display: flex; align-items: center; gap: 1rem; padding: 1rem; background: var(--dark-light); border: 2px solid rgba(255,255,255,0.1); border-radius: var(--radius-md); cursor: pointer; transition: var(--transition-base);"
+                                    onclick="selectPaymentMethod('{{ strtolower(str_replace(' ', '_', $method->name)) }}', this)">
+                                    <input type="radio" name="crypto" value="{{ strtolower(str_replace(' ', '_', $method->name)) }}"
+                                        style="width: 20px; height: 20px; cursor: pointer;">
+                                    @if($method->icon)
+                                        <img src="{{ $method->icon }}" alt="{{ $method->name }}" width="32" height="32" style="object-fit: contain;">
+                                    @endif
+                                    <div style="flex: 1;">
+                                        <div style="font-weight: 600; color: var(--white); margin-bottom: 0.25rem;">{{ $method->name }}</div>
+                                        <div style="font-size: 0.85rem; color: var(--gray);">Network: {{ $method->network }}</div>
+                                        @if($method->instruction)
+                                            <div style="font-size: 0.75rem; color: var(--primary-light); margin-top: 2px;">{{ $method->instruction }}</div>
+                                        @endif
+                                    </div>
+                                </label>
+                            @endforeach
                         </div>
                     </div>
 
@@ -807,15 +721,11 @@
     </div>
 
     <script>
-        // Dummy crypto addresses
+        // Crypto addresses from server
         const cryptoAddresses = {
-            btc: 'bc1q03nmsngcpwck9lah9uqkx3z84rfstgyc599hmf',
-            eth: '0xf5c6f9ad0a30e968dd82d3b18e726d11a9007a85', // ETH and USDT (ERC20)
-            usdt_trc20: 'TFjdAsb8yVgtNNU1ozMLXAyFq9Cvk3MbeB',
-            usdt_erc20: '0xf5c6f9ad0a30e968dd82d3b18e726d11a9007a85',
-            usdt_bep20: '0xf5c6f9ad0a30e968dd82d3b18e726d11a9007a85',
-            sol: 'C2w5KgYMCrVcm62XihK6prHDyXay2fEcpTXgHSU4FoqV',
-            bnb: '0xf5c6f9ad0a30e968dd82d3b18e726d11a9007a85'
+            @foreach($paymentMethods as $method)
+                '{{ strtolower(str_replace(' ', '_', $method->name)) }}': '{{ $method->account_number }}',
+            @endforeach
         };
 
         let selectedCrypto = '';
