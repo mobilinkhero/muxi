@@ -70,6 +70,8 @@ use App\Http\Controllers\SignalController;
 use App\Http\Controllers\Admin\LmsController as AdminLmsController;
 
 // Admin Area
+Route::redirect('/admin', '/admin/dashboard');
+
 Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
     Route::get('/orders', [App\Http\Controllers\Admin\OrderController::class, 'index'])->name('orders.index');

@@ -197,6 +197,13 @@
                 <li><a href="/trade"><span>📈</span> Live Signals</a></li>
                 <li><a href="/invest"><span>💼</span> Investments</a></li>
 
+                @if(auth()->check() && auth()->user()->is_admin)
+                    <li style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
+                        <a href="{{ route('admin.dashboard') }}" style="color: #F59E0B;">
+                            <span>🔐</span> Admin Panel
+                        </a>
+                    </li>
+                @endif
             </ul>
 
             <div style="margin-top: auto; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 1.5rem;">

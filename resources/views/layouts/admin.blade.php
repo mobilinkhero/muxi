@@ -223,6 +223,10 @@
         <aside class="sidebar">
             <div style="text-align: center; margin-bottom: 2rem;">
                 <img src="{{ asset('images/logo.svg') }}" alt="Logo" style="height: 40px;">
+                <div
+                    style="color: #F59E0B; font-weight: 900; font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; margin-top: 0.75rem; border: 1px solid #F59E0B; padding: 4px 10px; border-radius: 4px; display: inline-block; background: rgba(245, 158, 11, 0.1);">
+                    ADMIN PANEL
+                </div>
             </div>
 
             <nav>
