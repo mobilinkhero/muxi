@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Order;
+use App\Models\ContactMessage;
+use App\Models\ConsultationRequest;
 
 class AdminController extends Controller
 {
@@ -24,6 +26,8 @@ class AdminController extends Controller
         $totalRevenue = $orders->where('status', 'completed')->sum('amount');
         $activePaymentMethods = \App\Models\PaymentMethod::where('is_active', true)->count();
         $totalBrokers = \App\Models\Broker::count();
+        $totalMessages = \App\Models\ContactMessage::count();
+        $totalConsultations = \App\Models\ConsultationRequest::count();
 
         // Chart 1: Revenue (Last 7 Days)
         $revenueChart = Order::where('status', 'completed')
@@ -63,6 +67,8 @@ class AdminController extends Controller
             'totalRevenue',
             'activePaymentMethods',
             'totalBrokers',
+            'totalMessages',
+            'totalConsultations',
             'revenueDates',
             'revenueData',
             'paymentMethodsChart',

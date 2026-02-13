@@ -71,6 +71,30 @@
                 <div style="font-size: 1.5rem; font-weight: bold; color: var(--white);">{{ $totalBrokers ?? 0 }}</div>
             </div>
         </div>
+
+        <!-- Messages -->
+        <div class="card"
+            style="padding: 1.5rem; display: flex; align-items: center; gap: 1rem; border: 1px solid rgba(255,255,255,0.05);">
+            <div
+                style="font-size: 2rem; background: rgba(34, 211, 238, 0.1); width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; border-radius: 50%; color: #22d3ee;">
+                ✉️</div>
+            <div>
+                <div style="font-size: 0.9rem; color: var(--gray);">Total Messages</div>
+                <div style="font-size: 1.5rem; font-weight: bold; color: var(--white);">{{ $totalMessages ?? 0 }}</div>
+            </div>
+        </div>
+
+        <!-- Consultations -->
+        <div class="card"
+            style="padding: 1.5rem; display: flex; align-items: center; gap: 1rem; border: 1px solid rgba(255,255,255,0.05);">
+            <div
+                style="font-size: 2rem; background: rgba(139, 92, 246, 0.1); width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; border-radius: 50%; color: #8b5cf6;">
+                🤝</div>
+            <div>
+                <div style="font-size: 0.9rem; color: var(--gray);">Consultations</div>
+                <div style="font-size: 1.5rem; font-weight: bold; color: var(--white);">{{ $totalConsultations ?? 0 }}</div>
+            </div>
+        </div>
     </div>
 
     <!-- Analytics Charts -->
