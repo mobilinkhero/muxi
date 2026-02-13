@@ -24,8 +24,13 @@
             </div>
 
             <div class="form-group">
-                <label class="form-label">Bank Name (For Bank) or Network (For Crypto)</label>
-                <input type="text" name="bank_name" class="form-input" placeholder="e.g. Advcash / TRC20 / ERC20">
+                <label class="form-label">Bank Name (For Bank Transfers)</label>
+                <input type="text" name="bank_name" class="form-input" placeholder="e.g. Chase Bank, Tether">
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Network (For Crypto)</label>
+                <input type="text" name="network" class="form-input" placeholder="e.g. TRC20, ERC20, BTC">
             </div>
 
             <div class="form-group">
