@@ -59,7 +59,8 @@ use App\Http\Controllers\SignalController;
 // Admin Area
 Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
-    Route::post('/order/{id}', [AdminController::class, 'updateStatus'])->name('order.update');
+    Route::get('/orders', [App\Http\Controllers\Admin\OrderController::class, 'index'])->name('orders.index');
+    Route::post('/order/{id}', [App\Http\Controllers\Admin\OrderController::class, 'updateStatus'])->name('order.update');
 
     // Signal Management
     Route::resource('signals', SignalController::class);
