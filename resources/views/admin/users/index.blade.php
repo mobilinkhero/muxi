@@ -33,13 +33,17 @@
                             </td>
                             <td>
                                 @if(!$user->is_admin)
-                                    <form action="{{ route('admin.users.destroy', $user->id) }}" method="POST"
-                                        onsubmit="return confirm('Are you sure?')">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-secondary btn-sm"
-                                            style="color: #ef4444; border-color: #ef4444;">Delete</button>
-                                    </form>
+                                    <div style="display: flex; gap: 0.5rem;">
+                                        <a href="{{ route('admin.users.edit', $user->id) }}" class="btn btn-secondary btn-sm"
+                                            style="color: var(--primary); border-color: var(--primary);">Edit</a>
+                                        <form action="{{ route('admin.users.destroy', $user->id) }}" method="POST"
+                                            onsubmit="return confirm('Are you sure?')">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-secondary btn-sm"
+                                                style="color: #ef4444; border-color: #ef4444;">Delete</button>
+                                        </form>
+                                    </div>
                                 @endif
                             </td>
                         </tr>
