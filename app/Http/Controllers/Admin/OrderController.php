@@ -29,9 +29,19 @@ class OrderController extends Controller
             'status' => 'required|in:pending,completed,rejected',
         ]);
 
-        $order->update([
-            'status' => $request->status
-        ]);
+        if ($request->status === 'rejected') {
+            $request->validate([
+                'rejection_reason' => 'nullable|string|max:1000',
+            ]);
+            $order->update([
+                'status' => $request->status,
+                'rejection_reason' => $request->rejection_reason,
+            ]);
+        } else {
+            $order->update([
+                'status' => $request->status
+            ]);
+        }
 
         return back()->with('success', 'Order status updated successfully.');
     }

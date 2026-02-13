@@ -182,7 +182,7 @@
         <!-- Sidebar -->
         <aside class="sidebar">
             <a href="/" class="logo" style="margin-bottom: 2rem;">
-                <embed src="/images/logo.svg" type="image/svg+xml" style="height: 35px;">
+                <img src="{{ asset('images/logo.svg') }}" alt="Logo" style="height: 35px;">
             </a>
 
             <ul class="sidebar-menu">
@@ -195,6 +195,9 @@
                         class="{{ request()->is('dashboard/learning-stats') ? 'active' : '' }}"><span>🎓</span> My
                         Stats</a></li>
                 <li><a href="/trade"><span>📈</span> Live Signals</a></li>
+                <li><a href="{{ route('p2p.index') }}"
+                        class="{{ request()->routeIs('p2p.index') ? 'active' : '' }}"><span
+                            style="color: #10B981;">💱</span> P2P Exchange</a></li>
                 <li><a href="/invest"><span>💼</span> Investments</a></li>
 
                 @if(auth()->check() && auth()->user()->is_admin)

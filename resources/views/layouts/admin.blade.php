@@ -242,12 +242,22 @@
                 </a>
 
                 <a href="{{ route('admin.orders.index') }}"
-                    class="nav-link {{ request()->routeIs('admin.orders.*') ? 'active' : '' }}">
-                    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
-                    </svg>
-                    Orders
+                    class="nav-link {{ request()->routeIs('admin.orders.*') ? 'active' : '' }}"
+                    style="display: flex; justify-content: space-between; align-items: center;">
+                    <div style="display: flex; align-items: center;">
+                        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                        </svg>
+                        Orders
+                    </div>
+                    @php
+                        $pendingOrders = \App\Models\Order::where('status', 'pending')->count();
+                    @endphp
+                    @if($pendingOrders > 0)
+                        <span
+                            style="background: #ef4444; color: white; border-radius: 50%; padding: 2px 6px; font-size: 0.7rem; font-weight: bold;">{{ $pendingOrders }}</span>
+                    @endif
                 </a>
                 <a href="{{ route('admin.users.index') }}"
                     class="nav-link {{ request()->routeIs('admin.users.*') ? 'active' : '' }}">
@@ -280,6 +290,29 @@
                             d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
                     </svg>
                     Brokers / Links
+                </a>
+
+                <div
+                    style="margin: 1.5rem 0.75rem 0.5rem; font-size: 0.7rem; font-weight: 800; color: var(--gray); text-transform: uppercase; letter-spacing: 1px;">
+                    Exchange & Finance</div>
+
+                <a href="{{ route('admin.p2p.index') }}"
+                    class="nav-link {{ request()->routeIs('admin.p2p.*') ? 'active' : '' }}"
+                    style="display: flex; justify-content: space-between; align-items: center;">
+                    <div style="display: flex; align-items: center;">
+                        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+                        </svg>
+                        P2P & Rates
+                    </div>
+                    @php
+                        $pendingP2P = \App\Models\P2PTransaction::where('status', 'pending')->count();
+                    @endphp
+                    @if($pendingP2P > 0)
+                        <span
+                            style="background: #ef4444; color: white; border-radius: 50%; padding: 2px 6px; font-size: 0.7rem; font-weight: bold;">{{ $pendingP2P }}</span>
+                    @endif
                 </a>
 
                 <div
@@ -392,6 +425,7 @@
             document.querySelector('.sidebar-overlay').classList.toggle('show');
         }
     </script>
+    @yield('scripts')
 </body>
 
 </html>

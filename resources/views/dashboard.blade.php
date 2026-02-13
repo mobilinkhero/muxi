@@ -58,6 +58,43 @@
     </div>
 </header>
 
+@if($orders->where('status', 'rejected')->isNotEmpty())
+    <div style="margin-bottom: 2rem; background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 8px; padding: 1.5rem;">
+        <h3 style="color: #EF4444; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; font-size: 1.1rem; font-weight: 700;">
+            ⚠️ Action Required: Order Rejected
+        </h3>
+        
+        @foreach($orders->where('status', 'rejected') as $rejectedOrder)
+            <div style="margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(239, 68, 68, 0.2);">
+                <p style="color: var(--white); margin-bottom: 0.5rem; font-size: 0.95rem;">
+                    Your request for <strong>{{ $rejectedOrder->service_name }}</strong> was rejected.
+                </p>
+                
+                @if($rejectedOrder->rejection_reason)
+                    <div style="background: rgba(239, 68, 68, 0.1); padding: 0.75rem; border-radius: 4px; border-left: 3px solid #EF4444; margin-bottom: 1rem;">
+                        <span style="color: #EF4444; font-weight: bold; font-size: 0.85rem; display: block; margin-bottom: 0.25rem;">Admin Note:</span>
+                        <div style="color: var(--white); font-size: 0.9rem;">"{{ $rejectedOrder->rejection_reason }}"</div>
+                    </div>
+                @endif
+                
+                <div style="display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;">
+                    @if($rejectedOrder->payment_method === 'Verification')
+                        <a href="/learn" class="btn btn-sm" 
+                           style="background: #EF4444; color: white; border: none; padding: 0.5rem 1rem; border-radius: 4px; font-weight: 600; text-decoration: none; font-size: 0.85rem;">
+                           ↻ Re-Submit Verification
+                        </a>
+                    @else
+                        <a href="{{ route('contact') }}" class="btn btn-sm" 
+                           style="background: transparent; color: #EF4444; border: 1px solid #EF4444; padding: 0.5rem 1rem; border-radius: 4px; font-weight: 600; text-decoration: none; font-size: 0.85rem;">
+                           📞 Contact Support
+                        </a>
+                    @endif
+                </div>
+            </div>
+        @endforeach
+    </div>
+@endif
+
 <!-- Stats Overview -->
 <div class="stats-grid">
     <div class="dashboard-card" style="text-align: center;">

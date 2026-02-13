@@ -18,12 +18,14 @@ class OrderController extends Controller
                 'password' => 'required|string|min:8',
             ]);
 
+            $phoneNumber = $request->mobile ? '+92' . $request->mobile : ($request->countryCode ?? '') . $request->phone;
+
             $user = \App\Models\User::create([
                 'name' => $request->fullName,
                 'email' => $request->email,
                 'password' => \Illuminate\Support\Facades\Hash::make($request->password),
-                'phone' => ($request->countryCode ?? '') . $request->phone,
-                'whatsapp' => $request->whatsapp ?? $request->mobile, // verification form uses 'mobile'
+                'phone' => $phoneNumber,
+                'whatsapp' => $request->whatsapp,
             ]);
 
             Auth::login($user);
@@ -52,9 +54,13 @@ class OrderController extends Controller
             $path = $request->file('paymentScreenshot')->store('payment_proofs', 'public');
         }
 
-        // Handle verification photos if present
+        // Handle verification photos and details
         $verificationData = [];
         if ($isVerification) {
+            $verificationData['cnic_number'] = $request->cnicNumber;
+            // Handle mobile if user logged in, might come from form
+            $verificationData['mobile'] = $request->mobile ? '+92' . $request->mobile : Auth::user()->phone;
+
             foreach (['cnicFront', 'cnicBack', 'profilePhoto'] as $fileKey) {
                 if ($request->hasFile($fileKey)) {
                     $verificationData[$fileKey] = $request->file($fileKey)->store('verifications', 'public');
@@ -68,14 +74,14 @@ class OrderController extends Controller
             'amount' => $request->amount,
             'currency' => $request->currency,
             'payment_method' => $request->payment_method,
-            'transaction_id' => $request->txId,
+            'transaction_id' => $request->txId ?? ($isVerification ? 'VERIFICATION-' . time() . '-' . rand(1000, 9999) : null),
             'screenshot_path' => $path,
             'status' => 'pending',
-            'notes' => $isVerification ? 'Verification request: ' . json_encode($verificationData) : 'Payment submitted via website form',
+            'notes' => $isVerification ? json_encode($verificationData) : 'Payment submitted via website form',
         ]);
 
         return redirect()->route('order.success')->with([
-            'success' => 'Payment submitted successfully!',
+            'success' => 'Request submitted successfully!',
             'order_id' => $order->id
         ]);
     }

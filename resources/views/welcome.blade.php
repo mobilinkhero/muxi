@@ -19,8 +19,7 @@
         <div class="container">
             <div class="nav-container">
                 <a href="/" class="logo">
-                     <img src="{{ $settings['site_logo'] ?? '/images/logo.svg' }}" alt="{{ $settings['site_name'] ?? 'GSM Trading Lab' }}" style="height: 40px; filter: drop-shadow(0 0 12px rgba(99, 102, 241, 0.6));">
-                     <span style="font-weight: bold; font-size: 1.2rem; color: var(--white); margin-left: 0.5rem;">{{ $settings['site_name'] ?? 'GSM Trading Lab' }}</span>
+                     <img src="{{ asset('images/logo.svg') }}" alt="{{ $settings['site_name'] ?? 'GSM Trading Lab' }}" style="height: 40px;">
                 </a>
                 <ul class="nav-links">
                     <li><a href="#home">Home</a></li>

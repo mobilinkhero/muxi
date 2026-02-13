@@ -682,6 +682,41 @@
                     <input type="hidden" name="payment_method" value="Verification">
                     <input type="hidden" name="modal_id" value="verificationModal">
 
+                    <!-- Email -->
+                    <div>
+                        <label
+                            style="display: block; color: var(--white); font-weight: 600; margin-bottom: 0.5rem; font-size: 0.95rem;">
+                            Email Address <span style="color: #ef4444;">*</span>
+                        </label>
+                        <input type="email" name="email" required value="{{ old('email') }}"
+                            style="width: 100%; padding: 0.875rem 1rem; background: var(--dark-light); border: 1px solid {{ $errors->has('email') ? '#ef4444' : 'rgba(255,255,255,0.1)' }}; border-radius: var(--radius-md); color: var(--white); font-size: 1rem;"
+                            placeholder="your.email@example.com">
+                        @error('email')
+                            <div style="color: #ef4444; font-size: 0.85rem; margin-top: 0.25rem;">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    @if(!auth()->check())
+                        <!-- Password for new account -->
+                        <div>
+                            <label
+                                style="display: block; color: var(--white); font-weight: 600; margin-bottom: 0.5rem; font-size: 0.95rem;">
+                                Create Account Password <span style="color: #ef4444;">*</span>
+                            </label>
+                            <input type="password" name="password" required
+                                style="width: 100%; padding: 0.875rem 1rem; background: var(--dark-light); border: 1px solid {{ $errors->has('password') ? '#ef4444' : 'rgba(255,255,255,0.1)' }}; border-radius: var(--radius-md); color: var(--white); font-size: 1rem;"
+                                placeholder="Minimum 8 characters">
+                            @error('password')
+                                <div style="color: #ef4444; font-size: 0.85rem; margin-top: 0.25rem;">{{ $message }}</div>
+                            @enderror
+                            <div style="margin-top: 0.5rem; font-size: 0.8rem; color: var(--gray);">
+                                🔑 You will use this password to login later
+                            </div>
+                        </div>
+                    @else
+                        <input type="hidden" name="password" value="ALREADY_LOGGED_IN">
+                    @endif
+
                     <!-- Full Name -->
                     <div>
                         <label
@@ -718,10 +753,13 @@
                                 style="width: 100px; padding: 0.875rem 0.75rem; background: var(--dark-light); border: 1px solid rgba(255,255,255,0.1); border-radius: var(--radius-md); color: var(--white); font-size: 1rem; text-align: center;">
                                 🇵🇰 +92
                             </div>
-                            <input type="tel" name="mobile" required maxlength="10"
-                                style="flex: 1; padding: 0.875rem 1rem; background: var(--dark-light); border: 1px solid rgba(255,255,255,0.1); border-radius: var(--radius-md); color: var(--white); font-size: 1rem;"
+                            <input type="tel" name="mobile" required maxlength="10" value="{{ old('mobile') }}"
+                                style="flex: 1; padding: 0.875rem 1rem; background: var(--dark-light); border: 1px solid {{ $errors->has('mobile') ? '#ef4444' : 'rgba(255,255,255,0.1)' }}; border-radius: var(--radius-md); color: var(--white); font-size: 1rem;"
                                 placeholder="3XXXXXXXXX" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
                         </div>
+                        @error('mobile')
+                            <div style="color: #ef4444; font-size: 0.85rem; margin-top: 0.25rem;">{{ $message }}</div>
+                        @enderror
                         <div style="margin-top: 0.5rem; font-size: 0.85rem; color: var(--gray);">
                             ⚠️ Number must be registered on your CNIC name
                         </div>
@@ -733,13 +771,33 @@
                             style="display: block; color: var(--white); font-weight: 600; margin-bottom: 0.5rem; font-size: 0.95rem;">
                             WhatsApp Number <span style="color: #ef4444;">*</span>
                         </label>
-                        <input type="tel" name="whatsapp" required
-                            style="width: 100%; padding: 0.875rem 1rem; background: var(--dark-light); border: 1px solid rgba(255,255,255,0.1); border-radius: var(--radius-md); color: var(--white); font-size: 1rem;"
+                        <input type="tel" name="whatsapp" required value="{{ old('whatsapp') }}"
+                            style="width: 100%; padding: 0.875rem 1rem; background: var(--dark-light); border: 1px solid {{ $errors->has('whatsapp') ? '#ef4444' : 'rgba(255,255,255,0.1)' }}; border-radius: var(--radius-md); color: var(--white); font-size: 1rem;"
                             placeholder="Enter WhatsApp with country code">
+                        @error('whatsapp')
+                            <div style="color: #ef4444; font-size: 0.85rem; margin-top: 0.25rem;">{{ $message }}</div>
+                        @enderror
                         <div style="margin-top: 0.5rem; font-size: 0.85rem; color: var(--gray);">
                             📱 For emergency contact and class updates
                         </div>
                     </div>
+
+                    <script>
+                        document.addEventListener('DOMContentLoaded', function () {
+                            @if ($errors->any())
+                                const oldModalId = "{{ old('modal_id') }}";
+                                if (oldModalId === 'verificationModal') {
+                                    openVerificationModal();
+                                } else if (oldModalId === 'premiumModal') {
+                                    openPremiumModal();
+                                    // If step 2 was active, we might need to switch to it, but default is step 1.
+                                    // However, if validation failed, it means they were on step 2 (details).
+                                    // So let's force go to step 2.
+                                    goToStep2();
+                                }
+                            @endif
+        });
+                    </script>
                     <div>
                         <label
                             style="display: block; color: var(--white); font-weight: 600; margin-bottom: 0.5rem; font-size: 0.95rem;">
@@ -1249,41 +1307,15 @@
             const verificationForm = document.getElementById('verificationForm');
             if (verificationForm) {
                 verificationForm.addEventListener('submit', function (e) {
-                    e.preventDefault();
 
                     // Check if all photos are uploaded
                     if (!uploadedCnicFront || !uploadedCnicBack || !uploadedProfilePhoto) {
+                        e.preventDefault();
                         alert('Please upload all required photos:\n• CNIC Front\n• CNIC Back\n• Profile Photo');
                         return;
                     }
 
-                    const formData = new FormData(this);
-                    const data = {};
-                    formData.forEach((value, key) => data[key] = value);
-
-                    // Add photo info
-                    data.cnicFrontFile = uploadedCnicFront.name;
-                    data.cnicBackFile = uploadedCnicBack.name;
-                    data.profilePhotoFile = uploadedProfilePhoto.name;
-
-                    alert('✅ Verification Submitted!\n\n' +
-                        'Thank you for registering!\n\n' +
-                        'Verification Details:\n' +
-                        '✓ Name: ' + data.fullName + '\n' +
-                        '✓ CNIC: ' + data.cnicNumber + '\n' +
-                        '✓ Mobile: +92 ' + data.mobile + '\n' +
-                        '✓ CNIC Front: ' + data.cnicFrontFile + '\n' +
-                        '✓ CNIC Back: ' + data.cnicBackFile + '\n' +
-                        '✓ Profile Photo: ' + data.profilePhotoFile + '\n\n' +
-                        'Our team will verify your details within 24-48 hours.\n\n' +
-                        'You will receive:\n' +
-                        '• SMS confirmation on your mobile\n' +
-                        '• Demo account credentials\n' +
-                        '• Access to learning platform\n' +
-                        '• Welcome guide via email\n\n' +
-                        'Thank you for choosing GSM Trading Lab!');
-
-                    closeVerificationModal();
+                    // Form will now submit to server
                 });
             }
         });

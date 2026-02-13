@@ -151,14 +151,28 @@
             @if(isset($order))
                 @php
                     $waNumber = $settings['whatsapp_number'] ?? '447478035502';
-                    $message = "I have completed the payment and placed my order. Please confirm and guide me further.\n\n";
-                    $message .= "*Order Details:*\n";
-                    $message .= "• *Student Name:* " . ($order->user->name ?? 'N/A') . "\n";
-                    $message .= "• *Order ID:* #" . $order->id . "\n";
-                    $message .= "• *Course/Service:* " . $order->service_name . "\n";
-                    $message .= "• *Payment Method:* " . $order->payment_method . "\n";
-                    $message .= "• *Amount:* " . $order->currency . " " . number_format($order->amount, 2) . "\n";
-                    $message .= "• *Date & Time:* " . $order->created_at->format('M d, Y - h:i A') . " (Server Time)";
+                    $isVerification = $order->payment_method === 'Verification';
+
+                    if ($isVerification) {
+                        $details = json_decode($order->notes, true);
+                        $message = "I have submitted my verification details for Trust Based Access. Please review and approve.\n\n";
+                        $message .= "*Student Verification Details:*\n";
+                        $message .= "• *Name:* " . ($order->user->name ?? 'N/A') . "\n";
+                        $message .= "• *CNIC:* " . ($details['cnic_number'] ?? 'N/A') . "\n";
+                        $message .= "• *Mobile:* " . ($details['mobile'] ?? 'N/A') . "\n";
+                        $message .= "• *Order ID:* #" . $order->id . "\n";
+                        $message .= "• *Service:* " . $order->service_name . "\n";
+                        $message .= "• *Date:* " . $order->created_at->format('M d, Y - h:i A');
+                    } else {
+                        $message = "I have completed the payment and placed my order. Please confirm and guide me further.\n\n";
+                        $message .= "*Order Details:*\n";
+                        $message .= "• *Student Name:* " . ($order->user->name ?? 'N/A') . "\n";
+                        $message .= "• *Order ID:* #" . $order->id . "\n";
+                        $message .= "• *Course/Service:* " . $order->service_name . "\n";
+                        $message .= "• *Payment Method:* " . $order->payment_method . "\n";
+                        $message .= "• *Amount:* " . $order->currency . " " . number_format($order->amount, 2) . "\n";
+                        $message .= "• *Date & Time:* " . $order->created_at->format('M d, Y - h:i A') . " (Server Time)";
+                    }
 
                     $waUrl = "https://wa.me/" . preg_replace('/[^0-9]/', '', $waNumber) . "?text=" . urlencode($message);
                 @endphp
@@ -171,8 +185,8 @@
                             style="display: inline-block; width: 10px; height: 10px; background: #25D366; border-radius: 50%; animation: pulse 1s infinite;"></span>
                         Redirecting to WhatsApp...
                     </div>
-                    <p style="color: var(--gray); font-size: 0.85rem;">Sending your order details to our team for instant
-                        confirmation.</p>
+                    <p style="color: var(--gray); font-size: 0.85rem;">Sending your
+                        {{ $isVerification ? 'verification' : 'order' }} details to our team for instant confirmation.</p>
                     <a href="{{ $waUrl }}" class="btn btn-primary"
                         style="margin-top: 1rem; width: 100%; background: #25D366; border-color: #25D366; color: #fff;">
                         Open WhatsApp Now

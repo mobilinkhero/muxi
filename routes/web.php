@@ -129,3 +129,16 @@ Route::get('/api/market/coinglass/longshort', [CoinGlassController::class, 'getL
 Route::get('/api/market/dune/{queryId}', [DuneController::class, 'getQueryResult'])->name('api.market.dune');
 Route::get('/api/market/glassnode/metrics', [GlassnodeController::class, 'getMetrics'])->name('api.market.glassnode');
 Route::get('/api/market/news', [NewsController::class, 'getLatestNews'])->name('api.market.news');
+
+// P2P Routes (Admin)
+Route::group(['prefix' => 'admin', 'as' => 'admin.p2p.', 'middleware' => ['auth', 'admin']], function () {
+    Route::get('/p2p', [App\Http\Controllers\Admin\P2PController::class, 'index'])->name('index');
+    Route::post('/p2p/rates', [App\Http\Controllers\Admin\P2PController::class, 'updateRates'])->name('rates');
+    Route::post('/p2p/process/{id}', [App\Http\Controllers\Admin\P2PController::class, 'process'])->name('process');
+});
+
+// P2P Routes (User)
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('/dashboard/p2p', [App\Http\Controllers\P2PController::class, 'index'])->name('p2p.index');
+    Route::post('/dashboard/p2p', [App\Http\Controllers\P2PController::class, 'store'])->name('p2p.store');
+});

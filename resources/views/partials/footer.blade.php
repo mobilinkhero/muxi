@@ -4,7 +4,8 @@
             <div class="footer-section">
                 <h4 class="logo" style="font-size: 1.5rem;">
                     <a href="/" class="logo">
-                        <embed src="/images/logo.svg" type="image/svg+xml" style="height: 40px; margin-bottom: 1rem;">
+                        <img src="{{ asset('images/logo.svg') }}" alt="GSM Trading Lab"
+                            style="height: 40px; margin-bottom: 1rem;">
                     </a>
                     <p style="color: var(--gray-light); margin-top: 1rem;">
                         Your trusted partner in multi-market trading education, professional signals, and comprehensive

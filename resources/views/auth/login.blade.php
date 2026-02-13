@@ -82,9 +82,8 @@
 
     <div class="auth-card">
         <div class="auth-header">
-            <a href="/" class="logo" style="justify-content: center; margin-bottom: 1rem;">
-                <img src="https://i.ibb.co/3ykG88h/gsm-logo.png" alt="Logo" class="logo-animation"
-                    style="height: 60px;">
+            <a href="/" class="logo" style="justify-content: center; margin-bottom: 2rem; display: flex;">
+                <img src="{{ asset('images/logo.svg') }}" alt="Logo" class="logo-animation" style="height: 50px;">
             </a>
             <h2>Student Login</h2>
             <p>Access your dashboard and purchased courses</p>

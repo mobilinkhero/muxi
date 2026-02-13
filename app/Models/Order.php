@@ -16,6 +16,7 @@ class Order extends Model
         'transaction_id',
         'screenshot_path',
         'notes',
+        'rejection_reason',
     ];
 
     public function user()
