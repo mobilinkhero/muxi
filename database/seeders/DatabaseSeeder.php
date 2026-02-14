@@ -14,24 +14,23 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // Admin User
-        User::updateOrCreate(
-            ['email' => 'admin@gsmtradinglab.com'],
-            [
-                'name' => 'GSM Admin',
-                'password' => Hash::make('password'),
-                'is_admin' => true,
-            ]
-        );
+        // Admin User
+        $admin = User::firstOrNew(['email' => 'admin@gsmtradinglab.com']);
+        $admin->name = 'GSM Admin';
+        $admin->is_admin = true;
+        if (!$admin->exists) {
+            $admin->password = Hash::make('password');
+        }
+        $admin->save();
 
         // Demo Student User
-        User::updateOrCreate(
-            ['email' => 'student@gsmtradinglab.com'],
-            [
-                'name' => 'Demo Student',
-                'password' => Hash::make('password'),
-                'is_admin' => false,
-            ]
-        );
+        $student = User::firstOrNew(['email' => 'student@gsmtradinglab.com']);
+        $student->name = 'Demo Student';
+        $student->is_admin = false;
+        if (!$student->exists) {
+            $student->password = Hash::make('password');
+        }
+        $student->save();
 
         $this->call([
             BrokerSeeder::class,

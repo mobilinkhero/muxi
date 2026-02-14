@@ -16,10 +16,10 @@ class AdminMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::check() && Auth::user()->is_admin) {
+        if (Auth::check() && Auth::user()->is_admin === true) {
             return $next($request);
         }
 
-        return redirect('/dashboard')->with('error', 'Only admins can access that area.');
+        abort(403, 'Unauthorized access.');
     }
 }

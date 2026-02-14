@@ -33,14 +33,14 @@ class UserController extends Controller
             'is_admin' => 'boolean'
         ]);
 
-        User::create([
-            'name' => $validated['name'],
-            'email' => $validated['email'],
-            'password' => Hash::make($validated['password']),
-            'phone' => $validated['phone'] ?? null,
-            'whatsapp' => $validated['whatsapp'] ?? null,
-            'is_admin' => $request->has('is_admin'),
-        ]);
+        $user = new User();
+        $user->name = $validated['name'];
+        $user->email = $validated['email'];
+        $user->password = Hash::make($validated['password']);
+        $user->phone = $validated['phone'] ?? null;
+        $user->whatsapp = $validated['whatsapp'] ?? null;
+        $user->is_admin = $request->has('is_admin');
+        $user->save();
 
         return redirect()->route('admin.users.index')->with('success', 'User created successfully.');
     }
