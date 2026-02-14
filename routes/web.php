@@ -88,6 +88,11 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::post('/lms/tasks', [AdminLmsController::class, 'createTask'])->name('lms.tasks.store');
     Route::delete('/lms/tasks/{id}', [AdminLmsController::class, 'deleteTask'])->name('lms.tasks.delete');
 
+    // Class Recordings
+    Route::get('/lms/recordings', [AdminLmsController::class, 'recordings'])->name('lms.recordings');
+    Route::post('/lms/recordings/upload', [AdminLmsController::class, 'uploadRecording'])->name('lms.recordings.upload');
+    Route::delete('/lms/recordings/{id}', [AdminLmsController::class, 'deleteRecording'])->name('lms.recordings.delete');
+
     Route::post('/order/{id}', [App\Http\Controllers\Admin\OrderController::class, 'updateStatus'])->name('order.update');
     Route::delete('/order/{id}', [App\Http\Controllers\Admin\OrderController::class, 'destroy'])->name('orders.destroy');
 

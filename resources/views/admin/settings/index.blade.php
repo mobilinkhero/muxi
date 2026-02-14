@@ -68,6 +68,16 @@
                         <small style="color: var(--gray); display: block; margin-top: 5px;">Ye message Admin aur Student
                             portal par scroll kare ga.</small>
                     </div>
+
+                    <div class="form-group"
+                        style="background: rgba(239, 68, 68, 0.05); padding: 1.5rem; border-radius: 8px; border: 1px solid rgba(239, 68, 68, 0.2); margin-top: 1rem;">
+                        <label class="form-label" style="color: #ef4444; font-weight: bold;">📢 Second Announcement
+                            (Optional)</label>
+                        <textarea name="announcement_ticker_2" class="form-input" style="height: 80px;"
+                            placeholder="Dosri patti ka message yahan likhain (Optional)...">{{ $settings['announcement_ticker_2'] ?? '' }}</textarea>
+                        <small style="color: var(--gray); display: block; margin-top: 5px;">Ye message doosri line ma
+                            chalay ga.</small>
+                    </div>
                 </div>
 
                 <!-- Social Links -->

@@ -71,4 +71,53 @@ class LmsController extends Controller
         \App\Models\DailyTask::findOrFail($id)->delete();
         return back()->with('success', 'Task deleted.');
     }
+
+    // Class Recordings
+    public function recordings()
+    {
+        $recordings = \App\Models\ClassRecording::orderBy('published_at', 'desc')->get();
+        return view('admin.lms.recordings', compact('recordings'));
+    }
+
+    public function uploadRecording(Request $request)
+    {
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'video_file' => 'required|mimes:mp4,mov,avi,wmv|max:500000', // 500MB max
+            'thumbnail_file' => 'nullable|image|max:2048',
+        ]);
+
+        $videoPath = $request->file('video_file')->store('recordings/videos', 'public');
+        $thumbnailPath = null;
+        if ($request->hasFile('thumbnail_file')) {
+            $thumbnailPath = $request->file('thumbnail_file')->store('recordings/thumbnails', 'public');
+        }
+
+        \App\Models\ClassRecording::create([
+            'title' => $request->title,
+            'description' => $request->description,
+            'video_url' => '/storage/' . $videoPath,
+            'thumbnail_url' => $thumbnailPath ? '/storage/' . $thumbnailPath : null,
+            'published_at' => now(),
+        ]);
+
+        return back()->with('success', 'Recording uploaded successfully!');
+    }
+
+    public function deleteRecording($id)
+    {
+        $recording = \App\Models\ClassRecording::findOrFail($id);
+
+        // Delete files from storage
+        $videoPath = str_replace('/storage/', '', $recording->video_url);
+        \Illuminate\Support\Facades\Storage::disk('public')->delete($videoPath);
+
+        if ($recording->thumbnail_url) {
+            $thumbPath = str_replace('/storage/', '', $recording->thumbnail_url);
+            \Illuminate\Support\Facades\Storage::disk('public')->delete($thumbPath);
+        }
+
+        $recording->delete();
+        return back()->with('success', 'Recording deleted.');
+    }
 }

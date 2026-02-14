@@ -197,27 +197,40 @@
     <div class="sidebar-overlay" onclick="toggleSidebar()"></div>
 
     <!-- Announcement Ticker -->
-    @if(isset($settings['announcement_ticker']) && $settings['announcement_ticker'])
+    @if((isset($settings['announcement_ticker']) && $settings['announcement_ticker']) || (isset($settings['announcement_ticker_2']) && $settings['announcement_ticker_2']))
         <div
             style="background: #10B981; color: #000; padding: 0.6rem 0; font-weight: 800; font-size: 0.85rem; position: sticky; top: 0; z-index: 999; overflow: hidden; white-space: nowrap;">
-            <div style="display: inline-block; padding-left: 100%; animation: ticker 25s linear infinite;">
-                <span style="margin-right: 50px;">🚀 UPDATE: {{ $settings['announcement_ticker'] }}</span>
-                <span style="margin-right: 50px;">🚀 UPDATE: {{ $settings['announcement_ticker'] }}</span>
-                <span style="margin-right: 50px;">🚀 UPDATE: {{ $settings['announcement_ticker'] }}</span>
+            <div style="display: inline-block; padding-left: 100%; animation: ticker 40s linear infinite;">
+                @if(isset($settings['announcement_ticker']) && $settings['announcement_ticker'])
+                    <span style="margin-right: 50px;">🚀 UPDATE: {{ $settings['announcement_ticker'] }}</span>
+                @endif
+
+                @if(isset($settings['announcement_ticker_2']) && $settings['announcement_ticker_2'])
+                    <span style="margin-right: 50px; color: #991b1b;">🚨 ALERT: {{ $settings['announcement_ticker_2'] }}</span>
+                @endif
+
+                @if(isset($settings['announcement_ticker']) && $settings['announcement_ticker'])
+                    <span style="margin-right: 50px;">🚀 UPDATE: {{ $settings['announcement_ticker'] }}</span>
+                @endif
+
+                @if(isset($settings['announcement_ticker_2']) && $settings['announcement_ticker_2'])
+                    <span style="margin-right: 50px; color: #991b1b;">🚨 ALERT: {{ $settings['announcement_ticker_2'] }}</span>
+                @endif
             </div>
         </div>
-        <style>
-            @keyframes ticker {
-                0% {
-                    transform: translate3d(0, 0, 0);
-                }
-
-                100% {
-                    transform: translate3d(-100%, 0, 0);
-                }
-            }
-        </style>
     @endif
+
+    <style>
+        @keyframes ticker {
+            0% {
+                transform: translate3d(0, 0, 0);
+            }
+
+            100% {
+                transform: translate3d(-100%, 0, 0);
+            }
+        }
+    </style>
 
     <div style="display: flex; flex: 1; position: relative;">
         <aside class="sidebar">
@@ -326,6 +339,15 @@
                             d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                     </svg>
                     Daily Tasks
+                </a>
+
+                <a href="{{ route('admin.lms.recordings') }}"
+                    class="nav-link {{ request()->is('admin/lms/recordings*') ? 'active' : '' }}">
+                    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                    </svg>
+                    Recordings
                 </a>
 
                 <a href="{{ route('admin.lms.classes') }}"

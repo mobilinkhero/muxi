@@ -156,27 +156,40 @@
 
 <body>
     <!-- Announcement Ticker -->
-    @if(isset($settings['announcement_ticker']) && $settings['announcement_ticker'])
+    @if((isset($settings['announcement_ticker']) && $settings['announcement_ticker']) || (isset($settings['announcement_ticker_2']) && $settings['announcement_ticker_2']))
         <div
             style="background: #10B981; color: #000; padding: 0.6rem 0; font-weight: 800; font-size: 0.85rem; position: sticky; top: 0; z-index: 999; overflow: hidden; white-space: nowrap;">
-            <div style="display: inline-block; padding-left: 100%; animation: student-ticker 30s linear infinite;">
-                <span style="margin-right: 50px;">📢 IMPORTANT: {{ $settings['announcement_ticker'] }}</span>
-                <span style="margin-right: 50px;">📢 IMPORTANT: {{ $settings['announcement_ticker'] }}</span>
-                <span style="margin-right: 50px;">📢 IMPORTANT: {{ $settings['announcement_ticker'] }}</span>
+            <div style="display: inline-block; padding-left: 100%; animation: student-ticker 40s linear infinite;">
+                @if(isset($settings['announcement_ticker']) && $settings['announcement_ticker'])
+                    <span style="margin-right: 50px;">📢 IMPORTANT: {{ $settings['announcement_ticker'] }}</span>
+                @endif
+
+                @if(isset($settings['announcement_ticker_2']) && $settings['announcement_ticker_2'])
+                    <span style="margin-right: 50px; color: #991b1b;">🚨 ALERT: {{ $settings['announcement_ticker_2'] }}</span>
+                @endif
+
+                @if(isset($settings['announcement_ticker']) && $settings['announcement_ticker'])
+                    <span style="margin-right: 50px;">📢 IMPORTANT: {{ $settings['announcement_ticker'] }}</span>
+                @endif
+
+                @if(isset($settings['announcement_ticker_2']) && $settings['announcement_ticker_2'])
+                    <span style="margin-right: 50px; color: #991b1b;">🚨 ALERT: {{ $settings['announcement_ticker_2'] }}</span>
+                @endif
             </div>
         </div>
-        <style>
-            @keyframes student-ticker {
-                0% {
-                    transform: translate3d(0, 0, 0);
-                }
-
-                100% {
-                    transform: translate3d(-100%, 0, 0);
-                }
-            }
-        </style>
     @endif
+    
+    <style>
+        @keyframes student-ticker {
+            0% {
+                transform: translate3d(0, 0, 0);
+            }
+
+            100% {
+                transform: translate3d(-100%, 0, 0);
+            }
+        }
+    </style>
 
     <div class="dashboard-container">
         <!-- Sidebar -->

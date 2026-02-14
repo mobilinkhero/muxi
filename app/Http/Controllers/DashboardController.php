@@ -53,6 +53,11 @@ class DashboardController extends Controller
             'certificates' => 0
         ];
 
-        return view('dashboard.courses', compact('user', 'orders', 'stats'));
+        // Fetch Class Recordings
+        $recordings = \App\Models\ClassRecording::where('is_active', true)
+            ->orderBy('published_at', 'desc')
+            ->get();
+
+        return view('dashboard.courses', compact('user', 'orders', 'stats', 'recordings'));
     }
 }
