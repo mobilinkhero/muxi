@@ -70,9 +70,9 @@ use App\Http\Controllers\SignalController;
 use App\Http\Controllers\Admin\LmsController as AdminLmsController;
 
 // Admin Area
-Route::redirect('/admin', '/admin/dashboard');
+Route::redirect('/youcanthackme', '/youcanthackme/dashboard');
 
-Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
+Route::middleware(['auth', 'admin'])->prefix('youcanthackme')->name('admin.')->group(function () {
     Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
     Route::get('/orders', [App\Http\Controllers\Admin\OrderController::class, 'index'])->name('orders.index');
 
@@ -141,7 +141,7 @@ Route::get('/api/market/glassnode/metrics', [GlassnodeController::class, 'getMet
 Route::get('/api/market/news', [NewsController::class, 'getLatestNews'])->name('api.market.news');
 
 // P2P Routes (Admin)
-Route::group(['prefix' => 'admin', 'as' => 'admin.p2p.', 'middleware' => ['auth', 'admin']], function () {
+Route::group(['prefix' => 'youcanthackme', 'as' => 'admin.p2p.', 'middleware' => ['auth', 'admin']], function () {
     Route::get('/p2p', [App\Http\Controllers\Admin\P2PController::class, 'index'])->name('index');
     Route::post('/p2p/rates', [App\Http\Controllers\Admin\P2PController::class, 'updateRates'])->name('rates');
     Route::post('/p2p/process/{id}', [App\Http\Controllers\Admin\P2PController::class, 'process'])->name('process');
