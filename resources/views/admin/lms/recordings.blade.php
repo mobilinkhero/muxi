@@ -76,7 +76,7 @@
                     <div
                         style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 1rem;">
                         <span
-                            style="font-size: 0.8rem; color: var(--gray);">{{ $recording->published_at->format('M d, Y') }}</span>
+                            style="font-size: 0.8rem; color: var(--gray);">{{ $recording->published_at->format('l, M d, Y') }}</span>
 
                         <form action="{{ route('admin.lms.recordings.delete', $recording->id) }}" method="POST"
                             onsubmit="return confirm('Delete this recording permanently?');">

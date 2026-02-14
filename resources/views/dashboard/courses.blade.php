@@ -181,7 +181,7 @@
                                         {{ $recording->title }}
                                     </div>
                                     <div style="font-size: 0.8rem; color: var(--gray); margin-bottom: 0.5rem;">
-                                        {{ $recording->published_at->format('M d, Y') }}
+                                        {{ $recording->published_at->format('l, M d, Y') }}
                                     </div>
                                     @if($recording->description)
                                         <div style="font-size: 0.85rem; color: var(--gray-light); line-height: 1.4;">
