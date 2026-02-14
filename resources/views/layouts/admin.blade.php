@@ -319,6 +319,15 @@
                     style="margin: 1.5rem 0.75rem 0.5rem; font-size: 0.7rem; font-weight: 800; color: var(--gray); text-transform: uppercase; letter-spacing: 1px;">
                     LMS & Learning</div>
 
+                <a href="{{ route('admin.lms.tasks') }}"
+                    class="nav-link {{ request()->is('admin/lms/tasks*') ? 'active' : '' }}">
+                    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                    </svg>
+                    Daily Tasks
+                </a>
+
                 <a href="{{ route('admin.lms.classes') }}"
                     class="nav-link {{ request()->is('admin/lms/classes*') ? 'active' : '' }}">
                     <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">

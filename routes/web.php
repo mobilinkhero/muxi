@@ -83,6 +83,11 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::get('/lms/attendance/{id}', [AdminLmsController::class, 'attendance'])->name('lms.attendance');
     Route::get('/lms/student-stats', [AdminLmsController::class, 'studentStats'])->name('lms.student_stats');
 
+    // Daily Tasks
+    Route::get('/lms/tasks', [AdminLmsController::class, 'tasks'])->name('lms.tasks');
+    Route::post('/lms/tasks', [AdminLmsController::class, 'createTask'])->name('lms.tasks.store');
+    Route::delete('/lms/tasks/{id}', [AdminLmsController::class, 'deleteTask'])->name('lms.tasks.delete');
+
     Route::post('/order/{id}', [App\Http\Controllers\Admin\OrderController::class, 'updateStatus'])->name('order.update');
     Route::delete('/order/{id}', [App\Http\Controllers\Admin\OrderController::class, 'destroy'])->name('orders.destroy');
 
