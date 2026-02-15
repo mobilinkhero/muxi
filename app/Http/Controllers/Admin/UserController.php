@@ -78,6 +78,7 @@ class UserController extends Controller
 
         if ($request->has('reset_device_token')) {
             $user->device_token = null;
+            $user->browser_fingerprint = null;
         }
 
         $user->save();
@@ -101,6 +102,12 @@ class UserController extends Controller
     {
         $user->delete();
         return back()->with('success', 'User deleted successfully.');
+    }
+
+    public function resetDevice(User $user)
+    {
+        $user->update(['browser_fingerprint' => null]);
+        return back()->with('success', "Device limit reset for {$user->name}. They can now login from a new device.");
     }
 
     public function securityLogs()

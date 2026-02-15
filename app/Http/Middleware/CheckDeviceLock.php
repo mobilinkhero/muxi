@@ -12,42 +12,23 @@ class CheckDeviceLock
 {
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::check() && Auth::user()->is_premium) {
-            $user = Auth::user();
-            $cookieName = 'premium_device_token_' . $user->id; // Unique per user
+        $user = Auth::user();
 
-            $currentCookie = $request->cookie($cookieName);
+        if ($user && $user->is_premium) {
+            $dbFingerprint = $user->browser_fingerprint;
+            $cookieFingerprint = $request->cookie('device_fingerprint');
 
-            if (!$user->device_token) {
-                // If user has no token in DB (first login as premium or after reset)
+            // 1. If user is premium BUT DB has no fingerprint yet (first login after upgrade or reset)
+            // We let them through. The frontend JS will send and lock the fingerprint in the next seconds.
+            if (!$dbFingerprint) {
+                return $next($request);
+            }
 
-                // Check if cookie exists. If yes, that's weird (maybe leftover), but better overwrite.
-
-                $newToken = (string) Str::uuid();
-
-                // Update DB
-                $user->device_token = $newToken;
-                $user->save();
-
-                // Set cookie forever (10 years)
-                Cookie::queue(Cookie::forever($cookieName, $newToken));
-
-            } else {
-                // User has a token in DB.
-                // Request MUST have the matching cookie.
-
-                if (!$currentCookie || $currentCookie !== $user->device_token) {
-                    // Security Violation
-                    Auth::logout();
-
-                    // Invalidate session
-                    $request->session()->invalidate();
-                    $request->session()->regenerateToken();
-
-                    return redirect()->route('login')->withErrors([
-                        'email' => 'Access Denied: Your Premium account is locked to another device. Please use your registered device.'
-                    ]);
-                }
+            // 2. If DB has a fingerprint, the request MUST have a matching cookie
+            // We only check if the cookie exists. If it doesn't exist yet, we wait for JS to set it.
+            // But if it DOES exist and doesn't match, we block immediately.
+            if ($cookieFingerprint && $cookieFingerprint !== $dbFingerprint) {
+                return redirect()->route('device.blocked');
             }
         }
 

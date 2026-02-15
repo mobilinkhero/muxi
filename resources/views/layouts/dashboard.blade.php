@@ -178,7 +178,7 @@
             </div>
         </div>
     @endif
-    
+
     <style>
         @keyframes student-ticker {
             0% {
@@ -194,13 +194,29 @@
     <div class="dashboard-container">
         <!-- Sidebar -->
         <aside class="sidebar">
-            <a href="/" class="logo" style="margin-bottom: 2rem;">
+            <a href="/" class="logo" style="margin-bottom: 2rem; display: block;">
                 <img src="{{ asset('images/logo.svg') }}" alt="Logo" style="height: 35px;">
             </a>
+
+            <div
+                style="display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem; padding: 0.5rem; background: rgba(255,255,255,0.03); border-radius: 12px; border: 1px solid rgba(255,255,255,0.05);">
+                <img src="{{ auth()->user()->avatar_url }}"
+                    style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid var(--primary);">
+                <div style="overflow: hidden;">
+                    <div
+                        style="color: white; font-weight: 600; font-size: 0.9rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                        {{ auth()->user()->name }}
+                    </div>
+                    <div style="color: var(--gray); font-size: 0.7rem;">Student ID: #{{ auth()->id() }}</div>
+                </div>
+            </div>
 
             <ul class="sidebar-menu">
                 <li><a href="{{ route('dashboard') }}"
                         class="{{ request()->is('dashboard') ? 'active' : '' }}"><span>📊</span> Dashboard</a></li>
+                <li><a href="{{ route('profile.edit') }}"
+                        class="{{ request()->routeIs('profile.edit') ? 'active' : '' }}"><span>👤</span> Profile
+                        Settings</a></li>
                 <li><a href="{{ route('dashboard.courses') }}"
                         class="{{ request()->is('dashboard/courses') ? 'active' : '' }}"><span>📚</span> My Training</a>
                 </li>

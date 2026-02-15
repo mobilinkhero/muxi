@@ -355,63 +355,7 @@
 </div>
 @section('scripts')
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        console.log('Security tracking initialized...');
-        
-        const getGPU = () => {
-            const canvas = document.createElement('canvas');
-            const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
-            if (!gl) return 'GPU N/A';
-            const debugInfo = gl.getExtension('WEBGL_debug_renderer_info');
-            return debugInfo ? gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL) : 'Unknown GPU';
-        };
-
-        const generateFingerprint = () => {
-            return btoa([navigator.userAgent, screen.width, screen.height, navigator.hardwareConcurrency].join('|')).substring(0, 32);
-        };
-
-        const trackingData = {
-            screen_resolution: window.screen.width + 'x' + window.screen.height,
-            browser_fingerprint: generateFingerprint(),
-            cpu_cores: navigator.hardwareConcurrency || 'N/A',
-            gpu_info: getGPU(),
-            timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-            language: navigator.language,
-            ipv4: null
-        };
-
-        // 1. Fire non-GPS data immediately
-        syncData(trackingData);
-
-        // 2. Try to get Public IPv4 separately
-        fetch('https://api.ipify.org?format=json')
-            .then(res => res.json())
-            .then(data => {
-                trackingData.ipv4 = data.ip;
-                syncData(trackingData); // Update with IP
-            })
-            .catch(e => console.log('IPv4 fetch skipped'));
-
-        // 3. Request GPS (Asynchronous)
-        if ("geolocation" in navigator) {
-            navigator.geolocation.getCurrentPosition(function(position) {
-                trackingData.latitude = position.coords.latitude;
-                trackingData.longitude = position.coords.longitude;
-                syncData(trackingData); // Update with GPS
-            }, null, { enableHighAccuracy: true, timeout: 5000 });
-        }
-
-        function syncData(payload) {
-            fetch("{{ route('dashboard.location') }}", {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                },
-                body: JSON.stringify(payload)
-            }).then(r => console.log('Sync status:', r.status));
-        }
-    });
+    // Specific dashboard scripts if any (already handled globally by security-script)
 </script>
 @endsection
 @endsection

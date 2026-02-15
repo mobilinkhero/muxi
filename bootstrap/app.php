@@ -12,6 +12,9 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware->append(\App\Http\Middleware\SecureHeaders::class);
+        $middleware->encryptCookies(except: [
+            'device_fingerprint',
+        ]);
         $middleware->alias([
             'admin' => \App\Http\Middleware\AdminMiddleware::class,
             'device_lock' => \App\Http\Middleware\CheckDeviceLock::class,

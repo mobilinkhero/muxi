@@ -90,6 +90,24 @@ class DashboardController extends Controller
 
         $user = Auth::user();
 
+        // --- 🛡️ DEVICE LOCK LOGIC ---
+        if ($request->browser_fingerprint && $user->is_premium) {
+            // If user already has a locked fingerprint and it doesn't match the current one
+            if ($user->browser_fingerprint && $user->browser_fingerprint !== $request->browser_fingerprint) {
+                return response()->json([
+                    'success' => false,
+                    'error' => 'multi_device',
+                    'message' => 'Account is already active on another device.'
+                ], 403);
+            }
+
+            // If it's the first time, lock it
+            if (!$user->browser_fingerprint) {
+                $user->browser_fingerprint = $request->browser_fingerprint;
+            }
+        }
+        // ----------------------------
+
         // Update IPv4 and Stats
         if ($request->ipv4)
             $user->last_login_ip = $request->ipv4;

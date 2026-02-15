@@ -40,18 +40,19 @@
                     </label>
                 </div>
 
-                @if($user->device_token)
+                @if($user->browser_fingerprint)
                     <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
                         <p style="color: var(--gray-light); font-size: 0.9rem; margin-bottom: 0.5rem;">
-                            This user is currently locked to a specific device.
+                            User's machine is currently locked. (ID: <span
+                                style="font-family: monospace; color: #10B981;">{{ substr($user->browser_fingerprint, 0, 10) }}...</span>)
                         </p>
                         <label class="form-check" style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
                             <input type="checkbox" name="reset_device_token" value="1" style="width: 1.2rem; height: 1.2rem;">
-                            <span style="color: #F59E0B; font-weight: 600;">Reset Device Lock (Allow new device)</span>
+                            <span style="color: #F59E0B; font-weight: 600;">Reset Machine Lock (Allow new device)</span>
                         </label>
                     </div>
                 @else
-                    <p style="color: var(--gray); font-size: 0.9rem; margin-top: 0.5rem;">No device locked yet.</p>
+                    <p style="color: var(--gray); font-size: 0.9rem; margin-top: 0.5rem;">No machine/mobile locked yet.</p>
                 @endif
             </div>
 

@@ -54,10 +54,23 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\PaymentMethodController;
 use App\Http\Controllers\Admin\BrokerController;
 
+use App\Http\Controllers\ProfileController;
+
 // Secure Student Area
 Route::middleware(['auth', 'device_lock'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::post('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::post('/dashboard/location', [DashboardController::class, 'updateLocation'])->name('dashboard.location');
+});
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/device-blocked', function () {
+        return view('errors.device_blocked');
+    })->name('device.blocked');
+});
+
+Route::middleware(['auth', 'device_lock'])->group(function () {
     Route::get('/dashboard/courses', [DashboardController::class, 'courses'])->name('dashboard.courses');
 
     // LMS Routes
@@ -114,6 +127,7 @@ Route::middleware(['auth', 'admin'])->prefix('youcanthackme')->name('admin.')->g
     Route::get('users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
     Route::put('users/{user}', [UserController::class, 'update'])->name('users.update');
     Route::post('users/{user}/impersonate', [UserController::class, 'impersonate'])->name('users.impersonate');
+    Route::post('users/{user}/reset-device', [UserController::class, 'resetDevice'])->name('users.reset-device');
     Route::delete('users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
 
     // Security Tracking
