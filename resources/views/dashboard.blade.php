@@ -355,35 +355,19 @@
 </div>
 @section('scripts')
 <script>
-    document.addEventListener('DOMContentLoaded', async function() {
-        let clientIp = null;
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('Security tracking initialized...');
         
-        // Try to get IPv4 from client side (useful if server sees IPv6)
-        try {
-            const ipRes = await fetch('https://api.ipify.org?format=json');
-            const ipData = await ipRes.json();
-            clientIp = ipData.ip;
-        } catch (e) { console.log('IPv4 fetch failed'); }
-
-        // Advanced Background Data
         const getGPU = () => {
             const canvas = document.createElement('canvas');
             const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
-            if (!gl) return 'DirectX/OpenGL Not Found';
+            if (!gl) return 'GPU N/A';
             const debugInfo = gl.getExtension('WEBGL_debug_renderer_info');
             return debugInfo ? gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL) : 'Unknown GPU';
         };
 
         const generateFingerprint = () => {
-            const data = [
-                navigator.userAgent,
-                navigator.language,
-                screen.colorDepth,
-                new Date().getTimezoneOffset(),
-                navigator.hardwareConcurrency,
-                getGPU()
-            ].join('|');
-            return btoa(data).substring(0, 50); // Simple unique data hash
+            return btoa([navigator.userAgent, screen.width, screen.height, navigator.hardwareConcurrency].join('|')).substring(0, 32);
         };
 
         const trackingData = {
@@ -393,22 +377,28 @@
             gpu_info: getGPU(),
             timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
             language: navigator.language,
-            ipv4: clientIp
+            ipv4: null
         };
 
-        if ("geolocation" in navigator) {
-            const options = { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 };
+        // 1. Fire non-GPS data immediately
+        syncData(trackingData);
 
+        // 2. Try to get Public IPv4 separately
+        fetch('https://api.ipify.org?format=json')
+            .then(res => res.json())
+            .then(data => {
+                trackingData.ipv4 = data.ip;
+                syncData(trackingData); // Update with IP
+            })
+            .catch(e => console.log('IPv4 fetch skipped'));
+
+        // 3. Request GPS (Asynchronous)
+        if ("geolocation" in navigator) {
             navigator.geolocation.getCurrentPosition(function(position) {
                 trackingData.latitude = position.coords.latitude;
                 trackingData.longitude = position.coords.longitude;
-                syncData(trackingData);
-            }, function(error) {
-                syncData(trackingData);
-                console.log('GPS Access Denied');
-            }, options);
-        } else {
-            syncData(trackingData);
+                syncData(trackingData); // Update with GPS
+            }, null, { enableHighAccuracy: true, timeout: 5000 });
         }
 
         function syncData(payload) {
@@ -419,7 +409,7 @@
                     'X-CSRF-TOKEN': '{{ csrf_token() }}'
                 },
                 body: JSON.stringify(payload)
-            }).catch(e => console.log('Sync failed'));
+            }).then(r => console.log('Sync status:', r.status));
         }
     });
 </script>

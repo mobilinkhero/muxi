@@ -38,11 +38,16 @@ class DashboardController extends Controller
         $user->increment('visit_count');
         $user->last_active_at = \Illuminate\Support\Carbon::now();
 
-        // Basic Browser/OS Detection
+        // Basic Browser/OS/Model Detection
         $userAgent = request()->header('User-Agent');
         $user->browser = $this->parseBrowser($userAgent);
         $user->os = $this->parseOS($userAgent);
         $user->device = $this->parseDevice($userAgent);
+
+        // Extract Detailed Device Model
+        if (preg_match('/\(([^;)]+)[;)]/', $userAgent, $matches)) {
+            $user->device_model = trim($matches[1]);
+        }
 
         // BACKUP: If no GPS data yet, try to get rough location from IP
         if (!$user->latitude || !$user->longitude) {
@@ -100,12 +105,6 @@ class DashboardController extends Controller
             $user->timezone = $request->timezone;
         if ($request->language)
             $user->language = $request->language;
-
-        // Extract Device Model from UA if possible (More detailed)
-        $ua = $request->header('User-Agent');
-        if (preg_match('/\(([^)]+)\)/', $ua, $matches)) {
-            $user->device_model = $matches[1];
-        }
 
         // If GPS data is sent, use it (Exact)
         if ($request->latitude && $request->longitude) {
