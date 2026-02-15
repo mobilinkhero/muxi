@@ -443,7 +443,7 @@
             <div class="features-grid"
                 style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
                 <!-- Crypto -->
-                <div class="feature-card animate-on-scroll">
+                <div class="feature-card reveal">
                     <div class="feature-icon"><i class="fab fa-bitcoin"></i></div>
                     <h3>{{ $settings['home_market_1_title'] ?? 'Cryptocurrency' }}</h3>
                     <p>{{ $settings['home_market_1_desc'] ?? 'Master Bitcoin, Ethereum, and altcoins. Understand blockchain tech, DeFi, and market cycles.' }}
@@ -504,7 +504,7 @@
             <div class="services-grid"
                 style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
                 <!-- Learn Service -->
-                <div class="service-card animate-on-scroll">
+                <div class="service-card reveal">
                     <div class="service-header">
                         <div class="service-icon"><i class="fas fa-graduation-cap"></i></div>
                         <div>
@@ -591,7 +591,7 @@
             </div>
             <div class="features-grid"
                 style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
-                <div class="feature-card animate-on-scroll stagger-delay-1">
+                <div class="feature-card reveal stagger-delay-1">
                     <div class="feature-icon">1️⃣</div>
                     <h3>{{ $settings['home_step_1_title'] ?? 'Choose Your Path' }}</h3>
                     <p>{{ $settings['home_step_1_desc'] ?? 'Select whether you want to learn, trade, or invest. You can always combine services as you grow.' }}
@@ -834,29 +834,9 @@
                 }
             });
         });
-
-        // Scroll Animation Observer
-        document.addEventListener('DOMContentLoaded', function () {
-            const observerOptions = {
-                threshold: 0.1,
-                rootMargin: '0px 0px -50px 0px'
-            };
-
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                        observer.unobserve(entry.target); // Only animate once
-                    }
-                });
-            }, observerOptions);
-
-            document.querySelectorAll('.animate-on-scroll').forEach(el => {
-                observer.observe(el);
-            });
-        });
     </script>
     @include('partials.security-script')
+    @include('partials.animations')
 </body>
 
 </html>

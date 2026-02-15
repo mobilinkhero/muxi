@@ -78,7 +78,7 @@
                 <p>A systematic approach to growing your wealth.</p>
             </div>
             <div class="features-grid">
-                <div class="feature-card">
+                <div class="feature-card reveal stagger-delay-1 glass-hover">
                     <div class="feature-icon">1️⃣</div>
                     <h3>Assessment</h3>
                     <p>We analyze your financial situation, goals, and risk appetite.</p>
@@ -146,6 +146,8 @@
             </div>
         </div>
     </section>
+
+    @include('partials.animations')
 
     <!-- Footer -->
     @include('partials.footer')

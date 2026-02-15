@@ -149,6 +149,14 @@
             .mobile-header {
                 display: flex !important;
             }
+
+            .sidebar .logo {
+                margin: 0 !important;
+            }
+
+            .sidebar-close-btn {
+                display: block !important;
+            }
         }
     </style>
     @stack('styles')
@@ -194,9 +202,14 @@
     <div class="dashboard-container">
         <!-- Sidebar -->
         <aside class="sidebar">
-            <a href="/" class="logo" style="margin-bottom: 2rem; display: block;">
-                <img src="{{ asset('images/logo.svg') }}" alt="Logo" style="height: 35px;">
-            </a>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                <a href="/" class="logo">
+                    <img src="{{ asset('images/logo.svg') }}" alt="Logo" style="height: 35px;">
+                </a>
+                <button onclick="toggleSidebar()"
+                    style="display: none; background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer;"
+                    class="sidebar-close-btn">✕</button>
+            </div>
 
             <div
                 style="display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem; padding: 0.5rem; background: rgba(255,255,255,0.03); border-radius: 12px; border: 1px solid rgba(255,255,255,0.05);">
@@ -278,7 +291,9 @@
             }
         }
     </script>
+    @include('partials.mobile-nav')
     @include('partials.security-script')
+    @include('partials.animations')
     @stack('scripts')
 </body>
 

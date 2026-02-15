@@ -218,7 +218,7 @@
 </div>
 
 <!-- Dashboard Grid -->
-<div class="dashboard-grid-layout" style="display: grid; grid-template-columns: 2fr 1fr; gap: 2rem;">
+<div class="dashboard-grid-layout">
     <!-- Recent Orders -->
     <div>
         <h3 style="margin-bottom: 1.5rem; font-size: 1.25rem;">📜 Recent Activity</h3>

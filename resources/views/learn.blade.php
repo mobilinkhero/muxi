@@ -132,7 +132,7 @@
             <div class="services-grid" style="max-width: 1100px; margin: 0 auto;">
 
                 <!-- Option 1: Learn Now, Pay Later -->
-                <div class="service-card" style="border: 2px solid var(--primary); position: relative;">
+                <div class="service-card reveal" style="border: 2px solid var(--primary); position: relative;">
                     <div
                         style="position: absolute; top: -15px; right: 20px; background: var(--primary); padding: 0.5rem 1.5rem; border-radius: 50px; font-size: 0.85rem; font-weight: 700; color: white; box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);">
                         {{ $settings['learn_opt1_badge'] ?? '🤝 TRUST BASED' }}
@@ -189,7 +189,7 @@
                 </div>
 
                 <!-- Option 2: Premium Live Trading Course (Upfront) -->
-                <div class="service-card" style="border: 2px solid var(--accent); position: relative;">
+                <div class="service-card reveal" style="border: 2px solid var(--accent); position: relative;">
                     <div
                         style="position: absolute; top: -15px; right: 20px; background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); padding: 0.5rem 1.5rem; border-radius: 50px; font-size: 0.85rem; font-weight: 700; color: white; box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4);">
                         🛡️ MONEY BACK GUARANTEE
@@ -288,7 +288,7 @@
                 <p>Our premium course focuses on LIVE sessions because markets change every day</p>
             </div>
             <div class="features-grid">
-                <div class="feature-card">
+                <div class="feature-card reveal glass-hover">
                     <div class="feature-icon">⚡</div>
                     <h3>Real-Time Learning</h3>
                     <p>Learn as markets move. Understand how to react to live market conditions, not outdated scenarios
@@ -1548,6 +1548,7 @@
         });
     </script>
     @include('partials.security-script')
+    @include('partials.animations')
 </body>
 
 </html>

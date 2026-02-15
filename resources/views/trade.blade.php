@@ -142,7 +142,7 @@
 
             <div class="features-grid" style="margin-bottom: 4rem;">
                 @forelse($activeSignals as $signal)
-                    <div class="feature-card"
+                    <div class="feature-card reveal glass-hover"
                         style="text-align: left; position: relative; border-left: 4px solid {{ $signal->type == 'BUY' ? '#10B981' : '#ef4444' }}; transition: transform 0.3s ease, box-shadow 0.3s ease;">
 
                         <!-- Pulse Effect for Live Status -->
@@ -307,7 +307,7 @@
 
                 <div class="features-grid">
                     @foreach($closedSignals as $signal)
-                        <div class="feature-card"
+                        <div class="feature-card reveal stagger-delay-1 glass-hover"
                             style="text-align: left; position: relative; border-left: 4px solid {{ $signal->result == 'profit' ? '#10B981' : ($signal->result == 'loss' ? '#ef4444' : '#f59e0b') }}; opacity: 0.8;">
                             <div
                                 style="position: absolute; top: 1rem; right: 1rem; background: rgba(255,255,255,0.1); padding: 0.25rem 0.75rem; border-radius: 4px; font-size: 0.8rem;">
@@ -431,7 +431,7 @@
             <div class="services-grid" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));">
                 <div class="services-grid" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));">
                     @foreach($brokers as $broker)
-                        <div class="service-card"
+                        <div class="service-card reveal-zoom glass-hover"
                             style="text-align: center; padding: 2rem; position: relative; border: 1px solid rgba(255,255,255,0.05); transition: transform 0.3s ease;">
                             @if($broker->is_recommended)
                                 <div
@@ -675,6 +675,7 @@
         });
     </script>
     @include('partials.security-script')
+    @include('partials.animations')
 </body>
 
 </html>

@@ -519,6 +519,7 @@
         }
     </script>
     @yield('scripts')
+    @include('partials.animations')
 </body>
 
 </html>

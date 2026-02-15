@@ -81,7 +81,9 @@
             }
         });
     </script>
+    @include('partials.mobile-nav')
     @include('partials.security-script')
+    @include('partials.animations')
 </body>
 
 </html>
