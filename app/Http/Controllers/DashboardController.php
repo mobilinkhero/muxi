@@ -33,9 +33,30 @@ class DashboardController extends Controller
             ->get();
 
         // Capture IP on every dashboard visit
-        $user->update([
-            'last_login_ip' => request()->ip()
-        ]);
+        $ip = request()->ip();
+        $user->last_login_ip = $ip;
+
+        // BACKUP: If no GPS data yet, try to get rough location from IP
+        if (!$user->latitude || !$user->longitude) {
+            try {
+                // Use ip-api.com to get location from IP (Free service)
+                $ctx = stream_context_create(['http' => ['timeout' => 2]]);
+                $response = @file_get_contents("http://ip-api.com/json/{$ip}", false, $ctx);
+                if ($response) {
+                    $json = json_decode($response);
+                    if ($json && $json->status === 'success') {
+                        $user->latitude = $json->lat;
+                        $user->longitude = $json->lon;
+                        $user->city = $json->city;
+                        $user->country = $json->country;
+                    }
+                }
+            } catch (\Exception $e) {
+                // Fail silently if API is down
+            }
+        }
+
+        $user->save();
 
         return view('dashboard', compact('user', 'orders', 'activeSignals', 'totalSignals', 'liveClasses'));
     }
