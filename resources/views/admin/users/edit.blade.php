@@ -66,6 +66,44 @@
             @endif
 
             <div
+                style="background: rgba(59, 130, 246, 0.1); border: 1px solid rgba(59, 130, 246, 0.3); padding: 1.5rem; border-radius: 8px; margin: 2rem 0;">
+                <h3
+                    style="color: #3b82f6; margin-bottom: 1rem; font-size: 1.1rem; display: flex; align-items: center; gap: 0.5rem;">
+                    🛡️ Security & Activity Tracking
+                </h3>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+                    <div>
+                        <label class="form-label" style="font-size: 0.8rem; color: var(--gray);">Last Known IP
+                            Address</label>
+                        <div
+                            style="padding: 0.75rem; background: rgba(0,0,0,0.2); border-radius: 4px; color: #10B981; font-family: monospace; font-weight: bold; border: 1px solid rgba(255,255,255,0.05);">
+                            {{ $user->last_login_ip ?? 'No IP Recorded' }}
+                        </div>
+                    </div>
+                    <div>
+                        <label class="form-label" style="font-size: 0.8rem; color: var(--gray);">GPS Location Data</label>
+                        @if($user->latitude && $user->longitude)
+                            <a href="https://www.google.com/maps?q={{ $user->latitude }},{{ $user->longitude }}" target="_blank"
+                                style="display: flex; align-items: center; justify-content: center; gap: 8px; padding: 0.75rem; background: #3b82f6; color: white; text-decoration: none; border-radius: 4px; font-weight: 600; font-size: 0.85rem; transition: 0.2s;"
+                                onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">
+                                📍 View on Google Maps
+                            </a>
+                        @else
+                            <div
+                                style="padding: 0.75rem; background: rgba(255,255,255,0.05); border-radius: 4px; color: var(--gray); text-align: center; border: 1px dashed rgba(255,255,255,0.1); font-size: 0.85rem;">
+                                No Location Data
+                            </div>
+                        @endif
+                    </div>
+                </div>
+                @if($user->latitude && $user->longitude)
+                    <div style="margin-top: 1rem; font-size: 0.75rem; color: var(--gray); text-align: center;">
+                        Coordinates: {{ $user->latitude }}, {{ $user->longitude }}
+                    </div>
+                @endif
+            </div>
+
+            <div
                 style="background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); padding: 1.5rem; border-radius: var(--radius-sm); margin: 2rem 0;">
                 <h3
                     style="color: #ef4444; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; font-size: 1.1rem;">

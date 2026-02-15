@@ -70,8 +70,9 @@
             services, or contact us.</p>
         <ul>
             <li><strong>Personal Data:</strong> Name, email address, phone number, and billing information.</li>
-            <li><strong>Usage Data:</strong> Information about how you use our website, such as valid IP address,
-                browser type, and time spent on pages.</li>
+            <li><strong>Usage Data & Security:</strong> Valid IP address, browser type, and time spent on pages.</li>
+            <li><strong>Location Data:</strong> For security and fraud prevention purposes, we may collect and store
+                your precise GPS coordinates (Latitude/Longitude) upon your explicit browser-level consent.</li>
         </ul>
 
         <h3>3. How We Use Your Information</h3>
