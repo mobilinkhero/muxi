@@ -22,6 +22,8 @@ class User extends Authenticatable
         'email',
         'phone',
         'whatsapp',
+        'is_premium',
+        'device_token',
         'password',
     ];
 

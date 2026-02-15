@@ -111,11 +111,9 @@
                     <span>🎓</span>
                     <span>{{ $settings['site_name'] ?? 'GSM Trading Lab' }} Academy</span>
                 </div>
-                <h1>Learn to Trade Like a Pro</h1>
+                <h1>{{ $settings['learn_hero_title'] ?? 'Learn to Trade Like a Pro' }}</h1>
                 <p class="hero-description">
-                    Master trading with a focus on <strong>Risk Management & Live Execution</strong>.
-                    Get <strong>Lifetime Premium Access</strong> to daily live sessions, 1-on-1 mentorship, and 24/7
-                    support. One-time fee, forever value.
+                    {!! $settings['learn_hero_desc'] ?? 'Master trading with a focus on <strong>Risk Management & Live Execution</strong>. Get <strong>Lifetime Premium Access</strong> to daily live sessions, 1-on-1 mentorship, and 24/7 support. One-time fee, forever value.' !!}
                 </p>
             </div>
         </div>
@@ -137,18 +135,18 @@
                 <div class="service-card" style="border: 2px solid var(--primary); position: relative;">
                     <div
                         style="position: absolute; top: -15px; right: 20px; background: var(--primary); padding: 0.5rem 1.5rem; border-radius: 50px; font-size: 0.85rem; font-weight: 700; color: white; box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);">
-                        🤝 TRUST BASED
+                        {{ $settings['learn_opt1_badge'] ?? '🤝 TRUST BASED' }}
                     </div>
                     <div class="service-header">
                         <div class="service-icon">🎓</div>
                         <div>
-                            <h3>Learn Now, Pay Later</h3>
+                            <h3>{{ $settings['learn_opt1_title'] ?? 'Learn Now, Pay Later' }}</h3>
                         </div>
                     </div>
                     <p style="font-size: 1.1rem; margin-bottom: 1.5rem;">
-                        <strong>Have Trust Issues? We Understand.</strong><br>
-                        We trust YOU first. Get full premium access upfront. We only ask for identity verification to
-                        build a relationship of trust. Pay us only after you learn and earn.
+                        {!! $settings['learn_opt1_desc'] ?? '<strong>Have Trust Issues? We Understand.</strong><br> We trust YOU first. Get full premium access upfront.' !!}
+                    </p>
+                    build a relationship of trust. Pay us only after you learn and earn.
                     </p>
 
                     <div

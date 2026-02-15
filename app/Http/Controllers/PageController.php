@@ -45,6 +45,36 @@ class PageController extends Controller
         return view('company.careers', compact('jobs'));
     }
 
+    public function careerShow($id)
+    {
+        $job = \App\Models\JobPosting::where('id', $id)->where('is_active', true)->firstOrFail();
+        return view('company.careers_show', compact('job'));
+    }
+
+    public function careerApply(Request $request, $id)
+    {
+        $job = \App\Models\JobPosting::findOrFail($id);
+
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email',
+            'cv' => 'required|file|mimes:pdf,doc,docx|max:2048',
+        ]);
+
+        $path = $request->file('cv')->store('resumes', 'public');
+
+        \App\Models\JobApplication::create([
+            'job_posting_id' => $job->id,
+            'name' => $request->name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'cv_path' => '/storage/' . $path,
+            'cover_letter' => $request->cover_letter,
+        ]);
+
+        return back()->with('success', 'Application submitted successfully!');
+    }
+
     // Blog
     public function blog()
     {

@@ -8,8 +8,7 @@
                             style="height: 40px; margin-bottom: 1rem;">
                     </a>
                     <p style="color: var(--gray-light); margin-top: 1rem;">
-                        Your trusted partner in multi-market trading education, professional signals, and comprehensive
-                        market analysis.
+                        {{ $settings['footer_about'] ?? 'Your trusted partner in multi-market trading education, professional signals, and comprehensive market analysis.' }}
                     </p>
             </div>
             <div class="footer-section">
@@ -41,7 +40,7 @@
             </div>
         </div>
 
-        <!-- Social Media Links (Integrated from Trade page) -->
+        <!-- Social Media Links -->
         <div style="text-align: center; margin: 3rem 0;">
             <h3 style="color: var(--white); margin-bottom: 1.5rem; font-size: 1.5rem;">🚀 Follow Us On Social Media</h3>
             <div style="display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap;">
@@ -100,6 +99,38 @@
                     <img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png" alt="TikTok" width="40"
                         height="40" style="filter: invert(1);">
                     <span style="font-size: 0.8rem; color: var(--gray);">TikTok</span>
+                </a>
+                <!-- Snapchat -->
+                <a href="{{ $settings['snapchat_link'] ?? 'https://snapchat.com/add/gsmtradinglab' }}" target="_blank"
+                    style="text-decoration: none; transition: transform 0.2s; display: flex; flex-direction: column; align-items: center; gap: 0.5rem;"
+                    onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+                    <img src="https://cdn-icons-png.flaticon.com/512/3670/3670166.png" alt="Snapchat" width="40"
+                        height="40">
+                    <span style="font-size: 0.8rem; color: var(--gray);">Snapchat</span>
+                </a>
+                <!-- Discord -->
+                <a href="{{ $settings['discord_link'] ?? 'https://discord.gg/gsmtradinglab' }}" target="_blank"
+                    style="text-decoration: none; transition: transform 0.2s; display: flex; flex-direction: column; align-items: center; gap: 0.5rem;"
+                    onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+                    <img src="https://cdn-icons-png.flaticon.com/512/3670/3670157.png" alt="Discord" width="40"
+                        height="40" style="filter: invert(1);">
+                    <span style="font-size: 0.8rem; color: var(--gray);">Discord</span>
+                </a>
+                <!-- LinkedIn -->
+                <a href="{{ $settings['linkedin_link'] ?? 'https://linkedin.com/in/gsmtradinglab' }}" target="_blank"
+                    style="text-decoration: none; transition: transform 0.2s; display: flex; flex-direction: column; align-items: center; gap: 0.5rem;"
+                    onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+                    <img src="https://cdn-icons-png.flaticon.com/512/3536/3536505.png" alt="LinkedIn" width="40"
+                        height="40">
+                    <span style="font-size: 0.8rem; color: var(--gray);">LinkedIn</span>
+                </a>
+                <!-- WhatsApp -->
+                <a href="https://wa.me/{{ $settings['whatsapp_number'] ?? '447478035502' }}" target="_blank"
+                    style="text-decoration: none; transition: transform 0.2s; display: flex; flex-direction: column; align-items: center; gap: 0.5rem;"
+                    onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+                    <img src="https://cdn-icons-png.flaticon.com/512/3670/3670051.png" alt="WhatsApp" width="40"
+                        height="40">
+                    <span style="font-size: 0.8rem; color: var(--gray);">WhatsApp</span>
                 </a>
             </div>
         </div>

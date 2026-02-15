@@ -14,6 +14,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->append(\App\Http\Middleware\SecureHeaders::class);
         $middleware->alias([
             'admin' => \App\Http\Middleware\AdminMiddleware::class,
+            'device_lock' => \App\Http\Middleware\CheckDeviceLock::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

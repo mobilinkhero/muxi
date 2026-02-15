@@ -35,9 +35,11 @@
                         </td>
                         <td>{{ $post->published_at ? $post->published_at->format('M d, Y') : '-' }}</td>
                         <td>
-                            <div style="display: flex; gap: 0.5rem;">
+                            <div style="display: flex; gap: 0.5rem; justify-content: flex-end;">
                                 <a href="{{ route('company.blog.show', $post->slug) }}" target="_blank"
                                     class="btn btn-sm btn-secondary">View</a>
+                                <a href="{{ route('admin.content.blog.edit', $post->id) }}"
+                                    class="btn btn-sm btn-primary">Edit</a>
                                 <form action="{{ route('admin.content.blog.delete', $post->id) }}" method="POST"
                                     onsubmit="return confirm('Delete this post?')">
                                     @csrf

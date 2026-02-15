@@ -30,7 +30,6 @@ class UserController extends Controller
             'password' => 'required|string|min:8',
             'phone' => 'nullable|string',
             'whatsapp' => 'nullable|string',
-            'is_admin' => 'boolean'
         ]);
 
         $user = new User();
@@ -40,6 +39,7 @@ class UserController extends Controller
         $user->phone = $validated['phone'] ?? null;
         $user->whatsapp = $validated['whatsapp'] ?? null;
         $user->is_admin = $request->has('is_admin');
+        $user->is_premium = $request->has('is_premium');
         $user->save();
 
         return redirect()->route('admin.users.index')->with('success', 'User created successfully.');
@@ -65,18 +65,24 @@ class UserController extends Controller
         $user->phone = $validated['phone'] ?? $user->phone;
         $user->whatsapp = $validated['whatsapp'] ?? $user->whatsapp;
 
-        // Only update is_admin if it's not the current user
+        // Only update roles if it's not the current user
         if ($user->id !== Auth::id()) {
             $user->is_admin = $request->has('is_admin');
         }
+
+        $user->is_premium = $request->has('is_premium');
 
         if ($request->filled('password')) {
             $user->password = Hash::make($validated['password']);
         }
 
+        if ($request->has('reset_device_token')) {
+            $user->device_token = null;
+        }
+
         $user->save();
 
-        return redirect()->route('admin.users.index')->with('success', 'User updated successfully.');
+        return redirect()->route('admin.users.index')->with('success', 'User updated successfully.' . ($request->has('reset_device_token') ? ' Device lock reset.' : ''));
     }
 
     public function impersonate(User $user)

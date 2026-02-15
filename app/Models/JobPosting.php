@@ -12,11 +12,21 @@ class JobPosting extends Model
         'location',
         'type',
         'description',
-        'salary_range',
+        'salary',
+        'experience_level',
+        'deadline',
+        'requirements',
+        'benefits',
         'is_active',
     ];
 
     protected $casts = [
         'is_active' => 'boolean',
+        'deadline' => 'date',
     ];
+
+    public function applications()
+    {
+        return $this->hasMany(JobApplication::class);
+    }
 }

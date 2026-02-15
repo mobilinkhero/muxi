@@ -30,14 +30,48 @@
                             <p style="font-size: 0.9rem; color: var(--gray-light); margin-bottom: 1.5rem;">{{ $member->bio }}</p>
                         @endif
 
-                        <div style="display: flex; justify-content: center; gap: 1rem;">
+                        <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+                            @if($member->facebook_url)
+                                <a href="{{ $member->facebook_url }}" target="_blank"
+                                    style="color: var(--white); text-decoration: none; font-size: 1.2rem;">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                            @endif
+                            @if($member->instagram_url)
+                                <a href="{{ $member->instagram_url }}" target="_blank"
+                                    style="color: var(--white); text-decoration: none; font-size: 1.2rem;">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+                            @endif
+                            @if($member->threads_url)
+                                <a href="{{ $member->threads_url }}" target="_blank"
+                                    style="color: var(--white); text-decoration: none; font-size: 1.2rem;">
+                                    <i class="fab fa-threads"></i>
+                                </a>
+                            @endif
                             @if($member->twitter_url)
                                 <a href="{{ $member->twitter_url }}" target="_blank"
-                                    style="color: var(--white); text-decoration: none;">X</a>
+                                    style="color: var(--white); text-decoration: none; font-size: 1.2rem;">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
                             @endif
                             @if($member->linkedin_url)
                                 <a href="{{ $member->linkedin_url }}" target="_blank"
-                                    style="color: var(--white); text-decoration: none;">in</a>
+                                    style="color: var(--white); text-decoration: none; font-size: 1.2rem;">
+                                    <i class="fab fa-linkedin-in"></i>
+                                </a>
+                            @endif
+                            @if($member->youtube_url)
+                                <a href="{{ $member->youtube_url }}" target="_blank"
+                                    style="color: var(--white); text-decoration: none; font-size: 1.2rem;">
+                                    <i class="fab fa-youtube"></i>
+                                </a>
+                            @endif
+                            @if($member->tiktok_url)
+                                <a href="{{ $member->tiktok_url }}" target="_blank"
+                                    style="color: var(--white); text-decoration: none; font-size: 1.2rem;">
+                                    <i class="fab fa-tiktok"></i>
+                                </a>
                             @endif
                         </div>
                     </div>

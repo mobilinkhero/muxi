@@ -80,13 +80,21 @@
                             @endif
                         </td>
                         <td>
-                            <form action="{{ route('admin.content.careers.delete', $job->id) }}" method="POST"
-                                onsubmit="return confirm('Are you sure?')">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-sm"
-                                    style="background: #ef4444; color: white;">Delete</button>
-                            </form>
+                            <div style="display: flex; gap: 0.5rem; justify-content: flex-end;">
+                                <a href="{{ route('admin.content.careers.applications', $job->id) }}"
+                                    class="btn btn-sm btn-primary" style="background: var(--primary);">
+                                    Applicants ({{ $job->applications()->count() }})
+                                </a>
+                                <a href="{{ route('admin.content.careers.edit', $job->id) }}"
+                                    class="btn btn-sm btn-secondary">Edit</a>
+                                <form action="{{ route('admin.content.careers.delete', $job->id) }}" method="POST"
+                                    onsubmit="return confirm('Are you sure?')">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-sm btn-danger"
+                                        style="background: #ef4444; color: white;">Delete</button>
+                                </form>
+                            </div>
                         </td>
                     </tr>
                 @endforeach

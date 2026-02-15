@@ -33,14 +33,18 @@
                                     <span style="display: inline-flex; align-items: center; gap: 0.5rem; margin-right: 1.5rem;">
                                         📍 {{ $job->location }}
                                     </span>
-                                    <span style="display: inline-flex; align-items: center; gap: 0.5rem;">
+                                    <span style="display: inline-flex; align-items: center; gap: 0.5rem; margin-right: 1.5rem;">
                                         💼 {{ $job->type }}
                                     </span>
+                                    @if($job->salary)
+                                        <span style="display: inline-flex; align-items: center; gap: 0.5rem; color: #10B981;">
+                                            💰 {{ $job->salary }}
+                                        </span>
+                                    @endif
                                 </div>
                             </div>
-                            <a href="mailto:careers@gsmtradinglab.com?subject=Application for {{ $job->title }}"
-                                class="btn btn-primary btn-sm">
-                                Apply Now
+                            <a href="{{ route('company.careers.show', $job->id) }}" class="btn btn-primary btn-sm">
+                                View Details & Apply
                             </a>
                         </div>
                     </div>

@@ -35,9 +35,12 @@
                             <td>{{ $user->created_at->format('M d, Y') }}</td>
                             <td>
                                 @if($user->is_admin)
-                                    <span style="background: rgba(16, 185, 129, 0.2); color: #10B981; padding: 0.1rem 0.4rem; border-radius: 4px; font-size: 0.75rem;">Admin</span>
-                                @else
-                                    <span style="background: rgba(99, 102, 241, 0.2); color: var(--primary); padding: 0.1rem 0.4rem; border-radius: 4px; font-size: 0.75rem;">Student</span>
+                                    <span style="background: rgba(16, 185, 129, 0.2); color: #10B981; padding: 0.1rem 0.4rem; border-radius: 4px; font-size: 0.75rem; margin-right: 0.25rem;">Admin</span>
+                                @endif
+                                @if($user->is_premium)
+                                    <span style="background: rgba(245, 158, 11, 0.2); color: #F59E0B; padding: 0.1rem 0.4rem; border-radius: 4px; font-size: 0.75rem;">Premium</span>
+                                @elseif(!$user->is_admin)
+                                     <span style="background: rgba(99, 102, 241, 0.2); color: var(--primary); padding: 0.1rem 0.4rem; border-radius: 4px; font-size: 0.75rem;">Student</span>
                                 @endif
                             </td>
                             <td>

@@ -6,6 +6,7 @@ use App\Http\Controllers\LmsController;
 use App\Http\Controllers\HomeController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::post('/reviews', [App\Http\Controllers\ReviewController::class, 'store'])->name('reviews.store');
 
 use App\Models\PaymentMethod;
 
@@ -54,7 +55,7 @@ use App\Http\Controllers\Admin\PaymentMethodController;
 use App\Http\Controllers\Admin\BrokerController;
 
 // Secure Student Area
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'device_lock'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/dashboard/courses', [DashboardController::class, 'courses'])->name('dashboard.courses');
 
@@ -134,18 +135,34 @@ Route::middleware(['auth', 'admin'])->prefix('youcanthackme')->name('admin.')->g
     // Team
     Route::get('/content/team', [App\Http\Controllers\Admin\ContentController::class, 'teamIndex'])->name('content.team.index');
     Route::post('/content/team', [App\Http\Controllers\Admin\ContentController::class, 'teamStore'])->name('content.team.store');
+    Route::get('/content/team/{id}/edit', [App\Http\Controllers\Admin\ContentController::class, 'teamEdit'])->name('content.team.edit');
+    Route::post('/content/team/{id}', [App\Http\Controllers\Admin\ContentController::class, 'teamUpdate'])->name('content.team.update');
     Route::delete('/content/team/{id}', [App\Http\Controllers\Admin\ContentController::class, 'teamDelete'])->name('content.team.delete');
 
     // Careers
     Route::get('/content/careers', [App\Http\Controllers\Admin\ContentController::class, 'careersIndex'])->name('content.careers.index');
     Route::post('/content/careers', [App\Http\Controllers\Admin\ContentController::class, 'careerStore'])->name('content.careers.store');
+    Route::get('/content/careers/{id}/edit', [App\Http\Controllers\Admin\ContentController::class, 'careerEdit'])->name('content.careers.edit');
+    Route::post('/content/careers/{id}', [App\Http\Controllers\Admin\ContentController::class, 'careerUpdate'])->name('content.careers.update');
     Route::delete('/content/careers/{id}', [App\Http\Controllers\Admin\ContentController::class, 'careerDelete'])->name('content.careers.delete');
+    Route::get('/content/careers/{id}/applications', [App\Http\Controllers\Admin\ContentController::class, 'careerApplications'])->name('content.careers.applications');
 
     // Blog
     Route::get('/content/blog', [App\Http\Controllers\Admin\ContentController::class, 'blogIndex'])->name('content.blog.index');
     Route::get('/content/blog/create', [App\Http\Controllers\Admin\ContentController::class, 'blogCreate'])->name('content.blog.create');
     Route::post('/content/blog', [App\Http\Controllers\Admin\ContentController::class, 'blogStore'])->name('content.blog.store');
+    Route::get('/content/blog/{id}/edit', [App\Http\Controllers\Admin\ContentController::class, 'blogEdit'])->name('content.blog.edit');
+    Route::post('/content/blog/{id}', [App\Http\Controllers\Admin\ContentController::class, 'blogUpdate'])->name('content.blog.update');
     Route::delete('/content/blog/{id}', [App\Http\Controllers\Admin\ContentController::class, 'blogDelete'])->name('content.blog.delete');
+
+    // Page Content Management
+    Route::get('/content/pages', [App\Http\Controllers\Admin\PageContentController::class, 'index'])->name('content.pages.index');
+    Route::post('/content/pages/update', [App\Http\Controllers\Admin\PageContentController::class, 'update'])->name('content.pages.update');
+
+    // Reviews Management
+    Route::get('/content/reviews', [App\Http\Controllers\Admin\ContentController::class, 'reviewIndex'])->name('content.reviews.index');
+    Route::post('/content/reviews', [App\Http\Controllers\Admin\ContentController::class, 'reviewStore'])->name('content.reviews.store');
+    Route::delete('/content/reviews/{id}', [App\Http\Controllers\Admin\ContentController::class, 'reviewDelete'])->name('content.reviews.delete');
 });
 
 Route::post('/consultation', [App\Http\Controllers\ConsultationController::class, 'store'])->name('consultation.store');
@@ -178,6 +195,8 @@ Route::get('/start-trading', function () {
 Route::get('/about-us', [PageController::class, 'about'])->name('company.about');
 Route::get('/our-team', [PageController::class, 'team'])->name('company.team');
 Route::get('/careers', [PageController::class, 'careers'])->name('company.careers');
+Route::get('/careers/{id}', [PageController::class, 'careerShow'])->name('company.careers.show');
+Route::post('/careers/{id}/apply', [PageController::class, 'careerApply'])->name('company.careers.apply');
 Route::get('/blog', [PageController::class, 'blog'])->name('company.blog');
 Route::get('/blog/{slug}', [PageController::class, 'blogPost'])->name('company.blog.show');
 

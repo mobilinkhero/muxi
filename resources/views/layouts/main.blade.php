@@ -8,6 +8,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="description"
         content="@yield('description', 'Master trading in Crypto, Forex, Stocks, Indices, Commodities & Derivatives.')">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         <?php echo file_get_contents(resource_path('css/app.css')); ?>
 

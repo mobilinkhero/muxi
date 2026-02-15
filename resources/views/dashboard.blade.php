@@ -275,37 +275,49 @@
             <p style="font-size: 0.8rem; color: var(--gray); margin-bottom: 1.25rem;">Latest updates aur support ke liye humein follow karain. Username: <b>gsmtradinglab</b></p>
             
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">
-                <a href="{{ $settings['telegram_link'] ?? '#' }}" target="_blank"
-                    style="display: flex; align-items: center; justify-content: center; gap: 6px; padding: 0.6rem; background: rgba(0, 136, 204, 0.1); color: #0088cc; text-decoration: none; border-radius: var(--radius-sm); border: 1px solid rgba(0, 136, 204, 0.2); font-size: 0.8rem; font-weight: 600; transition: 0.2s;">
-                    📱 Telegram
-                </a>
-                <a href="{{ $settings['instagram_link'] ?? '#' }}" target="_blank"
-                    style="display: flex; align-items: center; justify-content: center; gap: 6px; padding: 0.6rem; background: rgba(225, 48, 108, 0.1); color: #E1306C; text-decoration: none; border-radius: var(--radius-sm); border: 1px solid rgba(225, 48, 108, 0.2); font-size: 0.8rem; font-weight: 600; transition: 0.2s;">
-                    📸 Insta
-                </a>
-                <a href="{{ $settings['facebook_link'] ?? '#' }}" target="_blank"
-                    style="display: flex; align-items: center; justify-content: center; gap: 6px; padding: 0.6rem; background: rgba(24, 119, 242, 0.1); color: #1877F2; text-decoration: none; border-radius: var(--radius-sm); border: 1px solid rgba(24, 119, 242, 0.2); font-size: 0.8rem; font-weight: 600; transition: 0.2s;">
-                    🔵 Facebook
-                </a>
-                <a href="{{ $settings['youtube_link'] ?? '#' }}" target="_blank"
+                <a href="{{ $settings['youtube_link'] ?? 'https://youtube.com/@gsmtradinglab' }}" target="_blank"
                     style="display: flex; align-items: center; justify-content: center; gap: 6px; padding: 0.6rem; background: rgba(255, 0, 0, 0.1); color: #FF0000; text-decoration: none; border-radius: var(--radius-sm); border: 1px solid rgba(255, 0, 0, 0.2); font-size: 0.8rem; font-weight: 600; transition: 0.2s;">
                     🎥 YouTube
                 </a>
-                <a href="{{ $settings['snapchat_link'] ?? '#' }}" target="_blank"
+                <a href="{{ $settings['telegram_link'] ?? 'https://t.me/gsmtradinglab' }}" target="_blank"
+                    style="display: flex; align-items: center; justify-content: center; gap: 6px; padding: 0.6rem; background: rgba(0, 136, 204, 0.1); color: #0088cc; text-decoration: none; border-radius: var(--radius-sm); border: 1px solid rgba(0, 136, 204, 0.2); font-size: 0.8rem; font-weight: 600; transition: 0.2s;">
+                    📱 Telegram
+                </a>
+                <a href="{{ $settings['instagram_link'] ?? 'https://instagram.com/gsmtradinglab' }}" target="_blank"
+                    style="display: flex; align-items: center; justify-content: center; gap: 6px; padding: 0.6rem; background: rgba(225, 48, 108, 0.1); color: #E1306C; text-decoration: none; border-radius: var(--radius-sm); border: 1px solid rgba(225, 48, 108, 0.2); font-size: 0.8rem; font-weight: 600; transition: 0.2s;">
+                    📸 Insta
+                </a>
+                <a href="{{ $settings['facebook_link'] ?? 'https://facebook.com/gsmtradinglab' }}" target="_blank"
+                    style="display: flex; align-items: center; justify-content: center; gap: 6px; padding: 0.6rem; background: rgba(24, 119, 242, 0.1); color: #1877F2; text-decoration: none; border-radius: var(--radius-sm); border: 1px solid rgba(24, 119, 242, 0.2); font-size: 0.8rem; font-weight: 600; transition: 0.2s;">
+                    🔵 Facebook
+                </a>
+                <a href="{{ $settings['snapchat_link'] ?? 'https://snapchat.com/add/gsmtradinglab' }}" target="_blank"
                     style="display: flex; align-items: center; justify-content: center; gap: 6px; padding: 0.6rem; background: rgba(255, 252, 0, 0.1); color: #e9e500; text-decoration: none; border-radius: var(--radius-sm); border: 1px solid rgba(255, 252, 0, 0.2); font-size: 0.8rem; font-weight: 600; transition: 0.2s;">
                     👻 Snapchat
                 </a>
-                <a href="{{ $settings['threads_link'] ?? '#' }}" target="_blank"
+                <a href="{{ $settings['threads_link'] ?? 'https://threads.net/@gsmtradinglab' }}" target="_blank"
                     style="display: flex; align-items: center; justify-content: center; gap: 6px; padding: 0.6rem; background: rgba(255, 255, 255, 0.05); color: #ffffff; text-decoration: none; border-radius: var(--radius-sm); border: 1px solid rgba(255, 255, 255, 0.1); font-size: 0.8rem; font-weight: 600; transition: 0.2s;">
                     🧵 Threads
                 </a>
-                <a href="{{ $settings['twitter_link'] ?? '#' }}" target="_blank"
+                <a href="{{ $settings['twitter_link'] ?? 'https://twitter.com/gsmtradinglab' }}" target="_blank"
                     style="display: flex; align-items: center; justify-content: center; gap: 6px; padding: 0.6rem; background: rgba(255, 255, 255, 0.05); color: #ffffff; text-decoration: none; border-radius: var(--radius-sm); border: 1px solid rgba(255, 255, 255, 0.1); font-size: 0.8rem; font-weight: 600; transition: 0.2s;">
                     𝕏 Twitter
                 </a>
-                <a href="{{ $settings['tiktok_link'] ?? '#' }}" target="_blank"
+                <a href="{{ $settings['tiktok_link'] ?? 'https://tiktok.com/@gsmtradinglab' }}" target="_blank"
                     style="display: flex; align-items: center; justify-content: center; gap: 6px; padding: 0.6rem; background: rgba(255, 255, 255, 0.05); color: #ffffff; text-decoration: none; border-radius: var(--radius-sm); border: 1px solid rgba(255, 255, 255, 0.1); font-size: 0.8rem; font-weight: 600; transition: 0.2s;">
                     🎶 TikTok
+                </a>
+                <a href="{{ $settings['discord_link'] ?? 'https://discord.gg/gsmtradinglab' }}" target="_blank"
+                    style="display: flex; align-items: center; justify-content: center; gap: 6px; padding: 0.6rem; background: rgba(88, 101, 242, 0.1); color: #5865F2; text-decoration: none; border-radius: var(--radius-sm); border: 1px solid rgba(88, 101, 242, 0.2); font-size: 0.8rem; font-weight: 600; transition: 0.2s;">
+                    🎮 Discord
+                </a>
+                <a href="{{ $settings['linkedin_link'] ?? 'https://linkedin.com/in/gsmtradinglab' }}" target="_blank"
+                    style="display: flex; align-items: center; justify-content: center; gap: 6px; padding: 0.6rem; background: rgba(10, 102, 194, 0.1); color: #0a66c2; text-decoration: none; border-radius: var(--radius-sm); border: 1px solid rgba(10, 102, 194, 0.2); font-size: 0.8rem; font-weight: 600; transition: 0.2s;">
+                    💼 LinkedIn
+                </a>
+                <a href="https://wa.me/{{ $settings['whatsapp_number'] ?? '447478035502' }}" target="_blank"
+                    style="grid-column: span 2; display: flex; align-items: center; justify-content: center; gap: 6px; padding: 0.6rem; background: rgba(37, 211, 102, 0.1); color: #25D366; text-decoration: none; border-radius: var(--radius-sm); border: 1px solid rgba(37, 211, 102, 0.2); font-size: 0.8rem; font-weight: 600; transition: 0.2s;">
+                    💬 WhatsApp
                 </a>
             </div>
             <a href="{{ route('contact') }}"

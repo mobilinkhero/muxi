@@ -21,6 +21,9 @@ class HomeController extends Controller
         // Fetch recent signals to display on landing page
         $recentSignals = \App\Models\Signal::orderBy('created_at', 'desc')->take(3)->get();
 
-        return view('welcome', compact('registeredUsers', 'successfulMembers', 'recentSignals'));
+        // Fetch published reviews to display on landing page
+        $reviews = \App\Models\Review::where('is_published', true)->latest()->get();
+
+        return view('welcome', compact('registeredUsers', 'successfulMembers', 'recentSignals', 'reviews'));
     }
 }

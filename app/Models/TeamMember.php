@@ -13,6 +13,11 @@ class TeamMember extends Model
         'image_url',
         'linkedin_url',
         'twitter_url',
+        'facebook_url',
+        'instagram_url',
+        'threads_url',
+        'youtube_url',
+        'tiktok_url',
         'is_active',
     ];
 

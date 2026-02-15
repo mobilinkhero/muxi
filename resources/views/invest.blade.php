@@ -148,70 +148,7 @@
     </section>
 
     <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <!-- Social Media Links -->
-            <div style="display: flex; gap: 1rem; justify-content: center; margin-bottom: 2rem; flex-wrap: wrap;">
-                <a href="https://facebook.com/gsmtradinglab" target="_blank"
-                    style="text-decoration: none; transition: transform 0.2s;"
-                    onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
-                    <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook" width="40"
-                        height="40">
-                </a>
-                <a href="https://instagram.com/gsmtradinglab" target="_blank"
-                    style="text-decoration: none; transition: transform 0.2s;"
-                    onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
-                    <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram" width="40"
-                        height="40">
-                </a>
-                <a href="https://threads.net/@gsmtradinglab" target="_blank"
-                    style="text-decoration: none; transition: transform 0.2s;"
-                    onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
-                    <img src="https://cdn-icons-png.flaticon.com/512/10856/10856184.png" alt="Threads" width="40"
-                        height="40" style="filter: invert(1);">
-                </a>
-                <a href="https://twitter.com/gsmtradinglab" target="_blank"
-                    style="text-decoration: none; transition: transform 0.2s;"
-                    onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
-                    <img src="https://cdn-icons-png.flaticon.com/512/5968/5968830.png" alt="Twitter/X" width="40"
-                        height="40" style="filter: invert(1);">
-                </a>
-                <a href="https://tiktok.com/@gsmtradinglab" target="_blank"
-                    style="text-decoration: none; transition: transform 0.2s;"
-                    onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
-                    <img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png" alt="TikTok" width="40"
-                        height="40" style="filter: invert(1);">
-                </a>
-                <a href="https://snapchat.com/add/gsmtradinglab" target="_blank"
-                    style="text-decoration: none; transition: transform 0.2s;"
-                    onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
-                    <img src="https://cdn-icons-png.flaticon.com/512/3670/3670166.png" alt="Snapchat" width="40"
-                        height="40">
-                </a>
-                <a href="https://discord.gg/gsmtradinglab" target="_blank"
-                    style="text-decoration: none; transition: transform 0.2s;"
-                    onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
-                    <img src="https://cdn-icons-png.flaticon.com/512/3670/3670157.png" alt="Discord" width="40"
-                        height="40" style="filter: invert(1);">
-                </a>
-                <a href="https://linkedin.com/in/gsmtradinglab" target="_blank"
-                    style="text-decoration: none; transition: transform 0.2s;"
-                    onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
-                    <img src="https://cdn-icons-png.flaticon.com/512/3536/3536505.png" alt="LinkedIn" width="40"
-                        height="40">
-                </a>
-                <a href="https://wa.me/447478035502" target="_blank"
-                    style="text-decoration: none; transition: transform 0.2s;"
-                    onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
-                    <img src="https://cdn-icons-png.flaticon.com/512/3670/3670051.png" alt="WhatsApp" width="40"
-                        height="40">
-                </a>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2026 GSM Trading Lab. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
+    @include('partials.footer')
 
     <script>
         // Navbar Scroll Effect

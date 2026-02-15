@@ -29,10 +29,37 @@
                 <input type="text" name="whatsapp" class="form-input" value="{{ old('whatsapp', $user->whatsapp) }}">
             </div>
 
+            <div
+                style="background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); padding: 1.5rem; border-radius: 8px; margin: 1.5rem 0;">
+                <h3 style="color: #10B981; margin-bottom: 1rem; font-size: 1.1rem;">💎 Premium Membership</h3>
+                <div class="form-group" style="margin-bottom: 1rem;">
+                    <label class="form-check" style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                        <input type="checkbox" name="is_premium" value="1" {{ $user->is_premium ? 'checked' : '' }}
+                            style="width: 1.2rem; height: 1.2rem;">
+                        <span style="color: var(--white); font-weight: 600;">Enable Premium Access</span>
+                    </label>
+                </div>
+
+                @if($user->device_token)
+                    <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
+                        <p style="color: var(--gray-light); font-size: 0.9rem; margin-bottom: 0.5rem;">
+                            This user is currently locked to a specific device.
+                        </p>
+                        <label class="form-check" style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                            <input type="checkbox" name="reset_device_token" value="1" style="width: 1.2rem; height: 1.2rem;">
+                            <span style="color: #F59E0B; font-weight: 600;">Reset Device Lock (Allow new device)</span>
+                        </label>
+                    </div>
+                @else
+                    <p style="color: var(--gray); font-size: 0.9rem; margin-top: 0.5rem;">No device locked yet.</p>
+                @endif
+            </div>
+
             @if($user->id !== auth()->id())
                 <div class="form-group" style="margin: 1.5rem 0;">
-                    <label class="form-check">
-                        <input type="checkbox" name="is_admin" value="1" {{ $user->is_admin ? 'checked' : '' }}>
+                    <label class="form-check" style="display: flex; align-items: center; gap: 0.5rem;">
+                        <input type="checkbox" name="is_admin" value="1" {{ $user->is_admin ? 'checked' : '' }}
+                            style="width: 1.2rem; height: 1.2rem;">
                         <span style="color: var(--white); font-weight: 600;">Grant Admin Privileges</span>
                     </label>
                 </div>

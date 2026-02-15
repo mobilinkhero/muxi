@@ -117,11 +117,9 @@
                     <span>📈</span>
                     <span>Professional Trading Signals</span>
                 </div>
-                <h1>Trade with Confidence</h1>
+                <h1>{{ $settings['trade_hero_title'] ?? 'Trade with Confidence' }}</h1>
                 <p class="hero-description">
-                    Receive high-accuracy trading signals and expert analysis primarily for <strong>Crypto, Forex, and
-                        Gold</strong>.
-                    We also cover Stocks, Indices & Derivatives to maximize your opportunities.
+                    {!! $settings['trade_hero_desc'] ?? 'Receive high-accuracy trading signals and expert analysis primarily for <strong>Crypto, Forex, and Gold</strong>. We also cover Stocks, Indices & Derivatives to maximize your opportunities.' !!}
                 </p>
                 <div class="hero-cta">
                     <a href="#plans" class="btn btn-primary">
@@ -410,7 +408,8 @@
 
             <div style="text-align: center; margin-top: 3rem;">
                 <p style="color: var(--gray); margin-bottom: 1.5rem;">Ready to start trading with our free signals?</p>
-                <a href="https://wa.me/447478035502" target="_blank" class="btn btn-primary">
+                <a href="https://wa.me/{{ $settings['whatsapp_number'] ?? '447478035502' }}" target="_blank"
+                    class="btn btn-primary">
                     <span>Join Free Community</span>
                     <span>→</span>
                 </a>

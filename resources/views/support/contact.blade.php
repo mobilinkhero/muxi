@@ -126,7 +126,7 @@
                     style="background: var(--dark-light); padding: 1.5rem; border-radius: var(--radius-md); width: 250px;">
                     <div style="font-size: 2rem; margin-bottom: 1rem;">📱</div>
                     <h4>WhatsApp</h4>
-                    <p style="color: var(--gray);">+44 7478 035502</p>
+                    <p style="color: var(--gray);">+{{ $settings['whatsapp_number'] ?? '44 7478 035502' }}</p>
                 </div>
             </div>
         </div>

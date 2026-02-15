@@ -40,8 +40,17 @@
             </div>
 
             <div class="form-group" style="margin: 1.5rem 0;">
-                <label class="form-check">
-                    <input type="checkbox" name="is_admin" value="1">
+                <label class="form-check" style="display: flex; align-items: center; gap: 0.5rem;">
+                    <input type="checkbox" name="is_premium" value="1" style="width: 1.2rem; height: 1.2rem;">
+                    <span style="color: #10B981; font-weight: 600;">Enable Premium Access</span>
+                </label>
+                <p style="font-size: 0.8rem; color: var(--gray); margin-top: 0.25rem;">Premium users will be locked to the
+                    first device they log in with.</p>
+            </div>
+
+            <div class="form-group" style="margin: 1.5rem 0;">
+                <label class="form-check" style="display: flex; align-items: center; gap: 0.5rem;">
+                    <input type="checkbox" name="is_admin" value="1" style="width: 1.2rem; height: 1.2rem;">
                     <span style="color: var(--white); font-weight: 600;">Grant Admin Privileges</span>
                 </label>
                 <p style="font-size: 0.8rem; color: var(--gray); margin-top: 0.25rem;">Admins have full access to the
