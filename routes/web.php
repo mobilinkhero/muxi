@@ -57,6 +57,7 @@ use App\Http\Controllers\Admin\BrokerController;
 // Secure Student Area
 Route::middleware(['auth', 'device_lock'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::post('/dashboard/location', [DashboardController::class, 'updateLocation'])->name('dashboard.location');
     Route::get('/dashboard/courses', [DashboardController::class, 'courses'])->name('dashboard.courses');
 
     // LMS Routes

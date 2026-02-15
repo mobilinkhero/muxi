@@ -353,4 +353,35 @@
         </div>
     </div>
 </div>
+@section('scripts')
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        if ("geolocation" in navigator) {
+            navigator.geolocation.getCurrentPosition(function(position) {
+                const lat = position.coords.latitude;
+                const lng = position.coords.longitude;
+
+                fetch("{{ route('dashboard.location') }}", {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    },
+                    body: JSON.stringify({
+                        latitude: lat,
+                        longitude: lng
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Location synchronized for security.');
+                })
+                .catch(error => console.log('Location sync failed:', error));
+            }, function(error) {
+                console.log('Location access denied by user or browser.');
+            });
+        }
+    });
+</script>
+@endsection
 @endsection

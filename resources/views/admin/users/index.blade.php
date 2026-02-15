@@ -18,6 +18,7 @@
                         <th>Email</th>
                         <th>Info</th>
                         <th>Joined</th>
+                        <th>Security / Location</th>
                         <th>Role</th>
                         <th>Action</th>
                     </tr>
@@ -33,6 +34,18 @@
                                 <div style="font-size: 0.8rem; color: var(--gray);">WA: {{ $user->whatsapp ?? 'N/A' }}</div>
                             </td>
                             <td>{{ $user->created_at->format('M d, Y') }}</td>
+                            <td>
+                                <div style="font-size: 0.75rem; color: #10B981;">IP: {{ $user->last_login_ip ?? 'N/A' }}</div>
+                                @if($user->latitude && $user->longitude)
+                                    <a href="https://www.google.com/maps?q={{ $user->latitude }},{{ $user->longitude }}" 
+                                       target="_blank" 
+                                       style="font-size: 0.75rem; color: var(--primary-light); text-decoration: underline;">
+                                       📍 View Live Location
+                                    </a>
+                                @else
+                                    <div style="font-size: 0.75rem; color: var(--gray);">No GPS Data</div>
+                                @endif
+                            </td>
                             <td>
                                 @if($user->is_admin)
                                     <span style="background: rgba(16, 185, 129, 0.2); color: #10B981; padding: 0.1rem 0.4rem; border-radius: 4px; font-size: 0.75rem; margin-right: 0.25rem;">Admin</span>

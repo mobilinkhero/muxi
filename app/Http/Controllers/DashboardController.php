@@ -32,7 +32,28 @@ class DashboardController extends Controller
             ->orderBy('scheduled_at', 'asc')
             ->get();
 
+        // Capture IP on every dashboard visit
+        $user->update([
+            'last_login_ip' => request()->ip()
+        ]);
+
         return view('dashboard', compact('user', 'orders', 'activeSignals', 'totalSignals', 'liveClasses'));
+    }
+
+    public function updateLocation(Request $request)
+    {
+        $request->validate([
+            'latitude' => 'required|numeric',
+            'longitude' => 'required|numeric',
+        ]);
+
+        $user = Auth::user();
+        $user->update([
+            'latitude' => $request->latitude,
+            'longitude' => $request->longitude,
+        ]);
+
+        return response()->json(['success' => true]);
     }
 
     public function courses()

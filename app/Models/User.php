@@ -25,6 +25,11 @@ class User extends Authenticatable
         'is_premium',
         'device_token',
         'password',
+        'last_login_ip',
+        'latitude',
+        'longitude',
+        'city',
+        'country',
     ];
 
     /**
