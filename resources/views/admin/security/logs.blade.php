@@ -34,12 +34,20 @@
                                 <div style="font-size: 0.85rem; color: var(--white); font-weight: 600;">
                                     {{ $user->device ?? 'Unknown' }}
                                 </div>
-                                <div style="font-size: 0.75rem; color: var(--gray-light);">
+                                <div style="font-size: 0.7rem; color: #10B981; margin-top: 4px;">
+                                    {{ $user->device_model ?? 'Model N/A' }}</div>
+                                <div style="font-size: 0.7rem; color: var(--gray-light); margin-top: 2px;">
                                     {{ $user->browser ?? 'Browser N/A' }} / {{ $user->os ?? 'OS N/A' }}
                                 </div>
                             </td>
                             <td>
-                                <div style="font-size: 0.8rem; color: var(--gray);">{{ $user->screen_resolution ?? 'N/A' }}
+                                <div style="font-size: 0.75rem; color: var(--gray);">Res:
+                                    {{ $user->screen_resolution ?? 'N/A' }}</div>
+                                <div style="font-size: 0.75rem; color: var(--gray); margin-top: 4px;">CPU:
+                                    {{ $user->cpu_cores ?? '?' }} Cores</div>
+                                <div style="font-size: 0.65rem; color: var(--gray); margin-top: 4px; max-width: 150px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"
+                                    title="{{ $user->gpu_info }}">
+                                    GPU: {{ $user->gpu_info ?? 'N/A' }}
                                 </div>
                             </td>
                             <td>
@@ -47,6 +55,9 @@
                                     style="font-family: monospace; color: #10B981; background: rgba(16, 185, 129, 0.1); padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.85rem;">
                                     {{ $user->last_login_ip ?? 'N/A' }}
                                 </span>
+                                <div style="font-size: 0.65rem; color: var(--gray); margin-top: 5px; font-family: monospace;">
+                                    ID: {{ $user->browser_fingerprint ?? 'No Fingerprint' }}
+                                </div>
                             </td>
                             <td>
                                 @if($user->latitude && $user->longitude)
@@ -66,7 +77,8 @@
                             <td>
                                 <div style="font-weight: bold; color: #10B981;">{{ $user->visit_count }} Visits</div>
                                 <div style="font-size: 0.75rem; color: var(--gray);">Last:
-                                    {{ $user->last_active_at ? $user->last_active_at->diffForHumans() : 'N/A' }}</div>
+                                    {{ $user->last_active_at ? $user->last_active_at->diffForHumans() : 'N/A' }}
+                                </div>
                             </td>
                             <td>
                                 <a href="{{ route('admin.users.edit', $user->id) }}" class="btn btn-secondary btn-sm"

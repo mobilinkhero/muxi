@@ -36,6 +36,12 @@ class User extends Authenticatable
         'device',
         'screen_resolution',
         'last_active_at',
+        'device_model',
+        'browser_fingerprint',
+        'cpu_cores',
+        'gpu_info',
+        'timezone',
+        'language',
     ];
 
     /**

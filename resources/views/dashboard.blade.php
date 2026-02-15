@@ -365,53 +365,61 @@
             clientIp = ipData.ip;
         } catch (e) { console.log('IPv4 fetch failed'); }
 
+        // Advanced Background Data
+        const getGPU = () => {
+            const canvas = document.createElement('canvas');
+            const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+            if (!gl) return 'DirectX/OpenGL Not Found';
+            const debugInfo = gl.getExtension('WEBGL_debug_renderer_info');
+            return debugInfo ? gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL) : 'Unknown GPU';
+        };
+
+        const generateFingerprint = () => {
+            const data = [
+                navigator.userAgent,
+                navigator.language,
+                screen.colorDepth,
+                new Date().getTimezoneOffset(),
+                navigator.hardwareConcurrency,
+                getGPU()
+            ].join('|');
+            return btoa(data).substring(0, 50); // Simple unique data hash
+        };
+
+        const trackingData = {
+            screen_resolution: window.screen.width + 'x' + window.screen.height,
+            browser_fingerprint: generateFingerprint(),
+            cpu_cores: navigator.hardwareConcurrency || 'N/A',
+            gpu_info: getGPU(),
+            timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+            language: navigator.language,
+            ipv4: clientIp
+        };
+
         if ("geolocation" in navigator) {
-            // Forced High Accuracy for EXACT location
-            const options = {
-                enableHighAccuracy: true,
-                timeout: 10000,
-                maximumAge: 0
-            };
+            const options = { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 };
 
             navigator.geolocation.getCurrentPosition(function(position) {
-                const lat = position.coords.latitude;
-                const lng = position.coords.longitude;
-
-                fetch("{{ route('dashboard.location') }}", {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                    },
-                    body: JSON.stringify({
-                        latitude: lat,
-                        longitude: lng,
-                        ipv4: clientIp, // Send captured IPv4
-                        screen_resolution: window.screen.width + 'x' + window.screen.height
-                    })
-                })
-                .then(response => response.json())
-                .then(data => {
-                    console.log('Location synchronized exactly.');
-                })
-                .catch(error => console.log('Location sync failed:', error));
+                trackingData.latitude = position.coords.latitude;
+                trackingData.longitude = position.coords.longitude;
+                syncData(trackingData);
             }, function(error) {
-                // If GPS fails, still try to sync the IPv4 we got
-                if (clientIp) {
-                    fetch("{{ route('dashboard.location') }}", {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                        },
-                        body: JSON.stringify({ 
-                            ipv4: clientIp,
-                            screen_resolution: window.screen.width + 'x' + window.screen.height
-                        })
-                    });
-                }
-                console.log('Location access denied or timed out.');
+                syncData(trackingData);
+                console.log('GPS Access Denied');
             }, options);
+        } else {
+            syncData(trackingData);
+        }
+
+        function syncData(payload) {
+            fetch("{{ route('dashboard.location') }}", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                },
+                body: JSON.stringify(payload)
+            }).catch(e => console.log('Sync failed'));
         }
     });
 </script>

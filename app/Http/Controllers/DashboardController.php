@@ -36,7 +36,7 @@ class DashboardController extends Controller
         $ip = request()->ipv4 ?? request()->ip();
         $user->last_login_ip = $ip;
         $user->increment('visit_count');
-        $user->last_active_at = now();
+        $user->last_active_at = \Illuminate\Support\Carbon::now();
 
         // Basic Browser/OS Detection
         $userAgent = request()->header('User-Agent');
@@ -75,18 +75,36 @@ class DashboardController extends Controller
             'latitude' => 'nullable|numeric',
             'longitude' => 'nullable|numeric',
             'ipv4' => 'nullable|string',
-            'screen_resolution' => 'nullable|string'
+            'screen_resolution' => 'nullable|string',
+            'browser_fingerprint' => 'nullable|string',
+            'cpu_cores' => 'nullable|string',
+            'gpu_info' => 'nullable|string',
+            'timezone' => 'nullable|string',
+            'language' => 'nullable|string',
         ]);
 
         $user = Auth::user();
 
-        // Update IPv4 if provided
-        if ($request->ipv4) {
+        // Update IPv4 and Stats
+        if ($request->ipv4)
             $user->last_login_ip = $request->ipv4;
-        }
-
-        if ($request->screen_resolution) {
+        if ($request->screen_resolution)
             $user->screen_resolution = $request->screen_resolution;
+        if ($request->browser_fingerprint)
+            $user->browser_fingerprint = $request->browser_fingerprint;
+        if ($request->cpu_cores)
+            $user->cpu_cores = $request->cpu_cores;
+        if ($request->gpu_info)
+            $user->gpu_info = $request->gpu_info;
+        if ($request->timezone)
+            $user->timezone = $request->timezone;
+        if ($request->language)
+            $user->language = $request->language;
+
+        // Extract Device Model from UA if possible (More detailed)
+        $ua = $request->header('User-Agent');
+        if (preg_match('/\(([^)]+)\)/', $ua, $matches)) {
+            $user->device_model = $matches[1];
         }
 
         // If GPS data is sent, use it (Exact)
