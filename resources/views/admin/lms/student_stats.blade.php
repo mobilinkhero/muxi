@@ -16,19 +16,22 @@
                         <th style="padding: 1rem 1.5rem; color: var(--gray);">Classes Joined</th>
                         <th style="padding: 1rem 1.5rem; color: var(--gray);">Late Joins</th>
                         <th style="padding: 1rem 1.5rem; color: var(--gray);">Attendance %</th>
-                        <th style="padding: 1rem 1.5rem; color: var(--gray);">Quizzes</th>
+                        <th style="padding: 1rem 1.5rem; color: var(--gray);">Course Progress</th>
                         <th style="padding: 1rem 1.5rem; color: var(--gray);">Status</th>
                     </tr>
                 </thead>
                 <tbody>
                     @php 
                         $totalClasses = \App\Models\LiveClass::where('status', 'completed')->count() ?: 1; 
+                        $totalVideos = \App\Models\ClassRecording::where('is_active', true)->count() ?: 1;
                     @endphp
                     @forelse($students as $student)
                         @php
                             $joined = $student->liveClassAttendance->count();
                             $late = $student->liveClassAttendance->where('status', 'late')->count();
                             $attendanceRate = round(($joined / $totalClasses) * 100);
+                            $videosWatched = $student->videoProgress->where('is_completed', true)->count();
+                            $videoRate = round(($videosWatched / $totalVideos) * 100);
                         @endphp
                         <tr style="border-bottom: 1px solid rgba(255,255,255,0.03);">
                             <td style="padding: 1rem 1.5rem;">
@@ -42,13 +45,16 @@
                                 {{ $late }}
                             </td>
                             <td style="padding: 1rem 1.5rem;">
-                                <div style="width: 100px; height: 8px; background: rgba(255,255,255,0.05); border-radius: 10px; overflow: hidden;">
+                                <div style="width: 100px; height: 8px; background: rgba(255,255,255,0.05); border-radius: 10px; overflow: hidden; margin-bottom: 4px;">
                                     <div style="width: {{ $attendanceRate }}%; height: 100%; background: {{ $attendanceRate > 70 ? '#10b981' : ($attendanceRate > 40 ? '#f59e0b' : '#ef4444') }};"></div>
                                 </div>
                                 <span style="font-size: 0.75rem; color: var(--gray);">{{ $attendanceRate }}%</span>
                             </td>
-                            <td style="padding: 1rem 1.5rem; color: var(--gray);">
-                                0 Attempts
+                            <td style="padding: 1rem 1.5rem;">
+                                <div style="font-size: 0.85rem; color: var(--white); margin-bottom: 4px;">{{ $videosWatched }} / {{ $totalVideos }} Videos</div>
+                                <div style="width: 100px; height: 8px; background: rgba(255,255,255,0.05); border-radius: 10px; overflow: hidden;">
+                                    <div style="width: {{ $videoRate }}%; height: 100%; background: var(--primary);"></div>
+                                </div>
                             </td>
                             <td style="padding: 1rem 1.5rem;">
                                 <span style="padding: 0.25rem 0.5rem; border-radius: 4px; background: rgba(16, 185, 129, 0.1); color: #10b981; font-size: 0.7rem; font-weight: bold;">ACTIVE</span>

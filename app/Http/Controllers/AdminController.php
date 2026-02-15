@@ -100,4 +100,31 @@ class AdminController extends Controller
 
         return back()->with('success', 'Order status updated successfully.');
     }
+
+    public function profile()
+    {
+        return view('admin.profile');
+    }
+
+    public function updateProfile(Request $request)
+    {
+        $user = Auth::user();
+
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email,' . $user->id,
+            'password' => 'nullable|string|min:8|confirmed',
+        ]);
+
+        $user->name = $request->name;
+        $user->email = $request->email;
+
+        if ($request->filled('password')) {
+            $user->password = \Illuminate\Support\Facades\Hash::make($request->password);
+        }
+
+        $user->save();
+
+        return back()->with('success', 'Profile updated successfully.');
+    }
 }

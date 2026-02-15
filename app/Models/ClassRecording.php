@@ -19,4 +19,8 @@ class ClassRecording extends Model
         'published_at' => 'datetime',
         'is_active' => 'boolean',
     ];
+    public function progress()
+    {
+        return $this->hasOne(ClassProgress::class)->where('user_id', auth()->id());
+    }
 }

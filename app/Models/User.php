@@ -58,4 +58,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(QuizAttempt::class);
     }
+
+    public function videoProgress()
+    {
+        return $this->hasMany(ClassProgress::class);
+    }
 }

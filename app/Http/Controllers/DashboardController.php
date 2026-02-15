@@ -53,10 +53,37 @@ class DashboardController extends Controller
             'certificates' => 0
         ];
 
-        // Fetch Class Recordings
-        $recordings = \App\Models\ClassRecording::where('is_active', true)
-            ->orderBy('published_at', 'desc')
+        // Fetch Class Recordings in ASC order for progression (Timeline order)
+        $recordingsList = \App\Models\ClassRecording::where('is_active', true)
+            ->orderBy('published_at', 'asc')
+            ->orderBy('id', 'asc') // Fallback for same timestamps
+            ->with([
+                'progress' => function ($q) use ($user) {
+                    $q->where('user_id', $user->id);
+                }
+            ])
             ->get();
+
+        $recordings = collect();
+        $previousCompleted = true; // First video is always unlocked
+
+        foreach ($recordingsList as $rec) {
+            // STRICT PROGRESSION: Next video only unlocks if previous is 99% complete
+            $isUnlocked = $previousCompleted;
+            $progressData = $rec->progress;
+
+            $rec->is_unlocked = $isUnlocked;
+            $rec->user_progress = $progressData ? $progressData->progress_percentage : 0;
+            $rec->is_completed = $progressData ? $progressData->is_completed : false;
+
+            $recordings->push($rec);
+
+            // Set for next iteration (This controls the lock for the next video)
+            $previousCompleted = $rec->is_completed;
+        }
+
+        // Return DESC for UI but keep computed properties
+        $recordings = $recordings->reverse();
 
         return view('dashboard.courses', compact('user', 'orders', 'stats', 'recordings'));
     }

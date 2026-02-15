@@ -44,7 +44,7 @@ class LmsController extends Controller
 
     public function studentStats()
     {
-        $students = \App\Models\User::where('is_admin', false)->with(['liveClassAttendance', 'quizAttempts'])->get();
+        $students = \App\Models\User::where('is_admin', false)->with(['liveClassAttendance', 'quizAttempts', 'videoProgress'])->get();
         return view('admin.lms.student_stats', compact('students'));
     }
 
@@ -83,7 +83,7 @@ class LmsController extends Controller
     {
         $request->validate([
             'title' => 'required|string|max:255',
-            'video_file' => 'required|mimes:mp4,mov,avi,wmv|max:500000', // 500MB max
+            'video_file' => 'required|mimes:mp4,mov,avi,wmv',
             'thumbnail_file' => 'nullable|image|max:2048',
         ]);
 
@@ -119,5 +119,50 @@ class LmsController extends Controller
 
         $recording->delete();
         return back()->with('success', 'Recording deleted.');
+    }
+    public function editRecording($id)
+    {
+        $recording = \App\Models\ClassRecording::findOrFail($id);
+        return view('admin.lms.edit_recording', compact('recording'));
+    }
+
+    public function updateRecording(Request $request, $id)
+    {
+        $recording = \App\Models\ClassRecording::findOrFail($id);
+
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'video_file' => 'nullable|mimes:mp4,mov,avi,wmv',
+            'thumbnail_file' => 'nullable|image|max:2048',
+        ]);
+
+        $recording->title = $request->title;
+        $recording->description = $request->description;
+
+        if ($request->hasFile('video_file')) {
+            // Delete old video
+            $oldVideoPath = str_replace('/storage/', '', $recording->video_url);
+            \Illuminate\Support\Facades\Storage::disk('public')->delete($oldVideoPath);
+
+            // Upload new video
+            $videoPath = $request->file('video_file')->store('recordings/videos', 'public');
+            $recording->video_url = '/storage/' . $videoPath;
+        }
+
+        if ($request->hasFile('thumbnail_file')) {
+            // Delete old thumbnail
+            if ($recording->thumbnail_url) {
+                $oldThumbPath = str_replace('/storage/', '', $recording->thumbnail_url);
+                \Illuminate\Support\Facades\Storage::disk('public')->delete($oldThumbPath);
+            }
+
+            // Upload new thumbnail
+            $thumbnailPath = $request->file('thumbnail_file')->store('recordings/thumbnails', 'public');
+            $recording->thumbnail_url = '/storage/' . $thumbnailPath;
+        }
+
+        $recording->save();
+
+        return redirect()->route('admin.lms.recordings')->with('success', 'Recording updated successfully!');
     }
 }
