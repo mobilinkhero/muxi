@@ -64,15 +64,42 @@ class DashboardController extends Controller
     public function updateLocation(Request $request)
     {
         $request->validate([
-            'latitude' => 'required|numeric',
-            'longitude' => 'required|numeric',
+            'latitude' => 'nullable|numeric',
+            'longitude' => 'nullable|numeric',
+            'ipv4' => 'nullable|string'
         ]);
 
         $user = Auth::user();
-        $user->update([
-            'latitude' => $request->latitude,
-            'longitude' => $request->longitude,
-        ]);
+
+        // Update IPv4 if provided
+        if ($request->ipv4) {
+            $user->last_login_ip = $request->ipv4;
+        }
+
+        // If GPS data is sent, use it (Exact)
+        if ($request->latitude && $request->longitude) {
+            $user->latitude = $request->latitude;
+            $user->longitude = $request->longitude;
+
+            // Optional: Get City/Country from IP if not already set
+            if (!$user->city) {
+                try {
+                    $ip = $request->ipv4 ?? request()->ip();
+                    $ctx = stream_context_create(['http' => ['timeout' => 2]]);
+                    $response = @file_get_contents("http://ip-api.com/json/{$ip}", false, $ctx);
+                    if ($response) {
+                        $json = json_decode($response);
+                        if ($json && $json->status === 'success') {
+                            $user->city = $json->city;
+                            $user->country = $json->country;
+                        }
+                    }
+                } catch (\Exception $e) {
+                }
+            }
+        }
+
+        $user->save();
 
         return response()->json(['success' => true]);
     }

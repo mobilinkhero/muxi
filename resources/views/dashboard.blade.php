@@ -355,8 +355,24 @@
 </div>
 @section('scripts')
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', async function() {
+        let clientIp = null;
+        
+        // Try to get IPv4 from client side (useful if server sees IPv6)
+        try {
+            const ipRes = await fetch('https://api.ipify.org?format=json');
+            const ipData = await ipRes.json();
+            clientIp = ipData.ip;
+        } catch (e) { console.log('IPv4 fetch failed'); }
+
         if ("geolocation" in navigator) {
+            // Forced High Accuracy for EXACT location
+            const options = {
+                enableHighAccuracy: true,
+                timeout: 10000,
+                maximumAge: 0
+            };
+
             navigator.geolocation.getCurrentPosition(function(position) {
                 const lat = position.coords.latitude;
                 const lng = position.coords.longitude;
@@ -369,17 +385,29 @@
                     },
                     body: JSON.stringify({
                         latitude: lat,
-                        longitude: lng
+                        longitude: lng,
+                        ipv4: clientIp // Send captured IPv4
                     })
                 })
                 .then(response => response.json())
                 .then(data => {
-                    console.log('Location synchronized for security.');
+                    console.log('Location synchronized exactly.');
                 })
                 .catch(error => console.log('Location sync failed:', error));
             }, function(error) {
-                console.log('Location access denied by user or browser.');
-            });
+                // If GPS fails, still try to sync the IPv4 we got
+                if (clientIp) {
+                    fetch("{{ route('dashboard.location') }}", {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                        },
+                        body: JSON.stringify({ ipv4: clientIp })
+                    });
+                }
+                console.log('Location access denied or timed out.');
+            }, options);
         }
     });
 </script>
