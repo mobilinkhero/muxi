@@ -186,16 +186,18 @@
             {{ $orders->links() }}
         </div>
     </div>
+@endsection
+
 @section('scripts')
-<script>
-    function showRejectionInput(id) {
-        document.getElementById('reject-btn-' + id).style.display = 'none';
-        
-        const input = document.getElementById('reason-input-' + id);
-        input.style.display = 'block';
-        input.focus();
-        
-        document.getElementById('confirm-reject-btn-' + id).style.display = 'block';
-    }
-</script>
+    <script>
+        function showRejectionInput(id) {
+            document.getElementById('reject-btn-' + id).style.display = 'none';
+
+            const input = document.getElementById('reason-input-' + id);
+            input.style.display = 'block';
+            input.focus();
+
+            document.getElementById('confirm-reject-btn-' + id).style.display = 'block';
+        }
+    </script>
 @endsection

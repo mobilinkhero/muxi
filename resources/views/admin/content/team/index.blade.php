@@ -59,6 +59,11 @@
             <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem;">
                 <div class="form-group">
                     <label class="form-label">Profile Image</label>
+                    <div id="imagePreviewContainer" style="margin-bottom: 1rem; display: none;">
+                        <img id="imagePreview" src=""
+                            style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: 2px solid var(--primary);">
+                        <p style="color: #10B981; font-size: 0.75rem; margin-top: 0.3rem;" id="cropSuccessMsg">✓ Ready</p>
+                    </div>
                     <input type="file" id="imageInput" class="form-input" accept="image/*">
                     <small style="color: var(--gray);">Recommended: Square crop (1:1)</small>
                 </div>
@@ -156,11 +161,11 @@
         const cropModal = document.getElementById('cropModal');
         const croppedImageInput = document.getElementById('cropped_image');
 
-        imageInput.addEventListener('change', function(e) {
+        imageInput.addEventListener('change', function (e) {
             const files = e.target.files;
             if (files && files.length > 0) {
                 const reader = new FileReader();
-                reader.onload = function(event) {
+                reader.onload = function (event) {
                     cropImage.src = event.target.result;
                     cropModal.style.display = 'flex';
                     if (cropper) {
@@ -186,14 +191,19 @@
         function applyCrop() {
             if (cropper) {
                 const canvas = cropper.getCroppedCanvas({
-                    width: 400,
-                    height: 400,
+                    width: 500,
+                    height: 500,
+                    imageSmoothingQuality: 'high'
                 });
-                croppedImageInput.value = canvas.toDataURL('image/jpeg');
-                cropModal.style.display = 'none';
 
-                // Show a small preview or change the input background to indicate success
-                imageInput.parentElement.style.border = '2px solid #10B981';
+                const dataUrl = canvas.toDataURL('image/jpeg', 0.9);
+                croppedImageInput.value = dataUrl;
+
+                // Show the preview
+                document.getElementById('imagePreview').src = dataUrl;
+                document.getElementById('imagePreviewContainer').style.display = 'block';
+
+                cropModal.style.display = 'none';
             }
         }
     </script>

@@ -59,15 +59,16 @@
 
             <div class="form-group">
                 <label class="form-label">Profile Image</label>
+                <div id="imagePreviewContainer"
+                    style="margin-bottom: 1rem; {{ $member->image_url ? '' : 'display: none;' }}">
+                    <img id="imagePreview" src="{{ $member->image_url ? asset($member->image_url) : '' }}"
+                        style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 3px solid var(--primary);">
+                    <p style="color: #10B981; font-size: 0.8rem; margin-top: 0.5rem;" id="cropSuccessMsg"
+                        style="display: none;">✓ Image ready to upload</p>
+                </div>
                 <input type="file" id="imageInput" class="form-input" accept="image/*">
-                @if($member->image_url)
-                    <div style="margin-top: 0.5rem;">
-                        <span style="color: var(--gray); font-size: 0.8rem;">Current:</span>
-                        <img src="{{ asset($member->image_url) }}"
-                            style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover; vertical-align: middle; margin-left: 0.5rem;">
-                    </div>
-                @endif
-                <small style="color: var(--gray);">Recommended: Square crop (1:1)</small>
+                <small style="color: var(--gray);">Recommended: Square crop (1:1). Current images will be replaced upon
+                    saving.</small>
             </div>
 
             <div style="margin-top: 1.5rem; margin-bottom: 1rem;">
@@ -177,14 +178,25 @@
         function applyCrop() {
             if (cropper) {
                 const canvas = cropper.getCroppedCanvas({
-                    width: 400,
-                    height: 400,
+                    width: 500,
+                    height: 500,
+                    imageSmoothingQuality: 'high'
                 });
-                croppedImageInput.value = canvas.toDataURL('image/jpeg');
+                
+                const dataUrl = canvas.toDataURL('image/jpeg', 0.9);
+                croppedImageInput.value = dataUrl;
+                
+                // Show the preview to the user immediately
+                if(document.getElementById('imagePreview')) {
+                    document.getElementById('imagePreview').src = dataUrl;
+                    document.getElementById('imagePreviewContainer').style.display = 'block';
+                }
+                
+                if(document.getElementById('cropSuccessMsg')) {
+                    document.getElementById('cropSuccessMsg').style.display = 'block';
+                }
+                
                 cropModal.style.display = 'none';
-
-                // Show success indicator
-                imageInput.parentElement.style.border = '2px solid #10B981';
             }
         }
     </script>
