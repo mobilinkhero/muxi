@@ -129,6 +129,23 @@ Route::middleware(['auth', 'admin'])->prefix('youcanthackme')->name('admin.')->g
     // Site Settings
     Route::get('/settings', [App\Http\Controllers\Admin\SettingController::class, 'index'])->name('settings.index');
     Route::post('/settings', [App\Http\Controllers\Admin\SettingController::class, 'update'])->name('settings.update');
+
+    // Content Management
+    // Team
+    Route::get('/content/team', [App\Http\Controllers\Admin\ContentController::class, 'teamIndex'])->name('content.team.index');
+    Route::post('/content/team', [App\Http\Controllers\Admin\ContentController::class, 'teamStore'])->name('content.team.store');
+    Route::delete('/content/team/{id}', [App\Http\Controllers\Admin\ContentController::class, 'teamDelete'])->name('content.team.delete');
+
+    // Careers
+    Route::get('/content/careers', [App\Http\Controllers\Admin\ContentController::class, 'careersIndex'])->name('content.careers.index');
+    Route::post('/content/careers', [App\Http\Controllers\Admin\ContentController::class, 'careerStore'])->name('content.careers.store');
+    Route::delete('/content/careers/{id}', [App\Http\Controllers\Admin\ContentController::class, 'careerDelete'])->name('content.careers.delete');
+
+    // Blog
+    Route::get('/content/blog', [App\Http\Controllers\Admin\ContentController::class, 'blogIndex'])->name('content.blog.index');
+    Route::get('/content/blog/create', [App\Http\Controllers\Admin\ContentController::class, 'blogCreate'])->name('content.blog.create');
+    Route::post('/content/blog', [App\Http\Controllers\Admin\ContentController::class, 'blogStore'])->name('content.blog.store');
+    Route::delete('/content/blog/{id}', [App\Http\Controllers\Admin\ContentController::class, 'blogDelete'])->name('content.blog.delete');
 });
 
 Route::post('/consultation', [App\Http\Controllers\ConsultationController::class, 'store'])->name('consultation.store');
@@ -139,12 +156,30 @@ use App\Http\Controllers\DuneController;
 use App\Http\Controllers\GlassnodeController;
 use App\Http\Controllers\NewsController;
 
+use App\Http\Controllers\PageController;
+
 Route::get('/api/market/global', [MarketController::class, 'getGlobalMetrics'])->name('api.market.global');
 Route::get('/api/market/coinglass/liquidations', [CoinGlassController::class, 'getLiquidations'])->name('api.market.cg.liq');
 Route::get('/api/market/coinglass/longshort', [CoinGlassController::class, 'getLongShortRatio'])->name('api.market.cg.ls');
 Route::get('/api/market/dune/{queryId}', [DuneController::class, 'getQueryResult'])->name('api.market.dune');
 Route::get('/api/market/glassnode/metrics', [GlassnodeController::class, 'getMetrics'])->name('api.market.glassnode');
 Route::get('/api/market/news', [NewsController::class, 'getLatestNews'])->name('api.market.news');
+
+// Markets Pages
+Route::get('/markets/crypto', [PageController::class, 'crypto'])->name('markets.crypto');
+Route::get('/markets/forex', [PageController::class, 'forex'])->name('markets.forex');
+Route::get('/markets/stocks', [PageController::class, 'stocks'])->name('markets.stocks');
+Route::get('/markets/commodities', [PageController::class, 'commodities'])->name('markets.commodities');
+
+// Company Pages
+Route::get('/start-trading', function () {
+    return view('invest');
+})->name('start-trading'); // Alias
+Route::get('/about-us', [PageController::class, 'about'])->name('company.about');
+Route::get('/our-team', [PageController::class, 'team'])->name('company.team');
+Route::get('/careers', [PageController::class, 'careers'])->name('company.careers');
+Route::get('/blog', [PageController::class, 'blog'])->name('company.blog');
+Route::get('/blog/{slug}', [PageController::class, 'blogPost'])->name('company.blog.show');
 
 // P2P Routes (Admin)
 Route::group(['prefix' => 'youcanthackme', 'as' => 'admin.p2p.', 'middleware' => ['auth', 'admin']], function () {

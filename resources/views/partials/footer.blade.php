@@ -15,19 +15,19 @@
             <div class="footer-section">
                 <h4>Markets</h4>
                 <ul class="footer-links">
-                    <li><a href="/learn">Cryptocurrency</a></li>
-                    <li><a href="/learn">Forex Trading</a></li>
-                    <li><a href="/learn">Stocks & Indices</a></li>
-                    <li><a href="/learn">Commodities & Derivatives</a></li>
+                    <li><a href="{{ route('markets.crypto') }}">Cryptocurrency</a></li>
+                    <li><a href="{{ route('markets.forex') }}">Forex Trading</a></li>
+                    <li><a href="{{ route('markets.stocks') }}">Stocks & Indices</a></li>
+                    <li><a href="{{ route('markets.commodities') }}">Commodities & Derivatives</a></li>
                 </ul>
             </div>
             <div class="footer-section">
                 <h4>Company</h4>
                 <ul class="footer-links">
-                    <li><a href="/#about">About Us</a></li>
-                    <li><a href="#">Our Team</a></li>
-                    <li><a href="/contact">Careers</a></li>
-                    <li><a href="/learn">Blog</a></li>
+                    <li><a href="{{ route('company.about') }}">About Us</a></li>
+                    <li><a href="{{ route('company.team') }}">Our Team</a></li>
+                    <li><a href="{{ route('company.careers') }}">Careers</a></li>
+                    <li><a href="{{ route('company.blog') }}">Blog</a></li>
                 </ul>
             </div>
             <div class="footer-section">
