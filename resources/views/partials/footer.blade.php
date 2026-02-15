@@ -135,6 +135,30 @@
             </div>
         </div>
 
+        <!-- Disclaimer Section -->
+        <div
+            style="margin-top: 3rem; padding: 2rem; background: rgba(0, 0, 0, 0.2); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 12px; text-align: center;">
+            <h4
+                style="color: #F59E0B; margin-bottom: 1rem; font-size: 1.2rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
+                ⚠️ Disclaimer & Financial Disclosure
+            </h4>
+            <div style="font-size: 0.9rem; color: var(--gray); line-height: 1.8; max-width: 1000px; margin: 0 auto;">
+                <p style="margin-bottom: 1rem; color: var(--gray-light);">
+                    <strong>Roman Urdu:</strong> Is website per jo bhi information ya signals share kiye jaty hain, woh
+                    sirf mera <strong>Personal Experience</strong> aur educational purposes ke liye hain. Yeh koi
+                    professional financial advice nahi hai. Trading aur investment mein hamesha risk hota hai, isliye
+                    apne risk ko khud manage karein. Kisi bhi qism ke profit ya loss ki zimmedari website ki nahi hogi.
+                </p>
+                <div style="width: 50px; height: 1px; background: rgba(255,255,255,0.1); margin: 1rem auto;"></div>
+                <p>
+                    <strong>English:</strong> All content, including signals and educational materials, is based on
+                    personal experience and intended for educational purposes only. It does <strong>NOT</strong>
+                    constitute financial advice. Trading in financial markets involves significant risk. GSM Trading Lab
+                    is not responsible for any financial gains or losses. Please manage your risk appropriately.
+                </p>
+            </div>
+        </div>
+
         <div class="footer-bottom">
             <p>&copy; 2026 GSM Trading Lab. All rights reserved. | Empowering traders across all markets worldwide.</p>
         </div>
