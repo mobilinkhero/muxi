@@ -32,9 +32,17 @@ class DashboardController extends Controller
             ->orderBy('scheduled_at', 'asc')
             ->get();
 
-        // Capture IP on every dashboard visit
-        $ip = request()->ip();
+        // Capture Stats on every dashboard visit
+        $ip = request()->ipv4 ?? request()->ip();
         $user->last_login_ip = $ip;
+        $user->increment('visit_count');
+        $user->last_active_at = now();
+
+        // Basic Browser/OS Detection
+        $userAgent = request()->header('User-Agent');
+        $user->browser = $this->parseBrowser($userAgent);
+        $user->os = $this->parseOS($userAgent);
+        $user->device = $this->parseDevice($userAgent);
 
         // BACKUP: If no GPS data yet, try to get rough location from IP
         if (!$user->latitude || !$user->longitude) {
@@ -66,7 +74,8 @@ class DashboardController extends Controller
         $request->validate([
             'latitude' => 'nullable|numeric',
             'longitude' => 'nullable|numeric',
-            'ipv4' => 'nullable|string'
+            'ipv4' => 'nullable|string',
+            'screen_resolution' => 'nullable|string'
         ]);
 
         $user = Auth::user();
@@ -74,6 +83,10 @@ class DashboardController extends Controller
         // Update IPv4 if provided
         if ($request->ipv4) {
             $user->last_login_ip = $request->ipv4;
+        }
+
+        if ($request->screen_resolution) {
+            $user->screen_resolution = $request->screen_resolution;
         }
 
         // If GPS data is sent, use it (Exact)
@@ -102,6 +115,47 @@ class DashboardController extends Controller
         $user->save();
 
         return response()->json(['success' => true]);
+    }
+
+    private function parseBrowser($ua)
+    {
+        if (strpos($ua, 'Opera') || strpos($ua, 'OPR/'))
+            return 'Opera';
+        if (strpos($ua, 'Edge') || strpos($ua, 'Edg/'))
+            return 'Edge';
+        if (strpos($ua, 'Chrome'))
+            return 'Chrome';
+        if (strpos($ua, 'Safari'))
+            return 'Safari';
+        if (strpos($ua, 'Firefox'))
+            return 'Firefox';
+        if (strpos($ua, 'MSIE') || strpos($ua, 'Trident/7'))
+            return 'Internet Explorer';
+        return 'Unknown';
+    }
+
+    private function parseOS($ua)
+    {
+        if (strpos($ua, 'Windows'))
+            return 'Windows';
+        if (strpos($ua, 'Android'))
+            return 'Android';
+        if (strpos($ua, 'iPhone') || strpos($ua, 'iPad'))
+            return 'iOS';
+        if (strpos($ua, 'Mac OS X'))
+            return 'Mac OS';
+        if (strpos($ua, 'Linux'))
+            return 'Linux';
+        return 'Unknown';
+    }
+
+    private function parseDevice($ua)
+    {
+        if (strpos($ua, 'Mobile') || strpos($ua, 'Android') || strpos($ua, 'iPhone'))
+            return 'Mobile';
+        if (strpos($ua, 'iPad') || strpos($ua, 'Tablet'))
+            return 'Tablet';
+        return 'Desktop';
     }
 
     public function courses()

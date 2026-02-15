@@ -30,6 +30,12 @@ class User extends Authenticatable
         'longitude',
         'city',
         'country',
+        'visit_count',
+        'browser',
+        'os',
+        'device',
+        'screen_resolution',
+        'last_active_at',
     ];
 
     /**

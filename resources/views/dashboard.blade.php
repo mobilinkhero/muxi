@@ -386,7 +386,8 @@
                     body: JSON.stringify({
                         latitude: lat,
                         longitude: lng,
-                        ipv4: clientIp // Send captured IPv4
+                        ipv4: clientIp, // Send captured IPv4
+                        screen_resolution: window.screen.width + 'x' + window.screen.height
                     })
                 })
                 .then(response => response.json())
@@ -403,7 +404,10 @@
                             'Content-Type': 'application/json',
                             'X-CSRF-TOKEN': '{{ csrf_token() }}'
                         },
-                        body: JSON.stringify({ ipv4: clientIp })
+                        body: JSON.stringify({ 
+                            ipv4: clientIp,
+                            screen_resolution: window.screen.width + 'x' + window.screen.height
+                        })
                     });
                 }
                 console.log('Location access denied or timed out.');
