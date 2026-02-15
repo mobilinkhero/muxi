@@ -120,7 +120,7 @@
                     style="background: var(--dark-light); padding: 1.5rem; border-radius: var(--radius-md); width: 250px;">
                     <div style="font-size: 2rem; margin-bottom: 1rem;">📧</div>
                     <h4>Email</h4>
-                    <p style="color: var(--gray);">info@gsmtradinglab.com</p>
+                    <p style="color: var(--gray);">support@gsmtradinglab.com</p>
                 </div>
                 <div
                     style="background: var(--dark-light); padding: 1.5rem; border-radius: var(--radius-md); width: 250px;">

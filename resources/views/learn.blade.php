@@ -1486,7 +1486,7 @@
                 <p>Join thousands of students who have transformed their trading skills with GSM Trading Lab Academy.
                 </p>
                 <a href="#" class="btn"
-                    onclick="alert('Enrollment coming soon! For now, email us at: academy@gsmtradinglab.com')">
+                    onclick="alert('Enrollment coming soon! For now, email us at: support@gsmtradinglab.com')">
                     <span>Enroll Now</span>
                     <span>→</span>
                 </a>

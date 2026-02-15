@@ -90,7 +90,8 @@
         <ul>
             <li><strong>100% Satisfaction Refund:</strong> If you pay for a course in advance and, after completing the
                 learning, you feel the content was not worthy or we did not teach correctly, we will issue a
-                <strong>100% refund</strong>. No questions asked.</li>
+                <strong>100% refund</strong>. No questions asked.
+            </li>
             <li><strong>Learn Now, Pay Later:</strong> For eligible students, we offer a "Learn Now, Pay Later" model.
                 You can access the learning materials first. Payment is only required if you find the knowledge valuable
                 and beneficial to your trading journey. If you do not find value, you are not obligated to pay.</li>
@@ -125,8 +126,8 @@
             a material change will be determined at our sole discretion.</p>
 
         <h3>9. Contact Us</h3>
-        <p>If you have any questions about these Terms, please contact us at <a href="mailto:info@gsmtradinglab.com"
-                style="color: var(--primary);">info@gsmtradinglab.com</a>.</p>
+        <p>If you have any questions about these Terms, please contact us at <a href="mailto:support@gsmtradinglab.com"
+                style="color: var(--primary);">support@gsmtradinglab.com</a>.</p>
     </div>
 
     @include('partials.footer')

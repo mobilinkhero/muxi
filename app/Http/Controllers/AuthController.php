@@ -18,7 +18,7 @@ class AuthController extends Controller
     {
         // Allow login with 'admin' username
         if ($request->email === 'admin') {
-            $request->merge(['email' => 'admin@gsmtradinglab.com']);
+            $request->merge(['email' => 'support@gsmtradinglab.com']);
         }
 
         $request->validate([

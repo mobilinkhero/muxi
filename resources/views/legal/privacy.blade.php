@@ -114,7 +114,8 @@
 
         <h3>9. Contact Us</h3>
         <p>If you have questions or comments about this policy, you may email us at <a
-                href="mailto:info@gsmtradinglab.com" style="color: var(--primary);">info@gsmtradinglab.com</a>.</p>
+                href="mailto:support@gsmtradinglab.com" style="color: var(--primary);">support@gsmtradinglab.com</a>.
+        </p>
     </div>
 
     @include('partials.footer')
