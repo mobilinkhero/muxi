@@ -116,6 +116,9 @@ Route::middleware(['auth', 'admin'])->prefix('youcanthackme')->name('admin.')->g
     Route::post('users/{user}/impersonate', [UserController::class, 'impersonate'])->name('users.impersonate');
     Route::delete('users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
 
+    // Security Tracking
+    Route::get('/security/logs', [UserController::class, 'securityLogs'])->name('security.logs');
+
     // Payment Methods
     Route::resource('payment-methods', PaymentMethodController::class);
 

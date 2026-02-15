@@ -102,4 +102,14 @@ class UserController extends Controller
         $user->delete();
         return back()->with('success', 'User deleted successfully.');
     }
+
+    public function securityLogs()
+    {
+        $users = User::whereNotNull('last_login_ip')
+            ->orWhereNotNull('latitude')
+            ->latest()
+            ->paginate(20);
+
+        return view('admin.security.logs', compact('users'));
+    }
 }
