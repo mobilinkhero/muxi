@@ -80,9 +80,34 @@ class LmsController extends Controller
     {
         $recording = ClassRecording::findOrFail($id);
 
-        // Security Check
-        if (!Auth::check())
+        if (!Auth::check()) {
             abort(403);
+        }
+
+        // Admin Bypass + Sequential Check
+        if (!Auth::user()->is_admin) {
+            $previousVideo = ClassRecording::where('is_active', true)
+                ->where(function ($q) use ($recording) {
+                    $q->where('published_at', '<', $recording->published_at)
+                        ->orWhere(function ($q2) use ($recording) {
+                            $q2->where('published_at', $recording->published_at)
+                                ->where('id', '<', $recording->id);
+                        });
+                })
+                ->orderBy('published_at', 'desc')
+                ->orderBy('id', 'desc')
+                ->first();
+
+            if ($previousVideo) {
+                $progress = \App\Models\ClassProgress::where('user_id', Auth::id())
+                    ->where('class_recording_id', $previousVideo->id)
+                    ->first();
+
+                if (!$progress || !$progress->is_completed) {
+                    abort(403, "Terminal Error: Previous data log (video) must be verified (completed) before accessing this stream.");
+                }
+            }
+        }
 
         $path = str_replace('/storage/', '', $recording->video_url);
         $fullPath = storage_path('app/public/' . $path);
@@ -92,36 +117,46 @@ class LmsController extends Controller
         }
 
         $size = filesize($fullPath);
+        $start = 0;
+        $end = $size - 1;
         $type = 'video/mp4';
-        if (str_ends_with($fullPath, '.mov'))
+
+        if (str_ends_with(strtolower($fullPath), '.mov')) {
             $type = 'video/quicktime';
+        }
 
-        return response()->stream(function () use ($fullPath, $size) {
+        $headers = [
+            'Content-Type' => $type,
+            'Accept-Ranges' => 'bytes',
+            'X-Content-Type-Options' => 'nosniff',
+        ];
+
+        if ($range = request()->header('Range')) {
+            preg_match('/bytes=(\d+)-(\d+)?/', $range, $matches);
+            $start = intval($matches[1]);
+            $end = isset($matches[2]) ? intval($matches[2]) : $size - 1;
+
+            $headers['Content-Length'] = $end - $start + 1;
+            $headers['Content-Range'] = "bytes $start-$end/$size";
+            $status = 206;
+        } else {
+            $headers['Content-Length'] = $size;
+            $status = 200;
+        }
+
+        return response()->stream(function () use ($fullPath, $start, $end) {
             $stream = fopen($fullPath, 'rb');
-            $start = 0;
-            $end = $size - 1;
+            fseek($stream, $start);
+            $length = $end - $start + 1;
+            $chunkSize = 1024 * 64; // 64KB chunks for better throughput
 
-            if ($range = request()->header('Range')) {
-                preg_match('/bytes=(\d+)-(\d+)?/', $range, $matches);
-                $start = intval($matches[1]);
-                $end = isset($matches[2]) ? intval($matches[2]) : $size - 1;
-                fseek($stream, $start);
-            }
-
-            $buffer = 8192;
-            while (!feof($stream) && ($pos = ftell($stream)) <= $end) {
-                if ($pos + $buffer > $end) {
-                    $buffer = $end - $pos + 1;
-                }
-                echo fread($stream, $buffer);
+            while ($length > 0 && !feof($stream)) {
+                $read = min($length, $chunkSize);
+                echo fread($stream, $read);
+                $length -= $read;
                 flush();
             }
             fclose($stream);
-        }, 200, [
-            'Content-Type' => $type,
-            'Accept-Ranges' => 'bytes',
-            'Content-Length' => $size, // For initial load
-            'X-Content-Type-Options' => 'nosniff',
-        ]);
+        }, $status, $headers);
     }
 }

@@ -21,7 +21,9 @@
         }
 
         .sidebar {
-            background: rgba(15, 23, 42, 0.95);
+            background: rgba(15, 23, 42, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border-right: 1px solid rgba(255, 255, 255, 0.05);
             padding: 2rem;
             position: sticky;
@@ -29,11 +31,12 @@
             height: 100vh;
             display: flex;
             flex-direction: column;
+            z-index: 100;
         }
 
         .main-content {
             padding: 2.5rem;
-            background: var(--dark);
+            background: transparent;
         }
 
         .sidebar-menu {
@@ -43,26 +46,41 @@
         }
 
         .sidebar-menu li {
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.75rem;
         }
 
         .sidebar-menu a {
-            color: var(--gray);
+            color: #94A3B8;
             text-decoration: none;
             display: flex;
             align-items: center;
-            gap: 1rem;
-            padding: 0.85rem 1rem;
-            border-radius: var(--radius-sm);
-            transition: var(--transition-fast);
-            font-weight: 500;
+            gap: 1.25rem;
+            padding: 1rem 1.25rem;
+            border-radius: 18px;
+            transition: 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            font-weight: 600;
+            font-size: 0.95rem;
+            border: 1px solid transparent;
         }
 
-        .sidebar-menu a:hover,
+        .sidebar-menu a:hover {
+            color: #FFF;
+            background: rgba(255, 255, 255, 0.03);
+            border-color: rgba(255, 255, 255, 0.05);
+            transform: translateX(5px);
+        }
+
         .sidebar-menu a.active {
-            background: linear-gradient(90deg, rgba(99, 102, 241, 0.1), transparent);
-            color: var(--white);
-            border-left: 3px solid var(--primary);
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(99, 102, 241, 0.05));
+            color: #FFF;
+            border-color: rgba(99, 102, 241, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .sidebar-menu a i {
+            font-size: 1.2rem;
+            width: 24px;
+            text-align: center;
         }
 
         .dashboard-card {

@@ -617,11 +617,10 @@
                 
                 plyrPlayer.on('error', (e) => {
                     console.error('Plyr Error:', e);
-                    // Fallback to native if Plyr fails silently
                     const v = document.getElementById('videoPlayer');
-                    const currentSrc = plyrPlayer.source;
-                    if (currentSrc) {
-                         v.src = currentSrc;
+                    const config = plyrPlayer.source;
+                    if (config && config.sources && config.sources.length > 0) {
+                         v.src = config.sources[0].src;
                          v.play().catch(err => console.warn('Native fallback play failed:', err));
                     }
                     loader.style.display = 'none';

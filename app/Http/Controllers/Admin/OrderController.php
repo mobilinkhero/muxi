@@ -29,12 +29,26 @@ class OrderController extends Controller
             'status' => 'required|in:pending,completed,rejected',
         ]);
 
-        if ($request->status === 'rejected') {
+        if ($request->status === 'completed') {
+            $order->update(['status' => 'completed']);
+
+            // Grant Premium Status if relevant service
+            $premiumServices = [
+                'GSM Premium Trading Course (Upfront)',
+                'Premium Access (Pay Later) Verification',
+                'Premium Access',
+                'Signals Premium'
+            ];
+
+            if (in_array($order->service_name, $premiumServices)) {
+                $order->user->update(['is_premium' => true]);
+            }
+        } elseif ($request->status === 'rejected') {
             $request->validate([
                 'rejection_reason' => 'nullable|string|max:1000',
             ]);
             $order->update([
-                'status' => $request->status,
+                'status' => 'rejected',
                 'rejection_reason' => $request->rejection_reason,
             ]);
         } else {

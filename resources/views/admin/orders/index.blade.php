@@ -1,203 +1,337 @@
 @extends('layouts.admin')
 
-@section('title', 'Manage Orders')
-@section('header', 'Order Management')
+@section('title', 'Order Stream - Admin')
 
 @section('content')
-    <div class="card">
-        <div style="margin-bottom: 1.5rem; display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; justify-content: space-between;">
-            <!-- Filters -->
-            <div style="display: flex; gap: 0.5rem;">
-                <a href="{{ route('admin.orders.index') }}" 
-                   class="btn btn-sm {{ !request('status') ? 'btn-primary' : 'btn-secondary' }}" 
-                   style="{{ !request('status') ? '' : 'background: transparent; border: 1px solid var(--gray); color: var(--gray-light);' }}">
-                    All
-                </a>
-                <a href="{{ route('admin.orders.index', ['status' => 'pending']) }}" 
-                   class="btn btn-sm {{ request('status') == 'pending' ? 'btn-primary' : 'btn-secondary' }}"
-                   style="{{ request('status') == 'pending' ? 'background: #F59E0B; border-color: #F59E0B;' : 'background: transparent; border: 1px solid var(--gray); color: var(--gray-light);' }}">
-                    Pending
-                </a>
-                <a href="{{ route('admin.orders.index', ['status' => 'completed']) }}" 
-                   class="btn btn-sm {{ request('status') == 'completed' ? 'btn-primary' : 'btn-secondary' }}"
-                   style="{{ request('status') == 'completed' ? 'background: #10B981; border-color: #10B981;' : 'background: transparent; border: 1px solid var(--gray); color: var(--gray-light);' }}">
-                    Completed
-                </a>
-                <a href="{{ route('admin.orders.index', ['status' => 'rejected']) }}" 
-                   class="btn btn-sm {{ request('status') == 'rejected' ? 'btn-primary' : 'btn-secondary' }}"
-                   style="{{ request('status') == 'rejected' ? 'background: #EF4444; border-color: #EF4444;' : 'background: transparent; border: 1px solid var(--gray); color: var(--gray-light);' }}">
-                    Rejected
-                </a>
-            </div>
-            
-            <!-- Search (Optional for future) -->
-            <div>
-                <form action="{{ route('admin.orders.index') }}" method="GET" style="display: flex; gap: 0.5rem;">
-                    <input type="text" name="search" placeholder="Search Order ID..." class="form-input" style="padding: 0.4rem;" value="{{ request('search') }}">
-                    <button type="submit" class="btn btn-secondary btn-sm">Search</button>
-                </form>
-            </div>
+    <div class="h-reveal" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 3rem;">
+        <div>
+            <h1 style="font-weight: 900; font-size: 2.5rem; letter-spacing: -1px; margin: 0;">Order Terminal</h1>
+            <p style="color: #94A3B8; margin-top: 0.5rem;">Managing {{ $orders->total() }} incoming data streams</p>
         </div>
 
+        <div class="filter-pill-cloud">
+            <a href="{{ route('admin.orders.index') }}"
+                class="f-pill {{ !request('status') ? 'active' : '' }}">ALL_NODES</a>
+            <a href="{{ route('admin.orders.index', ['status' => 'pending']) }}"
+                class="f-pill {{ request('status') == 'pending' ? 'active alert' : '' }}">PENDING</a>
+            <a href="{{ route('admin.orders.index', ['status' => 'completed']) }}"
+                class="f-pill {{ request('status') == 'completed' ? 'active success' : '' }}">COMPLETED</a>
+            <a href="{{ route('admin.orders.index', ['status' => 'rejected']) }}"
+                class="f-pill {{ request('status') == 'rejected' ? 'active danger' : '' }}">REJECTED</a>
+        </div>
+    </div>
+
+    <div class="h-card h-reveal" style="padding: 1rem;">
         <div style="overflow-x: auto;">
-            <table style="width: 100%; border-collapse: collapse;">
+            <table class="h-table">
                 <thead>
-                    <tr style="background: rgba(255,255,255,0.05);">
-                        <th style="padding: 1rem; text-align: left; color: var(--gray-light);">Order ID</th>
-                        <th style="padding: 1rem; text-align: left; color: var(--gray-light);">Student Info</th>
-                        <th style="padding: 1rem; text-align: left; color: var(--gray-light);">Order Details</th>
-                        <th style="padding: 1rem; text-align: left; color: var(--gray-light);">Payment Proof</th>
-                        <th style="padding: 1rem; text-align: left; color: var(--gray-light);">Status</th>
-                        <th style="padding: 1rem; text-align: left; color: var(--gray-light);">Action</th>
+                    <tr>
+                        <th>Identity</th>
+                        <th>Objective</th>
+                        <th>Payment Proof</th>
+                        <th>Status</th>
+                        <th>Protocols</th>
                     </tr>
                 </thead>
                 <tbody>
                     @forelse($orders as $order)
-                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.05); transition: background 0.2s; vertical-align: middle;">
-                            <td style="padding: 1rem;">#{{ $order->id }}</td>
-                            <td style="padding: 1rem;">
-                                <div style="font-weight: bold; color: var(--white);">{{ $order->user->name }}</div>
-                                <div style="font-size: 0.85rem; color: var(--gray);">{{ $order->user->email }}</div>
-                            </td>
-                            <td style="padding: 1rem;">
-                                <div style="color: var(--primary-light);">{{ $order->service_name }}</div>
-                                <div style="font-size: 1.1rem; font-weight: bold; margin-top: 0.25rem;">
-                                    ${{ number_format($order->amount, 2) }}
+                        <tr>
+                            <td>
+                                <div style="font-weight: 800; font-size: 1rem;">{{ $order->user->name }}</div>
+                                <div style="font-size: 0.75rem; color: #94A3B8; font-family: 'JetBrains Mono';">
+                                    {{ $order->user->email }}</div>
+                                <div style="font-size: 0.7rem; color: var(--h-primary); margin-top: 4px;">ID: #{{ $order->id }}
                                 </div>
-                                <div style="font-size: 0.85rem; color: var(--gray);">Via: {{ $order->payment_method }}</div>
                             </td>
-                            <td style="padding: 1rem;">
-                                @if($order->payment_method === 'Verification' && $order->service_name === 'Premium Access (Pay Later) Verification')
-                                    @php
-                                        $verification = json_decode($order->notes, true);
-                                    @endphp
+                            <td>
+                                <div style="font-weight: 700; color: white;">{{ $order->service_name }}</div>
+                                <div style="font-size: 1.25rem; font-weight: 900; color: var(--h-primary); margin-top: 4px;">
+                                    ${{ number_format($order->amount, 2) }}</div>
+                                <div style="font-size: 0.75rem; color: #94A3B8;">Method: {{ $order->payment_method }}</div>
+                            </td>
+                            <td>
+                                @if($order->payment_method === 'Verification')
+                                    @php $verification = json_decode($order->notes, true); @endphp
                                     @if(is_array($verification))
-                                        <div style="font-size: 0.85rem; color: var(--gray-light); margin-bottom: 0.5rem;">
-                                            <div><strong>CNIC:</strong> {{ $verification['cnic_number'] ?? 'N/A' }}</div>
-                                            <div><strong>Mobile:</strong> {{ $verification['mobile'] ?? 'N/A' }}</div>
-                                        </div>
-                                        <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                                        <div style="display: flex; gap: 8px;">
                                             @foreach(['cnicFront', 'cnicBack', 'profilePhoto'] as $key)
                                                 @if(isset($verification[$key]))
-                                                    <a href="{{ Storage::url($verification[$key]) }}" target="_blank" 
-                                                       style="display: block; width: 60px; height: 40px; overflow: hidden; border-radius: 4px; border: 1px solid rgba(255,255,255,0.1);"
-                                                       title="{{ ucfirst(preg_replace('/(?<!^)[A-Z]/', ' $0', $key)) }}">
-                                                        <img src="{{ Storage::url($verification[$key]) }}" alt="{{ $key }}" 
-                                                             style="width: 100%; height: 100%; object-fit: cover;">
+                                                    <a href="{{ Storage::url($verification[$key]) }}" target="_blank" class="proof-frame">
+                                                        <img src="{{ Storage::url($verification[$key]) }}" alt="doc">
                                                     </a>
                                                 @endif
                                             @endforeach
                                         </div>
-                                    @else
-                                        <span style="color: var(--gray);">Invalid Data</span>
                                     @endif
                                 @elseif($order->screenshot_path)
-                                    <div style="display: flex; flex-direction: column; gap: 0.5rem;">
-                                        <a href="{{ Storage::url($order->screenshot_path) }}" target="_blank" 
-                                           style="display: block; width: 100px; height: 60px; overflow: hidden; border-radius: 4px; border: 1px solid rgba(255,255,255,0.1);">
-                                            <img src="{{ Storage::url($order->screenshot_path) }}" alt="Proof" 
-                                                 style="width: 100%; height: 100%; object-fit: cover;">
+                                    <div style="display: flex; align-items: center; gap: 12px;">
+                                        <a href="{{ Storage::url($order->screenshot_path) }}" target="_blank"
+                                            class="proof-frame large">
+                                            <img src="{{ Storage::url($order->screenshot_path) }}" alt="proof">
                                         </a>
                                         @if($order->transaction_id)
-                                            <div style="font-size: 0.8rem; font-family: monospace; color: var(--gray);">
-                                                TXID: {{ Str::limit($order->transaction_id, 15) }}
-                                            </div>
+                                            <div style="font-size: 0.7rem; font-family: 'JetBrains Mono'; color: #64748B;">TX:
+                                                {{ Str::limit($order->transaction_id, 10) }}</div>
                                         @endif
                                     </div>
                                 @else
-                                    <span style="color: var(--gray);">No Proof Uploaded</span>
+                                    <span style="font-size: 0.75rem; color: #475569;">NO_PROOF_FOUND</span>
                                 @endif
                             </td>
-                            <td style="padding: 1rem;">
-                                @if($order->status == 'pending')
-                                    <span style="background: rgba(245, 158, 11, 0.2); color: #F59E0B; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.85rem;">Pending Review</span>
-                                @elseif($order->status == 'completed')
-                                    <span style="background: rgba(16, 185, 129, 0.2); color: #10B981; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.85rem;">Approved</span>
-                                @else
-                                    <span style="background: rgba(239, 68, 68, 0.2); color: #EF4444; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.85rem;">Rejected</span>
-                                @endif
-                            </td>
-                            <td style="padding: 1rem;">
-                                <form action="{{ route('admin.order.update', $order->id) }}" method="POST"
-                                    style="display: flex; flex-direction: column; gap: 0.5rem;">
-                                    @csrf
-                                    
-                                    <!-- Approve Button: Show if Pending or Rejected -->
-                                    @if($order->status != 'completed')
-                                        <button type="submit" name="status" value="completed" 
-                                                class="btn btn-sm" 
-                                                style="background: #10B981; color: white; border: none; width: 100%; text-align: center; font-weight: 500;">
-                                            {{ $order->status == 'rejected' ? 'Re-Approve' : 'Approve' }}
-                                        </button>
-                                    @endif
-                                    
-                                    <!-- Reject Button: Show if Pending or Completed -->
-                                    @if($order->status != 'rejected')
-                                        <div style="margin-top: {{ $order->status == 'completed' ? '0' : '0.5rem' }};">
-                                            <input type="text" name="rejection_reason" placeholder="Reason for rejection..." 
-                                                style="width: 100%; padding: 0.25rem 0.5rem; background: var(--dark); border: 1px solid rgba(239, 68, 68, 0.3); color: var(--white); font-size: 0.8rem; border-radius: 4px; margin-bottom: 0.4rem; display: none;"
-                                                id="reason-input-{{ $order->id }}">
-                                                
-                                            <button type="button" onclick="showRejectionInput({{ $order->id }})" 
-                                                    id="reject-btn-{{ $order->id }}"
-                                                    class="btn btn-sm" 
-                                                    style="background: rgba(239, 68, 68, 0.1); color: #EF4444; border: 1px solid #EF4444; width: 100%; text-align: center; font-weight: 500;">
-                                                Reject
-                                            </button>
-
-                                            <button type="submit" name="status" value="rejected" 
-                                                    id="confirm-reject-btn-{{ $order->id }}"
-                                                    class="btn btn-sm" 
-                                                    style="background: #EF4444; color: white; border: none; width: 100%; text-align: center; display: none; font-weight: 500;">
-                                                Confirm Reject
-                                            </button>
-                                        </div>
-                                    @endif
-                                </form>
-
+                            <td>
+                                <span class="status-pill"
+                                    style="background: {{ $order->status == 'pending' ? 'rgba(245, 158, 11, 0.1)' : ($order->status == 'completed' ? 'rgba(16, 185, 129, 0.1)' : 'rgba(239, 68, 68, 0.1)') }}; 
+                                                     color: {{ $order->status == 'pending' ? '#F59E0B' : ($order->status == 'completed' ? '#10B981' : '#EF4444') }};">
+                                    {{ strtoupper($order->status) }}
+                                </span>
                                 @if($order->status == 'rejected' && $order->rejection_reason)
-                                    <div style="margin-top: 0.5rem; font-size: 0.75rem; color: #EF4444; background: rgba(239, 68, 68, 0.1); padding: 0.5rem; border-radius: 4px;">
-                                        <strong>Reason:</strong> {{ $order->rejection_reason }}
-                                    </div>
+                                    <div
+                                        style="font-size: 0.7rem; color: #EF4444; margin-top: 6px; max-width: 150px; opacity: 0.8;">
+                                        "{{ $order->rejection_reason }}"</div>
                                 @endif
+                            </td>
+                            <td>
+                                <div style="display: flex; flex-direction: column; gap: 8px;">
+                                    <form action="{{ route('admin.order.update', $order->id) }}" method="POST">
+                                        @csrf
+                                        @if($order->status != 'completed')
+                                            <button type="submit" name="status" value="completed" class="action-btn-h success">
+                                                <i class="fas fa-check"></i>
+                                                {{ $order->status == 'rejected' ? 'RE-VERIFY' : 'VERIFY' }}
+                                            </button>
+                                        @endif
 
-                                <form action="{{ route('admin.orders.destroy', $order->id) }}" method="POST" 
-                                    onsubmit="return confirm('⚠️ Warning: This will permanently delete this order from the database. This action cannot be undone. Continue?')"
-                                    style="margin-top: 0.5rem;">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-sm" 
-                                            style="background: transparent; color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.3); width: 100%; font-size: 0.75rem; padding: 0.15rem 0.5rem;">
-                                        🗑️ Delete Permanently
-                                    </button>
-                                </form>
+                                        @if($order->status != 'rejected')
+                                            <div id="rejection-block-{{ $order->id }}" style="margin-top: 4px;">
+                                                <input type="text" name="rejection_reason" placeholder="Input error code..."
+                                                    class="h-input-sm" id="reason-{{ $order->id }}"
+                                                    style="display: none; margin-bottom: 4px;">
+                                                <button type="button" onclick="toggleRejection({{ $order->id }})"
+                                                    class="action-btn-h danger" id="rej-trigger-{{ $order->id }}">
+                                                    <i class="fas fa-times"></i> REJECT
+                                                </button>
+                                                <button type="submit" name="status" value="rejected"
+                                                    class="action-btn-h danger-fill" id="rej-confirm-{{ $order->id }}"
+                                                    style="display: none;">
+                                                    CONFIRM_REJECT
+                                                </button>
+                                            </div>
+                                        @endif
+                                    </form>
+
+                                    <form action="{{ route('admin.orders.destroy', $order->id) }}" method="POST"
+                                        onsubmit="return confirm('PERMANENTLY_PURGE_DATA?')">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit"
+                                            style="background: transparent; border: none; color: #475569; font-size: 0.65rem; cursor: pointer; text-decoration: underline;">
+                                            PURGE_RECORD
+                                        </button>
+                                    </form>
+                                </div>
                             </td>
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="6" style="text-align: center; padding: 3rem; color: var(--gray);">No orders found matching your criteria.</td>
+                            <td colspan="5" style="text-align: center; padding: 5rem; color: #94A3B8;">ZERO_RESULTS_IN_SECTOR
+                            </td>
                         </tr>
                     @endforelse
                 </tbody>
             </table>
         </div>
-        
-        <div style="margin-top: 1.5rem;">
+
+        <div style="margin-top: 2rem; border-top: 1px solid var(--h-border); padding-top: 1.5rem;">
             {{ $orders->links() }}
         </div>
     </div>
-@endsection
 
-@section('scripts')
-    <script>
-        function showRejectionInput(id) {
-            document.getElementById('reject-btn-' + id).style.display = 'none';
-
-            const input = document.getElementById('reason-input-' + id);
-            input.style.display = 'block';
-            input.focus();
-
-            document.getElementById('confirm-reject-btn-' + id).style.display = 'block';
+    <style>
+        .filter-pill-cloud {
+            display: flex;
+            gap: 10px;
         }
+
+        .f-pill {
+            padding: 8px 20px;
+            border-radius: 50px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--h-border);
+            color: #94A3B8;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 0.75rem;
+            transition: 0.3s;
+        }
+
+        .f-pill:hover {
+            background: rgba(255, 255, 255, 0.08);
+            color: white;
+        }
+
+        .f-pill.active {
+            background: var(--h-primary);
+            color: white;
+            border-color: var(--h-primary);
+        }
+
+        .f-pill.active.alert {
+            background: #F59E0B;
+            border-color: #F59E0B;
+        }
+
+        .f-pill.active.success {
+            background: #10B981;
+            border-color: #10B981;
+        }
+
+        .f-pill.active.danger {
+            background: #EF4444;
+            border-color: #EF4444;
+        }
+
+        .proof-frame {
+            width: 45px;
+            height: 30px;
+            border-radius: 6px;
+            overflow: hidden;
+            display: block;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: 0.3s;
+        }
+
+        .proof-frame.large {
+            width: 80px;
+            height: 50px;
+        }
+
+        .proof-frame:hover {
+            transform: scale(1.1);
+            border-color: var(--h-primary);
+        }
+
+        .proof-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .action-btn-h {
+            width: 100%;
+            padding: 8px 12px;
+            border-radius: 10px;
+            border: 1px solid transparent;
+            font-size: 0.7rem;
+            font-weight: 800;
+            cursor: pointer;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .action-btn-h.success {
+            background: rgba(16, 185, 129, 0.1);
+            color: #10B981;
+            border-color: rgba(16, 185, 129, 0.2);
+        }
+
+        .action-btn-h.danger {
+            background: rgba(239, 68, 68, 0.1);
+            color: #EF4444;
+            border-color: rgba(239, 68, 68, 0.2);
+        }
+
+        .action-btn-h.danger-fill {
+            background: #EF4444;
+            color: white;
+        }
+
+        .action-btn-h:hover {
+            transform: translateY(-2px);
+            filter: brightness(1.1);
+        }
+
+        .h-input-sm {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            border-radius: 8px;
+            padding: 6px 10px;
+            color: white;
+            font-size: 0.75rem;
+        }
+
+        .h-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0 12px;
+        }
+
+        .h-table tr {
+            background: rgba(255, 255, 255, 0.02);
+            transition: 0.3s;
+        }
+
+        .h-table tr:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .h-table td,
+        .h-table th {
+            padding: 1.5rem;
+            text-align: left;
+            vertical-align: middle;
+        }
+
+        .h-table th {
+            font-size: 0.7rem;
+            color: #94A3B8;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        .h-table td:first-child {
+            border-radius: 20px 0 0 20px;
+        }
+
+        .h-table td:last-child {
+            border-radius: 0 20px 20px 0;
+        }
+
+        .status-pill {
+            padding: 6px 14px;
+            border-radius: 50px;
+            font-size: 0.65rem;
+            font-weight: 900;
+            letter-spacing: 0.5px;
+        }
+
+        .h-reveal {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+    </style>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script>
+        function toggleRejection(id) {
+            document.getElementById('rej-trigger-' + id).style.display = 'none';
+            document.getElementById('reason-' + id).style.display = 'block';
+            document.getElementById('reason-' + id).focus();
+            document.getElementById('rej-confirm-' + id).style.display = 'block';
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            gsap.to('.h-reveal', {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                stagger: 0.1,
+                ease: "power4.out"
+            });
+        });
     </script>
 @endsection
