@@ -738,15 +738,17 @@ p {
         /* Space for bottom nav */
     }
 
-    .container {
-        padding: 0 var(--spacing-sm);
-    }
-
     /* Hide Desktop Nav Elements */
     .nav-links,
     .navbar .btn-primary {
         display: none !important;
     }
+
+    .container {
+        padding: 0 var(--spacing-sm);
+    }
+
+
 
     .navbar {
         padding: 0.5rem 0;
@@ -781,34 +783,6 @@ p {
         width: 100%;
         justify-content: center;
         padding: 1rem;
-    }
-
-    /* Grid Adjustments */
-    .features-grid,
-    .services-grid,
-    .stats-grid,
-    .analysis-grid {
-        grid-template-columns: 1fr !important;
-        gap: var(--spacing-md) !important;
-    }
-
-    .feature-card,
-    .service-card,
-    .dashboard-card {
-        padding: var(--spacing-md) !important;
-    }
-
-    /* Signal Card Mobile */
-    .signal-body {
-        grid-template-columns: 1fr 1fr;
-        gap: 0.5rem;
-    }
-
-    .signal-body>div:last-child {
-        grid-column: span 2;
-        text-align: center;
-        border-top: 1px solid rgba(255, 255, 255, 0.05);
-        padding-top: 0.5rem;
     }
 
     /* Bottom Tab Bar (Mobile App Feel) */
@@ -924,7 +898,7 @@ p {
     background: var(--dark-light);
     border: 1px solid rgba(255, 255, 255, 0.05);
     border-radius: var(--radius-lg);
-    padding: var(--spacing-md);
+    padding: var(--spacing-lg);
     position: relative;
     transition: var(--transition-base);
     overflow: hidden;
@@ -940,11 +914,11 @@ p {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
 }
 
 .signal-symbol {
-    font-size: 1.25rem;
+    font-size: 1.5rem;
     font-weight: 700;
     color: var(--white);
 }
@@ -968,25 +942,27 @@ p {
 }
 
 .signal-body {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--spacing-xs);
-    margin-bottom: var(--spacing-sm);
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: var(--spacing-md);
     padding: var(--spacing-sm);
     background: rgba(0, 0, 0, 0.2);
     border-radius: var(--radius-md);
 }
 
 .signal-data-label {
-    font-size: 0.75rem;
+    font-size: 0.8rem;
     color: var(--gray);
     margin-bottom: 0.25rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
 }
 
 .signal-data-value {
-    font-family: monospace;
-    font-weight: 600;
+    font-size: 1.2rem;
+    font-weight: 700;
     color: var(--white);
+    line-height: 1;
 }
 
 /* ===== ANIMATIONS ===== */
@@ -1074,7 +1050,9 @@ p {
     pointer-events: none;
 }
 
-.reveal.active {
+.reveal.active,
+.animate-on-scroll.visible,
+.animate-on-scroll.active {
     opacity: 1;
     transform: translateY(0);
     pointer-events: auto;

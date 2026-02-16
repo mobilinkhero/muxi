@@ -293,22 +293,22 @@
 
                 <h1 class="animate-slide-up delay-100"
                     style="font-size: 3.5rem; margin-bottom: 1.5rem; background: linear-gradient(to right, #fff, #94a3b8); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
-                    {!! $settings['home_hero_title'] ?? 'Master Trading Across <br> <span style="background: linear-gradient(135deg, #8B5CF6, #EC4899); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">All Major Markets</span>' !!}
+                    {!! $settings['home_hero_title'] ?? 'Master Financial Markets <br> Through <span style="background: linear-gradient(135deg, #8B5CF6, #EC4899); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Real Experience</span>' !!}
                 </h1>
 
                 <p class="hero-description animate-slide-up delay-200"
                     style="font-size: 1.2rem; line-height: 1.8; margin-bottom: 2.5rem; color: var(--gray-light);">
-                    {!! $settings['home_hero_desc'] ?? '<i class="fab fa-bitcoin" style="color: #F7931A;"></i> Crypto &nbsp;|&nbsp; <i class="fas fa-chart-line" style="color: #10B981;"></i> Forex &nbsp;|&nbsp; <i class="fas fa-building" style="color: #3B82F6;"></i> Stocks &nbsp;|&nbsp; <i class="fas fa-layer-group" style="color: #EC4899;"></i> Indices' !!}
+                    {!! $settings['home_hero_desc'] ?? 'A global trading learning community covering Crypto, Forex, Stocks, Commodities, Indices, Options & Futures. <br> <span style="color: var(--primary-light); font-weight: 500;">Learning first. Experience always. Growth together.</span>' !!}
                 </p>
 
                 <div class="hero-cta animate-slide-up delay-300"
                     style="display: flex; gap: 1rem; justify-content: center;">
-                    <a href="#markets" class="btn btn-primary btn-glow" style="padding: 1rem 2rem; font-size: 1.1rem;">
-                        <span>Explore Markets</span>
+                    <a href="#contact" class="btn btn-primary btn-glow" style="padding: 1rem 2rem; font-size: 1.1rem;">
+                        <span>Join Community</span>
                         <i class="fas fa-arrow-right" style="margin-left: 0.5rem;"></i>
                     </a>
-                    <a href="#services" class="btn btn-secondary" style="padding: 1rem 2rem; font-size: 1.1rem;">
-                        <span>Our Services</span>
+                    <a href="/learn" class="btn btn-secondary" style="padding: 1rem 2rem; font-size: 1.1rem;">
+                        <span>Start Learning</span>
                     </a>
                 </div>
             </div>
@@ -436,8 +436,8 @@
         <div class="container">
             <div class="section-header">
                 <span class="section-badge">{{ $settings['home_markets_badge'] ?? 'Markets We Cover' }}</span>
-                <h2>{{ $settings['home_markets_title'] ?? 'Trade Across All Major Markets' }}</h2>
-                <p>{{ $settings['home_markets_desc'] ?? 'We provide comprehensive education and tools across all major markets - designed for beginners and professional traders alike.' }}
+                <h2>{{ $settings['home_markets_title'] ?? 'Markets We Trade & Teach' }}</h2>
+                <p>{{ $settings['home_markets_desc'] ?? 'We focus on understanding how each market works, how liquidity moves, and how traders can build long-term skill across multiple financial environments.' }}
                 </p>
             </div>
             <div class="features-grid"
@@ -462,7 +462,7 @@
                 <div class="feature-card animate-on-scroll">
                     <div class="feature-icon"><i class="fas fa-gem"></i></div>
                     <h3>{{ $settings['home_market_3_title'] ?? 'Commodities' }}</h3>
-                    <p>{{ $settings['home_market_3_desc'] ?? 'Trade Gold (XAU), Silver, and Oil. Master supply/demand dynamics and safe-haven assets.' }}
+                    <p>{{ $settings['home_market_3_desc'] ?? 'Trade Gold, Silver, Metals, and Energy. Master supply/demand dynamics and safe-haven assets.' }}
                     </p>
                 </div>
 
@@ -485,8 +485,8 @@
                 <!-- Derivatives -->
                 <div class="feature-card animate-on-scroll">
                     <div class="feature-icon"><i class="fas fa-file-contract"></i></div>
-                    <h3>{{ $settings['home_market_6_title'] ?? 'Derivatives' }}</h3>
-                    <p>{{ $settings['home_market_6_desc'] ?? 'Leverage your positions with Futures & Options. Advanced hedging and risk strategies.' }}
+                    <h3>{{ $settings['home_market_6_title'] ?? 'Options & Futures' }}</h3>
+                    <p>{{ $settings['home_market_6_desc'] ?? 'Leverage your positions with sophisticated instruments. Advanced hedging and risk strategies.' }}
                     </p>
                 </div>
             </div>
@@ -508,19 +508,19 @@
                     <div class="service-header">
                         <div class="service-icon"><i class="fas fa-graduation-cap"></i></div>
                         <div>
-                            <h3>Learn With Us</h3>
+                            <h3>Learn Trading</h3>
                         </div>
                     </div>
-                    <p>Complete trading education. From beginner basics to institutional strategies.</p>
+                    <p>Market structure, psychology, risk management, and multi-market training.</p>
                     <ul class="service-features">
                         <li><i class="fas fa-check-circle" style="color: var(--accent); margin-right: 0.5rem;"></i>
-                            Multi-Market Courses</li>
+                            Market Structure</li>
                         <li><i class="fas fa-check-circle" style="color: var(--accent); margin-right: 0.5rem;"></i>
-                            Technical Analysis</li>
-                        <li><i class="fas fa-check-circle" style="color: var(--accent); margin-right: 0.5rem;"></i> Live
-                            Sessions</li>
-                        <li><i class="fas fa-check-circle" style="color: var(--accent); margin-right: 0.5rem;"></i> 24/7
-                            Access</li>
+                            Trading Psychology</li>
+                        <li><i class="fas fa-check-circle" style="color: var(--accent); margin-right: 0.5rem;"></i>
+                            Risk Management</li>
+                        <li><i class="fas fa-check-circle" style="color: var(--accent); margin-right: 0.5rem;"></i>
+                            Strategy Building</li>
                     </ul>
                     <a href="/learn" class="btn btn-primary btn-glow" style="width: 100%; margin-top: 1.5rem;">
                         <span>Start Learning</span>
@@ -533,22 +533,22 @@
                     <div class="service-header">
                         <div class="service-icon"><i class="fas fa-chart-line"></i></div>
                         <div>
-                            <h3>Trade With Us</h3>
+                            <h3>Trade With Analysis</h3>
                         </div>
                     </div>
-                    <p>Professional signals & analysis. Crypto, Forex, Stocks & more.</p>
+                    <p>Market breakdowns, trade ideas, strategy discussions, and real examples.</p>
                     <ul class="service-features">
                         <li><i class="fas fa-check-circle" style="color: var(--accent); margin-right: 0.5rem;"></i>
-                            Daily Signals</li>
+                            Market Breakdowns</li>
                         <li><i class="fas fa-check-circle" style="color: var(--accent); margin-right: 0.5rem;"></i>
-                            Market Analysis</li>
+                            Trade Ideas</li>
                         <li><i class="fas fa-check-circle" style="color: var(--accent); margin-right: 0.5rem;"></i>
-                            Real-Time Alerts</li>
-                        <li><i class="fas fa-check-circle" style="color: var(--accent); margin-right: 0.5rem;"></i> VIP
-                            Community</li>
+                            Strategy Discussions</li>
+                        <li><i class="fas fa-check-circle" style="color: var(--accent); margin-right: 0.5rem;"></i>
+                            Real Examples</li>
                     </ul>
                     <a href="/trade" class="btn btn-success btn-glow" style="width: 100%; margin-top: 1.5rem;">
-                        <span>Start Trading</span>
+                        <span>Start Analysis</span>
                         <i class="fas fa-arrow-right" style="margin-left: 0.5rem;"></i>
                     </a>
                 </div>
@@ -556,24 +556,24 @@
                 <!-- Invest Service -->
                 <div class="service-card animate-on-scroll">
                     <div class="service-header">
-                        <div class="service-icon"><i class="fas fa-sack-dollar"></i></div>
+                        <div class="service-icon"><i class="fas fa-users"></i></div>
                         <div>
-                            <h3>Invest With Us</h3>
+                            <h3>Community Learning</h3>
                         </div>
                     </div>
-                    <p>Build long-term wealth with managed portfolios and smart allocation.</p>
+                    <p>Global trader network, live discussions, knowledge sharing, and growth culture.</p>
                     <ul class="service-features">
                         <li><i class="fas fa-check-circle" style="color: var(--accent); margin-right: 0.5rem;"></i>
-                            Portfolio Management</li>
+                            Global Network</li>
                         <li><i class="fas fa-check-circle" style="color: var(--accent); margin-right: 0.5rem;"></i>
-                            Asset Allocation</li>
+                            Live Discussions</li>
                         <li><i class="fas fa-check-circle" style="color: var(--accent); margin-right: 0.5rem;"></i>
-                            Risk-Adjusted Returns</li>
+                            Knowledge Sharing</li>
                         <li><i class="fas fa-check-circle" style="color: var(--accent); margin-right: 0.5rem;"></i>
-                            Monthly Reports</li>
+                            Growth Mindset</li>
                     </ul>
-                    <a href="/invest" class="btn btn-primary btn-glow" style="width: 100%; margin-top: 1.5rem;">
-                        <span>Start Investing</span>
+                    <a href="#contact" class="btn btn-primary btn-glow" style="width: 100%; margin-top: 1.5rem;">
+                        <span>Join Community</span>
                         <i class="fas fa-arrow-right" style="margin-left: 0.5rem;"></i>
                     </a>
                 </div>
@@ -581,262 +581,523 @@
         </div>
     </section>
 
-    <!-- How It Works Section -->
+    <!-- Founder Story & Mission Section -->
     <section class="section" id="about">
         <div class="container">
             <div class="section-header">
-                <span class="section-badge">{{ $settings['home_about_badge'] ?? 'Simple Process' }}</span>
-                <h2>{{ $settings['home_about_title'] ?? 'How It Works' }}</h2>
-                <p>{{ $settings['home_about_desc'] ?? 'Start your trading journey in three simple steps' }}</p>
+                <span class="section-badge">{{ $settings['home_about_badge'] ?? 'Who We Are' }}</span>
+                <h2>{{ $settings['home_about_title'] ?? 'The Journey Behind GSM Trading Lab' }}</h2>
+                <div
+                    style="max-width: 800px; margin: 0 auto; text-align: left; background: var(--dark-light); padding: 2rem; border-radius: var(--radius-lg); border: 1px solid rgba(255,255,255,0.05);">
+                    <p style="margin-bottom: 1rem;">GSM Trading Lab is a global trading learning community built on real
+                        market experience, practical analysis, and honest education.</p>
+                    <p style="margin-bottom: 1rem;">This platform was created with one simple vision — to help traders
+                        understand financial markets through real trading knowledge instead of hype or unrealistic
+                        promises.</p>
+                    <p style="margin-bottom: 1rem;">The founder of GSM Trading Lab started trading with passion, faced
+                        real market challenges, and experienced major losses while learning. Those experiences shaped a
+                        deeper understanding of risk, psychology, and market behavior.</p>
+                    <p style="margin-bottom: 1rem;">GSM Trading Lab was created so new traders can learn faster, avoid
+                        common beginner mistakes, and understand how real markets actually work.</p>
+                    <p style="margin-bottom: 1rem;">We focus on education across all financial markets including
+                        Cryptocurrency, Forex, Stocks, Indices, Commodities, Options, and Futures.</p>
+                    <p style="font-weight: 500; color: var(--white); margin-bottom: 2rem;">Our mission is to build one
+                        of the world’s most trusted and largest trading communities where traders learn together, grow
+                        together, and succeed through knowledge, discipline, and real experience.</p>
+
+                    <div
+                        style="padding: 1.5rem; background: rgba(0,0,0,0.2); border-left: 3px solid var(--accent); border-radius: 4px;">
+                        <h4 style="color: var(--accent); margin-bottom: 0.5rem; font-size: 1.1rem;">👤 Founder’s Journey
+                        </h4>
+                        <p style="color: var(--gray-light); font-size: 0.95rem; margin-bottom: 0.8rem;">GSM Trading Lab
+                            was built by a trader who believes real growth comes from real market experience.</p>
+                        <p style="color: var(--gray-light); font-size: 0.95rem; margin-bottom: 0.8rem;">The journey
+                            started with strong interest in technology, telecom, and financial markets. Through years of
+                            learning, practice, and facing losses, valuable lessons were gained about discipline,
+                            patience, and risk control.</p>
+                        <p style="color: var(--gray-light); font-size: 0.95rem; margin-bottom: 0.8rem;">Instead of
+                            hiding mistakes, GSM Trading Lab was created to turn those experiences into learning
+                            opportunities for others.</p>
+                        <p style="color: var(--gray-light); font-size: 0.95rem;">The goal is simple — help traders
+                            understand markets the right way and build a strong global community based on honesty and
+                            practical knowledge.</p>
+                    </div>
+                </div>
             </div>
-            <div class="features-grid"
-                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
-                <div class="feature-card reveal stagger-delay-1">
-                    <div class="feature-icon">1️⃣</div>
-                    <h3>{{ $settings['home_step_1_title'] ?? 'Choose Your Path' }}</h3>
-                    <p>{{ $settings['home_step_1_desc'] ?? 'Select whether you want to learn, trade, or invest. You can always combine services as you grow.' }}
-                    </p>
+
+            <div style="margin-top: 5rem; text-align: center;">
+                <span class="section-badge">Why Choose Us</span>
+                <h2 style="margin-bottom: 3rem;">What Makes GSM Trading Lab Different</h2>
+
+                <div class="features-grid"
+                    style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                    <!-- 1. Built on real market experience -->
+                    <div class="feature-card reveal">
+                        <div class="feature-icon"><i class="fas fa-chart-line"></i></div>
+                        <h3>Real Market Experience</h3>
+                        <p>Built on years of actual trading, not just theoretical textbook knowledge.</p>
+                    </div>
+
+                    <!-- 2. Self-made trader journey -->
+                    <div class="feature-card reveal delay-100">
+                        <div class="feature-icon"><i class="fas fa-user-tie"></i></div>
+                        <h3>Self-Made Journey</h3>
+                        <p>A founder who started from scratch, faced losses, and learned the hard way.</p>
+                    </div>
+
+                    <!-- 3. Practical analysis and strategy learning -->
+                    <div class="feature-card reveal delay-200">
+                        <div class="feature-icon"><i class="fas fa-laptop-code"></i></div>
+                        <h3>Practical Analysis</h3>
+                        <p>Learn strategies that work in live markets, with real-time application.</p>
+                    </div>
+
+                    <!-- 4. Focus on risk management and psychology -->
+                    <div class="feature-card reveal">
+                        <div class="feature-icon"><i class="fas fa-brain"></i></div>
+                        <h3>Psychology & Risk</h3>
+                        <p>Mastering the mental game and capital protection is our top priority.</p>
+                    </div>
+
+                    <!-- 5. Global community learning model -->
+                    <div class="feature-card reveal delay-100">
+                        <div class="feature-icon"><i class="fas fa-users"></i></div>
+                        <h3>Global Community</h3>
+                        <p>Join a diverse network of traders learning and growing together worldwide.</p>
+                    </div>
+
+                    <!-- 6. Multi-market trading education -->
+                    <div class="feature-card reveal delay-200">
+                        <div class="feature-icon"><i class="fas fa-globe"></i></div>
+                        <h3>Multi-Market Focus</h3>
+                        <p>Education covering Crypto, Forex, Stocks, Indices, and Commodities.</p>
+                    </div>
                 </div>
-                <div class="feature-card animate-on-scroll stagger-delay-2">
-                    <div class="feature-icon">2️⃣</div>
-                    <h3>{{ $settings['home_step_2_title'] ?? 'Get Personalized Guidance' }}</h3>
-                    <p>{{ $settings['home_step_2_desc'] ?? 'Our experts will assess your goals and create a customized trading plan across your preferred markets, tailored to your experience level.' }}
-                    </p>
+            </div>
+
+            <!-- Who This Course Is For -->
+            <div style="margin-top: 5rem; text-align: center;">
+                <span class="section-badge">Target Audience</span>
+                <h2 style="margin-bottom: 3rem;">Who This Course Is For</h2>
+
+                <div class="features-grid"
+                    style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;">
+                    <div class="feature-card reveal" style="border-top: 4px solid var(--primary);">
+                        <div class="feature-icon"><i class="fas fa-seedling"></i></div>
+                        <h3>Beginners</h3>
+                        <p>Entering the world of trading with zero prior knowledge.</p>
+                    </div>
+
+                    <div class="feature-card reveal delay-100" style="border-top: 4px solid var(--secondary);">
+                        <div class="feature-icon"><i class="fas fa-chart-down"></i></div>
+                        <h3>Struggling Traders</h3>
+                        <p>Traders facing consistent losses and seeking discipline.</p>
+                    </div>
+
+                    <div class="feature-card reveal delay-200" style="border-top: 4px solid var(--accent);">
+                        <div class="feature-icon"><i class="fas fa-layer-group"></i></div>
+                        <h3>Multi-Market Learners</h3>
+                        <p>Traders wanting to expand knowledge across all asset classes.</p>
+                    </div>
+
+                    <div class="feature-card reveal delay-300" style="border-top: 4px solid var(--primary-light);">
+                        <div class="feature-icon"><i class="fas fa-glasses"></i></div>
+                        <h3>Real Experience Seekers</h3>
+                        <p>Traders who want deep market understanding over quick hype.</p>
+                    </div>
                 </div>
-                <div class="feature-card animate-on-scroll stagger-delay-3">
-                    <div class="feature-icon">3️⃣</div>
-                    <h3>{{ $settings['home_step_3_title'] ?? 'Start Your Journey' }}</h3>
-                    <p>{{ $settings['home_step_3_desc'] ?? 'Begin learning, trading, or investing with full support from our team and community every step of the way.' }}
-                    </p>
+            </div>
+
+            <!-- Trading Philosophy -->
+            <div
+                style="margin-top: 4rem; text-align: center; padding: 3rem; background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(16, 185, 129, 0.05)); border-radius: var(--radius-lg); border: 1px solid rgba(255,255,255,0.05);">
+                <h3 style="margin-bottom: 1rem; color: var(--white);">Trading Philosophy</h3>
+                <p style="font-size: 1.2rem; max-width: 800px; margin: 0 auto; font-style: italic;">"Trading is a skill.
+                    Trading is discipline. Trading is emotional control. Trading is long-term learning."</p>
+            </div>
+
+            <!-- Future Roadmap -->
+            <div style="margin-top: 5rem;">
+                <div class="section-header">
+                    <span class="section-badge">Vision</span>
+                    <h2>Future Roadmap</h2>
+                    <p>Our commitment to building a world-class trading ecosystem.</p>
+                </div>
+
+                <div
+                    style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; position: relative;">
+                    <!-- Line connecting phases (desktop only) -->
+                    <div style="display: none; position: absolute; top: 2rem; left: 0; right: 0; height: 2px; background: rgba(255,255,255,0.1); z-index: 0;"
+                        class="roadmap-line"></div>
+
+                    <!-- Phase 1 -->
+                    <div class="feature-card animate-on-scroll" style="z-index: 1; padding: 2rem 1.5rem;">
+                        <div
+                            style="background: var(--dark); width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--primary); display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem; color: var(--primary); font-weight: bold;">
+                            1</div>
+                        <h3 style="font-size: 1.2rem; margin-bottom: 1rem;">Community & Education</h3>
+                        <ul style="list-style: none; padding: 0; font-size: 0.9rem; color: var(--gray);">
+                            <li style="margin-bottom: 0.5rem;">✔ Free market education</li>
+                            <li style="margin-bottom: 0.5rem;">✔ Social media content</li>
+                            <li>✔ Global trading community</li>
+                        </ul>
+                    </div>
+
+                    <!-- Phase 2 -->
+                    <div class="feature-card animate-on-scroll delay-100"
+                        style="z-index: 1; padding: 2rem 1.5rem; border-color: rgba(16, 185, 129, 0.3);">
+                        <div
+                            style="background: var(--dark); width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--secondary); display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem; color: var(--secondary); font-weight: bold;">
+                            2</div>
+                        <h3 style="font-size: 1.2rem; margin-bottom: 1rem;">Premium Learning</h3>
+                        <ul style="list-style: none; padding: 0; font-size: 0.9rem; color: var(--gray);">
+                            <li style="margin-bottom: 0.5rem;">✔ Structured trading courses</li>
+                            <li style="margin-bottom: 0.5rem;">✔ Strategy programs</li>
+                            <li>✔ Mentorship</li>
+                        </ul>
+                    </div>
+
+                    <!-- Phase 3 -->
+                    <div class="feature-card animate-on-scroll delay-200" style="z-index: 1; padding: 2rem 1.5rem;">
+                        <div
+                            style="background: var(--dark); width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--accent); display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem; color: var(--accent); font-weight: bold;">
+                            3</div>
+                        <h3 style="font-size: 1.2rem; margin-bottom: 1rem;">FinTech Expansion</h3>
+                        <ul style="list-style: none; padding: 0; font-size: 0.9rem; color: var(--gray);">
+                            <li style="margin-bottom: 0.5rem;">✔ Trading tools</li>
+                            <li style="margin-bottom: 0.5rem;">✔ Analysis dashboards</li>
+                            <li>✔ Risk calculators</li>
+                        </ul>
+                    </div>
+
+                    <!-- Phase 4 -->
+                    <div class="feature-card animate-on-scroll delay-300" style="z-index: 1; padding: 2rem 1.5rem;">
+                        <div
+                            style="background: var(--dark); width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--primary-light); display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem; color: var(--primary-light); font-weight: bold;">
+                            4</div>
+                        <h3 style="font-size: 1.2rem; margin-bottom: 1rem;">Global Ecosystem</h3>
+                        <ul style="list-style: none; padding: 0; font-size: 0.9rem; color: var(--gray);">
+                            <li style="margin-bottom: 0.5rem;">✔ Mobile app</li>
+                            <li style="margin-bottom: 0.5rem;">✔ Multi-market platform</li>
+                            <li>✔ AI market learning tools</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Student Reviews Section -->
-    <section class="section" id="reviews" style="background: var(--dark-light);">
+    <!-- Community Rules & Culture Section -->
+    <section class="section" id="community-rules">
         <div class="container">
             <div class="section-header">
-                <span class="section-badge">{{ $settings['home_reviews_badge'] ?? 'Success Stories' }}</span>
-                <h2>{{ $settings['home_reviews_title'] ?? 'What Our Students Say' }}</h2>
-                <p>{{ $settings['home_reviews_desc'] ?? 'Real results from real people learning with GSM Trading Lab' }}
-                </p>
+                <span class="section-badge">Our Guidelines</span>
+                <h2>Community Rules & Culture</h2>
+
+                <div
+                    style="max-width: 800px; margin: 0 auto; margin-top: 2rem; padding: 2.5rem; background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(59, 130, 246, 0.05)); border-radius: var(--radius-lg); border: 1px solid rgba(16, 185, 129, 0.2); text-align: center;">
+                    <h3 style="color: var(--secondary); margin-bottom: 1rem; font-size: 1.5rem;">Community Culture</h3>
+                    <p style="font-size: 1.2rem; line-height: 1.8; color: var(--gray-light);">GSM Trading Lab is a
+                        learning family. <br> Here traders grow together, support each other, and build professional
+                        discipline.</p>
+                </div>
             </div>
 
-            <div class="features-grid">
-                @forelse($reviews as $review)
-                    <div class="feature-card" style="text-align: left;">
-                        <div style="color: #F59E0B; margin-bottom: 0.5rem;">
-                            {{ str_repeat('★', $review->rating) }}{{ str_repeat('☆', 5 - $review->rating) }}
-                        </div>
-                        <p style="font-style: italic; margin-bottom: 1.5rem;">"{{ $review->review }}"</p>
-                        <div style="display: flex; align-items: center; gap: 1rem;">
-                            <div
-                                style="width: 40px; height: 40px; background: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; color: white;">
-                                {{ strtoupper(substr($review->name, 0, 1)) }}
-                            </div>
-                            <div>
-                                <div style="font-weight: 600; color: var(--white);">{{ $review->name }}</div>
-                                <div style="font-size: 0.8rem; color: var(--gray);">{{ $review->role ?? 'Student' }}</div>
-                            </div>
-                        </div>
-                    </div>
-                @empty
-                    <!-- Placeholder reviews if none in database -->
-                    <div class="feature-card" style="text-align: left;">
-                        <div style="color: #F59E0B; margin-bottom: 0.5rem;">★★★★★</div>
-                        <p style="font-style: italic; margin-bottom: 1.5rem;">"I started with zero knowledge about crypto.
-                            Now I'm profitable!"</p>
-                        <div style="display: flex; align-items: center; gap: 1rem;">
-                            <div
-                                style="width: 40px; height: 40px; background: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; color: white;">
-                                AH</div>
-                            <div>
-                                <div style="font-weight: 600; color: var(--white);">Ali Hassan</div>
-                                <div style="font-size: 0.8rem; color: var(--gray);">Crypto Student</div>
-                            </div>
-                        </div>
-                    </div>
-                @endforelse
-            </div>
+            <div class="features-grid"
+                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 4rem;">
 
-            <!-- Submit Review Button -->
-            <div style="text-align: center; margin-top: 3rem;">
-                <button class="btn btn-secondary" onclick="openReviewModal()">
-                    <span>Write a Review</span>
-                </button>
-            </div>
-        </div>
-    </section>
-
-    <!-- Review Modal -->
-    <div id="reviewModal"
-        style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.9); z-index: 9999; overflow-y: auto; padding: 2rem;">
-        <div style="max-width: 500px; margin: 0 auto; position: relative; top: 10%;">
-            <button onclick="closeReviewModal()"
-                style="position: absolute; top: -10px; right: -10px; width: 40px; height: 40px; border-radius: 50%; background: var(--primary); color: white; border: none; font-size: 1.5rem; cursor: pointer;">&times;</button>
-            <div
-                style="background: var(--dark); border: 1px solid var(--primary); border-radius: var(--radius-lg); padding: 2rem;">
-                <h3 style="text-align: center; margin-bottom: 1.5rem; color: var(--white);">Share Your Experience</h3>
-                <form action="{{ route('reviews.store') }}" method="POST">
-                    @csrf
-                    <div style="margin-bottom: 1rem;">
-                        <label style="display: block; margin-bottom: 0.5rem; color: var(--white);">Your Name</label>
-                        <input type="text" name="name" required
-                            style="width: 100%; padding: 0.8rem; background: var(--dark-light); border: 1px solid rgba(255,255,255,0.1); border-radius: var(--radius-md); color: white;">
-                    </div>
-                    <div style="margin-bottom: 1rem;">
-                        <label style="display: block; margin-bottom: 0.5rem; color: var(--white);">Rating</label>
-                        <select name="rating"
-                            style="width: 100%; padding: 0.8rem; background: var(--dark-light); border: 1px solid rgba(255,255,255,0.1); border-radius: var(--radius-md); color: white;">
-                            <option value="5">★★★★★ (Excellent)</option>
-                            <option value="4">★★★★☆ (Good)</option>
-                            <option value="3">★★★☆☆ (Average)</option>
-                            <option value="2">★★☆☆☆ (Poor)</option>
-                            <option value="1">★☆☆☆☆ (Terrible)</option>
-                        </select>
-                    </div>
-                    <div style="margin-bottom: 1rem;">
-                        <label style="display: block; margin-bottom: 0.5rem; color: var(--white);">Your Review</label>
-                        <textarea name="review" rows="4" required
-                            style="width: 100%; padding: 0.8rem; background: var(--dark-light); border: 1px solid rgba(255,255,255,0.1); border-radius: var(--radius-md); color: white;"></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary" style="width: 100%;">Submit Review</button>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        function openReviewModal() {
-            document.getElementById('reviewModal').style.display = 'block';
-            document.body.style.overflow = 'hidden';
-        }
-        function closeReviewModal() {
-            document.getElementById('reviewModal').style.display = 'none';
-            document.body.style.overflow = 'auto';
-        }
-    </script>
-
-    <!-- CTA Section -->
-    <section class="section cta" id="contact">
-        <div class="container">
-            <div class="cta-content">
-                <h2>{{ $settings['home_cta_title'] ?? 'Ready to Start Your Trading Journey?' }}</h2>
-                <p>{{ $settings['home_cta_desc'] ?? 'Join thousands of successful traders and investors who trust us across all markets - Crypto, Forex, Stocks, Indices, Commodities & Derivatives.' }}
-                </p>
-
-                <!-- Social Media Links -->
-                <div style="display: flex; gap: 1rem; justify-content: center; margin: 2rem 0; flex-wrap: wrap;">
-                    <!-- YouTube -->
-                    <a href="{{ $settings['youtube_link'] ?? 'https://youtube.com/@gsmtradinglab' }}" target="_blank"
-                        style="text-decoration: none; transition: transform 0.2s;"
-                        onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
-                        <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube" width="40"
-                            height="40">
-                    </a>
-                    <!-- Telegram -->
-                    <a href="{{ $settings['telegram_link'] ?? 'https://t.me/gsmtradinglab' }}" target="_blank"
-                        style="text-decoration: none; transition: transform 0.2s;"
-                        onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram"
-                            width="40" height="40">
-                    </a>
-                    <a href="{{ $settings['facebook_link'] ?? 'https://facebook.com/gsmtradinglab' }}" target="_blank"
-                        style="text-decoration: none; transition: transform 0.2s;"
-                        onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
-                        <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook" width="40"
-                            height="40">
-                    </a>
-                    <a href="{{ $settings['instagram_link'] ?? 'https://instagram.com/gsmtradinglab' }}" target="_blank"
-                        style="text-decoration: none; transition: transform 0.2s;"
-                        onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
-                        <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram" width="40"
-                            height="40">
-                    </a>
-                    <a href="{{ $settings['threads_link'] ?? 'https://threads.net/@gsmtradinglab' }}" target="_blank"
-                        style="text-decoration: none; transition: transform 0.2s;"
-                        onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
-                        <img src="https://cdn-icons-png.flaticon.com/512/10856/10856184.png" alt="Threads" width="40"
-                            height="40" style="filter: invert(1);">
-                    </a>
-                    <a href="{{ $settings['twitter_link'] ?? 'https://twitter.com/gsmtradinglab' }}" target="_blank"
-                        style="text-decoration: none; transition: transform 0.2s;"
-                        onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
-                        <img src="https://cdn-icons-png.flaticon.com/512/5968/5968830.png" alt="Twitter/X" width="40"
-                            height="40" style="filter: invert(1);">
-                    </a>
-                    <a href="{{ $settings['tiktok_link'] ?? 'https://tiktok.com/@gsmtradinglab' }}" target="_blank"
-                        style="text-decoration: none; transition: transform 0.2s;"
-                        onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
-                        <img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png" alt="TikTok" width="40"
-                            height="40" style="filter: invert(1);">
-                    </a>
-                    <a href="{{ $settings['snapchat_link'] ?? 'https://snapchat.com/add/gsmtradinglab' }}"
-                        target="_blank" style="text-decoration: none; transition: transform 0.2s;"
-                        onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
-                        <img src="https://cdn-icons-png.flaticon.com/512/3670/3670166.png" alt="Snapchat" width="40"
-                            height="40">
-                    </a>
-                    <a href="{{ $settings['discord_link'] ?? 'https://discord.gg/gsmtradinglab' }}" target="_blank"
-                        style="text-decoration: none; transition: transform 0.2s;"
-                        onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
-                        <img src="https://cdn-icons-png.flaticon.com/512/3670/3670157.png" alt="Discord" width="40"
-                            height="40" style="filter: invert(1);">
-                    </a>
-                    <a href="{{ $settings['linkedin_link'] ?? 'https://linkedin.com/in/gsmtradinglab' }}"
-                        target="_blank" style="text-decoration: none; transition: transform 0.2s;"
-                        onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
-                        <img src="https://cdn-icons-png.flaticon.com/512/3536/3536505.png" alt="LinkedIn" width="40"
-                            height="40">
-                    </a>
-                    <a href="https://wa.me/{{ $settings['whatsapp_number'] ?? '447478035502' }}" target="_blank"
-                        style="text-decoration: none; transition: transform 0.2s;"
-                        onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
-                        <img src="https://cdn-icons-png.flaticon.com/512/3670/3670051.png" alt="WhatsApp" width="40"
-                            height="40">
-                    </a>
+                <div class="feature-card reveal"
+                    style="padding: 1.5rem; text-align: left; border-left: 4px solid var(--primary);">
+                    <h4 style="margin-bottom: 0; display: flex; align-items: center; gap: 0.8rem; font-size: 1.1rem;">
+                        <i class="fas fa-handshake" style="color: var(--primary);"></i> Respect Every Trader
+                    </h4>
                 </div>
 
-                <a href="/contact" class="btn">
-                    <span>Get Started Today</span>
-                    <span>→</span>
-                </a>
+                <div class="feature-card reveal delay-100"
+                    style="padding: 1.5rem; text-align: left; border-left: 4px solid var(--accent);">
+                    <h4 style="margin-bottom: 0; display: flex; align-items: center; gap: 0.8rem; font-size: 1.1rem;">
+                        <i class="fas fa-ban" style="color: var(--accent);"></i> No Fake Results
+                    </h4>
+                </div>
+
+                <div class="feature-card reveal delay-200"
+                    style="padding: 1.5rem; text-align: left; border-left: 4px solid var(--warning);">
+                    <h4 style="margin-bottom: 0; display: flex; align-items: center; gap: 0.8rem; font-size: 1.1rem;">
+                        <i class="fas fa-brain" style="color: var(--warning);"></i> No Signal Dependency
+                    </h4>
+                </div>
+
+                <div class="feature-card reveal"
+                    style="padding: 1.5rem; text-align: left; border-left: 4px solid var(--secondary);">
+                    <h4 style="margin-bottom: 0; display: flex; align-items: center; gap: 0.8rem; font-size: 1.1rem;">
+                        <i class="fas fa-book-reader" style="color: var(--secondary);"></i> Learning Comes First
+                    </h4>
+                </div>
+
+                <div class="feature-card reveal delay-100"
+                    style="padding: 1.5rem; text-align: left; border-left: 4px solid var(--primary-light);">
+                    <h4 style="margin-bottom: 0; display: flex; align-items: center; gap: 0.8rem; font-size: 1.1rem;">
+                        <i class="fas fa-balance-scale" style="color: var(--primary-light);"></i> Honest Knowledge
+                    </h4>
+                </div>
+
+                <div class="feature-card reveal delay-200"
+                    style="padding: 1.5rem; text-align: left; border-left: 4px solid var(--success);">
+                    <h4 style="margin-bottom: 0; display: flex; align-items: center; gap: 0.8rem; font-size: 1.1rem;">
+                        <i class="fas fa-shield-alt" style="color: var(--success);"></i> Risk Management
+                    </h4>
+                </div>
+
+                <div class="feature-card reveal delay-300"
+                    style="padding: 1.5rem; text-align: left; border-left: 4px solid var(--white); grid-column: 1 / -1; max-width: 600px; margin: 0 auto; width: 100%;">
+                    <h4
+                        style="margin-bottom: 0; display: flex; align-items: center; justify-content: center; gap: 0.8rem; font-size: 1.1rem;">
+                        <i class="fas fa-rocket" style="color: var(--white);"></i> Growth Mindset Only
+                    </h4>
+                </div>
+
             </div>
         </div>
-    </section>
 
-    <!-- Footer -->
-    <!-- Footer -->
-    @include('partials.footer')
+        <!-- Student Reviews Section -->
+        <section class="section" id="reviews" style="background: var(--dark-light);">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-badge">{{ $settings['home_reviews_badge'] ?? 'Community Trust' }}</span>
+                    <h2>{{ $settings['home_reviews_title'] ?? 'From Market Lessons To Global Knowledge' }}</h2>
+                    <p>{{ $settings['home_reviews_desc'] ?? 'See how traders are growing with GSM Trading Lab - Where Learning Comes First.' }}
+                    </p>
+                </div>
 
-    <!-- Simple Navbar Scroll Effect -->
-    <script>
-        window.addEventListener('scroll', function () {
-            const navbar = document.getElementById('navbar');
-            if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
+                <div class="features-grid">
+                    @forelse($reviews as $review)
+                        <div class="feature-card" style="text-align: left;">
+                            <div style="color: #F59E0B; margin-bottom: 0.5rem;">
+                                {{ str_repeat('★', $review->rating) }}{{ str_repeat('☆', 5 - $review->rating) }}
+                            </div>
+                            <p style="font-style: italic; margin-bottom: 1.5rem;">"{{ $review->review }}"</p>
+                            <div style="display: flex; align-items: center; gap: 1rem;">
+                                <div
+                                    style="width: 40px; height: 40px; background: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; color: white;">
+                                    {{ strtoupper(substr($review->name, 0, 1)) }}
+                                </div>
+                                <div>
+                                    <div style="font-weight: 600; color: var(--white);">{{ $review->name }}</div>
+                                    <div style="font-size: 0.8rem; color: var(--gray);">{{ $review->role ?? 'Student' }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @empty
+                        <!-- Placeholder reviews if none in database -->
+                        <div class="feature-card" style="text-align: left;">
+                            <div style="color: #F59E0B; margin-bottom: 0.5rem;">★★★★★</div>
+                            <p style="font-style: italic; margin-bottom: 1.5rem;">"I started with zero knowledge about
+                                crypto.
+                                Now I'm profitable!"</p>
+                            <div style="display: flex; align-items: center; gap: 1rem;">
+                                <div
+                                    style="width: 40px; height: 40px; background: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; color: white;">
+                                    AH</div>
+                                <div>
+                                    <div style="font-weight: 600; color: var(--white);">Ali Hassan</div>
+                                    <div style="font-size: 0.8rem; color: var(--gray);">Crypto Student</div>
+                                </div>
+                            </div>
+                        </div>
+                    @endforelse
+                </div>
+
+                <!-- Submit Review Button -->
+                <div style="text-align: center; margin-top: 3rem;">
+                    <button class="btn btn-secondary" onclick="openReviewModal()">
+                        <span>Write a Review</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Review Modal -->
+        <div id="reviewModal"
+            style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.9); z-index: 9999; overflow-y: auto; padding: 2rem;">
+            <div style="max-width: 500px; margin: 0 auto; position: relative; top: 10%;">
+                <button onclick="closeReviewModal()"
+                    style="position: absolute; top: -10px; right: -10px; width: 40px; height: 40px; border-radius: 50%; background: var(--primary); color: white; border: none; font-size: 1.5rem; cursor: pointer;">&times;</button>
+                <div
+                    style="background: var(--dark); border: 1px solid var(--primary); border-radius: var(--radius-lg); padding: 2rem;">
+                    <h3 style="text-align: center; margin-bottom: 1.5rem; color: var(--white);">Share Your Experience
+                    </h3>
+                    <form action="{{ route('reviews.store') }}" method="POST">
+                        @csrf
+                        <div style="margin-bottom: 1rem;">
+                            <label style="display: block; margin-bottom: 0.5rem; color: var(--white);">Your Name</label>
+                            <input type="text" name="name" required
+                                style="width: 100%; padding: 0.8rem; background: var(--dark-light); border: 1px solid rgba(255,255,255,0.1); border-radius: var(--radius-md); color: white;">
+                        </div>
+                        <div style="margin-bottom: 1rem;">
+                            <label style="display: block; margin-bottom: 0.5rem; color: var(--white);">Rating</label>
+                            <select name="rating"
+                                style="width: 100%; padding: 0.8rem; background: var(--dark-light); border: 1px solid rgba(255,255,255,0.1); border-radius: var(--radius-md); color: white;">
+                                <option value="5">★★★★★ (Excellent)</option>
+                                <option value="4">★★★★☆ (Good)</option>
+                                <option value="3">★★★☆☆ (Average)</option>
+                                <option value="2">★★☆☆☆ (Poor)</option>
+                                <option value="1">★☆☆☆☆ (Terrible)</option>
+                            </select>
+                        </div>
+                        <div style="margin-bottom: 1rem;">
+                            <label style="display: block; margin-bottom: 0.5rem; color: var(--white);">Your
+                                Review</label>
+                            <textarea name="review" rows="4" required
+                                style="width: 100%; padding: 0.8rem; background: var(--dark-light); border: 1px solid rgba(255,255,255,0.1); border-radius: var(--radius-md); color: white;"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">Submit Review</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            function openReviewModal() {
+                document.getElementById('reviewModal').style.display = 'block';
+                document.body.style.overflow = 'hidden';
             }
-        });
+            function closeReviewModal() {
+                document.getElementById('reviewModal').style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        </script>
 
-        // Smooth scroll for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
+        <!-- CTA Section -->
+        <section class="section cta" id="contact">
+            <div class="container">
+                <div class="cta-content">
+                    <h2>{{ $settings['home_cta_title'] ?? 'Ready to Start Your Trading Journey?' }}</h2>
+                    <p>{{ $settings['home_cta_desc'] ?? 'Join thousands of successful traders and investors who trust us across all markets - Crypto, Forex, Stocks, Indices, Commodities & Derivatives.' }}
+                    </p>
+
+                    <!-- Social Media Links -->
+                    <div style="display: flex; gap: 1rem; justify-content: center; margin: 2rem 0; flex-wrap: wrap;">
+                        <!-- YouTube -->
+                        <a href="{{ $settings['youtube_link'] ?? 'https://youtube.com/@gsmtradinglab' }}"
+                            target="_blank" style="text-decoration: none; transition: transform 0.2s;"
+                            onmouseover="this.style.transform='scale(1.1)'"
+                            onmouseout="this.style.transform='scale(1)'">
+                            <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube" width="40"
+                                height="40">
+                        </a>
+                        <!-- Telegram -->
+                        <a href="{{ $settings['telegram_link'] ?? 'https://t.me/gsmtradinglab' }}" target="_blank"
+                            style="text-decoration: none; transition: transform 0.2s;"
+                            onmouseover="this.style.transform='scale(1.1)'"
+                            onmouseout="this.style.transform='scale(1)'">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg"
+                                alt="Telegram" width="40" height="40">
+                        </a>
+                        <a href="{{ $settings['facebook_link'] ?? 'https://facebook.com/gsmtradinglab' }}"
+                            target="_blank" style="text-decoration: none; transition: transform 0.2s;"
+                            onmouseover="this.style.transform='scale(1.1)'"
+                            onmouseout="this.style.transform='scale(1)'">
+                            <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook" width="40"
+                                height="40">
+                        </a>
+                        <a href="{{ $settings['instagram_link'] ?? 'https://instagram.com/gsmtradinglab' }}"
+                            target="_blank" style="text-decoration: none; transition: transform 0.2s;"
+                            onmouseover="this.style.transform='scale(1.1)'"
+                            onmouseout="this.style.transform='scale(1)'">
+                            <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram"
+                                width="40" height="40">
+                        </a>
+                        <a href="{{ $settings['threads_link'] ?? 'https://threads.net/@gsmtradinglab' }}"
+                            target="_blank" style="text-decoration: none; transition: transform 0.2s;"
+                            onmouseover="this.style.transform='scale(1.1)'"
+                            onmouseout="this.style.transform='scale(1)'">
+                            <img src="https://cdn-icons-png.flaticon.com/512/10856/10856184.png" alt="Threads"
+                                width="40" height="40" style="filter: invert(1);">
+                        </a>
+                        <a href="{{ $settings['twitter_link'] ?? 'https://twitter.com/gsmtradinglab' }}" target="_blank"
+                            style="text-decoration: none; transition: transform 0.2s;"
+                            onmouseover="this.style.transform='scale(1.1)'"
+                            onmouseout="this.style.transform='scale(1)'">
+                            <img src="https://cdn-icons-png.flaticon.com/512/5968/5968830.png" alt="Twitter/X"
+                                width="40" height="40" style="filter: invert(1);">
+                        </a>
+                        <a href="{{ $settings['tiktok_link'] ?? 'https://tiktok.com/@gsmtradinglab' }}" target="_blank"
+                            style="text-decoration: none; transition: transform 0.2s;"
+                            onmouseover="this.style.transform='scale(1.1)'"
+                            onmouseout="this.style.transform='scale(1)'">
+                            <img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png" alt="TikTok" width="40"
+                                height="40" style="filter: invert(1);">
+                        </a>
+                        <a href="{{ $settings['snapchat_link'] ?? 'https://snapchat.com/add/gsmtradinglab' }}"
+                            target="_blank" style="text-decoration: none; transition: transform 0.2s;"
+                            onmouseover="this.style.transform='scale(1.1)'"
+                            onmouseout="this.style.transform='scale(1)'">
+                            <img src="https://cdn-icons-png.flaticon.com/512/3670/3670166.png" alt="Snapchat" width="40"
+                                height="40">
+                        </a>
+                        <a href="{{ $settings['discord_link'] ?? 'https://discord.gg/gsmtradinglab' }}" target="_blank"
+                            style="text-decoration: none; transition: transform 0.2s;"
+                            onmouseover="this.style.transform='scale(1.1)'"
+                            onmouseout="this.style.transform='scale(1)'">
+                            <img src="https://cdn-icons-png.flaticon.com/512/3670/3670157.png" alt="Discord" width="40"
+                                height="40" style="filter: invert(1);">
+                        </a>
+                        <a href="{{ $settings['linkedin_link'] ?? 'https://linkedin.com/in/gsmtradinglab' }}"
+                            target="_blank" style="text-decoration: none; transition: transform 0.2s;"
+                            onmouseover="this.style.transform='scale(1.1)'"
+                            onmouseout="this.style.transform='scale(1)'">
+                            <img src="https://cdn-icons-png.flaticon.com/512/3536/3536505.png" alt="LinkedIn" width="40"
+                                height="40">
+                        </a>
+                        <a href="https://wa.me/{{ $settings['whatsapp_number'] ?? '447478035502' }}" target="_blank"
+                            style="text-decoration: none; transition: transform 0.2s;"
+                            onmouseover="this.style.transform='scale(1.1)'"
+                            onmouseout="this.style.transform='scale(1)'">
+                            <img src="https://cdn-icons-png.flaticon.com/512/3670/3670051.png" alt="WhatsApp" width="40"
+                                height="40">
+                        </a>
+                    </div>
+
+                    <a href="/contact" class="btn">
+                        <span>Get Started Today</span>
+                        <span>→</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <!-- Footer -->
+        @include('partials.footer')
+
+        <!-- Simple Navbar Scroll Effect -->
+        <script>
+            window.addEventListener('scroll', function () {
+                const navbar = document.getElementById('navbar');
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
                 }
             });
-        });
-    </script>
-    @include('partials.security-script')
-    @include('partials.animations')
+
+            // Smooth scroll for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+        </script>
+        @include('partials.security-script')
+        @include('partials.animations')
 </body>
 
 </html>

@@ -136,31 +136,73 @@
         </div>
 
         <!-- Disclaimer Section -->
-        <div
-            style="margin-top: 3rem; padding: 2rem; background: rgba(0, 0, 0, 0.2); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 12px; text-align: center;">
+        <!-- Disclaimer Section -->
+        <div class="animate-slide-up"
+            style="margin-top: 3rem; padding: 2rem; background: rgba(0, 0, 0, 0.4); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 12px; text-align: center; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);">
             <h4
-                style="color: #F59E0B; margin-bottom: 1rem; font-size: 1.2rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
-                ⚠️ Disclaimer & Financial Disclosure
+                style="color: #F59E0B; margin-bottom: 0.5rem; font-size: 1.3rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem; text-shadow: 0 0 10px rgba(245, 158, 11, 0.3);">
+                <span style="font-size: 1.5rem;">⚠️</span> Trading Disclaimer
             </h4>
-            <div style="font-size: 0.9rem; color: var(--gray); line-height: 1.8; max-width: 1000px; margin: 0 auto;">
-                <p style="margin-bottom: 1rem; color: var(--gray-light);">
-                    <strong>Roman Urdu:</strong> Is website per jo bhi information ya signals share kiye jaty hain, woh
-                    sirf mera <strong>Personal Experience</strong> aur educational purposes ke liye hain. Yeh koi
-                    professional financial advice nahi hai. Trading aur investment mein hamesha risk hota hai, isliye
-                    apne risk ko khud manage karein. Kisi bhi qism ke profit ya loss ki zimmedari website ki nahi hogi.
+            <h5 style="color: var(--secondary); margin-bottom: 1.5rem; font-size: 1rem; letter-spacing: 1px;">
+                🚨 EDUCATIONAL PURPOSE ONLY
+            </h5>
+
+            <div style="font-size: 0.95rem; color: var(--gray); line-height: 1.8; max-width: 900px; margin: 0 auto;">
+                <p style="margin-bottom: 1rem; color: var(--white);">
+                    GSM Trading Lab par share ki gayi tamam information, analysis, strategies, aur learning content sirf
+                    <strong>education aur awareness</strong> ke liye hai.
                 </p>
-                <div style="width: 50px; height: 1px; background: rgba(255,255,255,0.1); margin: 1rem auto;"></div>
-                <p>
-                    <strong>English:</strong> All content, including signals and educational materials, is based on
-                    personal experience and intended for educational purposes only. It does <strong>NOT</strong>
-                    constitute financial advice. Trading in financial markets involves significant risk. GSM Trading Lab
-                    is not responsible for any financial gains or losses. Please manage your risk appropriately.
+
+                <p
+                    style="margin-bottom: 1rem; color: #ef4444; font-weight: 500; background: rgba(239, 68, 68, 0.1); padding: 0.5rem; border-radius: 6px; display: inline-block;">
+                    📊 Financial markets extremely volatile aur risky hoti hain. Trading me profit bhi ho sakta hai aur
+                    loss bhi ho sakta hai.
+                </p>
+
+                <div
+                    style="text-align: left; max-width: 700px; margin: 1.5rem auto; background: rgba(255,255,255,0.03); padding: 1.5rem; border-radius: 8px;">
+                    <p style="margin-bottom: 1rem;">🧠 <strong>Yahan jo bhi concepts, analysis, ya trading ideas share
+                            ki jati hain:</strong></p>
+                    <ul style="list-style: none; padding-left: 0;">
+                        <li style="margin-bottom: 0.5rem;">👉 Ye kisi bhi tarah ki <strong>financial advice nahi
+                                hain</strong></li>
+                        <li>👉 Ye sirf mera personal trading experience aur market learning journey hai</li>
+                    </ul>
+                </div>
+
+                <p style="margin-bottom: 1rem; color: var(--primary-light);">
+                    📚 GSM Trading Lab ka mission sirf traders ko markets samjhana, educate karna, aur learning
+                    environment provide karna hai.
+                </p>
+
+                <div
+                    style="margin: 1.5rem 0; padding: 1rem; border-left: 3px solid var(--accent); background: rgba(245, 158, 11, 0.05); text-align: left;">
+                    <p style="font-weight: 600; margin-bottom: 0.5rem; color: var(--white);">💼 Har trader ki financial
+                        situation, risk tolerance, aur decision making alag hoti hai. Is liye:</p>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin-bottom: 0.3rem;">✔ Apni research khud karein</li>
+                        <li style="margin-bottom: 0.3rem;">✔ Apni risk management follow karein</li>
+                        <li>✔ Trading decisions apni responsibility par lein</li>
+                    </ul>
+                </div>
+
+                <p style="margin-bottom: 1rem; font-style: italic; color: var(--gray-light);">
+                    ⚖️ GSM Trading Lab kisi bhi individual ke trading profit ya loss ka zimmedar nahi hoga.
+                </p>
+
+                <p
+                    style="margin-top: 2rem; color: var(--white); font-weight: 600; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1.5rem;">
+                    🌍 Join GSM Trading Lab to learn, grow, and understand markets — <span
+                        style="color: var(--secondary);">responsibly and professionally.</span>
                 </p>
             </div>
         </div>
 
         <div class="footer-bottom">
-            <p>&copy; 2026 GSM Trading Lab. All rights reserved. | Empowering traders across all markets worldwide.</p>
+            <p>&copy; 2026 GSM Trading Lab. A global multi-market trading learning community built on real market
+                experience. <br> Learning. Trading. Growing Together.</p>
+            <p style="margin-top: 0.5rem; font-size: 0.8rem; color: var(--gray-dark); opacity: 0.7;">Built on real
+                market experience and trader education.</p>
         </div>
     </div>
 </footer>

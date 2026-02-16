@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Registration - GSM Trading Lab</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         <?php echo file_get_contents(resource_path('css/app.css')); ?>
 
@@ -150,6 +151,8 @@
         </div>
     </div>
 
+    @include('partials.mobile-nav')
+    @include('partials.animations')
 </body>
 
 </html>
