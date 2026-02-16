@@ -16,11 +16,6 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
-        // Allow login with 'admin' username
-        if ($request->email === 'admin') {
-            $request->merge(['email' => 'support@gsmtradinglab.com']);
-        }
-
         $request->validate([
             'email' => ['required', 'string'],
             'password' => ['required'],
@@ -29,10 +24,10 @@ class AuthController extends Controller
         $loginValue = $request->email;
         $loginField = filter_var($loginValue, FILTER_VALIDATE_EMAIL) ? 'email' : 'phone';
 
-        if (Auth::attempt([$loginField => $loginValue, 'password' => $request->password])) {
+        if (Auth::attempt([$loginField => $loginValue, 'password' => $request->password], $request->filled('remember'))) {
             $request->session()->regenerate();
 
-            if ((bool) Auth::user()->is_admin === true) {
+            if (Auth::user()->is_admin) {
                 return redirect()->route('admin.dashboard');
             }
 
@@ -40,7 +35,7 @@ class AuthController extends Controller
         }
 
         return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
+            'email' => 'Access Denied. Credentials mismatch or account inactive.',
         ])->onlyInput('email');
     }
 
@@ -52,11 +47,36 @@ class AuthController extends Controller
     public function register(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'phone' => 'required|string|unique:users',
-            'whatsapp' => 'required|string',
-            'password' => 'required|string|min:8|confirmed',
+            'name' => ['required', 'string', 'max:255'],
+            'email' => [
+                'required',
+                'string',
+                'email',
+                'max:255',
+                'unique:users',
+                'regex:/^[a-z0-9](\.?[a-z0-9]){2,}@gmail\.com$/i', // Only official Gmail
+            ],
+            'phone' => [
+                'required',
+                'string',
+                'unique:users',
+                'regex:/^\+923\d{9}$/', // Must be +923xxxxxxxxx
+                function ($attribute, $value, $fail) {
+                    $digits = substr($value, 4);
+                    if (preg_match('/^(\d)\1{8}$/', $digits)) {
+                        $fail('This phone number looks illegitimate. Please use a real number.');
+                    }
+                    if (str_contains($digits, '000000')) {
+                        $fail('Phone number contains invalid zero sequence.');
+                    }
+                },
+            ],
+            'whatsapp' => ['required', 'string', 'regex:/^\+923\d{9}$/'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ], [
+            'email.regex' => 'Only official @gmail.com accounts are allowed.',
+            'phone.regex' => 'Format must be: +923XXXXXXXXX',
+            'whatsapp.regex' => 'WhatsApp format must be: +923XXXXXXXXX',
         ]);
 
         $user = User::create([
@@ -77,7 +97,7 @@ class AuthController extends Controller
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect('/');
+        return redirect('/login');
     }
 
     // Password Reset Methods

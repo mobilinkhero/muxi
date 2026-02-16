@@ -16,10 +16,11 @@ class AdminMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::check() && (bool) Auth::user()->is_admin === true) {
+        // Allow if user is admin OR if we are currently in impersonation mode
+        if (Auth::check() && ((bool) Auth::user()->is_admin === true || session()->has('impersonated_by'))) {
             return $next($request);
         }
 
-        abort(403, 'Unauthorized access.');
+        abort(403, 'UNAUTHORIZED ACCESS.');
     }
 }

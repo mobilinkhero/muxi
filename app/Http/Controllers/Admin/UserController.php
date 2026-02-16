@@ -93,15 +93,48 @@ class UserController extends Controller
             return back()->with('error', 'Cannot impersonate an administrator.');
         }
 
+        $adminId = Auth::id();
+
+        // Login as the user
         Auth::login($user);
 
-        return redirect()->route('dashboard')->with('success', 'You are now logged in as ' . $user->name);
+        // Store original admin ID in the NEW session after login
+        session(['impersonated_by' => $adminId]);
+
+        return redirect()->route('dashboard');
     }
 
-    public function destroy(User $user)
+    public function stopImpersonate()
     {
+        if (!session()->has('impersonated_by')) {
+            return redirect()->route('dashboard');
+        }
+
+        $adminId = session('impersonated_by');
+        $admin = User::findOrFail($adminId);
+
+        // Login back as Admin
+        Auth::login($admin);
+
+        // Clear session
+        session()->forget('impersonated_by');
+
+        return redirect()->route('admin.users.index')->with('success', 'Back to Admin Terminal');
+    }
+
+    public function destroy($id)
+    {
+        // Avoid deleting self
+        if ($id == Auth::id()) {
+            return back()->with('error', 'You cannot delete your own account.');
+        }
+
+        $user = User::findOrFail($id);
+
+        // Permanent deletion from database
         $user->delete();
-        return back()->with('success', 'User deleted successfully.');
+
+        return back()->with('success', 'User #' . $id . ' has been permanently purged from the system.');
     }
 
     public function resetDevice(User $user)

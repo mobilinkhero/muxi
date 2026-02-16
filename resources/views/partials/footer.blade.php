@@ -2,14 +2,14 @@
     <div class="container">
         <div class="footer-grid">
             <div class="footer-section">
-                <h4 class="logo" style="font-size: 1.5rem;">
+                <div style="margin-bottom: 1.5rem;">
                     <a href="/" class="logo">
-                        <img src="{{ asset('images/logo.svg') }}" alt="GSM Trading Lab"
-                            style="height: 40px; margin-bottom: 1rem;">
+                        <img src="{{ asset('images/logo.svg') }}" alt="GSM Trading Lab" style="height: 40px;">
                     </a>
-                    <p style="color: var(--gray-light); margin-top: 1rem;">
-                        {{ $settings['footer_about'] ?? 'Your trusted partner in multi-market trading education, professional signals, and comprehensive market analysis.' }}
-                    </p>
+                </div>
+                <p style="color: var(--gray-light); line-height: 1.6;">
+                    {{ $settings['footer_about'] ?? 'Your trusted partner in multi-market trading education, professional signals, and comprehensive market analysis.' }}
+                </p>
             </div>
             <div class="footer-section">
                 <h4>Markets</h4>
@@ -24,6 +24,7 @@
                 <h4>Company</h4>
                 <ul class="footer-links">
                     <li><a href="{{ route('company.about') }}">About Us</a></li>
+                    <li><a href="{{ route('community') }}">Community</a></li>
                     <li><a href="{{ route('company.team') }}">Our Team</a></li>
                     <li><a href="{{ route('company.careers') }}">Careers</a></li>
                     <li><a href="{{ route('company.blog') }}">Blog</a></li>
@@ -36,6 +37,7 @@
                     <li><a href="/contact">Contact Us</a></li>
                     <li><a href="/privacy-policy">Privacy Policy</a></li>
                     <li><a href="/terms-of-service">Terms of Service</a></li>
+                    <li><a href="{{ route('disclaimer') }}">Risk Disclaimer</a></li>
                 </ul>
             </div>
         </div>

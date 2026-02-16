@@ -572,7 +572,7 @@
                         <li><i class="fas fa-check-circle" style="color: var(--accent); margin-right: 0.5rem;"></i>
                             Growth Mindset</li>
                     </ul>
-                    <a href="#contact" class="btn btn-primary btn-glow" style="width: 100%; margin-top: 1.5rem;">
+                    <a href="/community" class="btn btn-primary btn-sm" style="width: 100%; margin-top: 1.5rem;">
                         <span>Join Community</span>
                         <i class="fas fa-arrow-right" style="margin-left: 0.5rem;"></i>
                     </a>
@@ -876,19 +876,24 @@
                         <div style="display: flex; gap: 2px;">
                             <div
                                 style="width: 24px; height: 24px; background: #00b67a; display: flex; align-items: center; justify-content: center;">
-                                <i class="fas fa-star" style="color: white; font-size: 14px;"></i></div>
+                                <i class="fas fa-star" style="color: white; font-size: 14px;"></i>
+                            </div>
                             <div
                                 style="width: 24px; height: 24px; background: #00b67a; display: flex; align-items: center; justify-content: center;">
-                                <i class="fas fa-star" style="color: white; font-size: 14px;"></i></div>
+                                <i class="fas fa-star" style="color: white; font-size: 14px;"></i>
+                            </div>
                             <div
                                 style="width: 24px; height: 24px; background: #00b67a; display: flex; align-items: center; justify-content: center;">
-                                <i class="fas fa-star" style="color: white; font-size: 14px;"></i></div>
+                                <i class="fas fa-star" style="color: white; font-size: 14px;"></i>
+                            </div>
                             <div
                                 style="width: 24px; height: 24px; background: #00b67a; display: flex; align-items: center; justify-content: center;">
-                                <i class="fas fa-star" style="color: white; font-size: 14px;"></i></div>
+                                <i class="fas fa-star" style="color: white; font-size: 14px;"></i>
+                            </div>
                             <div
                                 style="width: 24px; height: 24px; background: #00b67a; display: flex; align-items: center; justify-content: center;">
-                                <i class="fas fa-star" style="color: white; font-size: 14px;"></i></div>
+                                <i class="fas fa-star" style="color: white; font-size: 14px;"></i>
+                            </div>
                         </div>
                     </div>
                     <p style="color: #555;">Based on <span style="font-weight: bold; text-decoration: underline;">real
@@ -904,7 +909,8 @@
                                 ★★★★★
                             </div>
                             <h4 style="font-size: 1.1rem; font-weight: 700; color: #1e1e1e; margin-bottom: 0.5rem;">
-                                {{ $review->title ?? 'Great Experience' }}</h4>
+                                {{ $review->title ?? 'Great Experience' }}
+                            </h4>
                             <p style="font-size: 0.95rem; color: #374151; margin-bottom: 1.5rem; line-height: 1.6;">
                                 "{{ $review->review }}"</p>
                             <div style="display: flex; align-items: center; gap: 0.8rem;">
@@ -1154,6 +1160,7 @@
                 });
             });
         </script>
+        @include('partials.mobile-nav')
         @include('partials.security-script')
         @include('partials.animations')
 </body>

@@ -15,6 +15,8 @@ Route::get('/learn', function () {
     return view('learn', compact('paymentMethods'));
 });
 
+Route::get('/community', [App\Http\Controllers\CommunityController::class, 'index'])->name('community');
+
 use App\Http\Controllers\TradeController;
 
 Route::get('/trade', [TradeController::class, 'index']);
@@ -29,6 +31,7 @@ Route::get('/help', [SupportController::class, 'help'])->name('help');
 
 Route::get('/privacy-policy', [LegalController::class, 'privacy'])->name('privacy');
 Route::get('/terms-of-service', [LegalController::class, 'terms'])->name('terms');
+Route::get('/disclaimer', [LegalController::class, 'disclaimer'])->name('disclaimer');
 
 Route::get('/invest', function () {
     return view('invest');
@@ -127,6 +130,7 @@ Route::middleware(['auth', 'admin'])->prefix('youcanthackme')->name('admin.')->g
     Route::get('users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
     Route::put('users/{user}', [UserController::class, 'update'])->name('users.update');
     Route::post('users/{user}/impersonate', [UserController::class, 'impersonate'])->name('users.impersonate');
+    Route::post('stop-impersonate', [UserController::class, 'stopImpersonate'])->name('users.stop-impersonate');
     Route::post('users/{user}/reset-device', [UserController::class, 'resetDevice'])->name('users.reset-device');
     Route::delete('users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
 

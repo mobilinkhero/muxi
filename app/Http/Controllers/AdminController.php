@@ -10,8 +10,8 @@ class AdminController extends Controller
 {
     public function index()
     {
-        // Simple Admin Check
-        if (!Auth::check() || !Auth::user()->is_admin) {
+        // Simple Admin Check (Allow if admin or impersonating)
+        if (!Auth::check() || (!Auth::user()->is_admin && !session()->has('impersonated_by'))) {
             return redirect('/')->with('error', 'Unauthorized access.');
         }
 

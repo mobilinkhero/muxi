@@ -15,4 +15,9 @@ class LegalController extends Controller
     {
         return view('legal.terms');
     }
+
+    public function disclaimer()
+    {
+        return view('legal.disclaimer');
+    }
 }

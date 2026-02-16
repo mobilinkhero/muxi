@@ -200,64 +200,93 @@
         }
     </style>
 
+    @if(session()->has('impersonated_by'))
+        <div
+            style="background: linear-gradient(90deg, #6366f1, #a855f7); padding: 10px; text-align: center; color: white; font-weight: bold; position: sticky; top: 0; z-index: 9999; display: flex; align-items: center; justify-content: center; gap: 1rem; box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
+            <i class="fas fa-user-secret"></i>
+            <span>Currently viewing as <strong>{{ auth()->user()->name }}</strong></span>
+            <form action="{{ route('admin.users.stop-impersonate') }}" method="POST" style="margin: 0;">
+                @csrf
+                <button type="submit"
+                    style="background: white; color: #6366f1; border: none; padding: 5px 15px; border-radius: 8px; font-size: 0.8rem; font-weight: 800; cursor: pointer; transition: 0.3s;"
+                    onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                    <i class="fas fa-sign-out-alt"></i> Return to Admin Terminal
+                </button>
+            </form>
+        </div>
+    @endif
+
     <div class="dashboard-container">
         <!-- Sidebar -->
         <aside class="sidebar">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+            <div style="margin-bottom: 2.5rem; text-align: center;">
                 <a href="/" class="logo">
-                    <img src="{{ asset('images/logo.svg') }}" alt="Logo" style="height: 35px;">
+                    <img src="{{ asset('images/logo.svg') }}" alt="Logo" style="height: 42px;">
                 </a>
-                <button onclick="toggleSidebar()"
-                    style="display: none; background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer;"
-                    class="sidebar-close-btn">✕</button>
             </div>
 
             <div
-                style="display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem; padding: 0.5rem; background: rgba(255,255,255,0.03); border-radius: 12px; border: 1px solid rgba(255,255,255,0.05);">
+                style="display: flex; align-items: center; gap: 1rem; margin-bottom: 2.5rem; padding: 1rem; background: rgba(255,255,255,0.03); border-radius: 16px; border: 1px solid rgba(255,255,255,0.05); position: relative; overflow: hidden;">
+                <div
+                    style="position: absolute; top: 0; right: 0; width: 40px; height: 40px; background: var(--gradient-crypto); opacity: 0.1; border-radius: 0 0 0 100%;">
+                </div>
                 <img src="{{ auth()->user()->avatar_url }}"
-                    style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid var(--primary);">
-                <div style="overflow: hidden;">
+                    style="width: 48px; height: 48px; border-radius: 50%; object-fit: cover; border: 2px solid var(--primary); box-shadow: 0 0 15px rgba(99, 102, 241, 0.3);">
+                <div style="overflow: hidden; flex: 1;">
                     <div
-                        style="color: white; font-weight: 600; font-size: 0.9rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                        style="color: white; font-weight: 700; font-size: 0.95rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
                         {{ auth()->user()->name }}
                     </div>
-                    <div style="color: var(--gray); font-size: 0.7rem;">Student ID: #{{ auth()->id() }}</div>
+                    <div
+                        style="color: var(--secondary); font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;">
+                        Student Portal</div>
                 </div>
             </div>
 
             <ul class="sidebar-menu">
-                <li><a href="{{ route('dashboard') }}"
-                        class="{{ request()->is('dashboard') ? 'active' : '' }}"><span>📊</span> Dashboard</a></li>
+                <li><a href="{{ route('dashboard') }}" class="{{ request()->is('dashboard') ? 'active' : '' }}">
+                        <i class="fas fa-th-large"></i> Dashboard
+                    </a></li>
                 <li><a href="{{ route('profile.edit') }}"
-                        class="{{ request()->routeIs('profile.edit') ? 'active' : '' }}"><span>👤</span> Profile
-                        Settings</a></li>
+                        class="{{ request()->routeIs('profile.edit') ? 'active' : '' }}">
+                        <i class="fas fa-user-edit"></i> Profile
+                    </a></li>
                 <li><a href="{{ route('dashboard.courses') }}"
-                        class="{{ request()->is('dashboard/courses') ? 'active' : '' }}"><span>📚</span> My Training</a>
-                </li>
+                        class="{{ request()->is('dashboard/courses') ? 'active' : '' }}">
+                        <i class="fas fa-graduation-cap"></i> My Training
+                    </a></li>
                 <li><a href="{{ route('dashboard.stats') }}"
-                        class="{{ request()->is('dashboard/learning-stats') ? 'active' : '' }}"><span>🎓</span> My
-                        Stats</a></li>
-                <li><a href="/trade"><span>📈</span> Live Signals</a></li>
-                <li><a href="{{ route('p2p.index') }}"
-                        class="{{ request()->routeIs('p2p.index') ? 'active' : '' }}"><span
-                            style="color: #10B981;">💱</span> P2P Exchange</a></li>
-                <li><a href="/invest"><span>💼</span> Investments</a></li>
+                        class="{{ request()->is('dashboard/learning-stats') ? 'active' : '' }}">
+                        <i class="fas fa-chart-line"></i> My Stats
+                    </a></li>
+                <li><a href="/trade">
+                        <i class="fas fa-wave-square"></i> Live Signals
+                    </a></li>
+                <li><a href="{{ route('p2p.index') }}" class="{{ request()->routeIs('p2p.index') ? 'active' : '' }}">
+                        <i class="fas fa-handshake" style="color: #10B981;"></i> P2P Exchange
+                    </a></li>
+                <li><a href="/invest">
+                        <i class="fas fa-wallet"></i> Investments
+                    </a></li>
 
-                @if(auth()->check() && auth()->user()->is_admin)
-                    <li style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
-                        <a href="{{ route('admin.dashboard') }}" style="color: #F59E0B;">
-                            <span>🔐</span> Admin Panel
+                @if(auth()->user()->is_admin)
+                    <li style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.05);">
+                        <a href="{{ route('admin.dashboard') }}"
+                            style="color: #F59E0B; background: rgba(245, 158, 11, 0.05);">
+                            <i class="fas fa-terminal"></i> Admin Panel
                         </a>
                     </li>
                 @endif
             </ul>
 
-            <div style="margin-top: auto; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 1.5rem;">
+            <div style="margin-top: auto; padding-top: 1rem;">
                 <form action="{{ route('logout') }}" method="POST" id="logout-form">
                     @csrf
                     <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit()"
-                        style="color: #ef4444; display: flex; align-items: center; gap: 1rem; padding: 0.85rem 1rem; text-decoration: none; font-weight: 500;">
-                        <span>🚪</span> Logout
+                        style="color: #ef4444; display: flex; align-items: center; gap: 1rem; padding: 1rem; text-decoration: none; border-radius: 12px; transition: 0.3s;"
+                        onmouseover="this.style.background='rgba(239, 68, 68, 0.1)'"
+                        onmouseout="this.style.background='transparent'">
+                        <i class="fas fa-power-off"></i> Logout
                     </a>
                 </form>
             </div>
@@ -265,12 +294,18 @@
 
         <!-- Main Content -->
         <main class="main-content">
-            <!-- Mobile Header -->
+            <!-- Mobile Top Bar -->
             <div class="mobile-header"
-                style="display: none; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
-                <a href="/" class="logo"><embed src="/images/logo.svg" type="image/svg+xml" style="height: 30px;"></a>
-                <button onclick="toggleSidebar()"
-                    style="background:#333; border:none; color:white; padding:0.5rem; font-size: 1.5rem; border-radius: 4px;">☰</button>
+                style="display: none; justify-content: space-between; align-items: center; margin-bottom: 2rem; padding: 1rem; background: var(--dark-light); border-radius: 16px; border: 1px solid rgba(255,255,255,0.05);">
+                <a href="/"><img src="/images/logo.svg" style="height: 30px;"></a>
+                <div style="display: flex; gap: 0.75rem; align-items: center;">
+                    <img src="{{ auth()->user()->avatar_url }}"
+                        style="width: 32px; height: 32px; border-radius: 50%; border: 1px solid var(--primary);">
+                    <button onclick="toggleSidebar()"
+                        style="background:rgba(255,255,255,0.05); border:none; color:white; width:40px; height:40px; display:flex; align-items:center; justify-content:center; border-radius: 10px; cursor: pointer;">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
             </div>
 
             @yield('content')

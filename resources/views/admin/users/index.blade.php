@@ -60,7 +60,7 @@
                                 <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
                                     @if(!$user->is_admin)
                                         <form action="{{ route('admin.users.impersonate', $user->id) }}" method="POST"
-                                            onsubmit="return confirm('You will be logged out as Admin and logged in as this user. Continue?')">
+                                            target="_blank">
                                             @csrf
                                             <button type="submit" class="btn btn-secondary btn-sm"
                                                 style="color: #10B981; border-color: #10B981; padding: 0.25rem 0.5rem; font-size: 0.7rem;">Login As</button>
