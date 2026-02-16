@@ -137,64 +137,63 @@
 
         <!-- Disclaimer Section -->
         <!-- Disclaimer Section -->
-        <div class="animate-slide-up"
-            style="margin-top: 3rem; padding: 2rem; background: rgba(0, 0, 0, 0.4); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 12px; text-align: center; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);">
-            <h4
-                style="color: #F59E0B; margin-bottom: 0.5rem; font-size: 1.3rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem; text-shadow: 0 0 10px rgba(245, 158, 11, 0.3);">
-                <span style="font-size: 1.5rem;">⚠️</span> Trading Disclaimer
-            </h4>
-            <h5 style="color: var(--secondary); margin-bottom: 1.5rem; font-size: 1rem; letter-spacing: 1px;">
-                🚨 EDUCATIONAL PURPOSE ONLY
-            </h5>
+        <!-- Risk Disclaimer Button & Modal -->
+        <div style="text-align: center; margin-top: 3rem; margin-bottom: 2rem;">
+            <button onclick="document.getElementById('disclaimerModal').style.display='flex'" class="btn-glow"
+                style="background: transparent; border: 1px solid rgba(255,255,255,0.1); color: var(--gray); padding: 0.8rem 2rem; border-radius: 50px; cursor: pointer; transition: all 0.3s; font-size: 0.9rem; letter-spacing: 1px;">
+                ⚠️ RISK DISCLAIMER
+            </button>
+        </div>
 
-            <div style="font-size: 0.95rem; color: var(--gray); line-height: 1.8; max-width: 900px; margin: 0 auto;">
-                <p style="margin-bottom: 1rem; color: var(--white);">
-                    GSM Trading Lab par share ki gayi tamam information, analysis, strategies, aur learning content sirf
-                    <strong>education aur awareness</strong> ke liye hai.
-                </p>
+        <!-- Disclaimer Modal -->
+        <div id="disclaimerModal"
+            style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 9999; align-items: center; justify-content: center; backdrop-filter: blur(5px);">
+            <div class="animate-slide-up"
+                style="background: #1e293b; width: 90%; max-width: 600px; padding: 2.5rem; border-radius: 16px; border: 1px solid rgba(255,255,255,0.1); position: relative; max-height: 90vh; overflow-y: auto;">
 
-                <p
-                    style="margin-bottom: 1rem; color: #ef4444; font-weight: 500; background: rgba(239, 68, 68, 0.1); padding: 0.5rem; border-radius: 6px; display: inline-block;">
-                    📊 Financial markets extremely volatile aur risky hoti hain. Trading me profit bhi ho sakta hai aur
-                    loss bhi ho sakta hai.
-                </p>
+                <!-- Close Button -->
+                <button onclick="document.getElementById('disclaimerModal').style.display='none'"
+                    style="position: absolute; top: 1rem; right: 1rem; background: none; border: none; color: var(--gray); font-size: 1.5rem; cursor: pointer;">&times;</button>
 
-                <div
-                    style="text-align: left; max-width: 700px; margin: 1.5rem auto; background: rgba(255,255,255,0.03); padding: 1.5rem; border-radius: 8px;">
-                    <p style="margin-bottom: 1rem;">🧠 <strong>Yahan jo bhi concepts, analysis, ya trading ideas share
-                            ki jati hain:</strong></p>
-                    <ul style="list-style: none; padding-left: 0;">
-                        <li style="margin-bottom: 0.5rem;">👉 Ye kisi bhi tarah ki <strong>financial advice nahi
-                                hain</strong></li>
-                        <li>👉 Ye sirf mera personal trading experience aur market learning journey hai</li>
-                    </ul>
+                <h3
+                    style="color: #F59E0B; margin-bottom: 1.5rem; font-size: 1.4rem; display: flex; align-items: center; gap: 0.8rem;">
+                    <i class="fas fa-exclamation-triangle"></i> Important Risk Warning
+                </h3>
+
+                <div style="color: var(--gray-light); font-size: 0.95rem; line-height: 1.7; text-align: left;">
+                    <p style="margin-bottom: 1rem;"><strong>General Risk Warning:</strong> Trading in financial markets
+                        (Cryptocurrency, Forex, Stocks, Indices, Commodities, Derivatives) involves a high degree of
+                        risk and may not be suitable for all investors. The high degree of leverage available can work
+                        against you as well as for you. Before deciding to trade, you should carefully consider your
+                        investment objectives, level of experience, and risk appetite.</p>
+
+                    <p style="margin-bottom: 1rem;"><strong>No Financial Advice:</strong> The content provided by GSM
+                        Trading Lab, including but not limited to market analysis, trading signals, educational videos,
+                        and strategies, is for <strong>educational and informational purposes only</strong>. It should
+                        not be construed as financial or investment advice. You act on this information at your own
+                        risk.</p>
+
+                    <p style="margin-bottom: 1rem;"><strong>Loss of Capital:</strong> There is a possibility that you
+                        could sustain a loss of some or all of your initial investment; therefore, you should not invest
+                        money that you cannot afford to lose. You should be aware of all the risks associated with
+                        financial trading and seek advice from an independent financial advisor if you have any doubts.
+                    </p>
+
+                    <div
+                        style="background: rgba(239, 68, 68, 0.1); border-left: 3px solid #ef4444; padding: 1rem; margin-top: 1.5rem;">
+                        <p style="margin-bottom: 0; color: #ef4444; font-size: 0.9rem;"><strong>Liability
+                                Disclaimer:</strong> GSM Trading Lab and its founders accept no liability for any loss
+                            or damage, including without limitation to, any loss of profit, which may arise directly or
+                            indirectly from use of or reliance on such information.</p>
+                    </div>
                 </div>
 
-                <p style="margin-bottom: 1rem; color: var(--primary-light);">
-                    📚 GSM Trading Lab ka mission sirf traders ko markets samjhana, educate karna, aur learning
-                    environment provide karna hai.
-                </p>
-
-                <div
-                    style="margin: 1.5rem 0; padding: 1rem; border-left: 3px solid var(--accent); background: rgba(245, 158, 11, 0.05); text-align: left;">
-                    <p style="font-weight: 600; margin-bottom: 0.5rem; color: var(--white);">💼 Har trader ki financial
-                        situation, risk tolerance, aur decision making alag hoti hai. Is liye:</p>
-                    <ul style="list-style: none; padding: 0;">
-                        <li style="margin-bottom: 0.3rem;">✔ Apni research khud karein</li>
-                        <li style="margin-bottom: 0.3rem;">✔ Apni risk management follow karein</li>
-                        <li>✔ Trading decisions apni responsibility par lein</li>
-                    </ul>
+                <div style="margin-top: 2rem; text-align: center;">
+                    <button onclick="document.getElementById('disclaimerModal').style.display='none'"
+                        class="btn btn-secondary" style="width: 100%;">
+                        I Understand & Accept
+                    </button>
                 </div>
-
-                <p style="margin-bottom: 1rem; font-style: italic; color: var(--gray-light);">
-                    ⚖️ GSM Trading Lab kisi bhi individual ke trading profit ya loss ka zimmedar nahi hoga.
-                </p>
-
-                <p
-                    style="margin-top: 2rem; color: var(--white); font-weight: 600; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1.5rem;">
-                    🌍 Join GSM Trading Lab to learn, grow, and understand markets — <span
-                        style="color: var(--secondary);">responsibly and professionally.</span>
-                </p>
             </div>
         </div>
 

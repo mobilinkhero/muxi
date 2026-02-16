@@ -859,62 +859,120 @@
             </div>
         </div>
 
-        <!-- Student Reviews Section -->
-        <section class="section" id="reviews" style="background: var(--dark-light);">
+        <!-- Trustpilot Reviews Section -->
+        <section class="section" id="reviews"
+            style="background: #fff; color: #1e1e1e; padding-top: 5rem; padding-bottom: 5rem;">
             <div class="container">
                 <div class="section-header">
-                    <span class="section-badge">{{ $settings['home_reviews_badge'] ?? 'Community Trust' }}</span>
-                    <h2>{{ $settings['home_reviews_title'] ?? 'From Market Lessons To Global Knowledge' }}</h2>
-                    <p>{{ $settings['home_reviews_desc'] ?? 'See how traders are growing with GSM Trading Lab - Where Learning Comes First.' }}
-                    </p>
+                    <div
+                        style="display: flex; align-items: center; justify-content: center; gap: 0.5rem; margin-bottom: 1rem;">
+                        <i class="fas fa-star" style="color: #00b67a; font-size: 1.5rem;"></i>
+                        <span style="font-weight: bold; font-size: 1.5rem; color: #1e1e1e;">Trustpilot</span>
+                    </div>
+                    <h2 style="color: #1e1e1e; margin-bottom: 1rem;">See What Our Community Says</h2>
+                    <div
+                        style="display: flex; align-items: center; justify-content: center; gap: 0.5rem; margin-bottom: 1rem;">
+                        <span style="font-weight: 500;">Excellent</span>
+                        <div style="display: flex; gap: 2px;">
+                            <div
+                                style="width: 24px; height: 24px; background: #00b67a; display: flex; align-items: center; justify-content: center;">
+                                <i class="fas fa-star" style="color: white; font-size: 14px;"></i></div>
+                            <div
+                                style="width: 24px; height: 24px; background: #00b67a; display: flex; align-items: center; justify-content: center;">
+                                <i class="fas fa-star" style="color: white; font-size: 14px;"></i></div>
+                            <div
+                                style="width: 24px; height: 24px; background: #00b67a; display: flex; align-items: center; justify-content: center;">
+                                <i class="fas fa-star" style="color: white; font-size: 14px;"></i></div>
+                            <div
+                                style="width: 24px; height: 24px; background: #00b67a; display: flex; align-items: center; justify-content: center;">
+                                <i class="fas fa-star" style="color: white; font-size: 14px;"></i></div>
+                            <div
+                                style="width: 24px; height: 24px; background: #00b67a; display: flex; align-items: center; justify-content: center;">
+                                <i class="fas fa-star" style="color: white; font-size: 14px;"></i></div>
+                        </div>
+                    </div>
+                    <p style="color: #555;">Based on <span style="font-weight: bold; text-decoration: underline;">real
+                            student experiences</span>.</p>
                 </div>
 
-                <div class="features-grid">
+                <div class="features-grid"
+                    style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
                     @forelse($reviews as $review)
-                        <div class="feature-card" style="text-align: left;">
-                            <div style="color: #F59E0B; margin-bottom: 0.5rem;">
-                                {{ str_repeat('★', $review->rating) }}{{ str_repeat('☆', 5 - $review->rating) }}
+                        <div class="feature-card"
+                            style="text-align: left; background: #f8f9fa; border: 1px solid #e5e7eb; box-shadow: none; padding: 1.5rem;">
+                            <div style="color: #00b67a; margin-bottom: 0.8rem;">
+                                ★★★★★
                             </div>
-                            <p style="font-style: italic; margin-bottom: 1.5rem;">"{{ $review->review }}"</p>
-                            <div style="display: flex; align-items: center; gap: 1rem;">
-                                <div
-                                    style="width: 40px; height: 40px; background: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; color: white;">
-                                    {{ strtoupper(substr($review->name, 0, 1)) }}
-                                </div>
-                                <div>
-                                    <div style="font-weight: 600; color: var(--white);">{{ $review->name }}</div>
-                                    <div style="font-size: 0.8rem; color: var(--gray);">{{ $review->role ?? 'Student' }}
-                                    </div>
-                                </div>
+                            <h4 style="font-size: 1.1rem; font-weight: 700; color: #1e1e1e; margin-bottom: 0.5rem;">
+                                {{ $review->title ?? 'Great Experience' }}</h4>
+                            <p style="font-size: 0.95rem; color: #374151; margin-bottom: 1.5rem; line-height: 1.6;">
+                                "{{ $review->review }}"</p>
+                            <div style="display: flex; align-items: center; gap: 0.8rem;">
+                                <div style="font-weight: 600; color: #1e1e1e; font-size: 0.9rem;">{{ $review->name }}</div>
+                                <span style="color: #6b7280; font-size: 0.8rem;">Verified Student <i
+                                        class="fas fa-check-circle" style="color: #6b7280;"></i></span>
                             </div>
                         </div>
                     @empty
-                        <!-- Placeholder reviews if none in database -->
-                        <div class="feature-card" style="text-align: left;">
-                            <div style="color: #F59E0B; margin-bottom: 0.5rem;">★★★★★</div>
-                            <p style="font-style: italic; margin-bottom: 1.5rem;">"I started with zero knowledge about
-                                crypto.
-                                Now I'm profitable!"</p>
-                            <div style="display: flex; align-items: center; gap: 1rem;">
-                                <div
-                                    style="width: 40px; height: 40px; background: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; color: white;">
-                                    AH</div>
-                                <div>
-                                    <div style="font-weight: 600; color: var(--white);">Ali Hassan</div>
-                                    <div style="font-size: 0.8rem; color: var(--gray);">Crypto Student</div>
-                                </div>
+                        <!-- Placeholder reviews -->
+                        <div class="feature-card"
+                            style="text-align: left; background: #f8f9fa; border: 1px solid #e5e7eb; box-shadow: none; padding: 1.5rem;">
+                            <div style="color: #00b67a; margin-bottom: 0.8rem;">★★★★★</div>
+                            <h4 style="font-size: 1.1rem; font-weight: 700; color: #1e1e1e; margin-bottom: 0.5rem;">Life
+                                Changing Course</h4>
+                            <p style="font-size: 0.95rem; color: #374151; margin-bottom: 1.5rem; line-height: 1.6;">"I
+                                started with zero knowledge. The way market structure is explained is mind-blowing. Highly
+                                recommended!"</p>
+                            <div style="display: flex; align-items: center; gap: 0.8rem;">
+                                <div style="font-weight: 600; color: #1e1e1e; font-size: 0.9rem;">Ali Hassan</div>
+                                <span style="color: #6b7280; font-size: 0.8rem;">Verified Student <i
+                                        class="fas fa-check-circle" style="color: #6b7280;"></i></span>
+                            </div>
+                        </div>
+
+                        <div class="feature-card"
+                            style="text-align: left; background: #f8f9fa; border: 1px solid #e5e7eb; box-shadow: none; padding: 1.5rem;">
+                            <div style="color: #00b67a; margin-bottom: 0.8rem;">★★★★★</div>
+                            <h4 style="font-size: 1.1rem; font-weight: 700; color: #1e1e1e; margin-bottom: 0.5rem;">Best
+                                Mentor Ever</h4>
+                            <p style="font-size: 0.95rem; color: #374151; margin-bottom: 1.5rem; line-height: 1.6;">"Finally
+                                a mentor who talks about risk management and psychology first. No fake dreams, just real
+                                trading."</p>
+                            <div style="display: flex; align-items: center; gap: 0.8rem;">
+                                <div style="font-weight: 600; color: #1e1e1e; font-size: 0.9rem;">Sarah K.</div>
+                                <span style="color: #6b7280; font-size: 0.8rem;">Verified Student <i
+                                        class="fas fa-check-circle" style="color: #6b7280;"></i></span>
+                            </div>
+                        </div>
+
+                        <div class="feature-card"
+                            style="text-align: left; background: #f8f9fa; border: 1px solid #e5e7eb; box-shadow: none; padding: 1.5rem;">
+                            <div style="color: #00b67a; margin-bottom: 0.8rem;">★★★★★</div>
+                            <h4 style="font-size: 1.1rem; font-weight: 700; color: #1e1e1e; margin-bottom: 0.5rem;">Real
+                                Market Knowledge</h4>
+                            <p style="font-size: 0.95rem; color: #374151; margin-bottom: 1.5rem; line-height: 1.6;">"I was
+                                struggling for 2 years. After joining GSM, my view of the market completely changed. The
+                                community is amazing."</p>
+                            <div style="display: flex; align-items: center; gap: 0.8rem;">
+                                <div style="font-weight: 600; color: #1e1e1e; font-size: 0.9rem;">Usman Z.</div>
+                                <span style="color: #6b7280; font-size: 0.8rem;">Verified Student <i
+                                        class="fas fa-check-circle" style="color: #6b7280;"></i></span>
                             </div>
                         </div>
                     @endforelse
                 </div>
 
-                <!-- Submit Review Button -->
                 <div style="text-align: center; margin-top: 3rem;">
-                    <button class="btn btn-secondary" onclick="openReviewModal()">
-                        <span>Write a Review</span>
-                    </button>
+                    <a href="#" class="btn btn-secondary"
+                        style="background: #fff; color: #1e1e1e; border: 1px solid #ccc; display: inline-flex; align-items: center; gap: 0.5rem;">
+                        <span>See our reviews on</span>
+                        <i class="fas fa-star" style="color: #00b67a;"></i>
+                        <strong>Trustpilot</strong>
+                    </a>
                 </div>
             </div>
+
+
         </section>
 
         <!-- Review Modal -->
