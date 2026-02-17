@@ -146,8 +146,8 @@
 
         .nav-link.active {
             color: white;
-            background: linear-gradient(to right, rgba(99, 102, 241, 0.2), transparent);
-            box-shadow: inset 4px 0 0 var(--primary);
+            background: linear-gradient(to right, rgba(99, 102, 241, 0.15), transparent);
+            border-left: 4px solid var(--primary);
         }
 
         .nav-link.active i {
@@ -163,9 +163,9 @@
         }
 
         .top-deck {
-            padding: 1.5rem 3.5rem;
+            padding: 1.25rem 2.5rem;
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
             background: rgba(2, 6, 23, 0.6);
             backdrop-filter: blur(20px);
@@ -173,6 +173,14 @@
             position: sticky;
             top: 0;
             z-index: 50;
+        }
+
+        .top-deck-inner {
+            width: 100%;
+            max-width: 1550px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         .status-dot {
@@ -246,8 +254,8 @@
         }
 
         .main-content {
-            padding: 3.5rem;
-            max-width: 1600px;
+            padding: 2.5rem;
+            max-width: 1550px;
             width: 100%;
             margin: 0 auto;
         }
@@ -413,15 +421,17 @@
 
     <div class="main-wrapper">
         <header class="top-deck">
-            <div style="display: flex; align-items: center; gap: 15px;">
-                <div class="status-dot"></div>
-                <span style="font-weight: 700; font-size: 0.9rem; color: #10B981;">Online Status: Active</span>
-            </div>
+            <div class="top-deck-inner">
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <div class="status-dot"></div>
+                    <span style="font-weight: 700; font-size: 0.9rem; color: #10B981;">Online Status: Active</span>
+                </div>
 
-            <div class="user-pill">
-                <div class="avatar-circle">{{ substr(auth()->user()->name, 0, 1) }}</div>
-                <div style="font-size: 0.95rem; font-weight: 700;">{{ auth()->user()->name }}</div>
-                <i class="fas fa-chevron-down" style="font-size: 0.8rem; opacity: 0.5;"></i>
+                <div class="user-pill">
+                    <div class="avatar-circle">{{ substr(auth()->user()->name, 0, 1) }}</div>
+                    <div style="font-size: 0.95rem; font-weight: 700;">{{ auth()->user()->name }}</div>
+                    <i class="fas fa-chevron-down" style="font-size: 0.8rem; opacity: 0.5;"></i>
+                </div>
             </div>
         </header>
 

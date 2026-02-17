@@ -5,18 +5,23 @@
 @section('content')
     <!-- Dashboard Header -->
     <div class="h-reveal"
-        style="margin-bottom: 4rem; display: flex; justify-content: space-between; align-items: flex-end;">
-        <div>
-            <h1 style="font-weight: 900; font-size: 3.5rem; letter-spacing: -2px; margin: 0; line-height: 1;">Welcome Back,
-                Admin</h1>
-            <p style="color: #64748B; font-size: 1.1rem; margin-top: 1rem; font-weight: 500;">Here's what's happening on
+        style="margin-bottom: 3rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;">
+        <div style="flex: 1; min-width: 300px;">
+            <h1 style="font-weight: 900; font-size: 3rem; letter-spacing: -1.5px; margin: 0; line-height: 1.1;">Welcome
+                Back, Admin</h1>
+            <p style="color: #64748B; font-size: 1rem; margin-top: 0.75rem; font-weight: 500;">Here's what's happening on
                 your website today.</p>
         </div>
-        <div style="text-align: right;">
+        <div
+            style="text-align: right; background: rgba(255,255,255,0.03); padding: 12px 24px; border-radius: 20px; border: 1px solid var(--border);">
             <div
-                style="font-size: 0.75rem; color: #64748B; font-weight: 800; text-transform: uppercase; letter-spacing: 2px;">
+                style="font-size: 0.7rem; color: #64748B; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 4px;">
                 Server Time</div>
-            <div style="font-size: 1.5rem; font-weight: 900; color: white;">{{ now()->format('h:i A') }}</div>
+            <div
+                style="font-size: 1.25rem; font-weight: 900; color: white; display: flex; align-items: center; gap: 8px; justify-content: flex-end;">
+                <i class="far fa-clock" style="color: var(--primary); font-size: 1rem;"></i>
+                {{ now()->format('h:i A') }}
+            </div>
         </div>
     </div>
 
@@ -140,7 +145,8 @@
                                 <div style="display: flex; align-items: center; gap: 12px;">
                                     <div
                                         style="width: 35px; height: 35px; border-radius: 10px; background: var(--primary); display: flex; align-items: center; justify-content: center; font-weight: 900;">
-                                        {{ substr($order->user->name, 0, 1) }}</div>
+                                        {{ substr($order->user->name, 0, 1) }}
+                                    </div>
                                     <div>
                                         <div style="font-weight: 700; color: #fff;">{{ $order->user->name }}</div>
                                         <div style="font-size: 0.75rem; color: #64748B;">{{ $order->user->email }}</div>
@@ -230,8 +236,8 @@
                     labels: ['Completed', 'Pending', 'Rejected'],
                     datasets: [{
                         data: [
-                                {{ $orderStatusChart['Completed'] ?? 0 }},
-                                {{ $orderStatusChart['Pending'] ?? 0 }},
+                                    {{ $orderStatusChart['Completed'] ?? 0 }},
+                                    {{ $orderStatusChart['Pending'] ?? 0 }},
                             {{ $orderStatusChart['Rejected'] ?? 0 }}
                         ],
                         backgroundColor: ['#10b981', '#f59e0b', '#f43f5e'],
