@@ -287,14 +287,7 @@
                         <i class="fas fa-wallet"></i> Investments
                     </a></li>
 
-                @if(auth()->user()->is_admin)
-                    <li style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.05);">
-                        <a href="{{ route('admin.dashboard') }}"
-                            style="color: #F59E0B; background: rgba(245, 158, 11, 0.05);">
-                            <i class="fas fa-terminal"></i> Admin Panel
-                        </a>
-                    </li>
-                @endif
+
             </ul>
 
             <div style="margin-top: auto; padding-top: 1rem;">

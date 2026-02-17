@@ -40,27 +40,51 @@ class P2PController extends Controller
     public function updateRates(Request $request)
     {
         $request->validate([
-            'buy_rate' => 'required|numeric',
-            'sell_rate' => 'required|numeric',
-            'balance' => 'required|numeric', // USDT Balance
+            'buy_rate' => 'nullable|numeric',
+            'sell_rate' => 'nullable|numeric',
+            'balance' => 'nullable|numeric',
             'usdt_wallet' => 'nullable|string',
-            'pkr_bank' => 'nullable|string',
+            'bank_name' => 'nullable|string',
+            'account_title' => 'nullable|string',
+            'account_no' => 'nullable|string',
+            'iban' => 'nullable|string',
+            'usdt_network' => 'nullable|string',
+            'is_active' => 'nullable',
         ]);
 
-        // Update USDT Pool
-        P2PPool::where('asset', 'USDT')->update([
-            'buy_rate' => $request->buy_rate,
-            'sell_rate' => $request->sell_rate,
-            'balance' => $request->balance,
-            'wallet_details' => $request->usdt_wallet, // Admin's TRC20 Address
-        ]);
+        // Update USDT Pool (If rate data is present)
+        if ($request->has('buy_rate') || $request->has('balance')) {
+            $updateData = [];
+            if ($request->has('buy_rate'))
+                $updateData['buy_rate'] = $request->buy_rate;
+            if ($request->has('sell_rate'))
+                $updateData['sell_rate'] = $request->sell_rate;
+            if ($request->has('balance'))
+                $updateData['balance'] = $request->balance;
+            if ($request->has('is_active'))
+                $updateData['is_active'] = $request->is_active;
 
-        // Update PKR Pool (Bank Details)
-        P2PPool::where('asset', 'PKR')->update([
-            'wallet_details' => $request->pkr_bank, // Admin's Bank Details
-        ]);
+            if (!empty($updateData)) {
+                P2PPool::where('asset', 'USDT')->update($updateData);
+            }
+        }
 
-        return back()->with('success', 'Exchange settings updated successfully.');
+        // Update Receiving Endpoints (Structured Data)
+        if ($request->has('bank_name')) {
+            $pkrDetails = "Bank: " . $request->bank_name . "\nTitle: " . $request->account_title . "\nA/C: " . $request->account_no . "\nIBAN: " . ($request->iban ?? 'N/A');
+            P2PPool::where('asset', 'PKR')->update([
+                'wallet_details' => $pkrDetails,
+            ]);
+        }
+
+        if ($request->has('usdt_wallet')) {
+            $usdtDetails = "Network: " . ($request->usdt_network ?? 'TRC20') . "\nAddress: " . $request->usdt_wallet;
+            P2PPool::where('asset', 'USDT')->update([
+                'wallet_details' => $usdtDetails,
+            ]);
+        }
+
+        return back()->with('success', 'Exchange parameters synchronized successfully.');
     }
 
     /**

@@ -9,24 +9,30 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 
     <style>
         :root {
-            --primary: #6366f1;
-            --primary-glow: rgba(99, 102, 241, 0.4);
-            --secondary: #06b6d4;
-            --accent: #f43f5e;
-            --bg-dark: #020617;
-            --sidebar-bg: #0f172a;
-            --card-bg: rgba(30, 41, 59, 0.5);
-            --border: rgba(255, 255, 255, 0.08);
-            --text-main: #f8fafc;
-            --text-dim: #94a3b8;
+            --primary: #00c076;
+            /* Trading Green */
+            --primary-glow: rgba(0, 192, 118, 0.3);
+            --secondary: #6366f1;
+            --accent: #ff3b30;
+            /* Trading Red */
+            --bg-dark: #0b0e11;
+            /* Crypto Dark */
+            --sidebar-bg: #161a1e;
+            --card-bg: rgba(24, 29, 33, 0.7);
+            --border: rgba(255, 255, 255, 0.05);
+            --text-main: #eaecef;
+            --text-dim: #848e9c;
             --font-main: 'Outfit', sans-serif;
             --font-secondary: 'Plus Jakarta Sans', sans-serif;
+            --font-accent: 'Space Grotesk', sans-serif;
+            --grid-line: rgba(255, 255, 255, 0.02);
         }
 
         body {
@@ -38,8 +44,45 @@
             min-height: 100vh;
             overflow-x: hidden;
             background-image:
-                radial-gradient(circle at 0% 0%, rgba(99, 102, 241, 0.12) 0%, transparent 40%),
-                radial-gradient(circle at 100% 100%, rgba(6, 182, 212, 0.1) 0%, transparent 40%);
+                linear-gradient(var(--grid-line) 1px, transparent 1px),
+                linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        /* 4D Background Orbs */
+        .orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            z-index: -1;
+            opacity: 0.4;
+            pointer-events: none;
+        }
+
+        .orb-1 {
+            width: 400px;
+            height: 400px;
+            background: var(--primary);
+            top: -100px;
+            left: -100px;
+        }
+
+        .orb-2 {
+            width: 350px;
+            height: 350px;
+            background: var(--secondary);
+            bottom: -100px;
+            right: -100px;
+        }
+
+        .orb-3 {
+            width: 300px;
+            height: 300px;
+            background: var(--accent);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0.1;
         }
 
         /* 3D Glass Scrollbar */
@@ -57,10 +100,11 @@
             border: 2px solid var(--bg-dark);
         }
 
-        /* Styling Sidebar as a Premium Floating Deck */
+        /* Sidebar: Floating Frost Deck */
         .sidebar {
             width: 280px;
             background: var(--sidebar-bg);
+            backdrop-filter: blur(30px);
             border-right: 1px solid var(--border);
             padding: 2.5rem 1.25rem;
             display: flex;
@@ -69,7 +113,7 @@
             top: 0;
             height: 100vh;
             z-index: 100;
-            box-shadow: 20px 0 50px rgba(0, 0, 0, 0.3);
+            box-shadow: 10px 0 50px rgba(0, 0, 0, 0.5);
         }
 
         .brand {
@@ -81,25 +125,32 @@
         }
 
         .brand-icon {
-            width: 45px;
-            height: 45px;
+            width: 48px;
+            height: 48px;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
-            border-radius: 12px;
+            border-radius: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: 900;
-            font-size: 1.4rem;
+            font-size: 1.5rem;
             color: white;
-            box-shadow: 0 10px 25px var(--primary-glow);
-            transform: perspective(100px) rotateY(10deg);
+            box-shadow: 0 10px 30px var(--glow-indigo);
+            position: relative;
+            transform-style: preserve-3d;
+            transition: 0.5s;
+        }
+
+        .brand:hover .brand-icon {
+            transform: rotateY(180deg) scale(1.1);
         }
 
         .brand-text {
+            font-family: var(--font-accent);
             font-weight: 800;
-            font-size: 1.3rem;
-            letter-spacing: -0.5px;
-            background: linear-gradient(to bottom, #fff, #94a3b8);
+            font-size: 1.4rem;
+            letter-spacing: -1px;
+            background: linear-gradient(to right, #fff, #94a3b8);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
@@ -233,24 +284,50 @@
             font-size: 0.8rem;
         }
 
-        /* 3D Global UI Cards */
+        /* 4D Cards: Floating & Depth */
         .h-card {
             background: var(--card-bg);
             backdrop-filter: blur(25px);
             border: 1px solid var(--border);
-            border-radius: 28px;
+            border-radius: 20px;
             padding: 2.5rem;
             margin-bottom: 2rem;
-            transition: all 0.5s cubic-bezier(0.2, 1, 0.3, 1);
+            transition: border-color 0.4s, background 0.4s, box-shadow 0.4s;
             position: relative;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            box-shadow:
+                0 4px 20px rgba(0, 0, 0, 0.2),
+                inset 0 0 0 1px rgba(255, 255, 255, 0.02);
+            overflow: hidden;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+
+        .h-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg,
+                    transparent,
+                    rgba(0, 192, 118, 0.05),
+                    transparent);
+            transition: none;
+            pointer-events: none;
+        }
+
+        .h-card:hover::after {
+            left: 100%;
+            transition: 0.8s ease-in-out;
         }
 
         .h-card:hover {
-            transform: translateY(-12px) perspective(1000px) rotateX(2deg);
-            background: rgba(40, 54, 78, 0.6);
-            border-color: rgba(255, 255, 255, 0.15);
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+            border-color: rgba(0, 192, 118, 0.3);
+            background: rgba(24, 29, 33, 0.9);
+            box-shadow:
+                0 20px 40px rgba(0, 0, 0, 0.4),
+                0 0 20px var(--primary-glow);
         }
 
         .main-content {
@@ -333,76 +410,80 @@
 </head>
 
 <body>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+
     <aside class="sidebar">
         <div class="brand">
             <div class="brand-icon">G</div>
-            <div class="brand-text">GSM ADMIN</div>
+            <div class="brand-text">GSM TRADING</div>
         </div>
 
-        <div style="overflow-y: auto; flex: 1; padding-right: 5px;">
+        <div style="overflow-y: auto; flex: 1; padding-right: 5px;" class="sidebar-scroll">
             <div class="nav-group">
-                <span class="nav-label">Management</span>
+                <span class="nav-label">Main Menu</span>
                 <nav>
                     <a href="{{ route('admin.dashboard') }}"
                         class="nav-link {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
-                        <i class="fas fa-home"></i> Home
+                        <i class="fas fa-th-large"></i> Dashboard
                     </a>
                     <a href="{{ route('admin.users.index') }}"
                         class="nav-link {{ request()->routeIs('admin.users.*') ? 'active' : '' }}">
-                        <i class="fas fa-users"></i> Users
+                        <i class="fas fa-users"></i> Users List
                     </a>
                     <a href="{{ route('admin.orders.index') }}"
                         class="nav-link {{ request()->routeIs('admin.orders.*') ? 'active' : '' }}">
-                        <i class="fas fa-shopping-cart"></i> Orders
+                        <i class="fas fa-shopping-basket"></i> Orders Details
                     </a>
                     <a href="{{ route('admin.signals.index') }}"
                         class="nav-link {{ request()->routeIs('admin.signals.*') ? 'active' : '' }}">
-                        <i class="fas fa-chart-line"></i> Trade Signals
+                        <i class="fas fa-chart-bar"></i> Trading Signals
                     </a>
                 </nav>
             </div>
 
             <div class="nav-group">
-                <span class="nav-label">Financials</span>
+                <span class="nav-label">Finance & Assets</span>
                 <nav>
                     <a href="{{ route('admin.p2p.index') }}" class="nav-link">
                         <i class="fas fa-exchange-alt"></i> P2P Portal
                     </a>
                     <a href="{{ route('admin.payment-methods.index') }}" class="nav-link">
-                        <i class="fas fa-credit-card"></i> Payments
+                        <i class="fas fa-wallet"></i> Payment Methods
                     </a>
                     <a href="{{ route('admin.brokers.index') }}" class="nav-link">
-                        <i class="fas fa-university"></i> Brokers
+                        <i class="fas fa-building"></i> Broker List
                     </a>
                 </nav>
             </div>
 
             <div class="nav-group">
-                <span class="nav-label">Academy</span>
+                <span class="nav-label">Academy / LMS</span>
                 <nav>
                     <a href="{{ route('admin.lms.classes') }}" class="nav-link">
                         <i class="fas fa-video"></i> Live Classes
                     </a>
                     <a href="{{ route('admin.lms.recordings') }}" class="nav-link">
-                        <i class="fas fa-play-circle"></i> Video Logs
+                        <i class="fas fa-play-circle"></i> Video Recordings
                     </a>
                     <a href="{{ route('admin.lms.tasks') }}" class="nav-link">
-                        <i class="fas fa-tasks"></i> Student Tasks
+                        <i class="fas fa-clipboard-list"></i> Student Tasks
                     </a>
                 </nav>
             </div>
 
             <div class="nav-group">
-                <span class="nav-label">Settings</span>
+                <span class="nav-label">System Control</span>
                 <nav>
                     <a href="{{ route('admin.content.pages.index') }}" class="nav-link">
-                        <i class="fas fa-file-alt"></i> Edit Content
+                        <i class="fas fa-file-signature"></i> Edit Pages
                     </a>
                     <a href="{{ route('admin.security.logs') }}" class="nav-link">
-                        <i class="fas fa-shield-alt"></i> Security
+                        <i class="fas fa-lock"></i> Security Logs
                     </a>
                     <a href="{{ route('admin.settings.index') }}" class="nav-link">
-                        <i class="fas fa-cog"></i> Configuration
+                        <i class="fas fa-tools"></i> Site Settings
                     </a>
                 </nav>
             </div>
@@ -412,8 +493,8 @@
             <form action="{{ route('logout') }}" method="POST">
                 @csrf
                 <button type="submit" class="nav-link"
-                    style="width: 100%; border: none; background: transparent; cursor: pointer;">
-                    <i class="fas fa-sign-out-alt" style="color: var(--accent);"></i> Logout Now
+                    style="width: 100%; border: none; background: transparent; cursor: pointer; color: var(--accent);">
+                    <i class="fas fa-power-off"></i> Destruct Session
                 </button>
             </form>
         </div>
@@ -422,15 +503,20 @@
     <div class="main-wrapper">
         <header class="top-deck">
             <div class="top-deck-inner">
-                <div style="display: flex; align-items: center; gap: 15px;">
+                <div style="display: flex; align-items: center; gap: 20px;">
                     <div class="status-dot"></div>
-                    <span style="font-weight: 700; font-size: 0.9rem; color: #10B981;">Online Status: Active</span>
+                    <span
+                        style="font-weight: 800; font-size: 0.8rem; color: #10B981; text-transform: uppercase; letter-spacing: 2px;">
+                        System Secure • Node Active
+                    </span>
                 </div>
 
                 <div class="user-pill">
                     <div class="avatar-circle">{{ substr(auth()->user()->name, 0, 1) }}</div>
-                    <div style="font-size: 0.95rem; font-weight: 700;">{{ auth()->user()->name }}</div>
-                    <i class="fas fa-chevron-down" style="font-size: 0.8rem; opacity: 0.5;"></i>
+                    <div style="font-size: 1rem; font-weight: 800; font-family: var(--font-accent);">
+                        {{ auth()->user()->name }}
+                    </div>
+                    <i class="fas fa-angle-down" style="font-size: 0.8rem; opacity: 0.5;"></i>
                 </div>
             </div>
         </header>
@@ -441,14 +527,93 @@
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            gsap.to('.h-reveal', {
+            // Precision Entrance Sequence
+            const tl = gsap.timeline({ defaults: { ease: "expo.out" } });
+
+            tl.set('.h-reveal', { opacity: 0, scale: 0.95, filter: 'blur(10px)', y: 20 });
+
+            tl.to('.h-reveal', {
                 opacity: 1,
+                scale: 1,
+                filter: 'blur(0px)',
                 y: 0,
                 duration: 1.2,
-                stagger: 0.1,
-                ease: "power4.out"
+                stagger: {
+                    each: 0.1,
+                    from: "start"
+                }
+            });
+
+            // Parallax Background Flow
+            document.addEventListener('mousemove', e => {
+                const xPos = (e.clientX / window.innerWidth - 0.5) * 40;
+                const yPos = (e.clientY / window.innerHeight - 0.5) * 40;
+
+                gsap.to(document.body, {
+                    backgroundPosition: `${xPos}px ${yPos}px`,
+                    duration: 2,
+                    ease: "power2.out"
+                });
+
+                // Subtle orb parallax
+                gsap.to('.orb-1', { x: xPos * 2, y: yPos * 2, duration: 3 });
+                gsap.to('.orb-2', { x: -xPos * 3, y: -yPos * 3, duration: 4 });
+            });
+
+            // Physics-Based Card Interactions
+            document.querySelectorAll('.h-card').forEach(card => {
+                card.addEventListener('mousemove', e => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+
+                    const rotateX = (centerY - y) / 15;
+                    const rotateY = (x - centerX) / 15;
+
+                    gsap.to(card, {
+                        rotateX: rotateX,
+                        rotateY: rotateY,
+                        scale: 1.02,
+                        duration: 0.6,
+                        ease: "power3.out",
+                        overwrite: "auto"
+                    });
+                });
+
+                card.addEventListener('mouseleave', () => {
+                    gsap.to(card, {
+                        rotateX: 0,
+                        rotateY: 0,
+                        scale: 1,
+                        duration: 1.2,
+                        ease: "elastic.out(1, 0.4)",
+                        overwrite: "auto"
+                    });
+                });
+            });
+
+            // Smooth Sidebar Navigation
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('mouseenter', () => {
+                    gsap.to(link.querySelector('i'), {
+                        rotate: 15,
+                        scale: 1.2,
+                        duration: 0.3
+                    });
+                });
+                link.addEventListener('mouseleave', () => {
+                    gsap.to(link.querySelector('i'), {
+                        rotate: 0,
+                        scale: 1,
+                        duration: 0.3
+                    });
+                });
             });
         });
     </script>

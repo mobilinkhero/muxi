@@ -14,7 +14,12 @@ class P2PController extends Controller
      */
     public function index()
     {
-        $pools = P2PPool::where('is_active', true)->get()->keyBy('asset');
+        $pools = P2PPool::get()->keyBy('asset');
+
+        // P2P Portal Global Switch (via USDT pool)
+        if (!($pools['USDT']->is_active ?? false)) {
+            return redirect()->route('dashboard')->with('error', 'P2P Exchange Node is currently offline for maintenance.');
+        }
         $transactions = P2PTransaction::where('user_id', Auth::id())->orderBy('created_at', 'desc')->get();
 
         return view('dashboard.p2p.index', compact('pools', 'transactions'));
@@ -54,9 +59,17 @@ class P2PController extends Controller
         }
 
         if ($request->type === 'sell') {
-            if (empty($request->user_payment_details)) {
-                return back()->with('error', 'Payment details are required for sell orders.');
-            }
+            $request->validate([
+                'bank_name' => 'required|string',
+                'account_title' => 'required|string',
+                'account_no' => 'required|string',
+                'iban' => 'nullable|string',
+            ]);
+
+            $paymentDetails = "Bank: " . $request->bank_name . "\n" .
+                "Title: " . $request->account_title . "\n" .
+                "A/C: " . $request->account_no . "\n" .
+                "IBAN: " . ($request->iban ?? 'N/A');
         }
 
         P2PTransaction::create([
@@ -69,7 +82,7 @@ class P2PController extends Controller
             'rate' => $rate,
             'status' => 'pending',
             'proof_image' => $proofPath,
-            'user_payment_details' => $request->user_payment_details,
+            'user_payment_details' => $paymentDetails ?? null,
         ]);
 
         return back()->with('success', 'Order submitted successfully! Please wait for admin approval.');

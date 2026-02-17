@@ -3,77 +3,93 @@
 @section('title', 'Admin Dashboard')
 
 @section('content')
-    <!-- Dashboard Header -->
+    <!-- Dashboard Header: Trading Desk Style -->
     <div class="h-reveal"
-        style="margin-bottom: 3rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;">
+        style="margin-bottom: 4rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 30px;">
         <div style="flex: 1; min-width: 300px;">
-            <h1 style="font-weight: 900; font-size: 3rem; letter-spacing: -1.5px; margin: 0; line-height: 1.1;">Welcome
-                Back, Admin</h1>
-            <p style="color: #64748B; font-size: 1rem; margin-top: 0.75rem; font-weight: 500;">Here's what's happening on
-                your website today.</p>
+            <div
+                style="font-family: var(--font-accent); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 4px; color: var(--primary); margin-bottom: 0.5rem; font-weight: 700;">
+                TRADING DESK • SESSION: {{ date('H:i') }}
+            </div>
+            <h1
+                style="font-weight: 900; font-size: 3.5rem; letter-spacing: -2px; margin: 0; line-height: 1; font-family: var(--font-accent);">
+                Admin <span style="color: var(--text-dim);">Dashboard</span>
+            </h1>
+            <p
+                style="color: var(--text-dim); font-size: 1.1rem; margin-top: 1rem; font-weight: 500; font-family: var(--font-secondary);">
+                Global overview of users, revenue, and active trading signals.
+            </p>
         </div>
-        <div
-            style="text-align: right; background: rgba(255,255,255,0.03); padding: 12px 24px; border-radius: 20px; border: 1px solid var(--border);">
+
+        <div style="display: flex; gap: 15px;">
             <div
-                style="font-size: 0.7rem; color: #64748B; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 4px;">
-                Server Time</div>
-            <div
-                style="font-size: 1.25rem; font-weight: 900; color: white; display: flex; align-items: center; gap: 8px; justify-content: flex-end;">
-                <i class="far fa-clock" style="color: var(--primary); font-size: 1rem;"></i>
-                {{ now()->format('h:i A') }}
+                style="text-align: right; background: rgba(22, 26, 30, 0.8); backdrop-filter: blur(20px); padding: 16px 32px; border-radius: 12px; border: 1px solid var(--border); box-shadow: 0 10px 40px rgba(0,0,0,0.2);">
+                <div
+                    style="font-size: 0.7rem; color: var(--text-dim); font-weight: 800; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 6px;">
+                    MARKET STATUS</div>
+                <div
+                    style="font-size: 1.4rem; font-weight: 900; color: white; display: flex; align-items: center; gap: 10px; font-family: var(--font-accent);">
+                    <i class="fas fa-signal" style="color: #10B981; font-size: 0.9rem;"></i>
+                    LIVE
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- Stats Cards: High Spec 3D -->
+    <!-- Stats: Crypto Exchange Style -->
     <div
-        style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2.5rem; margin-bottom: 4rem;">
-        <div class="h-card h-reveal">
-            <div
-                style="width: 50px; height: 50px; border-radius: 14px; background: rgba(99, 102, 241, 0.1); display: flex; align-items: center; justify-content: center; color: var(--primary); font-size: 1.4rem; margin-bottom: 2rem;">
-                <i class="fas fa-users"></i>
+        style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-bottom: 4rem;">
+        <div class="h-card h-reveal" style="border-top: 4px solid var(--primary); border-radius: 12px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                <div
+                    style="color: var(--text-dim); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; font-weight: 800; font-family: var(--font-accent);">
+                    Total Users</div>
+                <i class="fas fa-users" style="color: var(--primary); opacity: 0.5;"></i>
             </div>
-            <div
-                style="color: var(--text-dim); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; font-weight: 700;">
-                Total Registered Users</div>
-            <div style="font-size: 3.5rem; font-weight: 900; margin-top: 0.5rem; color: #fff; letter-spacing: -1px;"
+            <div style="font-size: 3.2rem; font-weight: 900; color: #fff; letter-spacing: -2px; font-family: var(--font-accent);"
                 class="stylized-counter" data-target="{{ $totalUsers ?? 0 }}">0</div>
+            <div style="margin-top: 1rem; color: var(--primary); font-size: 0.85rem; font-weight: 600;">↑ 12% from last
+                month</div>
         </div>
 
-        <div class="h-card h-reveal">
-            <div
-                style="width: 50px; height: 50px; border-radius: 14px; background: rgba(16, 185, 129, 0.1); display: flex; align-items: center; justify-content: center; color: #10b981; font-size: 1.4rem; margin-bottom: 2rem;">
-                <i class="fas fa-dollar-sign"></i>
+        <div class="h-card h-reveal" style="border-top: 4px solid var(--primary); border-radius: 12px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                <div
+                    style="color: var(--text-dim); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; font-weight: 800; font-family: var(--font-accent);">
+                    Total Revenue</div>
+                <i class="fas fa-chart-line" style="color: var(--primary); opacity: 0.5;"></i>
             </div>
             <div
-                style="color: var(--text-dim); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; font-weight: 700;">
-                Total Revenue Earned</div>
-            <div style="font-size: 3.5rem; font-weight: 900; margin-top: 0.5rem; color: #fff; letter-spacing: -1px;">
-                ${{ number_format($totalRevenue ?? 0, 0) }}</div>
+                style="font-size: 3.2rem; font-weight: 900; color: #fff; letter-spacing: -2px; font-family: var(--font-accent);">
+                ${{ number_format($totalRevenue ?? 0, 0) }}
+            </div>
+            <div style="margin-top: 1rem; color: var(--primary); font-size: 0.85rem; font-weight: 600;">↑ 8.4% from last
+                month</div>
         </div>
 
-        <div class="h-card h-reveal">
-            <div
-                style="width: 50px; height: 50px; border-radius: 14px; background: rgba(245, 158, 11, 0.1); display: flex; align-items: center; justify-content: center; color: #f59e0b; font-size: 1.4rem; margin-bottom: 2rem;">
-                <i class="fas fa-clock"></i>
+        <div class="h-card h-reveal" style="border-top: 4px solid #f59e0b; border-radius: 12px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                <div
+                    style="color: var(--text-dim); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; font-weight: 800; font-family: var(--font-accent);">
+                    Pending Orders</div>
+                <i class="fas fa-clock" style="color: #f59e0b; opacity: 0.5;"></i>
             </div>
-            <div
-                style="color: var(--text-dim); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; font-weight: 700;">
-                Pending Order Requests</div>
-            <div style="font-size: 3.5rem; font-weight: 900; margin-top: 0.5rem; color: #fff; letter-spacing: -1px;"
+            <div style="font-size: 3.2rem; font-weight: 900; color: #fff; letter-spacing: -2px; font-family: var(--font-accent);"
                 class="stylized-counter" data-target="{{ $pendingOrders ?? 0 }}">0</div>
+            <div style="margin-top: 1rem; color: #f59e0b; font-size: 0.85rem; font-weight: 600;">Requires attention</div>
         </div>
 
-        <div class="h-card h-reveal">
-            <div
-                style="width: 50px; height: 50px; border-radius: 14px; background: rgba(244, 63, 94, 0.1); display: flex; align-items: center; justify-content: center; color: var(--accent); font-size: 1.4rem; margin-bottom: 2rem;">
-                <i class="fas fa-envelope"></i>
+        <div class="h-card h-reveal" style="border-top: 4px solid var(--accent); border-radius: 12px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                <div
+                    style="color: var(--text-dim); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; font-weight: 800; font-family: var(--font-accent);">
+                    Signal Requests</div>
+                <i class="fas fa-bullhorn" style="color: var(--accent); opacity: 0.5;"></i>
             </div>
-            <div
-                style="color: var(--text-dim); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; font-weight: 700;">
-                Unread Messages</div>
-            <div style="font-size: 3.5rem; font-weight: 900; margin-top: 0.5rem; color: #fff; letter-spacing: -1px;"
+            <div style="font-size: 3.2rem; font-weight: 900; color: #fff; letter-spacing: -2px; font-family: var(--font-accent);"
                 class="stylized-counter" data-target="{{ $totalMessages ?? 0 }}">0</div>
+            <div style="margin-top: 1rem; color: var(--accent); font-size: 0.85rem; font-weight: 600;">Active volume high
+            </div>
         </div>
     </div>
 
@@ -236,8 +252,8 @@
                     labels: ['Completed', 'Pending', 'Rejected'],
                     datasets: [{
                         data: [
-                                    {{ $orderStatusChart['Completed'] ?? 0 }},
-                                    {{ $orderStatusChart['Pending'] ?? 0 }},
+                                            {{ $orderStatusChart['Completed'] ?? 0 }},
+                                            {{ $orderStatusChart['Pending'] ?? 0 }},
                             {{ $orderStatusChart['Rejected'] ?? 0 }}
                         ],
                         backgroundColor: ['#10b981', '#f59e0b', '#f43f5e'],
