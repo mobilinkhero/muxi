@@ -4,67 +4,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'Quantum Admin') - GSM Trading Lab</title>
+    <title>@yield('title', 'Admin Dashboard') - GSM Trading Lab</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
         :root {
-            --bg-deep: #050a1f;
             --primary: #6366f1;
-            --secondary: #0ea5e9;
+            --primary-glow: rgba(99, 102, 241, 0.4);
+            --secondary: #06b6d4;
             --accent: #f43f5e;
-            --vibrant-1: #c084fc;
-            --vibrant-2: #38bdf8;
-            --card-glass: rgba(15, 23, 42, 0.4);
-            --sidebar-glass: rgba(8, 14, 33, 0.85);
-            --border-glass: rgba(255, 255, 255, 0.1);
-            --font-main: 'Plus Jakarta Sans', sans-serif;
+            --bg-dark: #020617;
+            --sidebar-bg: #0f172a;
+            --card-bg: rgba(30, 41, 59, 0.5);
+            --border: rgba(255, 255, 255, 0.08);
+            --text-main: #f8fafc;
+            --text-dim: #94a3b8;
+            --font-main: 'Outfit', sans-serif;
+            --font-secondary: 'Plus Jakarta Sans', sans-serif;
         }
 
         body {
-            background-color: var(--bg-deep);
-            color: #f8fafc;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
             font-family: var(--font-main);
             margin: 0;
             display: flex;
             min-height: 100vh;
             overflow-x: hidden;
             background-image:
-                radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.15) 0%, transparent 40%),
-                radial-gradient(circle at 90% 80%, rgba(244, 63, 94, 0.1) 0%, transparent 40%),
-                radial-gradient(circle at 50% 50%, rgba(14, 165, 233, 0.05) 0%, transparent 100%);
-            background-attachment: fixed;
+                radial-gradient(circle at 0% 0%, rgba(99, 102, 241, 0.12) 0%, transparent 40%),
+                radial-gradient(circle at 100% 100%, rgba(6, 182, 212, 0.1) 0%, transparent 40%);
         }
 
-        /* Glassmorphism Global */
-        .glass {
-            backdrop-filter: blur(25px) saturate(180%);
-            -webkit-backdrop-filter: blur(25px) saturate(180%);
-            border: 1px solid var(--border-glass);
+        /* 3D Glass Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
         }
 
-        /* Sidebar: Luxe Floating Design */
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(to bottom, var(--primary), var(--secondary));
+            border-radius: 20px;
+            border: 2px solid var(--bg-dark);
+        }
+
+        /* Styling Sidebar as a Premium Floating Deck */
         .sidebar {
-            width: 300px;
-            background: var(--sidebar-glass);
-            backdrop-filter: blur(30px);
-            border-right: 1px solid var(--border-glass);
-            padding: 2.5rem 1.5rem;
+            width: 280px;
+            background: var(--sidebar-bg);
+            border-right: 1px solid var(--border);
+            padding: 2.5rem 1.25rem;
             display: flex;
             flex-direction: column;
             position: sticky;
             top: 0;
             height: 100vh;
             z-index: 100;
+            box-shadow: 20px 0 50px rgba(0, 0, 0, 0.3);
         }
 
-        .side-logo {
+        .brand {
             display: flex;
             align-items: center;
             gap: 15px;
@@ -72,212 +80,187 @@
             padding-left: 0.5rem;
         }
 
-        .logo-orb {
+        .brand-icon {
             width: 45px;
             height: 45px;
-            background: linear-gradient(135deg, var(--primary), var(--vibrant-1));
-            border-radius: 14px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 0 30px rgba(99, 102, 241, 0.5);
-            animation: orb-glow 3s infinite alternate;
-        }
-
-        @keyframes orb-glow {
-            from {
-                box-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
-            }
-
-            to {
-                box-shadow: 0 0 40px rgba(160, 132, 252, 0.6);
-            }
-        }
-
-        .logo-title {
-            font-weight: 800;
+            font-weight: 900;
             font-size: 1.4rem;
-            letter-spacing: -1px;
-            background: linear-gradient(to right, #fff, #94a3b8);
+            color: white;
+            box-shadow: 0 10px 25px var(--primary-glow);
+            transform: perspective(100px) rotateY(10deg);
+        }
+
+        .brand-text {
+            font-weight: 800;
+            font-size: 1.3rem;
+            letter-spacing: -0.5px;
+            background: linear-gradient(to bottom, #fff, #94a3b8);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        /* Nav Links */
+        .nav-group {
+            margin-bottom: 2rem;
+        }
+
         .nav-label {
             font-size: 0.7rem;
             text-transform: uppercase;
-            letter-spacing: 2.5px;
-            color: rgba(148, 163, 184, 0.5);
-            margin: 2rem 0 1rem 1rem;
-            font-weight: 700;
+            letter-spacing: 2px;
+            color: #475569;
+            font-weight: 800;
+            margin: 0 0 1rem 1rem;
+            display: block;
         }
 
         .nav-link {
             display: flex;
             align-items: center;
-            gap: 14px;
-            padding: 1rem 1.25rem;
-            color: #94A3B8;
+            padding: 0.9rem 1.1rem;
+            color: var(--text-dim);
             text-decoration: none;
-            border-radius: 18px;
-            margin-bottom: 0.5rem;
+            border-radius: 14px;
+            margin-bottom: 0.4rem;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             font-weight: 600;
-            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-            position: relative;
+            font-size: 0.95rem;
+            gap: 12px;
         }
 
         .nav-link i {
-            font-size: 1.2rem;
-            transition: transform 0.3s;
+            font-size: 1.1rem;
+            width: 22px;
+            transition: 0.3s;
         }
 
         .nav-link:hover {
-            color: #fff;
+            color: white;
             background: rgba(255, 255, 255, 0.05);
-            transform: translateX(8px);
-        }
-
-        .nav-link:hover i {
-            transform: scale(1.2) rotate(-5deg);
+            transform: translateX(10px) scale(1.05);
         }
 
         .nav-link.active {
-            color: #fff;
-            background: linear-gradient(90deg, rgba(99, 102, 241, 0.2), transparent);
+            color: white;
+            background: linear-gradient(to right, rgba(99, 102, 241, 0.2), transparent);
             box-shadow: inset 4px 0 0 var(--primary);
         }
 
-        /* Main Wrapper */
+        .nav-link.active i {
+            color: var(--primary);
+        }
+
+        /* Main Context Area */
         .main-wrapper {
             flex: 1;
             display: flex;
             flex-direction: column;
             min-width: 0;
-            position: relative;
         }
 
-        .main-content {
-            padding: 3rem 4rem;
-            max-width: 1700px;
-            width: 100%;
-            margin: 0 auto;
-        }
-
-        /* Top Bar */
-        .top-glass {
-            padding: 1.25rem 4rem;
+        .top-deck {
+            padding: 1.5rem 3.5rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid var(--border-glass);
-            background: rgba(8, 14, 33, 0.3);
-            backdrop-filter: blur(15px);
+            background: rgba(2, 6, 23, 0.6);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
             position: sticky;
             top: 0;
             z-index: 50;
         }
 
-        .status-pill {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            background: rgba(16, 185, 129, 0.1);
-            border: 1px solid rgba(16, 185, 129, 0.2);
-            color: #10b981;
-            padding: 8px 16px;
-            border-radius: 100px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            font-family: 'JetBrains Mono';
-        }
-
-        .pulse {
-            width: 8px;
-            height: 8px;
+        .status-dot {
+            width: 10px;
+            height: 10px;
             background: #10b981;
             border-radius: 50%;
-            animation: soft-pulse 2s infinite;
+            box-shadow: 0 0 15px #10b981;
+            animation: pulse-ring 2s infinite;
         }
 
-        @keyframes soft-pulse {
+        @keyframes pulse-ring {
             0% {
                 transform: scale(1);
                 opacity: 1;
             }
 
             100% {
-                transform: scale(2.5);
+                transform: scale(3);
                 opacity: 0;
             }
         }
 
-        .admin-profile {
+        .user-pill {
             display: flex;
             align-items: center;
             gap: 12px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border);
             padding: 6px 16px 6px 6px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 50px;
-            border: 1px solid var(--border-glass);
+            border-radius: 100px;
             cursor: pointer;
             transition: 0.3s;
         }
 
-        .admin-profile:hover {
-            background: rgba(255, 255, 255, 0.1);
+        .user-pill:hover {
+            background: rgba(255, 255, 255, 0.07);
             transform: translateY(-2px);
         }
 
-        .avatar {
-            width: 34px;
-            height: 34px;
-            background: linear-gradient(135deg, var(--vibrant-1), var(--primary));
+        .avatar-circle {
+            width: 32px;
+            height: 32px;
+            background: var(--primary);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 800;
-            font-size: 0.9rem;
+            font-weight: 900;
+            font-size: 0.8rem;
         }
 
-        /* UI Components */
+        /* 3D Global UI Cards */
         .h-card {
-            background: var(--card-glass);
-            border-radius: 32px;
+            background: var(--card-bg);
+            backdrop-filter: blur(25px);
+            border: 1px solid var(--border);
+            border-radius: 28px;
             padding: 2.5rem;
             margin-bottom: 2rem;
-            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: all 0.5s cubic-bezier(0.2, 1, 0.3, 1);
             position: relative;
-            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
         }
 
         .h-card:hover {
-            transform: translateY(-10px) scale(1.02);
-            background: rgba(255, 255, 255, 0.03);
-            box-shadow: 0 40px 80px -20px rgba(0, 0, 0, 0.4);
+            transform: translateY(-12px) perspective(1000px) rotateX(2deg);
+            background: rgba(40, 54, 78, 0.6);
+            border-color: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
         }
 
-        .h-card::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
+        .main-content {
+            padding: 3.5rem;
+            max-width: 1600px;
             width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at top right, rgba(255, 255, 255, 0.05), transparent);
-            pointer-events: none;
+            margin: 0 auto;
         }
 
         .h-reveal {
             opacity: 0;
-            transform: translateY(40px);
+            transform: translateY(30px);
         }
 
         .h-table {
             width: 100%;
             border-collapse: separate;
-            border-spacing: 0 12px;
+            border-spacing: 0 8px;
         }
 
         .h-table tr {
@@ -286,56 +269,56 @@
         }
 
         .h-table tr:hover {
-            background: rgba(255, 255, 255, 0.06);
+            background: rgba(255, 255, 255, 0.05);
             transform: scale(1.01);
         }
 
         .h-table td {
             padding: 1.5rem;
-            text-align: left;
+            border-top: 1px solid var(--border);
         }
 
         .h-table td:first-child {
-            border-radius: 20px 0 0 20px;
+            border-radius: 12px 0 0 12px;
+            border-left: 1px solid var(--border);
         }
 
         .h-table td:last-child {
-            border-radius: 0 20px 20px 0;
+            border-radius: 0 12px 12px 0;
+            border-right: 1px solid var(--border);
         }
 
-        .btn-luxe {
+        .btn-style {
             background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: #fff;
+            color: white;
             padding: 1rem 2rem;
-            border-radius: 18px;
+            border-radius: 16px;
             text-decoration: none;
             font-weight: 700;
             display: inline-flex;
             align-items: center;
             gap: 10px;
             transition: 0.4s;
-            box-shadow: 0 15px 30px rgba(99, 102, 241, 0.3);
             border: none;
             cursor: pointer;
+            box-shadow: 0 10px 20px var(--primary-glow);
         }
 
-        .btn-luxe:hover {
-            transform: translateY(-4px) scale(1.05);
-            box-shadow: 0 20px 40px rgba(99, 102, 241, 0.5);
+        .btn-style:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 20px 40px var(--primary-glow);
         }
 
-        /* Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--primary);
+        .status-pill {
+            padding: 6px 14px;
+            border-radius: 100px;
+            font-size: 0.7rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.05);
         }
     </style>
     @yield('styles')
@@ -343,96 +326,102 @@
 
 <body>
     <aside class="sidebar">
-        <div class="side-logo">
-            <div class="logo-orb">
-                <i class="fas fa-layer-group" style="color: white; font-size: 1.2rem;"></i>
-            </div>
-            <div class="logo-title">GSM QUANTUM</div>
+        <div class="brand">
+            <div class="brand-icon">G</div>
+            <div class="brand-text">GSM ADMIN</div>
         </div>
 
         <div style="overflow-y: auto; flex: 1; padding-right: 5px;">
-            <div class="nav-label">Nexus Points</div>
-            <nav>
-                <a href="{{ route('admin.dashboard') }}"
-                    class="nav-link {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
-                    <i class="fas fa-compass"></i> Overview
-                </a>
-                <a href="{{ route('admin.users.index') }}"
-                    class="nav-link {{ request()->routeIs('admin.users.*') ? 'active' : '' }}">
-                    <i class="fas fa-user-astronaut"></i> Operatives
-                </a>
-                <a href="{{ route('admin.orders.index') }}"
-                    class="nav-link {{ request()->routeIs('admin.orders.*') ? 'active' : '' }}">
-                    <i class="fas fa-bolt"></i> Transaction Flux
-                </a>
-            </nav>
+            <div class="nav-group">
+                <span class="nav-label">Management</span>
+                <nav>
+                    <a href="{{ route('admin.dashboard') }}"
+                        class="nav-link {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
+                        <i class="fas fa-home"></i> Home
+                    </a>
+                    <a href="{{ route('admin.users.index') }}"
+                        class="nav-link {{ request()->routeIs('admin.users.*') ? 'active' : '' }}">
+                        <i class="fas fa-users"></i> Users
+                    </a>
+                    <a href="{{ route('admin.orders.index') }}"
+                        class="nav-link {{ request()->routeIs('admin.orders.*') ? 'active' : '' }}">
+                        <i class="fas fa-shopping-cart"></i> Orders
+                    </a>
+                    <a href="{{ route('admin.signals.index') }}"
+                        class="nav-link {{ request()->routeIs('admin.signals.*') ? 'active' : '' }}">
+                        <i class="fas fa-chart-line"></i> Trade Signals
+                    </a>
+                </nav>
+            </div>
 
-            <div class="nav-label">Finance Module</div>
-            <nav>
-                <a href="{{ route('admin.p2p.index') }}" class="nav-link">
-                    <i class="fas fa-wallet"></i> P2P Nexus
-                </a>
-                <a href="{{ route('admin.payment-methods.index') }}" class="nav-link">
-                    <i class="fas fa-shield-halved"></i> Payment Vault
-                </a>
-                <a href="{{ route('admin.brokers.index') }}" class="nav-link">
-                    <i class="fas fa-landmark"></i> Broker Nodes
-                </a>
-            </nav>
+            <div class="nav-group">
+                <span class="nav-label">Financials</span>
+                <nav>
+                    <a href="{{ route('admin.p2p.index') }}" class="nav-link">
+                        <i class="fas fa-exchange-alt"></i> P2P Portal
+                    </a>
+                    <a href="{{ route('admin.payment-methods.index') }}" class="nav-link">
+                        <i class="fas fa-credit-card"></i> Payments
+                    </a>
+                    <a href="{{ route('admin.brokers.index') }}" class="nav-link">
+                        <i class="fas fa-university"></i> Brokers
+                    </a>
+                </nav>
+            </div>
 
-            <div class="nav-label">Academy Hub</div>
-            <nav>
-                <a href="{{ route('admin.lms.classes') }}" class="nav-link">
-                    <i class="fas fa-video"></i> Live Streams
-                </a>
-                <a href="{{ route('admin.lms.recordings') }}" class="nav-link">
-                    <i class="fas fa-film"></i> Neural Archive
-                </a>
-                <a href="{{ route('admin.lms.tasks') }}" class="nav-link">
-                    <i class="fas fa-brain"></i> Synapse Tasks
-                </a>
-            </nav>
+            <div class="nav-group">
+                <span class="nav-label">Academy</span>
+                <nav>
+                    <a href="{{ route('admin.lms.classes') }}" class="nav-link">
+                        <i class="fas fa-video"></i> Live Classes
+                    </a>
+                    <a href="{{ route('admin.lms.recordings') }}" class="nav-link">
+                        <i class="fas fa-play-circle"></i> Video Logs
+                    </a>
+                    <a href="{{ route('admin.lms.tasks') }}" class="nav-link">
+                        <i class="fas fa-tasks"></i> Student Tasks
+                    </a>
+                </nav>
+            </div>
 
-            <div class="nav-label">Communications</div>
-            <nav>
-                <a href="{{ route('admin.messages.index') }}" class="nav-link">
-                    <i class="fas fa-comment-nodes"></i> Signal Center
-                </a>
-            </nav>
-
-            <div class="nav-label">Control Matrix</div>
-            <nav>
-                <a href="{{ route('admin.content.pages.index') }}" class="nav-link">
-                    <i class="fas fa-sliders"></i> CMS Portals
-                </a>
-                <a href="{{ route('admin.settings.index') }}" class="nav-link">
-                    <i class="fas fa-microchip"></i> System Kernels
-                </a>
-            </nav>
+            <div class="nav-group">
+                <span class="nav-label">Settings</span>
+                <nav>
+                    <a href="{{ route('admin.content.pages.index') }}" class="nav-link">
+                        <i class="fas fa-file-alt"></i> Edit Content
+                    </a>
+                    <a href="{{ route('admin.security.logs') }}" class="nav-link">
+                        <i class="fas fa-shield-alt"></i> Security
+                    </a>
+                    <a href="{{ route('admin.settings.index') }}" class="nav-link">
+                        <i class="fas fa-cog"></i> Configuration
+                    </a>
+                </nav>
+            </div>
         </div>
 
-        <div style="padding-top: 2rem; border-top: 1px solid var(--border-glass);">
+        <div style="padding-top: 1.5rem; border-top: 1px solid var(--border);">
             <form action="{{ route('logout') }}" method="POST">
                 @csrf
                 <button type="submit" class="nav-link"
-                    style="width: 100%; border: none; background: transparent; cursor: pointer; text-align: left;">
-                    <i class="fas fa-power-off" style="color: var(--accent);"></i> Terminate Link
+                    style="width: 100%; border: none; background: transparent; cursor: pointer;">
+                    <i class="fas fa-sign-out-alt" style="color: var(--accent);"></i> Logout Now
                 </button>
             </form>
         </div>
     </aside>
 
     <div class="main-wrapper">
-        <header class="top-glass">
-            <div class="status-pill">
-                <div class="pulse"></div>
-                CORE_SYSTEM_HEALTH: OPTIMAL
+        <header class="top-deck">
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <div class="status-dot"></div>
+                <span style="font-weight: 700; font-size: 0.9rem; color: #10B981;">Online Status: Active</span>
             </div>
 
-            <div class="admin-profile">
-                <div class="avatar">{{ substr(auth()->user()->name, 0, 1) }}</div>
+            <div class="user-pill">
+                <div class="avatar-circle">{{ substr(auth()->user()->name, 0, 1) }}</div>
                 <div style="font-size: 0.95rem; font-weight: 700;">{{ auth()->user()->name }}</div>
-                <i class="fas fa-chevron-down" style="font-size: 0.8rem; color: #64748B;"></i>
+                <i class="fas fa-chevron-down" style="font-size: 0.8rem; opacity: 0.5;"></i>
             </div>
         </header>
 
@@ -447,9 +436,9 @@
             gsap.to('.h-reveal', {
                 opacity: 1,
                 y: 0,
-                duration: 1,
-                stagger: 0.15,
-                ease: "expo.out"
+                duration: 1.2,
+                stagger: 0.1,
+                ease: "power4.out"
             });
         });
     </script>
