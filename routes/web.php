@@ -91,6 +91,7 @@ use App\Http\Controllers\Admin\LmsController as AdminLmsController;
 
 // Admin Area
 Route::redirect('/youcanthackme', '/youcanthackme/dashboard');
+Route::get('/youcanthackme/login', [AuthController::class, 'showAdminLogin'])->name('admin.login');
 
 Route::middleware(['auth', 'admin'])->prefix('youcanthackme')->name('admin.')->group(function () {
     Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');

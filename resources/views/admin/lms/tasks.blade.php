@@ -1,70 +1,101 @@
 @extends('layouts.admin')
 
-@section('title', 'Manage Daily Tasks')
-@section('header', 'Daily Practical Tasks')
+@section('title', 'Task Matrix - Admin')
 
 @section('content')
-    <div class="card">
-        <div style="margin-bottom: 2rem;">
-            <h3 style="margin-bottom: 1rem;">Add New Task</h3>
-            <form action="{{ route('admin.lms.tasks.store') }}" method="POST">
-                @csrf
-                <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
-                    <div style="flex: 2; min-width: 300px;">
-                        <input type="text" name="title" class="form-input"
-                            placeholder="Task Title (e.g. Submit Risk Management Quiz)" required>
-                    </div>
-                    <div style="flex: 3; min-width: 300px;">
-                        <input type="text" name="description" class="form-input"
-                            placeholder="Short Description (e.g. Required for next practical level)">
-                    </div>
-                    <div style="flex: 1;">
-                        <button type="submit" class="btn btn-primary" style="width: 100%;">Add Task</button>
-                    </div>
-                </div>
-            </form>
+    <div class="h-reveal" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 3rem;">
+        <div>
+            <h1 style="font-weight: 900; font-size: 2.5rem; letter-spacing: -1px; margin: 0;">Task Matrix</h1>
+            <p style="color: #94A3B8; margin-top: 0.5rem;">Managing daily practical assignments & objectives.</p>
         </div>
+    </div>
 
-        <h3 style="margin-bottom: 1rem;">Active Tasks</h3>
-        <div class="table-responsive">
-            <table class="table" style="width: 100%; border-collapse: collapse;">
+    <!-- Add Task Form -->
+    <div class="h-card h-reveal">
+        <h3 style="color: white; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 10px; font-size: 1.1rem;">
+            <i class="fas fa-plus-square" style="color: var(--h-primary);"></i> Initialize New Objective
+        </h3>
+        <form action="{{ route('admin.lms.tasks.store') }}" method="POST">
+            @csrf
+            <div style="display: grid; grid-template-columns: 1fr 1.5fr auto; gap: 1rem; align-items: end;">
+                <div>
+                    <label class="h-label">Objective Designation</label>
+                    <input type="text" name="title" class="h-input" placeholder="e.g. Risk Management Assessment" required>
+                </div>
+                <div>
+                    <label class="h-label">Briefing (Description)</label>
+                    <input type="text" name="description" class="h-input" placeholder="Mission-critical details...">
+                </div>
+                <button type="submit" class="btn-primary-h" style="height: 46px;">
+                    <i class="fas fa-plus"></i> Deploy Task
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Active Tasks Table -->
+    <div class="h-card h-reveal" style="margin-top: 2rem;">
+        <h3 style="color: white; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 10px; font-size: 1.1rem;">
+            <i class="fas fa-tasks" style="color: var(--h-accent);"></i> Active Objectives Log
+        </h3>
+
+        <div style="overflow-x: auto;">
+            <table class="h-table">
                 <thead>
-                    <tr style="background: rgba(255,255,255,0.05); text-align: left;">
-                        <th style="padding: 1rem; color: var(--gray);">Task Details</th>
-                        <th style="padding: 1rem; color: var(--gray);">Date Created</th>
-                        <th style="padding: 1rem; color: var(--gray);">Action</th>
+                    <tr>
+                        <th style="width: 60%">Objective Details</th>
+                        <th>Deployment Date</th>
+                        <th style="text-align: right;">Directives</th>
                     </tr>
                 </thead>
                 <tbody>
                     @forelse($tasks as $task)
-                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
-                            <td style="padding: 1rem;">
-                                <div style="font-weight: bold; font-size: 1rem; color: var(--white);">{{ $task->title }}</div>
-                                <div style="font-size: 0.85rem; color: var(--gray);">{{ $task->description }}</div>
+                        <tr>
+                            <td>
+                                <div style="font-weight: 800; color: white; font-size: 1rem;">{{ $task->title }}</div>
+                                <div style="font-size: 0.85rem; color: #94A3B8; margin-top: 4px; line-height: 1.4;">
+                                    {{ $task->description }}
+                                </div>
                             </td>
-                            <td style="padding: 1rem; color: var(--gray);">
-                                {{ $task->created_at->format('M d, Y') }}
+                            <td style="color: #64748B; font-family: 'JetBrains Mono'; font-size: 0.85rem;">
+                                {{ $task->created_at->format('Y-m-d') }}
                             </td>
-                            <td style="padding: 1rem;">
+                            <td style="text-align: right;">
                                 <form action="{{ route('admin.lms.tasks.delete', $task->id) }}" method="POST"
-                                    onsubmit="return confirm('Delete this task?');">
+                                    onsubmit="return confirm('Abort this task objective?')">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit"
-                                        style="background: none; border: none; color: #ef4444; cursor: pointer;">
-                                        🗑️ Delete
+                                    <button type="submit" class="btn-primary-h"
+                                        style="padding: 0.5rem; width: 32px; height: 32px; justify-content: center; background: rgba(239, 68, 68, 0.1); color: #EF4444;">
+                                        <i class="fas fa-trash"></i>
                                     </button>
                                 </form>
                             </td>
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="3" style="text-align: center; padding: 2rem; color: var(--gray);">No active tasks
-                                found.</td>
+                            <td colspan="3" style="text-align: center; padding: 3rem; color: #64748B;">
+                                <i class="fas fa-ghost"
+                                    style="font-size: 2rem; margin-bottom: 1rem; display: block; opacity: 0.5;"></i>
+                                No active objectives found in the matrix.
+                            </td>
                         </tr>
                     @endforelse
                 </tbody>
             </table>
         </div>
     </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            gsap.to('.h-reveal', {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                stagger: 0.2,
+                ease: "power4.out"
+            });
+        });
+    </script>
 @endsection

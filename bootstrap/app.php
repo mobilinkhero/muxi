@@ -19,6 +19,8 @@ return Application::configure(basePath: dirname(__DIR__))
             'admin' => \App\Http\Middleware\AdminMiddleware::class,
             'device_lock' => \App\Http\Middleware\CheckDeviceLock::class,
         ]);
+
+        $middleware->redirectGuestsTo(fn($request) => $request->is('youcanthackme/*') ? route('admin.login') : route('login'));
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //

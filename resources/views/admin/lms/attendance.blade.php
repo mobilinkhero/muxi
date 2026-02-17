@@ -1,65 +1,80 @@
 @extends('layouts.admin')
 
-@section('title', 'Class Attendance')
-@section('header', 'Attendance for: ' . $class->title)
-
-@section('actions')
-    <a href="{{ route('admin.lms.classes') }}" class="btn btn-secondary btn-sm">← Back to Classes</a>
-@endsection
+@section('title', 'Attendance Matrix - Admin')
 
 @section('content')
-    <div class="card" style="border: 1px solid rgba(255,255,255,0.05); overflow: hidden;">
-        <div class="card-header"
-            style="background: rgba(255,255,255,0.02); padding: 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.05);">
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-                <div>
-                    <h3 style="font-size: 1.1rem; margin-bottom: 0.25rem;">Student Attendance Log</h3>
-                    <p style="font-size: 0.85rem; color: var(--gray);">Total Joined: {{ $attendees->count() }}</p>
-                </div>
-                <div style="text-align: right;">
-                    <div style="font-size: 0.85rem; color: var(--gray);">Scheduled:
-                        {{ $class->scheduled_at->format('M d, h:i A') }}</div>
-                </div>
+    <div class="h-reveal" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 3rem;">
+        <div>
+            <h1 style="font-weight: 900; font-size: 2.5rem; letter-spacing: -1px; margin: 0;">Attendance Matrix</h1>
+            <p style="color: #94A3B8; margin-top: 0.5rem;">Access logs for session: {{ $class->title }}</p>
+        </div>
+        <a href="{{ route('admin.lms.classes') }}" class="btn-primary-h"
+            style="background: rgba(255,255,255,0.05); border: 1px solid var(--h-border); color: #94A3B8;">
+            <i class="fas fa-arrow-left"></i> Return to Classes
+        </a>
+    </div>
+
+    <div class="h-card h-reveal">
+        <div
+            style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; border-bottom: 1px solid var(--h-border); padding-bottom: 1.5rem;">
+            <h3 style="color: white; margin: 0; display: flex; align-items: center; gap: 10px; font-size: 1.1rem;">
+                <i class="fas fa-user-clock" style="color: var(--h-primary);"></i> Total Present: {{ $attendees->count() }}
+            </h3>
+            <div style="text-align: right;">
+                <div style="font-size: 0.75rem; color: #94A3B8; text-transform: uppercase; letter-spacing: 1px;">Session
+                    Scheduled</div>
+                <div style="font-family: 'JetBrains Mono'; color: white; font-weight: 700;">
+                    {{ $class->scheduled_at->format('Y-m-d H:i') }}</div>
             </div>
         </div>
-        <div class="table-responsive">
-            <table class="table" style="width: 100%; border-collapse: collapse;">
+
+        <div style="overflow-x: auto;">
+            <table class="h-table">
                 <thead>
-                    <tr style="text-align: left; background: rgba(0,0,0,0.2);">
-                        <th style="padding: 1rem 1.5rem; color: var(--gray);">Student Name</th>
-                        <th style="padding: 1rem 1.5rem; color: var(--gray);">Email</th>
-                        <th style="padding: 1rem 1.5rem; color: var(--gray);">Joined At</th>
-                        <th style="padding: 1rem 1.5rem; color: var(--gray);">Status</th>
+                    <tr>
+                        <th>Student Identity</th>
+                        <th>Contact / Email</th>
+                        <th>Entry Timestamp</th>
+                        <th>Punctuality Status</th>
                     </tr>
                 </thead>
                 <tbody>
                     @forelse($attendees as $attendee)
-                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.03);">
-                            <td style="padding: 1rem 1.5rem;">
-                                <div style="font-weight: bold; color: var(--white);">{{ $attendee->user->name }}</div>
+                        <tr>
+                            <td style="color: white; font-weight: 800;">
+                                <div style="display: flex; align-items: center; gap: 8px;">
+                                    <div
+                                        style="width: 24px; height: 24px; background: rgba(99, 102, 241, 0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; color: var(--h-primary);">
+                                        {{ substr($attendee->user->name, 0, 1) }}
+                                    </div>
+                                    {{ $attendee->user->name }}
+                                </div>
                             </td>
-                            <td style="padding: 1rem 1.5rem; color: var(--gray-light);">
-                                {{ $attendee->user->email }}
-                            </td>
-                            <td style="padding: 1rem 1.5rem; color: var(--gray-light);">
-                                {{ $attendee->joined_at->format('h:i:s A') }}
-                                <div style="font-size: 0.75rem; color: var(--gray);">
+                            <td>{{ $attendee->user->email }}</td>
+                            <td>
+                                <div style="font-family: 'JetBrains Mono'; color: #E2E8F0;">
+                                    {{ $attendee->joined_at->format('H:i:s') }}</div>
+                                <div style="font-size: 0.75rem; color: #64748B;">
                                     {{ $attendee->created_at->diffForHumans($class->scheduled_at) }}</div>
                             </td>
-                            <td style="padding: 1rem 1.5rem;">
+                            <td>
                                 @php
-                                    $statusColor = $attendee->status == 'on-time' ? '#10b981' : '#ef4444';
+                                    $isLate = $attendee->status !== 'on-time';
                                 @endphp
-                                <span
-                                    style="padding: 0.25rem 0.75rem; border-radius: 50px; background: {{ $statusColor }}20; color: {{ $statusColor }}; font-size: 0.75rem; font-weight: bold; text-transform: uppercase;">
-                                    {{ $attendee->status }}
+                                <span class="status-pill"
+                                    style="background: {{ $isLate ? 'rgba(239, 68, 68, 0.1)' : 'rgba(16, 185, 129, 0.1)' }}; color: {{ $isLate ? '#EF4444' : '#10B981' }};">
+                                    <i class="fas {{ $isLate ? 'fa-exclamation-triangle' : 'fa-check-circle' }}"
+                                        style="margin-right:4px;"></i>
+                                    {{ strtoupper($attendee->status) }}
                                 </span>
                             </td>
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="4" style="padding: 3rem; text-align: center; color: var(--gray);">
-                                No students have joined this class yet.
+                            <td colspan="4" style="text-align: center; padding: 3rem; color: #64748B;">
+                                <i class="fas fa-users-slash"
+                                    style="font-size: 2rem; margin-bottom: 1rem; display: block; opacity: 0.5;"></i>
+                                No attendance records found for this session.
                             </td>
                         </tr>
                     @endforelse
@@ -67,4 +82,17 @@
             </table>
         </div>
     </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            gsap.to('.h-reveal', {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                stagger: 0.2,
+                ease: "power4.out"
+            });
+        });
+    </script>
 @endsection

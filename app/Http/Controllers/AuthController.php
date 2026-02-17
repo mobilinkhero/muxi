@@ -14,6 +14,11 @@ class AuthController extends Controller
         return view('auth.login');
     }
 
+    public function showAdminLogin()
+    {
+        return view('admin.auth.login');
+    }
+
     public function login(Request $request)
     {
         $request->validate([

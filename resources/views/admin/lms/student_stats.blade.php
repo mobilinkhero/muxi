@@ -1,69 +1,95 @@
 @extends('layouts.admin')
 
-@section('title', 'Student Performance')
-@section('header', 'Overall Student Stats')
+@section('title', 'Trainee Matrix - Admin')
 
 @section('content')
-    <div class="card" style="border: 1px solid rgba(255,255,255,0.05); overflow: hidden;">
-        <div class="card-header" style="background: rgba(255,255,255,0.02); padding: 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.05);">
-            <h3 style="font-size: 1.1rem; margin: 0;">Learning Progress Analytics</h3>
+    <div class="h-reveal" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 3rem;">
+        <div>
+            <h1 style="font-weight: 900; font-size: 2.5rem; letter-spacing: -1px; margin: 0;">Trainee Matrix</h1>
+            <p style="color: #94A3B8; margin-top: 0.5rem;">Performance analytics & progression data.</p>
         </div>
-        <div class="table-responsive">
-            <table class="table" style="width: 100%; border-collapse: collapse;">
+    </div>
+
+    <div class="h-card h-reveal">
+        <h3 style="color: white; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 10px; font-size: 1.1rem;">
+            <i class="fas fa-chart-pie" style="color: var(--h-primary);"></i> Learning Progress Analytics
+        </h3>
+
+        <div style="overflow-x: auto;">
+            <table class="h-table">
                 <thead>
-                    <tr style="text-align: left; background: rgba(0,0,0,0.2);">
-                        <th style="padding: 1rem 1.5rem; color: var(--gray);">Student</th>
-                        <th style="padding: 1rem 1.5rem; color: var(--gray);">Classes Joined</th>
-                        <th style="padding: 1rem 1.5rem; color: var(--gray);">Late Joins</th>
-                        <th style="padding: 1rem 1.5rem; color: var(--gray);">Attendance %</th>
-                        <th style="padding: 1rem 1.5rem; color: var(--gray);">Course Progress</th>
-                        <th style="padding: 1rem 1.5rem; color: var(--gray);">Status</th>
+                    <tr>
+                        <th>Operative Identity</th>
+                        <th>Sessions Engaged</th>
+                        <th>Late Entries</th>
+                        <th>Attendance Rating</th>
+                        <th>Module Completion</th>
+                        <th>Account Status</th>
                     </tr>
                 </thead>
                 <tbody>
                     @php 
                         $totalClasses = \App\Models\LiveClass::where('status', 'completed')->count() ?: 1; 
-                        $totalVideos = \App\Models\ClassRecording::where('is_active', true)->count() ?: 1;
+                        $totalVideos = \App\Models\ClassRecording::count() ?: 1;
                     @endphp
                     @forelse($students as $student)
                         @php
-                            $joined = $student->liveClassAttendance->count();
-                            $late = $student->liveClassAttendance->where('status', 'late')->count();
-                            $attendanceRate = round(($joined / $totalClasses) * 100);
-                            $videosWatched = $student->videoProgress->where('is_completed', true)->count();
-                            $videoRate = round(($videosWatched / $totalVideos) * 100);
+                            // Assuming relationships exist, otherwise we fallback to 0
+                            $joined = $student->liveClassAttendance ? $student->liveClassAttendance->count() : 0;
+                            $late = $student->liveClassAttendance ? $student->liveClassAttendance->where('status', 'late')->count() : 0;
+                            
+                            // Adjust calculation to avoid division by zero if $totalClasses is somehow 0 (handled above but good to be safe)
+                            $attendanceRate = $totalClasses > 0 ? round(($joined / $totalClasses) * 100) : 0;
+                            
+                            // Mocking video progress if relationship doesn't exist or is empty for now
+                            $videosWatched = $student->videoProgress ? $student->videoProgress->where('is_completed', true)->count() : 0;
+                            $videoRate = $totalVideos > 0 ? round(($videosWatched / $totalVideos) * 100) : 0;
                         @endphp
-                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.03);">
-                            <td style="padding: 1rem 1.5rem;">
-                                <div style="font-weight: bold; color: var(--white);">{{ $student->name }}</div>
-                                <div style="font-size: 0.8rem; color: var(--gray);">{{ $student->email }}</div>
+                        <tr>
+                            <td style="color: white; font-weight: 800;">
+                                <div style="display: flex; align-items: center; gap: 8px;">
+                                    <div style="width: 24px; height: 24px; background: rgba(236, 72, 153, 0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; color: var(--h-accent);">
+                                        {{ substr($student->name, 0, 1) }}
+                                    </div>
+                                    <div>
+                                        {{ $student->name }}
+                                        <div style="font-size: 0.75rem; color: #64748B; font-weight: 400; font-family: 'JetBrains Mono';">{{ $student->email }}</div>
+                                    </div>
+                                </div>
                             </td>
-                            <td style="padding: 1rem 1.5rem; color: var(--white); font-weight: bold;">
-                                {{ $joined }}
+                            <td style="font-family: 'JetBrains Mono'; color: #E2E8F0;">
+                                {{ $joined }} <span style="color: #64748B; font-size: 0.8rem;">/ {{ $totalClasses }}</span>
                             </td>
-                            <td style="padding: 1rem 1.5rem; color: {{ $late > 0 ? '#ef4444' : 'var(--gray)' }};">
+                            <td style="font-family: 'JetBrains Mono'; color: {{ $late > 0 ? '#EF4444' : '#64748B' }};">
                                 {{ $late }}
                             </td>
-                            <td style="padding: 1rem 1.5rem;">
-                                <div style="width: 100px; height: 8px; background: rgba(255,255,255,0.05); border-radius: 10px; overflow: hidden; margin-bottom: 4px;">
-                                    <div style="width: {{ $attendanceRate }}%; height: 100%; background: {{ $attendanceRate > 70 ? '#10b981' : ($attendanceRate > 40 ? '#f59e0b' : '#ef4444') }};"></div>
-                                </div>
-                                <span style="font-size: 0.75rem; color: var(--gray);">{{ $attendanceRate }}%</span>
-                            </td>
-                            <td style="padding: 1rem 1.5rem;">
-                                <div style="font-size: 0.85rem; color: var(--white); margin-bottom: 4px;">{{ $videosWatched }} / {{ $totalVideos }} Videos</div>
-                                <div style="width: 100px; height: 8px; background: rgba(255,255,255,0.05); border-radius: 10px; overflow: hidden;">
-                                    <div style="width: {{ $videoRate }}%; height: 100%; background: var(--primary);"></div>
+                            <td>
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <div style="flex: 1; height: 6px; background: rgba(255,255,255,0.05); border-radius: 4px; overflow: hidden;">
+                                        <div style="width: {{ $attendanceRate }}%; height: 100%; background: {{ $attendanceRate > 70 ? '#10B981' : ($attendanceRate > 40 ? '#F59E0B' : '#EF4444') }}; box-shadow: 0 0 10px {{ $attendanceRate > 70 ? '#10B981' : ($attendanceRate > 40 ? '#F59E0B' : '#EF4444') }};"></div>
+                                    </div>
+                                    <span style="font-size: 0.75rem; color: {{ $attendanceRate > 70 ? '#10B981' : ($attendanceRate > 40 ? '#F59E0B' : '#EF4444') }}; font-family: 'JetBrains Mono'; width: 30px; text-align: right;">{{ $attendanceRate }}%</span>
                                 </div>
                             </td>
-                            <td style="padding: 1rem 1.5rem;">
-                                <span style="padding: 0.25rem 0.5rem; border-radius: 4px; background: rgba(16, 185, 129, 0.1); color: #10b981; font-size: 0.7rem; font-weight: bold;">ACTIVE</span>
+                            <td>
+                                <div style="font-size: 0.75rem; color: #94A3B8; margin-bottom: 4px; font-family: 'JetBrains Mono';">
+                                    {{ $videosWatched }} / {{ $totalVideos }} Protocols
+                                </div>
+                                <div style="height: 6px; background: rgba(255,255,255,0.05); border-radius: 4px; overflow: hidden;">
+                                    <div style="width: {{ $videoRate }}%; height: 100%; background: var(--h-primary); box-shadow: 0 0 10px var(--h-primary);"></div>
+                                </div>
+                            </td>
+                            <td>
+                                <span class="status-pill" style="background: rgba(16, 185, 129, 0.1); color: #10B981;">
+                                    ACTIVE
+                                </span>
                             </td>
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="6" style="padding: 3rem; text-align: center; color: var(--gray);">
-                                No students found.
+                            <td colspan="6" style="text-align: center; padding: 3rem; color: #64748B;">
+                                <i class="fas fa-users-slash" style="font-size: 2rem; margin-bottom: 1rem; display: block; opacity: 0.5;"></i>
+                                No trainee data found in the matrix.
                             </td>
                         </tr>
                     @endforelse
@@ -71,4 +97,17 @@
             </table>
         </div>
     </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            gsap.to('.h-reveal', {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                stagger: 0.2,
+                ease: "power4.out"
+            });
+        });
+    </script>
 @endsection

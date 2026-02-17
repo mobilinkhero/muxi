@@ -9,7 +9,7 @@
             <p style="color: #94A3B8; margin-top: 0.5rem;">Cross-chain P2P Exchange Control Terminal</p>
         </div>
         <div style="display: flex; gap: 1rem;">
-            <div class="card"
+            <div class="h-card"
                 style="margin: 0; padding: 12px 24px; border-radius: 16px; background: rgba(16, 185, 129, 0.1); border-color: rgba(16, 185, 129, 0.2);">
                 <div style="font-size: 0.7rem; color: #10B981; font-weight: 800; text-transform: uppercase;">System Reserve
                 </div>
@@ -21,28 +21,28 @@
 
     <!-- Stats Matrix -->
     <div class="grid-stats h-reveal">
-        <div class="card stat-card" style="border-left: 4px solid var(--h-secondary);">
+        <div class="h-card" style="border-left: 4px solid var(--h-secondary); padding: 1.5rem 2rem; margin: 0;">
             <div style="font-size: 0.8rem; color: #94A3B8; font-weight: 700;">TOTAL_USER_BUY</div>
             <div style="font-size: 1.75rem; font-weight: 900; color: white; margin-top: 0.5rem;">
                 {{ number_format($stats['total_volume_buy'], 2) }} <span
                     style="font-size: 0.9rem; opacity: 0.5;">USDT</span></div>
         </div>
-        <div class="card stat-card" style="border-left: 4px solid var(--h-accent);">
+        <div class="h-card" style="border-left: 4px solid var(--h-accent); padding: 1.5rem 2rem; margin: 0;">
             <div style="font-size: 0.8rem; color: #94A3B8; font-weight: 700;">TOTAL_USER_SELL</div>
             <div style="font-size: 1.75rem; font-weight: 900; color: white; margin-top: 0.5rem;">
                 {{ number_format($stats['total_volume_sell'], 2) }} <span
                     style="font-size: 0.9rem; opacity: 0.5;">USDT</span></div>
         </div>
-        <div class="card stat-card" style="border-left: 4px solid #F59E0B;">
+        <div class="h-card" style="border-left: 4px solid #F59E0B; padding: 1.5rem 2rem; margin: 0;">
             <div style="font-size: 0.8rem; color: #94A3B8; font-weight: 700;">PENDING_QUEUE</div>
             <div style="font-size: 1.75rem; font-weight: 900; color: white; margin-top: 0.5rem;">
                 {{ $stats['total_pending'] }} <span style="font-size: 0.9rem; opacity: 0.5;">REQUESTS</span></div>
         </div>
     </div>
 
-    <div class="p2p-layout h-reveal">
+    <div class="p2p-layout h-reveal" style="margin-top: 2.5rem;">
         <!-- Configuration Terminal -->
-        <div class="card" style="flex: 1; min-width: 350px;">
+        <div class="h-card" style="flex: 1; min-width: 350px;">
             <h3 style="font-weight: 900; margin-bottom: 2rem; display: flex; align-items: center; gap: 10px;">
                 <i class="fas fa-sliders-h" style="color: var(--h-primary);"></i> Node Config
             </h3>
@@ -88,16 +88,16 @@
                         placeholder="TRC20 / ERC20 Address">{{ $usdtPool->wallet_details }}</textarea>
                 </div>
 
-                <button type="submit" class="btn-primary-h">
+                <button type="submit" class="btn-primary-h" style="width: 100%; justify-content: center;">
                     <i class="fas fa-sync-alt"></i> COMMIT CHANGES
                 </button>
             </form>
         </div>
 
         <!-- Order Flow -->
-        <div style="flex: 2; display: flex; flex-direction: column; gap: 2rem;">
+        <div style="flex: 2; display: flex; flex-direction: column; gap: 2rem; min-width: 0;">
             <!-- Pending Requests -->
-            <div class="card">
+            <div class="h-card">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
                     <h3 style="font-weight: 900; margin: 0;">Validation Queue</h3>
                     <span class="status-pill"
@@ -137,15 +137,15 @@
                                     </td>
                                     <td>
                                         @if($tx->type == 'buy' && $tx->proof_image)
-                                            <a href="{{ Storage::url($tx->proof_image) }}" target="_blank" class="action-btn"
-                                                style="background: rgba(99, 102, 241, 0.1); color: var(--h-primary);">
+                                            <a href="{{ Storage::url($tx->proof_image) }}" target="_blank" class="btn-primary-h"
+                                                style="padding: 0.5rem 1rem; font-size: 0.75rem; background: rgba(99, 102, 241, 0.1); color: var(--h-primary);">
                                                 <i class="fas fa-file-invoice"></i> PROOF
                                             </a>
                                         @elseif($tx->type == 'sell')
                                             <button
                                                 onclick="alert('PAYMENT DETAILS:\n{{ str_replace(array("\r", "\n"), " ", $tx->user_payment_details) }}')"
-                                                class="action-btn"
-                                                style="background: rgba(236, 72, 153, 0.1); color: var(--h-accent);">
+                                                class="btn-primary-h"
+                                                style="padding: 0.5rem 1rem; font-size: 0.75rem; background: rgba(236, 72, 153, 0.1); color: var(--h-accent);">
                                                 <i class="fas fa-university"></i> DETAILS
                                             </button>
                                         @endif
@@ -155,8 +155,8 @@
                                             <form action="{{ route('admin.p2p.process', $tx->id) }}" method="POST">
                                                 @csrf
                                                 <input type="hidden" name="action" value="approve">
-                                                <button type="submit" class="action-btn"
-                                                    style="background: #10B981; color: white;"
+                                                <button type="submit" class="btn-primary-h"
+                                                    style="padding: 0.5rem; width: 32px; height: 32px; justify-content: center; background: rgba(16, 185, 129, 0.2); color: #10B981;"
                                                     onclick="return confirm('APPROVE_SEQUENCE_START?')">
                                                     <i class="fas fa-check"></i>
                                                 </button>
@@ -164,8 +164,8 @@
                                             <form action="{{ route('admin.p2p.process', $tx->id) }}" method="POST">
                                                 @csrf
                                                 <input type="hidden" name="action" value="reject">
-                                                <button type="submit" class="action-btn"
-                                                    style="background: #EF4444; color: white;"
+                                                <button type="submit" class="btn-primary-h"
+                                                    style="padding: 0.5rem; width: 32px; height: 32px; justify-content: center; background: rgba(239, 68, 68, 0.2); color: #EF4444;"
                                                     onclick="return confirm('REJECT_PURGE_START?')">
                                                     <i class="fas fa-times"></i>
                                                 </button>
@@ -184,7 +184,7 @@
             </div>
 
             <!-- History -->
-            <div class="card">
+            <div class="h-card">
                 <h3 style="font-weight: 900; margin-bottom: 2rem;">Archive Logs</h3>
                 <div style="overflow-x: auto;">
                     <table class="h-table">
@@ -233,54 +233,17 @@
             margin-bottom: 2.5rem;
         }
 
-        .stat-card {
-            padding: 1.5rem 2rem;
-            margin: 0;
-            transition: 0.3s;
-        }
-
-        .stat-card:hover {
-            transform: translateY(-5px);
-            background: rgba(255, 255, 255, 0.05);
-        }
-
         .p2p-layout {
             display: flex;
-            gap: 2.5rem;
+            gap: 2rem;
             flex-wrap: wrap;
             align-items: flex-start;
-        }
-
-        .h-label {
-            display: block;
-            font-size: 0.7rem;
-            font-weight: 800;
-            letter-spacing: 1px;
-            color: #94A3B8;
-            margin-bottom: 0.75rem;
         }
 
         .h-input-wrapper {
             position: relative;
             display: flex;
             align-items: center;
-        }
-
-        .h-input {
-            width: 100%;
-            background: rgba(0, 0, 0, 0.2);
-            border: 1px solid var(--h-border);
-            border-radius: 12px;
-            padding: 12px 16px;
-            color: white;
-            font-family: 'JetBrains Mono';
-            transition: 0.3s;
-        }
-
-        .h-input:focus {
-            outline: none;
-            border-color: var(--h-primary);
-            background: rgba(0, 0, 0, 0.4);
         }
 
         .h-addon {
@@ -290,95 +253,6 @@
             font-weight: 900;
             color: #64748B;
             pointer-events: none;
-        }
-
-        .btn-primary-h {
-            width: 100%;
-            padding: 1rem;
-            background: var(--h-primary);
-            border: none;
-            border-radius: 16px;
-            color: white;
-            font-weight: 800;
-            cursor: pointer;
-            transition: 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
-
-        .btn-primary-h:hover {
-            filter: brightness(1.1);
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(99, 102, 241, 0.2);
-        }
-
-        .status-pill {
-            padding: 4px 12px;
-            border-radius: 50px;
-            font-size: 0.65rem;
-            font-weight: 900;
-            letter-spacing: 0.5px;
-        }
-
-        .h-table {
-            width: 100%;
-            border-collapse: separate;
-            border-spacing: 0 8px;
-        }
-
-        .h-table tr {
-            background: rgba(255, 255, 255, 0.02);
-            transition: 0.3s;
-        }
-
-        .h-table tr:hover {
-            background: rgba(255, 255, 255, 0.04);
-        }
-
-        .h-table td,
-        .h-table th {
-            padding: 1.25rem 1rem;
-        }
-
-        .h-table th {
-            font-size: 0.7rem;
-            color: #94A3B8;
-            font-weight: 800;
-            text-transform: uppercase;
-        }
-
-        .h-table td:first-child {
-            border-radius: 12px 0 0 12px;
-        }
-
-        .h-table td:last-child {
-            border-radius: 0 12px 12px 0;
-        }
-
-        .action-btn {
-            width: 38px;
-            height: 38px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 10px;
-            border: none;
-            cursor: pointer;
-            transition: 0.3s;
-            text-decoration: none;
-            font-size: 0.9rem;
-        }
-
-        .action-btn:hover {
-            transform: scale(1.1);
-            filter: brightness(1.1);
-        }
-
-        .h-reveal {
-            opacity: 0;
-            transform: translateY(20px);
         }
     </style>
 

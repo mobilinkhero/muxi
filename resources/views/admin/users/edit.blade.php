@@ -1,131 +1,189 @@
 @extends('layouts.admin')
 
-@section('title', 'Edit User')
-@section('header', 'Edit User')
+@section('title', 'Configure Entity - Admin')
 
 @section('content')
-    <div class="card" style="max-width: 600px; margin: 0 auto;">
-        <form action="{{ route('admin.users.update', $user->id) }}" method="POST">
-            @csrf
-            @method('PUT')
+    <div class="h-reveal" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 3rem;">
+        <div>
+            <h1 style="font-weight: 900; font-size: 2.5rem; letter-spacing: -1px; margin: 0;">Configure Entity</h1>
+            <p style="color: #94A3B8; margin-top: 0.5rem;">Modifying parameters for operator: <span
+                    style="color: var(--h-primary); font-family: 'JetBrains Mono';">{{ $user->email }}</span></p>
+        </div>
+        <a href="{{ route('admin.users.index') }}" class="btn-primary-h"
+            style="background: rgba(255,255,255,0.05); border: 1px solid var(--h-border); color: #94A3B8;">
+            <i class="fas fa-arrow-left"></i> User Matrix
+        </a>
+    </div>
 
-            <div class="form-group">
-                <label class="form-label">Name</label>
-                <input type="text" name="name" class="form-input" required value="{{ old('name', $user->name) }}">
+    <form action="{{ route('admin.users.update', $user->id) }}" method="POST" class="h-reveal">
+        @csrf
+        @method('PUT')
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 2rem;">
+            <!-- Basic Bio-Data -->
+            <div class="h-card">
+                <h3
+                    style="margin-bottom: 2rem; font-size: 1.1rem; display: flex; align-items: center; gap: 10px; color: var(--h-primary);">
+                    <i class="fas fa-id-card"></i> Bio-Matrix
+                </h3>
+
+                <div class="form-group mb-4">
+                    <label class="h-label">Designation Name</label>
+                    <input type="text" name="name" class="h-input" required value="{{ old('name', $user->name) }}">
+                </div>
+
+                <div class="form-group mb-4">
+                    <label class="h-label">Comm Channel (Email)</label>
+                    <input type="email" name="email" class="h-input" required value="{{ old('email', $user->email) }}">
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+                    <div class="form-group mb-4">
+                        <label class="h-label">Phone Frequency</label>
+                        <input type="text" name="phone" class="h-input" value="{{ old('phone', $user->phone) }}">
+                    </div>
+                    <div class="form-group mb-4">
+                        <label class="h-label">WhatsApp Stream</label>
+                        <input type="text" name="whatsapp" class="h-input" value="{{ old('whatsapp', $user->whatsapp) }}">
+                    </div>
+                </div>
             </div>
 
-            <div class="form-group">
-                <label class="form-label">Email Address</label>
-                <input type="email" name="email" class="form-input" required value="{{ old('email', $user->email) }}">
-            </div>
+            <!-- Access & Privilege -->
+            <div class="h-card">
+                <h3
+                    style="margin-bottom: 2rem; font-size: 1.1rem; display: flex; align-items: center; gap: 10px; color: var(--h-secondary);">
+                    <i class="fas fa-key"></i> Access Protocols
+                </h3>
 
-            <div class="form-group">
-                <label class="form-label">Phone Number</label>
-                <input type="text" name="phone" class="form-input" value="{{ old('phone', $user->phone) }}">
-            </div>
-
-            <div class="form-group">
-                <label class="form-label">WhatsApp Number</label>
-                <input type="text" name="whatsapp" class="form-input" value="{{ old('whatsapp', $user->whatsapp) }}">
-            </div>
-
-            <div
-                style="background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); padding: 1.5rem; border-radius: 8px; margin: 1.5rem 0;">
-                <h3 style="color: #10B981; margin-bottom: 1rem; font-size: 1.1rem;">💎 Premium Membership</h3>
-                <div class="form-group" style="margin-bottom: 1rem;">
-                    <label class="form-check" style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                <div
+                    style="background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(16, 185, 129, 0.1); padding: 1.25rem; border-radius: 20px; margin-bottom: 1.5rem;">
+                    <label style="display: flex; align-items: flex-start; gap: 1rem; cursor: pointer;">
                         <input type="checkbox" name="is_premium" value="1" {{ $user->is_premium ? 'checked' : '' }}
-                            style="width: 1.2rem; height: 1.2rem;">
-                        <span style="color: var(--white); font-weight: 600;">Enable Premium Access</span>
+                            style="width: 1.25rem; height: 1.25rem; margin-top: 0.2rem; cursor: pointer;">
+                        <div>
+                            <span style="color: var(--h-secondary); font-weight: 800; font-size: 0.95rem;">PREMIUM
+                                ACCESS</span>
+                            <p style="font-size: 0.75rem; color: #64748B; margin-top: 4px;">Grants unrestricted trajectory
+                                to Academy logs and Live signals.</p>
+                        </div>
                     </label>
                 </div>
 
-                @if($user->browser_fingerprint)
-                    <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
-                        <p style="color: var(--gray-light); font-size: 0.9rem; margin-bottom: 0.5rem;">
-                            User's machine is currently locked. (ID: <span
-                                style="font-family: monospace; color: #10B981;">{{ substr($user->browser_fingerprint, 0, 10) }}...</span>)
-                        </p>
-                        <label class="form-check" style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
-                            <input type="checkbox" name="reset_device_token" value="1" style="width: 1.2rem; height: 1.2rem;">
-                            <span style="color: #F59E0B; font-weight: 600;">Reset Machine Lock (Allow new device)</span>
+                @if($user->id !== auth()->id())
+                    <div
+                        style="background: rgba(236, 72, 153, 0.05); border: 1px solid rgba(236, 72, 153, 0.1); padding: 1.25rem; border-radius: 20px; margin-bottom: 1.5rem;">
+                        <label style="display: flex; align-items: flex-start; gap: 1rem; cursor: pointer;">
+                            <input type="checkbox" name="is_admin" value="1" {{ $user->is_admin ? 'checked' : '' }}
+                                style="width: 1.25rem; height: 1.25rem; margin-top: 0.2rem; cursor: pointer;">
+                            <div>
+                                <span style="color: var(--h-accent); font-weight: 800; font-size: 0.95rem;">ADMIN CONTROL</span>
+                                <p style="font-size: 0.75rem; color: #64748B; margin-top: 4px;">WARNING: Authorizes full command
+                                    over system modules.</p>
+                            </div>
                         </label>
                     </div>
-                @else
-                    <p style="color: var(--gray); font-size: 0.9rem; margin-top: 0.5rem;">No machine/mobile locked yet.</p>
                 @endif
+
+                <div class="form-group" style="padding-top: 1.5rem; border-top: 1px solid var(--h-border);">
+                    <label class="h-label">Passcode Override</label>
+                    <input type="password" name="password" class="h-input" placeholder="Initialise new key..."
+                        style="border-style: dashed;">
+                    <p
+                        style="font-size: 0.7rem; color: #64748B; margin-top: 8px; font-family: 'JetBrains Mono'; text-transform: uppercase;">
+                        Leave null to maintain current encryption.</p>
+                </div>
             </div>
 
-            @if($user->id !== auth()->id())
-                <div class="form-group" style="margin: 1.5rem 0;">
-                    <label class="form-check" style="display: flex; align-items: center; gap: 0.5rem;">
-                        <input type="checkbox" name="is_admin" value="1" {{ $user->is_admin ? 'checked' : '' }}
-                            style="width: 1.2rem; height: 1.2rem;">
-                        <span style="color: var(--white); font-weight: 600;">Grant Admin Privileges</span>
-                    </label>
-                </div>
-            @endif
+            <!-- Global Parameters (Full Width) -->
+            <div class="h-card" style="grid-column: 1 / -1;">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 3rem;">
+                    <!-- Hardware Security -->
+                    <div>
+                        <h3
+                            style="margin-bottom: 1.5rem; font-size: 1rem; color: #F59E0B; display: flex; align-items: center; gap: 8px;">
+                            <i class="fas fa-microchip"></i> Hardware Nexus
+                        </h3>
+                        @if($user->browser_fingerprint)
+                            <div
+                                style="background: rgba(0,0,0,0.2); border: 1px solid var(--h-border); padding: 1.5rem; border-radius: 20px;">
+                                <div
+                                    style="font-size: 0.7rem; color: #64748B; margin-bottom: 8px; font-family: 'JetBrains Mono'; text-transform: uppercase;">
+                                    ACTIVE FINGERPRINT</div>
+                                <code
+                                    style="color: #F8FAFC; font-family: 'JetBrains Mono'; display: block; word-break: break-all; font-size: 0.75rem; background: rgba(255,255,255,0.05); padding: 5px 10px; border-radius: 4px;">{{ $user->browser_fingerprint }}</code>
 
-            <div
-                style="background: rgba(59, 130, 246, 0.1); border: 1px solid rgba(59, 130, 246, 0.3); padding: 1.5rem; border-radius: 8px; margin: 2rem 0;">
-                <h3
-                    style="color: #3b82f6; margin-bottom: 1rem; font-size: 1.1rem; display: flex; align-items: center; gap: 0.5rem;">
-                    🛡️ Security & Activity Tracking
-                </h3>
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
-                    <div>
-                        <label class="form-label" style="font-size: 0.8rem; color: var(--gray);">Last Known IP
-                            Address</label>
-                        <div
-                            style="padding: 0.75rem; background: rgba(0,0,0,0.2); border-radius: 4px; color: #10B981; font-family: monospace; font-weight: bold; border: 1px solid rgba(255,255,255,0.05);">
-                            {{ $user->last_login_ip ?? 'No IP Recorded' }}
-                        </div>
-                    </div>
-                    <div>
-                        <label class="form-label" style="font-size: 0.8rem; color: var(--gray);">GPS Location Data</label>
-                        @if($user->latitude && $user->longitude)
-                            <a href="https://www.google.com/maps?q={{ $user->latitude }},{{ $user->longitude }}" target="_blank"
-                                style="display: flex; align-items: center; justify-content: center; gap: 8px; padding: 0.75rem; background: #3b82f6; color: white; text-decoration: none; border-radius: 4px; font-weight: 600; font-size: 0.85rem; transition: 0.2s;"
-                                onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">
-                                📍 View on Google Maps
-                            </a>
+                                <label
+                                    style="display: flex; align-items: center; gap: 10px; margin-top: 2rem; cursor: pointer;">
+                                    <input type="checkbox" name="reset_device_token" value="1"
+                                        style="width: 1.25rem; height: 1.25rem; cursor: pointer;">
+                                    <span style="font-weight: 800; color: white; font-size: 0.85rem;">DE-AUTHORIZE & RE-LINK
+                                        DEVICE</span>
+                                </label>
+                            </div>
                         @else
                             <div
-                                style="padding: 0.75rem; background: rgba(255,255,255,0.05); border-radius: 4px; color: var(--gray); text-align: center; border: 1px dashed rgba(255,255,255,0.1); font-size: 0.85rem;">
-                                No Location Data
+                                style="padding: 2.5rem; border: 1px dashed var(--h-border); border-radius: 20px; color: #64748B; text-align: center;">
+                                <i class="fas fa-fingerprint" style="font-size: 2rem; opacity: 0.2; margin-bottom: 1rem;"></i>
+                                <p style="font-size: 0.85rem;">No hardware signature detected in current logs.</p>
                             </div>
                         @endif
                     </div>
-                </div>
-                @if($user->latitude && $user->longitude)
-                    <div style="margin-top: 1rem; font-size: 0.75rem; color: var(--gray); text-align: center;">
-                        Coordinates: {{ $user->latitude }}, {{ $user->longitude }}
+
+                    <!-- Signal Tracking -->
+                    <div>
+                        <h3
+                            style="margin-bottom: 1.5rem; font-size: 1rem; color: var(--h-primary); display: flex; align-items: center; gap: 8px;">
+                            <i class="fas fa-satellite"></i> Signal Origin
+                        </h3>
+                        <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+                            <div
+                                style="display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.2); padding: 0.75rem 1.25rem; border-radius: 12px; border: 1px solid var(--h-border);">
+                                <span
+                                    style="color: #64748B; font-size: 0.75rem; font-family: 'JetBrains Mono'; text-transform: uppercase;">LATEST
+                                    IP LOG</span>
+                                <span
+                                    style="font-family: 'JetBrains Mono'; color: var(--h-secondary); font-weight: 800;">{{ $user->last_login_ip ?? '???.???.???.???' }}</span>
+                            </div>
+
+                            @if($user->latitude && $user->longitude)
+                                <a href="https://www.google.com/maps?q={{ $user->latitude }},{{ $user->longitude }}"
+                                    target="_blank" class="btn-primary-h"
+                                    style="justify-content: center; background: rgba(99, 102, 241, 0.1); border-color: var(--h-primary); color: var(--h-primary);">
+                                    <i class="fas fa-map-location-dot"></i> Intercept Position on Grid
+                                </a>
+                            @else
+                                <div
+                                    style="padding: 2.5rem; border: 1px dashed var(--h-border); border-radius: 20px; color: #64748B; text-align: center;">
+                                    <i class="fas fa-location-crosshairs"
+                                        style="font-size: 2rem; opacity: 0.2; margin-bottom: 1rem;"></i>
+                                    <p style="font-size: 0.85rem;">Origin coordinates missing from flight data.</p>
+                                </div>
+                            @endif
+                        </div>
                     </div>
-                @endif
-            </div>
-
-            <div
-                style="background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); padding: 1.5rem; border-radius: var(--radius-sm); margin: 2rem 0;">
-                <h3
-                    style="color: #ef4444; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; font-size: 1.1rem;">
-                    🔒 Security & Password Control
-                </h3>
-                <p style="color: var(--gray-light); font-size: 0.9rem; margin-bottom: 1.5rem; line-height: 1.5;">
-                    Client passwords are encrypted for maximum security (industry standard). While you cannot "see" the old
-                    password,
-                    <strong>you have ful control to overwrite it</strong>. Entering a new password here will instantly
-                    update their account.
-                </p>
-                <div class="form-group" style="margin-bottom: 0;">
-                    <label class="form-label" style="color: var(--white);">Set New Password</label>
-                    <input type="text" name="password" class="form-input" placeholder="Type new password here to change it"
-                        style="border-color: rgba(239, 68, 68, 0.5); background: rgba(0,0,0,0.2);">
-                    <small style="color: var(--gray); display: block; margin-top: 0.5rem;">Leave this blank if you don't
-                        want to change their password.</small>
                 </div>
             </div>
+        </div>
 
-            <button type="submit" class="btn btn-primary" style="width: 100%;">Update User Details</button>
-        </form>
-    </div>
+        <div style="margin-top: 3rem; margin-bottom: 5rem; text-align: center;">
+            <button type="submit" class="btn-primary-h"
+                style="padding: 1rem 4rem; font-size: 1.1rem; box-shadow: 0 0 40px rgba(99, 102, 241, 0.1);">
+                <i class="fas fa-save"></i> Execute Protocol Update
+            </button>
+        </div>
+    </form>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            gsap.to('.h-reveal', {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                stagger: 0.2,
+                ease: "power4.out"
+            });
+        });
+    </script>
 @endsection

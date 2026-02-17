@@ -4,56 +4,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'Admin Panel') - GSM Trading Lab</title>
-    
+    <title>@yield('title', 'Quantum Admin') - GSM Trading Lab</title>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
         :root {
-            --h-bg: #020617;
-            --h-sidebar: rgba(15, 23, 42, 0.8);
-            --h-card: rgba(15, 23, 42, 0.4);
-            --h-border: rgba(255, 255, 255, 0.08);
-            --h-primary: #6366F1;
-            --h-secondary: #10B981;
-            --h-accent: #EC4899;
-            --font-h: 'Outfit', sans-serif;
+            --bg-deep: #050a1f;
+            --primary: #6366f1;
+            --secondary: #0ea5e9;
+            --accent: #f43f5e;
+            --vibrant-1: #c084fc;
+            --vibrant-2: #38bdf8;
+            --card-glass: rgba(15, 23, 42, 0.4);
+            --sidebar-glass: rgba(8, 14, 33, 0.85);
+            --border-glass: rgba(255, 255, 255, 0.1);
+            --font-main: 'Plus Jakarta Sans', sans-serif;
         }
 
         body {
-            background: var(--h-bg);
-            color: #F8FAFC;
-            font-family: var(--font-h);
+            background-color: var(--bg-deep);
+            color: #f8fafc;
+            font-family: var(--font-main);
+            margin: 0;
             display: flex;
             min-height: 100vh;
-            margin: 0;
             overflow-x: hidden;
+            background-image:
+                radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(244, 63, 94, 0.1) 0%, transparent 40%),
+                radial-gradient(circle at 50% 50%, rgba(14, 165, 233, 0.05) 0%, transparent 100%);
+            background-attachment: fixed;
         }
 
-        /* Animated Ambient Orbs */
-        .h-orb {
-            position: fixed;
-            width: 500px;
-            height: 500px;
-            border-radius: 50%;
-            filter: blur(120px);
-            z-index: -1;
-            opacity: 0.1;
-            pointer-events: none;
+        /* Glassmorphism Global */
+        .glass {
+            backdrop-filter: blur(25px) saturate(180%);
+            -webkit-backdrop-filter: blur(25px) saturate(180%);
+            border: 1px solid var(--border-glass);
         }
 
-        .h-orb-1 { background: var(--h-primary); top: -10%; right: -10%; }
-        .h-orb-2 { background: var(--h-accent); bottom: -10%; left: -10%; }
-
+        /* Sidebar: Luxe Floating Design */
         .sidebar {
-            width: 280px;
-            background: var(--h-sidebar);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-right: 1px solid var(--h-border);
+            width: 300px;
+            background: var(--sidebar-glass);
+            backdrop-filter: blur(30px);
+            border-right: 1px solid var(--border-glass);
             padding: 2.5rem 1.5rem;
             display: flex;
             flex-direction: column;
@@ -63,196 +64,395 @@
             z-index: 100;
         }
 
-        .main-wrapper {
-            flex: 1;
+        .side-logo {
             display: flex;
-            flex-direction: column;
-            min-width: 0;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 3.5rem;
+            padding-left: 0.5rem;
         }
 
-        .main-content {
-            padding: 3rem;
-            max-width: 1600px;
-            width: 100%;
-            margin: 0 auto;
+        .logo-orb {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, var(--primary), var(--vibrant-1));
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 30px rgba(99, 102, 241, 0.5);
+            animation: orb-glow 3s infinite alternate;
+        }
+
+        @keyframes orb-glow {
+            from {
+                box-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
+            }
+
+            to {
+                box-shadow: 0 0 40px rgba(160, 132, 252, 0.6);
+            }
+        }
+
+        .logo-title {
+            font-weight: 800;
+            font-size: 1.4rem;
+            letter-spacing: -1px;
+            background: linear-gradient(to right, #fff, #94a3b8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Nav Links */
+        .nav-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 2.5px;
+            color: rgba(148, 163, 184, 0.5);
+            margin: 2rem 0 1rem 1rem;
+            font-weight: 700;
         }
 
         .nav-link {
             display: flex;
             align-items: center;
+            gap: 14px;
             padding: 1rem 1.25rem;
             color: #94A3B8;
             text-decoration: none;
-            border-radius: 16px;
+            border-radius: 18px;
             margin-bottom: 0.5rem;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             font-weight: 600;
-            font-size: 0.95rem;
-            gap: 12px;
-        }
-
-        .nav-link:hover {
-            background: rgba(255, 255, 255, 0.03);
-            color: white;
-            transform: translateX(5px);
-        }
-
-        .nav-link.active {
-            background: rgba(99, 102, 241, 0.1);
-            color: var(--h-primary);
-            border: 1px solid rgba(99, 102, 241, 0.2);
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            position: relative;
         }
 
         .nav-link i {
-            font-size: 1.1rem;
-            width: 24px;
-            text-align: center;
+            font-size: 1.2rem;
+            transition: transform 0.3s;
         }
 
-        .top-bar {
+        .nav-link:hover {
+            color: #fff;
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateX(8px);
+        }
+
+        .nav-link:hover i {
+            transform: scale(1.2) rotate(-5deg);
+        }
+
+        .nav-link.active {
+            color: #fff;
+            background: linear-gradient(90deg, rgba(99, 102, 241, 0.2), transparent);
+            box-shadow: inset 4px 0 0 var(--primary);
+        }
+
+        /* Main Wrapper */
+        .main-wrapper {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+            position: relative;
+        }
+
+        .main-content {
+            padding: 3rem 4rem;
+            max-width: 1700px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        /* Top Bar */
+        .top-glass {
+            padding: 1.25rem 4rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1.5rem 3rem;
-            background: rgba(15, 23, 42, 0.4);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--h-border);
+            border-bottom: 1px solid var(--border-glass);
+            background: rgba(8, 14, 33, 0.3);
+            backdrop-filter: blur(15px);
             position: sticky;
             top: 0;
             z-index: 50;
         }
 
-        .card {
-            background: var(--h-card);
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--h-border);
-            border-radius: 28px;
-            padding: 2rem;
-            margin-bottom: 2rem;
+        .status-pill {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            color: #10b981;
+            padding: 8px 16px;
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            font-family: 'JetBrains Mono';
         }
 
-        @media (max-width: 992px) {
-            .sidebar {
-                position: fixed;
-                left: -280px;
-                transition: 0.3s;
+        .pulse {
+            width: 8px;
+            height: 8px;
+            background: #10b981;
+            border-radius: 50%;
+            animation: soft-pulse 2s infinite;
+        }
+
+        @keyframes soft-pulse {
+            0% {
+                transform: scale(1);
+                opacity: 1;
             }
-            .sidebar.show { left: 0; }
-            .main-content { padding: 1.5rem; }
-            .top-bar { padding: 1rem 1.5rem; }
+
+            100% {
+                transform: scale(2.5);
+                opacity: 0;
+            }
         }
 
-        table {
+        .admin-profile {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 6px 16px 6px 6px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50px;
+            border: 1px solid var(--border-glass);
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .admin-profile:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .avatar {
+            width: 34px;
+            height: 34px;
+            background: linear-gradient(135deg, var(--vibrant-1), var(--primary));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 0.9rem;
+        }
+
+        /* UI Components */
+        .h-card {
+            background: var(--card-glass);
+            border-radius: 32px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .h-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            background: rgba(255, 255, 255, 0.03);
+            box-shadow: 0 40px 80px -20px rgba(0, 0, 0, 0.4);
+        }
+
+        .h-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
-            border-collapse: collapse;
+            height: 100%;
+            background: radial-gradient(circle at top right, rgba(255, 255, 255, 0.05), transparent);
+            pointer-events: none;
         }
 
-        th, td {
-            padding: 1rem;
+        .h-reveal {
+            opacity: 0;
+            transform: translateY(40px);
+        }
+
+        .h-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0 12px;
+        }
+
+        .h-table tr {
+            background: rgba(255, 255, 255, 0.02);
+            transition: 0.4s;
+        }
+
+        .h-table tr:hover {
+            background: rgba(255, 255, 255, 0.06);
+            transform: scale(1.01);
+        }
+
+        .h-table td {
+            padding: 1.5rem;
             text-align: left;
-            border-bottom: 1px solid var(--h-border);
+        }
+
+        .h-table td:first-child {
+            border-radius: 20px 0 0 20px;
+        }
+
+        .h-table td:last-child {
+            border-radius: 0 20px 20px 0;
+        }
+
+        .btn-luxe {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: #fff;
+            padding: 1rem 2rem;
+            border-radius: 18px;
+            text-decoration: none;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: 0.4s;
+            box-shadow: 0 15px 30px rgba(99, 102, 241, 0.3);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-luxe:hover {
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(99, 102, 241, 0.5);
         }
 
         /* Scrollbar */
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: var(--h-bg); }
-        ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 10px; }
-        ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.2); }
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary);
+        }
     </style>
     @yield('styles')
 </head>
 
 <body>
-    <div class="h-orb h-orb-1"></div>
-    <div class="h-orb h-orb-2"></div>
-
-    <aside class="sidebar" id="sidebar">
-        <div style="margin-bottom: 3rem; padding-left: 0.5rem;">
-            <a href="{{ route('admin.dashboard') }}" style="text-decoration: none; display: flex; align-items: center; gap: 12px;">
-                <div style="width: 40px; height: 40px; background: var(--h-primary); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 900;">G</div>
-                <span style="font-weight: 900; font-size: 1.25rem; color: white; letter-spacing: -0.5px;">ADMIN_CORE</span>
-            </a>
+    <aside class="sidebar">
+        <div class="side-logo">
+            <div class="logo-orb">
+                <i class="fas fa-layer-group" style="color: white; font-size: 1.2rem;"></i>
+            </div>
+            <div class="logo-title">GSM QUANTUM</div>
         </div>
 
-        <nav style="flex: 1;">
-            <a href="{{ route('admin.dashboard') }}" class="nav-link {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
-                <i class="fas fa-th-large"></i> Dashboard
-            </a>
-            <a href="{{ route('admin.users.index') }}" class="nav-link {{ request()->routeIs('admin.users.*') ? 'active' : '' }}">
-                <i class="fas fa-users"></i> User Matrix
-            </a>
-            <a href="{{ route('admin.orders.index') }}" class="nav-link {{ request()->routeIs('admin.orders.*') ? 'active' : '' }}">
-                <i class="fas fa-shopping-cart"></i> Order Stream
-            </a>
-            <a href="{{ route('admin.signals.index') }}" class="nav-link {{ request()->routeIs('admin.signals.*') ? 'active' : '' }}">
-                <i class="fas fa-bolt"></i> Live Signals
-            </a>
-            <a href="/youcanthackme/p2p-transactions" class="nav-link {{ request()->is('youcanthackme/p2p-transactions*') ? 'active' : '' }}">
-                <i class="fas fa-exchange-alt"></i> P2P Portal
-            </a>
-            <a href="/youcanthackme/p2p-pools" class="nav-link {{ request()->is('youcanthackme/p2p-pools*') ? 'active' : '' }}">
-                <i class="fas fa-vault"></i> Liquidity Pools
-            </a>
-            <a href="/youcanthackme/live-classes" class="nav-link {{ request()->is('youcanthackme/live-classes*') ? 'active' : '' }}">
-                <i class="fas fa-broadcast-tower"></i> Live Classes
-            </a>
-            <a href="/youcanthackme/class-recordings" class="nav-link {{ request()->is('youcanthackme/class-recordings*') ? 'active' : '' }}">
-                <i class="fas fa-play-circle"></i> Academy Logs
-            </a>
-            <a href="{{ route('admin.security.logs') }}" class="nav-link {{ request()->routeIs('admin.security.logs') ? 'active' : '' }}">
-                <i class="fas fa-shield-halved"></i> Security Logs
-            </a>
-        </nav>
+        <div style="overflow-y: auto; flex: 1; padding-right: 5px;">
+            <div class="nav-label">Nexus Points</div>
+            <nav>
+                <a href="{{ route('admin.dashboard') }}"
+                    class="nav-link {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
+                    <i class="fas fa-compass"></i> Overview
+                </a>
+                <a href="{{ route('admin.users.index') }}"
+                    class="nav-link {{ request()->routeIs('admin.users.*') ? 'active' : '' }}">
+                    <i class="fas fa-user-astronaut"></i> Operatives
+                </a>
+                <a href="{{ route('admin.orders.index') }}"
+                    class="nav-link {{ request()->routeIs('admin.orders.*') ? 'active' : '' }}">
+                    <i class="fas fa-bolt"></i> Transaction Flux
+                </a>
+            </nav>
 
-        <div style="margin-top: auto; padding-top: 2rem; border-top: 1px solid var(--h-border);">
-            <a href="{{ route('dashboard') }}" class="nav-link">
-                <i class="fas fa-external-link-alt"></i> Student Panel
-            </a>
+            <div class="nav-label">Finance Module</div>
+            <nav>
+                <a href="{{ route('admin.p2p.index') }}" class="nav-link">
+                    <i class="fas fa-wallet"></i> P2P Nexus
+                </a>
+                <a href="{{ route('admin.payment-methods.index') }}" class="nav-link">
+                    <i class="fas fa-shield-halved"></i> Payment Vault
+                </a>
+                <a href="{{ route('admin.brokers.index') }}" class="nav-link">
+                    <i class="fas fa-landmark"></i> Broker Nodes
+                </a>
+            </nav>
+
+            <div class="nav-label">Academy Hub</div>
+            <nav>
+                <a href="{{ route('admin.lms.classes') }}" class="nav-link">
+                    <i class="fas fa-video"></i> Live Streams
+                </a>
+                <a href="{{ route('admin.lms.recordings') }}" class="nav-link">
+                    <i class="fas fa-film"></i> Neural Archive
+                </a>
+                <a href="{{ route('admin.lms.tasks') }}" class="nav-link">
+                    <i class="fas fa-brain"></i> Synapse Tasks
+                </a>
+            </nav>
+
+            <div class="nav-label">Communications</div>
+            <nav>
+                <a href="{{ route('admin.messages.index') }}" class="nav-link">
+                    <i class="fas fa-comment-nodes"></i> Signal Center
+                </a>
+            </nav>
+
+            <div class="nav-label">Control Matrix</div>
+            <nav>
+                <a href="{{ route('admin.content.pages.index') }}" class="nav-link">
+                    <i class="fas fa-sliders"></i> CMS Portals
+                </a>
+                <a href="{{ route('admin.settings.index') }}" class="nav-link">
+                    <i class="fas fa-microchip"></i> System Kernels
+                </a>
+            </nav>
+        </div>
+
+        <div style="padding-top: 2rem; border-top: 1px solid var(--border-glass);">
             <form action="{{ route('logout') }}" method="POST">
                 @csrf
-                <button type="submit" class="nav-link" style="width: 100%; border: none; background: transparent; cursor: pointer; text-align: left;">
-                    <i class="fas fa-power-off"></i> Terminate Session
+                <button type="submit" class="nav-link"
+                    style="width: 100%; border: none; background: transparent; cursor: pointer; text-align: left;">
+                    <i class="fas fa-power-off" style="color: var(--accent);"></i> Terminate Link
                 </button>
             </form>
         </div>
     </aside>
 
     <div class="main-wrapper">
-        <header class="top-bar">
-            <button class="mobile-toggle" onclick="document.getElementById('sidebar').classList.toggle('show')">
-                <i class="fas fa-bars"></i>
-            </button>
-            <div style="display: flex; align-items: center; gap: 2rem;">
-                <div style="color: #94A3B8; font-size: 0.85rem; font-family: 'JetBrains Mono';">SYSTEM_STATUS: <span style="color: var(--h-secondary);">OPTIMAL</span></div>
+        <header class="top-glass">
+            <div class="status-pill">
+                <div class="pulse"></div>
+                CORE_SYSTEM_HEALTH: OPTIMAL
             </div>
-            <div style="display: flex; align-items: center; gap: 1.5rem;">
-                <div style="text-align: right;">
-                    <div style="font-weight: 700; color: white;">{{ auth()->user()->name }}</div>
-                    <div style="font-size: 0.75rem; color: #94A3B8;">OPERATOR_ID: #{{ auth()->id() }}</div>
-                </div>
-                <div style="width: 40px; height: 40px; border-radius: 12px; background: rgba(99, 102, 241, 0.1); border: 1px solid var(--h-primary); display: flex; align-items: center; justify-content: center; color: var(--h-primary); font-weight: 900;">
-                    {{ substr(auth()->user()->name, 0, 1) }}
-                </div>
+
+            <div class="admin-profile">
+                <div class="avatar">{{ substr(auth()->user()->name, 0, 1) }}</div>
+                <div style="font-size: 0.95rem; font-weight: 700;">{{ auth()->user()->name }}</div>
+                <i class="fas fa-chevron-down" style="font-size: 0.8rem; color: #64748B;"></i>
             </div>
         </header>
 
         <main class="main-content">
-            @if(session('success'))
-                <div class="card" style="border-color: var(--h-secondary); background: rgba(16, 185, 129, 0.05); color: var(--h-secondary); padding: 1rem 2rem; margin-bottom: 2rem;">
-                    <i class="fas fa-check-circle"></i> {{ session('success') }}
-                </div>
-            @endif
-
-            @if(session('error'))
-                <div class="card" style="border-color: #ef4444; background: rgba(239, 68, 68, 0.05); color: #ef4444; padding: 1rem 2rem; margin-bottom: 2rem;">
-                    <i class="fas fa-exclamation-triangle"></i> {{ session('error') }}
-                </div>
-            @endif
-
             @yield('content')
         </main>
     </div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            gsap.to('.h-reveal', {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                stagger: 0.15,
+                ease: "expo.out"
+            });
+        });
+    </script>
     @yield('scripts')
 </body>
 
