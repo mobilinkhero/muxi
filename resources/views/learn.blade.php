@@ -174,7 +174,7 @@
                         </div>
                         <div style="font-size: 0.85rem; color: var(--white); margin-top: 0.5rem;">Pay <span
                                 style="text-decoration: line-through; color: #ef4444; margin-right: 4px;">$350</span>
-                            $100 Only After You Learn & Earn</div>
+                            $150 Only After You Learn & Earn</div>
                     </div>
 
                     <a href="#" class="btn btn-primary" style="width: 100%;"
@@ -230,7 +230,7 @@
                                 style="font-size: 1.5rem; text-decoration: line-through; color: var(--gray); margin-right: 8px;">$350</span>$100
                         </div>
                         <div style="font-size: 0.85rem; color: #ef4444; font-weight: bold; margin-top: 5px;">🔥 Limited
-                            Time Offer (Save 70%)</div>
+                            Time Offer (Special Deal)</div>
                         <div style="font-size: 0.85rem; color: var(--gray);">Refundable if not satisfied</div>
                     </div>
 
